@@ -8,8 +8,8 @@ node_js:
 before_install:
 #
 script:
-  # - npm run lint
-  # - npm run test
+  - npm run lint
+  - npm run test
   - npm run build
 
 deploy:
