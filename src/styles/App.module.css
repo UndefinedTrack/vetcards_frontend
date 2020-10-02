@@ -1,0 +1,5 @@
+@import url('./stylesConstants.css');
+
+.App {
+  background-color: var(--main-bg-color);
+}
