@@ -15,7 +15,7 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  #github_token: $repo_token
+  github_token: $org_access_token
   local_dir: build
   on:
     branch:
