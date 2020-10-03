@@ -1,1 +1,19 @@
 @import url('./stylesConstants.css');
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  background-color: var(--header-color);
+  align-items: center;
+}
+
+.Name {
+  margin-left: 2vh;
+  color: var(--active-button-color);
+  font-size: 4vh;
+}
+
+.ButtonContainer {
+  display: flex;
+}
