@@ -30,7 +30,7 @@ export default function Profile() {
   }
 
   function handleSubmit(event) {
-		event.preventDefault()
+    event.preventDefault()
 	}
 
   return (
