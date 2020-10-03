@@ -1,0 +1,16 @@
+@import url('./stylesConstants.css');
+
+.Button {
+  display: flex;
+  justify-content: center;
+  padding: 1vh;
+  margin: 1vh;
+  width: 44vh;
+  border-radius: 7px;
+  background-color: var(--link-button);
+  font-family: Noto Sans JP;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+}

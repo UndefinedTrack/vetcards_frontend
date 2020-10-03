@@ -1,0 +1,44 @@
+@import url('./stylesConstants.css');
+
+.Container {
+  background-color: var(--header-color);
+  margin: 3vh;
+  border-radius: 10px;
+  width: 68vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.Name {
+  margin-top: 4vh;
+  margin-left: 3vh;
+  font-family: Noto Sans JP;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+}
+
+.Line {
+  color: var(--active-button-color);
+  background-color: var(--active-button-color);
+  width: 65vw;
+  border: none;
+  height: 1px;
+}
+
+.SearchButton {
+  margin-top: 1vh;
+  margin-right: 3vh;
+  width: 6vh;
+  fill: var(--active-button-color);
+}
+
+.NameAndSearch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MedicalCardContainer {
+  overflow: auto;
+}

@@ -1,0 +1,32 @@
+@import url('./stylesConstants.css');
+
+.MedicalCard {
+  margin-left: 3vh;
+  font-family: Noto Sans JP;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  overflow: auto;
+}
+
+.Card {
+  display: flex;
+}
+
+.Name {
+  margin-right: 5px;
+}
+
+.Value {
+  margin-right: 5px;
+}
+
+.Line {
+  color: var(--active-button-color);
+  background-color: var(--active-button-color);
+  width: 64vw;
+  margin-right: 15px;
+  border: none;
+  height: 1px;
+}

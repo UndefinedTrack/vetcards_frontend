@@ -1,0 +1,18 @@
+@import url('./stylesConstants.css');
+
+.InformationBlock {
+  width: 80%;
+}
+
+.InformationLine {
+  display: flex;
+  font-size: 18px;
+}
+
+.Name {
+  margin: 2px;
+}
+
+.Value {
+  margin: 2px;
+}
