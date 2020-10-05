@@ -1,0 +1,25 @@
+@import url('./stylesConstants.css');
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  background-color: var(--header-color);
+  align-items: center;
+}
+
+.Name {
+  margin-left: 2vh;
+  color: var(--active-button-color);
+  font-family: Noto Sans JP;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 49px;
+}
+
+.ButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}

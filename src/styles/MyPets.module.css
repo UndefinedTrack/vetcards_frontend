@@ -1,0 +1,7 @@
+@import url('./stylesConstants.css');
+
+.Container {
+  display: flex;
+  justify-content: space-between;
+  height: 89vh;
+}

@@ -20,5 +20,5 @@ deploy:
   on:
     branch:
       - master
-      - dev
+      - develop
       - devel

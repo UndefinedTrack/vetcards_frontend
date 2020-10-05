@@ -1,0 +1,35 @@
+@import url('./stylesConstants.css');
+
+.Container {
+  background-color: var(--header-color);
+  margin: 3vh;
+  border-radius: 10px;
+  width: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* box-shadow: 5px 5px gray; */
+  justify-content: space-around;
+}
+
+.PetName {
+  margin-top: 4vh;
+  margin-bottom: 2vh;
+  font-family: Noto Sans JP;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 35px;
+}
+
+.PhotoPet {
+  width: 20vh;
+}
+
+.Line {
+  color: var(--active-button-color);
+  background-color: var(--active-button-color);
+  width: 45vh;
+  border: none;
+  height: 1px;
+}

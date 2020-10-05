@@ -1,0 +1,100 @@
+@import url('./stylesConstants.css');
+
+.profileSpace {
+  display: flex;
+  background-color: var(--main-bg-color);
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.profileWrapper {
+  display: flex;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  background-color: var(--header-color);
+  flex-direction: column;
+  width: 90vw;
+  border-radius: 10px;
+}
+
+.formSpace {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.fieldsColumn {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  padding: 2vh;
+}
+
+.saveButton {
+  display: flex;
+  align-self: flex-end;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--active-button-color);
+  color: var(--header-color);
+  font-size: 2.5vh;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  height: auto;
+  width: auto;
+  margin: 5vh;
+  cursor: pointer;
+  outline: none;
+}
+
+.changeAvatar {
+  display: flex;
+  border: none;
+  color: var(--active-button-color);
+  background-color: var(--header-color);
+  font-size: 2.5vh;
+  cursor: pointer;
+  outline: none;
+}
+
+.avatarSample {
+  display: flex;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-color: var(--main-bg-color);
+  margin: 3vh;
+}
+
+.avatarWrapper {
+  display: flex;
+  height: inherit;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.input {
+  display: flex;
+  height: 5.5vh;
+  width: 90%;
+  outline: none;
+  border: 1px solid var(--active-button-color);
+  border-radius: 10px;
+  font-size: 2.5vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
+}
+
+.text {
+  display: flex;
+  font-size: 2.5vh;
+}
+
+.noteText {
+  color: var(--active-button-color);
+}
