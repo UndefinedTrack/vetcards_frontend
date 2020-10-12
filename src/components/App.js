@@ -14,15 +14,15 @@ function App() {
           <h1>Пользуйтесь нашим великолепным сервисом!</h1>
         </Route>
         <Route path="/profile">
-          <Header header="profile" />
+          <Header header="profile" isVet />
           <Profile />
         </Route>
         <Route path="/mypets">
-          <Header header="myPets" />
+          <Header header="mypets" isVet />
           <MyPets />
         </Route>
         <Route path="/mypatients">
-          <Header header="profile" />
+          <Header header="mypatients" isVet />
           <MyPatients />
         </Route>
       </HashRouter>
