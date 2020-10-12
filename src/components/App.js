@@ -3,6 +3,7 @@ import { HashRouter, Route } from 'react-router-dom'
 import Profile from './Profile'
 import MyPets from './MyPets'
 import Header from './Header'
+import MyPatients from './vet/MyPatients'
 import styles from '../styles/App.module.css'
 
 function App() {
@@ -19,6 +20,10 @@ function App() {
         <Route path="/mypets">
           <Header header="myPets" />
           <MyPets />
+        </Route>
+        <Route path="/mypatients">
+          <Header header="profile" />
+          <MyPatients />
         </Route>
       </HashRouter>
     </div>
