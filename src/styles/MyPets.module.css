@@ -5,3 +5,40 @@
   justify-content: space-between;
   height: 89vh;
 }
+
+.NotPet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.NotPetText {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 34px;
+  line-height: 49px;
+  margin-bottom: 29px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+.NotPetButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 401px;
+  height: 68px;
+  background-color: var(--active-button-color);
+  border-radius: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 49px;
+}
