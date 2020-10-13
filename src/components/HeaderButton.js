@@ -3,44 +3,34 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styles from '../styles/HeaderButton.module.css'
 
-function HeaderButton({ buttonName, myPetStyles, profileStyles }) {
+function HeaderButton({ buttonName, buttonStyles }) {
   let nameHeader
   if (buttonName === 'Мои питомцы') {
     nameHeader = 'mypets'
-    if (myPetStyles === 'enabled') {
-      return (
-        <Link to={nameHeader} className={styles.Enabled}>
-          <p>{buttonName}</p>
-        </Link>
-      )
-    }
-    return (
-      <Link to={nameHeader} className={styles.Disabled}>
-        <p>{buttonName}</p>
-      </Link>
-    )
-  }
-  if (buttonName === 'Профиль') {
+  } else if (buttonName === 'Профиль') {
     nameHeader = 'profile'
-    if (profileStyles === 'enabled') {
-      return (
-        <Link to={nameHeader} className={styles.Enabled}>
+  } else if (buttonName === 'Мои пациенты') {
+    nameHeader = 'mypatients'
+  }
+  return (
+    <div>
+      {buttonStyles === 'enabled' && (
+        <Link to={nameHeader} className={`${styles.Enabled} ${styles.Button}`}>
           <p>{buttonName}</p>
         </Link>
-      )
-    }
-    return (
-      <Link to={nameHeader} className={styles.Disabled}>
-        <p>{buttonName}</p>
-      </Link>
-    )
-  }
+      )}
+      {buttonStyles === 'disabled' && (
+        <Link to={nameHeader} className={`${styles.Disabled} ${styles.Button}`}>
+          <p>{buttonName}</p>
+        </Link>
+      )}
+    </div>
+  )
 }
 
 HeaderButton.propTypes = {
   buttonName: PropTypes.string.isRequired,
-  myPetStyles: PropTypes.string,
-  profileStyles: PropTypes.string,
+  buttonStyles: PropTypes.string.isRequired,
 }
 
 export default HeaderButton

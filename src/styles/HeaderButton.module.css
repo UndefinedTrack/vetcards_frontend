@@ -1,27 +1,25 @@
 @import url('./stylesConstants.css');
 
-.Enabled {
-  padding: 0vw 3vw;
-  font-size: 2.5vh;
-  color: white;
-  text-decoration: none;
-  font-family: Noto Sans JP;
-  line-height: 26px;
+.Button {
   display: flex;
   align-items: center;
-  height: 10vh;
+  justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 176px;
+  height: 112px;
+}
+
+.Enabled {
+  color: white !important;
+  text-decoration: none;
   background-color: var(--active-button-color);
 }
 
 .Disabled {
-  display: flex;
-  align-items: center;
-  padding: 0vw 3vw;
-  font-size: 2.5vh;
-  color: black;
+  color: black !important;
   text-decoration: none;
-  font-family: Noto Sans JP;
-  line-height: 26px;
-  height: 10vh;
   background-color: var(--header-color);
 }

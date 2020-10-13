@@ -3,16 +3,15 @@
 .Header {
   display: flex;
   justify-content: space-between;
-  height: 10vh;
+  height: 112px;
   background-color: var(--header-color);
   align-items: center;
 }
 
 .Name {
-  margin-left: 2vh;
   color: var(--active-button-color);
-  font-family: Noto Sans JP;
-  font-style: normal;
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-left: 23px;
   font-weight: bold;
   font-size: 34px;
   line-height: 49px;
