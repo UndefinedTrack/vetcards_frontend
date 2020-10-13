@@ -79,6 +79,7 @@ export const getUserProfileInfo = (uid) => {
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
+          vet: uinfo.vet,
         }
 
         dispatch(getProfileInfoSuccess(user))
