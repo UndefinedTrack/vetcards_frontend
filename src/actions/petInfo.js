@@ -48,7 +48,7 @@ export const getPetInfo = (pid, uid) => {
   return (dispatch, getState) => {
     dispatch(getPetInfoStarted())
 
-    fetch(`${API_URL}/pets/info?uid=${uid}&pid=${pid}` /*, { credentials: 'include' }*/)
+    fetch(`${API_URL}/pets/info?uid=${uid}&pid=${pid}` /* , { credentials: 'include' } */)
       .then((resp) => resp.json())
       .then((data) => {
         const pinfo = data.pet

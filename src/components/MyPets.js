@@ -14,10 +14,8 @@ function MyPets(props) {
     if (!petList.length) {
       getInfo(uid)
     }
-
-    // const interval = setInterval(() => getInfo(uid), 10000)
+    // eslint-disable-next-line
   }, [getInfo])
-  // console.log(petList)
 
   return (
     <div>

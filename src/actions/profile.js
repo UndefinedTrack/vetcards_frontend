@@ -122,7 +122,7 @@ export const getPetsList = (uid) => {
   return (dispatch, getState) => {
     dispatch(getPetsListStarted())
 
-    fetch(`${API_URL}/pets/list?uid=${uid}` /*, { credentials: 'include' }*/)
+    fetch(`${API_URL}/pets/list?uid=${uid}` /* , { credentials: 'include' } */)
       .then((resp) => resp.json())
       .then((data) => {
         const pets = []
@@ -142,7 +142,6 @@ export const getPetsList = (uid) => {
           }
 
           pets.push(pet)
-          console.log(pets)
         })
 
         dispatch(getPetsListSuccess(pets))
