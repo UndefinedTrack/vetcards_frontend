@@ -14,6 +14,7 @@ const initialState = {
         userId: -1,
         name: '',
         species: '',
+        breed: '',
         color: '',
         birthDate: '',
         gender: '',

@@ -135,6 +135,7 @@ export const getPetsList = (uid) => {
             userId: pt.user_id,
             name: pt.name,
             species: pt.species,
+            breed: pt.breed,
             color: pt.color,
             birthDate: pt.birth_date,
             gender: pt.gender,

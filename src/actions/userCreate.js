@@ -21,10 +21,11 @@ const createUserFailure = (error) => ({
   },
 })
 
-export const createUser = (username, firstName, patronymic, lastName, phone, email) => {
+export const createUser = (username, password, firstName, patronymic, lastName, phone, email) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('username', username)
+    data.append('password', password)
     data.append('first_name', firstName)
     data.append('patronymic', patronymic)
     data.append('last_name', lastName)

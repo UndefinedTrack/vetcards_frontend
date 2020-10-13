@@ -44,12 +44,13 @@ const deletePetFailure = (error) => ({
   },
 })
 
-export const createPet = (uid, name, species, color, birthDate, gender, chip) => {
+export const createPet = (uid, name, species, breed, color, birthDate, gender, chip) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('user', uid)
     data.append('name', name)
     data.append('species', species)
+    data.append('breed', breed)
     data.append('color', color)
     data.append('birth_date', birthDate)
     data.append('gender', gender)
