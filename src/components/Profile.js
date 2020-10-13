@@ -5,9 +5,12 @@ import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
 import { getUserProfileInfo } from '../actions/profile'
 
-function Profile(props) {
+function Profile({ profileInfo, getProfileInfo }) {
   const uid = 2
-  const { profileInfo, getProfileInfo } = props
+  if (profileInfo === undefined) {
+    profileInfo = []
+    getProfileInfo(uid)
+  }
 
   // const [lastName, setLastName] = useState('')
   // const [firstName, setFirstName] = useState('')
