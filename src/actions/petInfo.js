@@ -70,9 +70,10 @@ export const getPetInfo = (pid, uid) => {
   }
 }
 
-export const updatePetInfo = (uid, name, species, breed, color, birthDate, gender, chip) => {
+export const updatePetInfo = (pid, uid, name, species, breed, color, birthDate, gender, chip) => {
   return (dispatch, getState) => {
     const data = new FormData()
+    data.append('id', pid)
     data.append('user', uid)
     data.append('name', name)
     data.append('species', species)
@@ -86,7 +87,21 @@ export const updatePetInfo = (uid, name, species, breed, color, birthDate, gende
 
     fetch(`${API_URL}/pets/update`, { method: 'POST', body: data, credentials: 'include' })
       .then((resp) => resp.json())
-      .then((dat) => dispatch(updatePetInfoSuccess(dat)))
+      .then((dat) => {
+        const pinfo = dat.pet
+        const pet = {
+          petId: pinfo.id,
+          userId: pinfo.user,
+          name: pinfo.name,
+          species: pinfo.species,
+          breed: pinfo.breed,
+          color: pinfo.color,
+          birthDate: pinfo.birth_date,
+          gender: pinfo.gender,
+          chip: pinfo.chip,
+        }
+        dispatch(updatePetInfoSuccess(pet))
+      })
       .catch((err) => dispatch(updatePetInfoFailure(err.message)))
   }
 }
