@@ -67,7 +67,7 @@ export const getUserProfileInfo = (uid) => {
   return (dispatch, getState) => {
     dispatch(getProfileInfoStarted())
 
-    fetch(`${API_URL}/users/info?uid=${uid}`, { credentials: 'include' })
+    fetch(`${API_URL}/users/info?uid=${uid}` /* , { credentials: 'include' } */)
       .then((resp) => resp.json())
       .then((data) => {
         const uinfo = data.user
