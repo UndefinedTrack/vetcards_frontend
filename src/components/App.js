@@ -1,12 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { HashRouter, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Profile from './Profile'
 import MyPets from './MyPets'
 import Header from './Header'
 import MyPatients from './vet/MyPatients'
 import styles from '../styles/App.module.css'
+// import { getUserProfileInfo } from '../actions/profile'
 
-function App() {
+function App({ profileInfo }) {
+  // console.log(profileInfo)
   return (
     <div className={styles.App}>
       <HashRouter>
@@ -30,4 +34,8 @@ function App() {
   )
 }
 
-export default App
+const mapStateToProps = (state) => ({
+  profileInfo: state.profile.profile,
+})
+
+export default connect(mapStateToProps, null)(App)

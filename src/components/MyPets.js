@@ -6,9 +6,12 @@ import MedicalHistory from './MedicalHistory'
 import styles from '../styles/MyPets.module.css'
 import { getPetsList } from '../actions/profile'
 
-function MyPets(props) {
+function MyPets({ petList, getInfo }) {
   const uid = 2
-  const { petList, getInfo } = props
+  if (petList === undefined) {
+    petList = []
+    getInfo(uid)
+  }
 
   useEffect(() => {
     if (!petList.length) {
