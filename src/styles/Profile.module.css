@@ -102,4 +102,7 @@
 
 .noteText {
   color: var(--active-button-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
 }
