@@ -10,11 +10,10 @@
 
 .profileWrapper {
   display: flex;
-  margin-top: 4vh;
-  margin-bottom: 4vh;
+  margin-top: 50px;
   background-color: var(--header-color);
   flex-direction: column;
-  width: 90vw;
+  width: 1318px;
   border-radius: 10px;
 }
 
@@ -23,6 +22,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
+  margin-right: 86px;
 }
 
 .fieldsColumn {
@@ -39,14 +39,15 @@
   border-radius: 10px;
   background-color: var(--active-button-color);
   color: var(--header-color);
-  font-size: 2.5vh;
-  padding-left: 3vw;
-  padding-right: 3vw;
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  padding: 2vh 3vw 2vh 3vw;
   height: auto;
   width: auto;
-  margin: 5vh;
+  margin: 50px;
   cursor: pointer;
   outline: none;
 }
@@ -85,14 +86,18 @@
   outline: none;
   border: 1px solid var(--active-button-color);
   border-radius: 10px;
-  font-size: 2.5vh;
   padding-left: 2vh;
   padding-right: 2vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .text {
   display: flex;
-  font-size: 2.5vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .noteText {

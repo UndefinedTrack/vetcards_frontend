@@ -2,8 +2,9 @@
 
 .Container {
   display: flex;
-  justify-content: space-between;
-  height: 89vh;
+  justify-content: center;
+  margin-top: 50px;
+  height: 609px;
 }
 
 .NotPet {

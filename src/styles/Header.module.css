@@ -3,7 +3,7 @@
 .Header {
   display: flex;
   justify-content: space-between;
-  height: 112px;
+  height: 75px;
   background-color: var(--header-color);
   align-items: center;
 }

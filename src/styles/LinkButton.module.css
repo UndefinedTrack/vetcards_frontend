@@ -3,14 +3,19 @@
 .Button {
   display: flex;
   justify-content: center;
-  padding: 1vh;
-  margin: 1vh;
-  width: 44vh;
+  align-items: center;
+  margin-top: 16px;
+  width: 331px;
+  height: 48px;
   border-radius: 7px;
   background-color: var(--link-button);
-  font-family: Noto Sans JP;
-  font-style: normal;
+  font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 35px;
+  padding: 6.5px;
+}
+
+.Button:last-child {
+  margin-bottom: 38px;
 }
