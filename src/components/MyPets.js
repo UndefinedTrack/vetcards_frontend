@@ -25,7 +25,7 @@ function MyPets({ petList, getInfo }) {
       {Boolean(!petList.length) && (
         <div className={styles.NotPet}>
           <div className={styles.NotPetText}>У вас нет ни одного питомца :(</div>
-          <a href="vetcards_frontend#/create-pet" className={styles.NotPetButton}>
+          <a href="create-pet" className={styles.NotPetButton}>
             Добавить!
           </a>
         </div>
