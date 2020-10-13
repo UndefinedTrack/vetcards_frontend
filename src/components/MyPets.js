@@ -7,7 +7,7 @@ import styles from '../styles/MyPets.module.css'
 import { getPetsList } from '../actions/profile'
 
 function MyPets({ petList, getInfo }) {
-  const uid = 2
+  const uid = 3
   if (petList === undefined) {
     petList = []
     getInfo(uid)
@@ -25,7 +25,7 @@ function MyPets({ petList, getInfo }) {
       {Boolean(!petList.length) && (
         <div className={styles.NotPet}>
           <div className={styles.NotPetText}>У вас нет ни одного питомца :(</div>
-          <a href="create-pet" className={styles.NotPetButton}>
+          <a href="vetcards_frontend#/create-pet" className={styles.NotPetButton}>
             Добавить!
           </a>
         </div>

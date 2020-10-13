@@ -35,6 +35,8 @@
 .saveButton {
   display: flex;
   align-self: flex-end;
+  align-items: center;
+  justify-content: center;
   border: none;
   border-radius: 10px;
   background-color: var(--active-button-color);
@@ -44,9 +46,8 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
-  padding: 2vh 3vw 2vh 3vw;
-  height: auto;
-  width: auto;
+  width: 182px;
+  height: 46px;
   margin: 50px;
   cursor: pointer;
   outline: none;
@@ -68,7 +69,7 @@
   width: 200px;
   height: 200px;
   background-color: var(--main-bg-color);
-  margin: 3vh;
+  margin: 50px;
 }
 
 .avatarWrapper {

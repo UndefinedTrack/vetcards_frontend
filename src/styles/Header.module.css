@@ -22,3 +22,14 @@
   justify-content: flex-end;
   align-items: flex-end;
 }
+
+.BackButton {
+  height: 75px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.PopUpHeader {
+  display: flex;
+  align-items: center;
+}

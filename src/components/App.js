@@ -7,6 +7,8 @@ import MyPets from './MyPets'
 import Header from './Header'
 import MyPatients from './vet/MyPatients'
 import styles from '../styles/App.module.css'
+import PopUpHeader from './PopUpHeader'
+import PetCreator from './PetCreator'
 // import { getUserProfileInfo } from '../actions/profile'
 
 function App({ profileInfo }) {
@@ -28,6 +30,10 @@ function App({ profileInfo }) {
         <Route path="/mypatients">
           <Header header="mypatients" isVet={false} />
           <MyPatients />
+        </Route>
+        <Route path="/create-pet">
+          <PopUpHeader header="create-pet" isVet={false} />
+          <PetCreator />
         </Route>
       </HashRouter>
     </div>
