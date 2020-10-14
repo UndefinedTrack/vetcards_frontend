@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
+import { connect } from 'react-redux'
 import styles from '../styles/MedicalHistory.module.css'
 import MedicalCard from './MedicalCard'
 import { ReactComponent as Search } from '../icons/search.svg'
+import { getVetProcs } from '../actions/procsList'
 
-function MedicalHistory() {
+function MedicalHistory({ procsList }) {
   return (
     <div className={styles.Container}>
       <div className={styles.NameAndSearch}>
@@ -12,18 +15,20 @@ function MedicalHistory() {
       </div>
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
-        <MedicalCard />
-        <MedicalCard />
-        <MedicalCard />
-        <MedicalCard />
-        <MedicalCard />
-        <MedicalCard />
-        <MedicalCard />
-        <MedicalCard />
-        <MedicalCard />
+        {procsList.map((procs) => {
+          return <MedicalCard key={`u${procsList.userId}p${procsList.petId}`} procsList={procsList} />
+        })}
       </section>
     </div>
   )
 }
 
-export default MedicalHistory
+const mapStateToProps = (state) => ({
+  procsList: state.procsList.vetProcs,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getProcs: (pid, uid) => dispatch(getVetProcs(pid, uid)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MedicalHistory)

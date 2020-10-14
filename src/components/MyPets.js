@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import AboutPet from './AboutPet'
-import MedicalHistory from './MedicalHistory'
 import styles from '../styles/MyPets.module.css'
 import { getPetsList } from '../actions/profile'
+import LoadMedicalHistory from './LoadMedicalHistory'
 
-function MyPets({ petList, getInfo }) {
+function MyPets({ petList, getInfo, procsList, getProcs }) {
   const uid = 2
   if (petList === undefined) {
     petList = []
@@ -30,13 +29,7 @@ function MyPets({ petList, getInfo }) {
           </a>
         </div>
       )}
-      {Boolean(petList.length) &&
-        petList.map((pet) => (
-          <div className={styles.Container} key={pet.petId}>
-            <AboutPet pet={pet} />
-            <MedicalHistory />
-          </div>
-        ))}
+      {Boolean(petList.length) && petList.map((pet) => <LoadMedicalHistory key={pet.petId} pet={pet} />)}
     </div>
   )
 }

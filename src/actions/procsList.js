@@ -48,7 +48,7 @@ export const getVetProcs = (pid, uid) => {
   return (dispatch, getState) => {
     dispatch(getVetProcsStarted())
 
-    fetch(`${API_URL}/cards/get_vet?uid=${uid}&pid=${pid}`, { credentials: 'include' })
+    fetch(`${API_URL}/cards/get_vet?uid=${uid}&pid=${pid}` /* , { credentials: 'include' } */)
       .then((resp) => resp.json())
       .then((data) => {
         const procedures = []
