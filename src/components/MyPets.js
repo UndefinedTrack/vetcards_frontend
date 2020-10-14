@@ -8,6 +8,7 @@ import { ReactComponent as Plus } from '../icons/plus.svg'
 
 function MyPets({ petList, getInfo, procsList, getProcs }) {
   const uid = 2
+
   if (petList === undefined) {
     petList = []
     getInfo(uid)
@@ -17,6 +18,8 @@ function MyPets({ petList, getInfo, procsList, getProcs }) {
     if (!petList.length) {
       getInfo(uid)
     }
+
+    setTimeout(() => getInfo(uid), 100)
     // eslint-disable-next-line
   }, [getInfo])
 

@@ -22,7 +22,7 @@ function LoadMedicalHistory({ pet, procsList, getProcs }) {
   return (
     <div className={styles.Container} key={pet.petId}>
       <AboutPet pet={pet} />
-      <MedicalHistory procsList={procsList} />
+      <MedicalHistory pet={pet} procsList={procsList} />
     </div>
   )
 }

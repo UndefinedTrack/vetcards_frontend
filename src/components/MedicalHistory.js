@@ -6,7 +6,7 @@ import MedicalCard from './MedicalCard'
 import { ReactComponent as Search } from '../icons/search.svg'
 import { getVetProcs } from '../actions/procsList'
 
-function MedicalHistory({ procsList }) {
+function MedicalHistory({ pet, procsList }) {
   return (
     <div className={styles.Container}>
       <div className={styles.NameAndSearch}>
@@ -16,7 +16,7 @@ function MedicalHistory({ procsList }) {
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
         {procsList.map((procs) => {
-          return <MedicalCard key={`u${procsList.userId}p${procsList.petId}`} procsList={procsList} />
+          return <MedicalCard pet={pet} key={`u${procsList.userId}p${procsList.petId}`} procsList={procsList} />
         })}
       </section>
     </div>
