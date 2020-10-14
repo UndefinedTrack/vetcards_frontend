@@ -1,15 +1,20 @@
 @import url('./stylesConstants.css');
 
 .Content {
-  margin-top: 125px;
+  margin-top: 100px;
 }
 
 .Container {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 25px;
   height: 609px;
   margin-bottom: 50px;
+}
+
+.ContainerButton {
+  display: flex;
+  justify-content: center;
 }
 
 .NotPet {
@@ -35,17 +40,33 @@ a:visited {
   color: white;
 }
 
-.NotPetButton {
+.Button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 401px;
-  height: 68px;
   background-color: var(--active-button-color);
   border-radius: 10px;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
+  color: white;
+}
+
+.NotPetButton {
   font-size: 34px;
   line-height: 49px;
-  color: white;
+  width: 401px;
+  height: 68px;
+}
+
+.NewPetButton {
+  font-size: 24px;
+  line-height: 35px;
+  width: 1318px;
+  height: 50px;
+}
+
+.Plus {
+  margin-right: 10px;
+  margin-top: 4px;
+  height: 35px;
 }

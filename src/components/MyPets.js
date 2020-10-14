@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import styles from '../styles/MyPets.module.css'
 import { getPetsList } from '../actions/profile'
 import LoadMedicalHistory from './LoadMedicalHistory'
+import { ReactComponent as Plus } from '../icons/plus.svg'
 
 function MyPets({ petList, getInfo, procsList, getProcs }) {
   const uid = 2
@@ -24,8 +25,16 @@ function MyPets({ petList, getInfo, procsList, getProcs }) {
       {Boolean(!petList.length) && (
         <div className={styles.NotPet}>
           <div className={styles.NotPetText}>У вас нет ни одного питомца :(</div>
-          <a href="#/create-pet" className={styles.NotPetButton}>
+          <a href="#/create-pet" className={`${styles.Button} ${styles.NotPetButton}`}>
             Добавить!
+          </a>
+        </div>
+      )}
+      {Boolean(petList.length) && (
+        <div className={styles.ContainerButton}>
+          <a href="#/create-pet" className={`${styles.Button} ${styles.NewPetButton}`}>
+            <Plus className={styles.Plus} />
+            Добавить питомца
           </a>
         </div>
       )}
