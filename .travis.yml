@@ -20,5 +20,5 @@ deploy:
   on:
     branch:
       - master
-      - dev_oks
+      - dev
       - devel
