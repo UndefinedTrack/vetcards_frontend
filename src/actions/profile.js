@@ -8,6 +8,9 @@ import {
   GET_PETS_LIST_REQUEST,
   GET_PETS_LIST_SUCCESS,
   GET_PETS_LIST_FAILURE,
+  GET_PATIENTS_LIST_REQUEST,
+  GET_PATIENTS_LIST_SUCCESS,
+  GET_PATIENTS_LIST_FAILURE
 } from '../constants/ActionTypes'
 
 import {
@@ -58,6 +61,22 @@ const getPetsListSuccess = (pets) => ({
 
 const getPetsListFailure = (error) => ({
   type: GET_PETS_LIST_FAILURE,
+  payload: {
+    error,
+  },
+})
+
+const getPatientsListStarted = () => ({
+  type: GET_PATIENTS_LIST_REQUEST,
+})
+
+const getPatientsListSuccess = (patients) => ({
+  type: GET_PATIENTS_LIST_SUCCESS,
+  payload: patients,
+})
+
+const getPatientsListFailure = (error) => ({
+  type: GET_PATIENTS_LIST_FAILURE,
   payload: {
     error,
   },
@@ -149,5 +168,32 @@ export const getPetsList = (uid) => {
         dispatch(getPetsListSuccess(pets))
       })
       .catch((err) => dispatch(getPetsListFailure(err.message)))
+  }
+}
+
+export const getPatientsList = (uid) => {
+  return (dispatch, getState) => {
+    dispatch(getPatientsListStarted())
+
+    fetch(`${API_URL}/pets/patients?uid=${uid}` /* , { credentials: 'include' } */)
+      .then((resp) => resp.json())
+      .then((data) => {
+        const patients = []
+
+        const pinfo = data.patients
+
+        pinfo.forEach((pt) => {
+          const patient = {
+            patient: pt.patient,
+            owner: pt.owner,
+            card: pt.card,
+          }
+
+          patients.push(patient)
+        })
+
+        dispatch(getPatientsListSuccess(patients))
+      })
+      .catch((err) => dispatch(getPatientsListFailure(err.message)))
   }
 }
