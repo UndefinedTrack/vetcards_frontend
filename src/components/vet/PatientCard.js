@@ -1,28 +1,29 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../styles/vet/PatientsCard.module.css'
 import { ReactComponent as Photo } from '../../icons/photo.svg'
 
-function PatientCard() {
+function PatientCard({ patient }) {
   return (
     <div className={styles.PatientsContainer}>
       <Photo className={styles.Photo} />
-      <Info sectionName="Пациент" />
-      <Info sectionName="Владелец" />
-      <Info sectionName="Номер карты" />
+      <Info sectionName="Пациент" value={patient.patient} />
+      <Info sectionName="Владелец" value={patient.owner} />
+      <Info sectionName="Номер карты" value={patient.card} />
       <HistoryButton />
     </div>
   )
 }
 
-function Info({ sectionName }) {
+function Info({ sectionName, value }) {
   let sectionData
   if (sectionName === 'Пациент') {
-    sectionData = 'Имя пациента'
+    sectionData = value
   } else if (sectionName === 'Владелец') {
-    sectionData = 'Имя владельца'
+    sectionData = value
   } else {
-    sectionData = '№ 666'
+    sectionData = value
   }
   return (
     <div className={styles.InfoContainer}>
