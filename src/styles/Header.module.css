@@ -1,11 +1,15 @@
 @import url('./stylesConstants.css');
 
 .Header {
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   height: 75px;
   background-color: var(--header-color);
   align-items: center;
+  position: fixed;
 }
 
 .Name {

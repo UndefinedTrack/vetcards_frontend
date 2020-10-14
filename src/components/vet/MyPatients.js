@@ -13,6 +13,11 @@ function MyPatients() {
         <PatientCard />
         <PatientCard />
         <PatientCard />
+        <PatientCard />
+        <PatientCard />
+        <PatientCard />
+        <PatientCard />
+        <PatientCard />
       </section>
     </div>
   )

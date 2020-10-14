@@ -1,83 +1,100 @@
-import React, { useState } from 'react'
+/* eslint-disable react/prop-types */
+import React /* { useState } */ from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { createPet } from '../actions/petOps'
 import styles from '../styles/Profile.module.css'
 
-function PetCreator(props) {
-  const [name, setName] = useState('')
+class PetCreator extends React.Component {
+  constructor(props) {
+    super(props)
 
-  function handleSubmit(event) {
+    this.state = {
+      name: '',
+      species: '',
+      breed: '',
+      color: '',
+      birthDate: '',
+      gender: '',
+      chip: '',
+      success: '',
+    }
+
+    this.createPet = props.createPet
+  }
+
+  submitHandler = (event) => {
     event.preventDefault()
+
+    const { name, species, breed, color, birthDate, gender, chip } = this.state
+
+    this.createPet(2, name, species, breed, color, birthDate, gender, chip)
+    this.setState({
+      name: '',
+      species: '',
+      breed: '',
+      color: '',
+      birthDate: '',
+      gender: '',
+      chip: '',
+      success: 'Готово!',
+    })
   }
 
-  function handleNameChange(event) {
-    setName(event.target.value)
+  changeInputHandler = (event) => {
+    event.persist()
+    this.setState((prev) => ({
+      ...prev,
+      ...{
+        [event.target.name]: event.target.value,
+      },
+    }))
   }
 
-  return (
-    <div className={styles.profileSpace}>
-      <div className={styles.profileWrapper}>
-        <form onSubmit={handleSubmit} className={styles.formSpace}>
-          <ChangeAvatar />
-          <div className={styles.fieldsColumn}>
-            <Name
-              handleSubmit={handleSubmit}
-              handleNameChange={handleNameChange}
-              heading="Кличка"
-              placeholder="Мурзик"
-              lastName={name}
-            />
-            <Name
-              handleSubmit={handleSubmit}
-              handleNameChange={handleNameChange}
-              heading="Вид"
-              lastName={name}
-              placeholder="Кот"
-            />
-            <Name
-              handleSubmit={handleSubmit}
-              handleNameChange={handleNameChange}
-              heading="Порода"
-              lastName={name}
-              placeholder="Беспородный"
-            />
-            <Name
-              handleSubmit={handleSubmit}
-              handleNameChange={handleNameChange}
-              heading="Окрас"
-              lastName={name}
-              placeholder="Чёрный"
-            />
-          </div>
-          <div className={styles.fieldsColumn}>
-            <Name
-              handleSubmit={handleSubmit}
-              handleNameChange={handleNameChange}
-              heading="Дата рождения"
-              placeholder="01.09.2018"
-              lastName={name}
-            />
-            <Name
-              handleSubmit={handleSubmit}
-              handleNameChange={handleNameChange}
-              heading="Пол"
-              lastName={name}
-              placeholder="Самец"
-            />
-            <Name
-              handleSubmit={handleSubmit}
-              handleNameChange={handleNameChange}
-              heading="Чип"
-              lastName={name}
-              placeholder="000000000000000"
-            />
-          </div>
-        </form>
-        <button type="button" className={styles.saveButton}>
-          Сохранить
-        </button>
+  render() {
+    const { success } = this.state
+    return (
+      <div className={styles.profileSpace}>
+        <div className={styles.profileWrapper}>
+          <form onSubmit={this.submitHandler}>
+            <div className={styles.formSpace}>
+              <ChangeAvatar />
+              <div className={styles.fieldsColumn}>
+                <Name handleNameChange={this.changeInputHandler} heading="Кличка" placeholder="Мурзик" name="name" />
+                <Name handleNameChange={this.changeInputHandler} heading="Вид" placeholder="Кот" name="species" />
+                <Name
+                  handleNameChange={this.changeInputHandler}
+                  heading="Порода"
+                  placeholder="Беспородный"
+                  name="breed"
+                />
+                <Name handleNameChange={this.changeInputHandler} heading="Окрас" placeholder="Чёрный" name="color" />
+              </div>
+              <div className={styles.fieldsColumn}>
+                <Name
+                  handleNameChange={this.changeInputHandler}
+                  heading="Дата рождения"
+                  placeholder="01.09.2018"
+                  name="birthDate"
+                />
+                <Name handleNameChange={this.changeInputHandler} heading="Пол" placeholder="Самец" name="gender" />
+                <Name
+                  handleNameChange={this.changeInputHandler}
+                  heading="Чип"
+                  placeholder="000000000000000"
+                  name="chip"
+                />
+              </div>
+            </div>
+            <button type="submit" className={styles.saveButton}>
+              Сохранить
+            </button>
+            <div className={`${styles.noteText} ${styles.Success}`}>{success}</div>
+          </form>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 function ChangeAvatar(props) {
@@ -99,9 +116,10 @@ function Name({ handleNameChange, name, heading, placeholder }) {
       </p>
       <input
         type="text"
+        required
         className={styles.input}
         onChange={handleNameChange}
-        defaultValue={name}
+        name={name}
         placeholder={placeholder}
       />
     </div>
@@ -115,4 +133,9 @@ Name.propTypes = {
   placeholder: PropTypes.string.isRequired,
 }
 
-export default PetCreator
+const mapDispatchToProps = (dispatch) => ({
+  createPet: (uid, name, species, breed, color, birthDate, gender, chip) =>
+    dispatch(createPet(uid, name, species, breed, color, birthDate, gender, chip)),
+})
+
+export default connect(null, mapDispatchToProps)(PetCreator)

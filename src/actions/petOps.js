@@ -58,7 +58,7 @@ export const createPet = (uid, name, species, breed, color, birthDate, gender, c
 
     dispatch(createPetStarted())
 
-    fetch(`${API_URL}/pets/create`, { method: 'POST', body: data, credentials: 'include' })
+    fetch(`${API_URL}/pets/create`, { method: 'POST', body: data /* credentials: 'include' */ })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createPetSuccess(dat)))
       .catch((err) => dispatch(createPetFailure(err.message)))

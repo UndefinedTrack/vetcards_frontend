@@ -10,10 +10,7 @@ import { getPetInfo } from '../actions/petInfo'
 function AboutPet({ pet }) {
   return (
     <section className={styles.Container}>
-      <div className={styles.PetName}>
-        {pet.name}
-        {pet.petId}
-      </div>
+      <div className={styles.PetName}>{pet.name}</div>
       <PhotoPet className={styles.PhotoPet} />
       <hr className={styles.Line} />
       <InformationBlock pet={pet} />

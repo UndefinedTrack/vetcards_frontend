@@ -48,7 +48,6 @@ function Profile({ profileInfo, getProfileInfo }) {
   function handleSubmit(event) {
     event.preventDefault()
   }
-
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>

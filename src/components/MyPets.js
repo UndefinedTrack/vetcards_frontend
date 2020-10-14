@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import AboutPet from './AboutPet'
-import MedicalHistory from './MedicalHistory'
 import styles from '../styles/MyPets.module.css'
 import { getPetsList } from '../actions/profile'
+import LoadMedicalHistory from './LoadMedicalHistory'
+import { ReactComponent as Plus } from '../icons/plus.svg'
 
-function MyPets({ petList, getInfo }) {
-  const uid = 3
+function MyPets({ petList, getInfo, procsList, getProcs }) {
+  const uid = 2
+
   if (petList === undefined) {
     petList = []
     getInfo(uid)
@@ -17,26 +18,30 @@ function MyPets({ petList, getInfo }) {
     if (!petList.length) {
       getInfo(uid)
     }
+
+    setTimeout(() => getInfo(uid), 100)
     // eslint-disable-next-line
   }, [getInfo])
 
   return (
-    <div>
+    <div className={styles.Content}>
       {Boolean(!petList.length) && (
         <div className={styles.NotPet}>
           <div className={styles.NotPetText}>У вас нет ни одного питомца :(</div>
-          <a href="vetcards_frontend#/create-pet" className={styles.NotPetButton}>
+          <a href="#/create-pet" className={`${styles.Button} ${styles.NotPetButton}`}>
             Добавить!
           </a>
         </div>
       )}
-      {Boolean(petList.length) &&
-        petList.map((pet) => (
-          <div className={styles.Container} key={pet.petId}>
-            <AboutPet pet={pet} />
-            <MedicalHistory />
-          </div>
-        ))}
+      {Boolean(petList.length) && (
+        <div className={styles.ContainerButton}>
+          <a href="#/create-pet" className={`${styles.Button} ${styles.NewPetButton}`}>
+            <Plus className={styles.Plus} />
+            Добавить питомца
+          </a>
+        </div>
+      )}
+      {Boolean(petList.length) && petList.map((pet) => <LoadMedicalHistory key={pet.petId} pet={pet} />)}
     </div>
   )
 }
