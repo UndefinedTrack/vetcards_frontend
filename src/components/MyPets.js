@@ -7,7 +7,7 @@ import styles from '../styles/MyPets.module.css'
 import { getPetsList } from '../actions/profile'
 
 function MyPets({ petList, getInfo }) {
-  const uid = 3
+  const uid = 2
   if (petList === undefined) {
     petList = []
     getInfo(uid)
@@ -21,7 +21,7 @@ function MyPets({ petList, getInfo }) {
   }, [getInfo])
 
   return (
-    <div>
+    <div className={styles.Content}>
       {Boolean(!petList.length) && (
         <div className={styles.NotPet}>
           <div className={styles.NotPetText}>У вас нет ни одного питомца :(</div>

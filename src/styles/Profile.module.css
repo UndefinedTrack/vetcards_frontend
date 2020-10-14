@@ -10,7 +10,7 @@
 
 .profileWrapper {
   display: flex;
-  margin-top: 50px;
+  margin-top: 125px;
   background-color: var(--header-color);
   flex-direction: column;
   width: 1318px;

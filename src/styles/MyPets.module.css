@@ -1,10 +1,15 @@
 @import url('./stylesConstants.css');
 
+.Content {
+  margin-top: 125px;
+}
+
 .Container {
   display: flex;
   justify-content: center;
   margin-top: 50px;
   height: 609px;
+  margin-bottom: 50px;
 }
 
 .NotPet {
