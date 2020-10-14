@@ -84,6 +84,7 @@ class PetCreator extends React.Component {
                   placeholder="000000000000000"
                   name="chip"
                 />
+                <p className={styles.noteText}>* - обязательные для заполнения поля</p>
               </div>
             </div>
             <button type="submit" className={styles.saveButton}>

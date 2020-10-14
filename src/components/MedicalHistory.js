@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styles from '../styles/MedicalHistory.module.css'
-import MedicalCard from './MedicalCard'
+// import MedicalCard from './MedicalCard'
 import { ReactComponent as Search } from '../icons/search.svg'
 import { getVetProcs } from '../actions/procsList'
 
@@ -15,9 +15,9 @@ function MedicalHistory({ pet, procsList }) {
       </div>
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
-        {procsList.map((procs) => {
+        {/* {procsList.map((procs) => {
           return <MedicalCard pet={pet} key={`u${procsList.userId}p${procsList.petId}`} procsList={procsList} />
-        })}
+        })} */}
       </section>
     </div>
   )
