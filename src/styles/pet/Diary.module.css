@@ -1,0 +1,86 @@
+@import url('../stylesConstants.css');
+
+.DiaryContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 618px;
+  margin-top: 100px;
+}
+
+.DiaryBlocks {
+  border-radius: 10px;
+  width: 650px;
+  height: 100%;
+  background-color: var(--header-color);
+}
+
+.DiaryBlocks:first-child {
+  margin-right: 18px;
+}
+
+.NameAndSearch {
+  display: flex;
+  align-items: center;
+}
+
+.Name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  margin-top: 15px;
+  margin-left: 36px;
+}
+
+.Buttons {
+  margin-left: auto;
+}
+
+.Button {
+  height: 30px;
+  fill: var(--active-button-color);
+  margin-top: 10px;
+  margin-right: 20px;
+  padding: 5px;
+  padding-bottom: 0;
+}
+
+.Line {
+  color: var(--active-button-color);
+  background-color: var(--active-button-color);
+  width: 601px;
+  border: none;
+  height: 1px;
+  margin: 0;
+  margin-top: 8.5px;
+  margin-left: 23.5px;
+}
+
+.Procedures {
+  /* background-color: #000; */
+  height: 558px;
+  overflow: scroll;
+}
+
+.ProcedureBlock {
+  display: flex;
+  align-items: center;
+  margin-top: 21px;
+  margin-left: 36px;
+  margin-right: 46px;
+}
+
+.InformationBlock {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 20px;
+}
+
+.MoreButton {
+  margin-left: auto;
+}

@@ -1,13 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import styles from '../styles/LinkButton.module.css'
 
-function LinkButton({ nameButton }) {
-  return <div className={styles.Button}>{nameButton}</div>
+function LinkButton({ nameButton, href }) {
+  return (
+    <Link to={href} className={styles.Button}>
+      {nameButton}
+    </Link>
+  )
 }
-
-export default LinkButton
 
 LinkButton.propTypes = {
   nameButton: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
 }
+
+export default LinkButton

@@ -15,8 +15,8 @@ function AboutPet({ pet }) {
       <hr className={styles.Line} />
       <InformationBlock pet={pet} />
       <hr className={styles.Line} />
-      <LinkButton nameButton="Записаться на приём" />
-      <LinkButton nameButton="Дневник" />
+      <LinkButton nameButton="Записаться на приём" href="./" />
+      <LinkButton nameButton="Дневник" href="./diary" />
     </section>
   )
 }
