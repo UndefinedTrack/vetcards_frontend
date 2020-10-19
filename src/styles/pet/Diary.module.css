@@ -32,6 +32,7 @@
   line-height: 35px;
   margin-top: 15px;
   margin-left: 36px;
+  margin-bottom: 8.5px;
 }
 
 .Buttons {
@@ -54,12 +55,10 @@
   border: none;
   height: 1px;
   margin: 0;
-  margin-top: 8.5px;
   margin-left: 23.5px;
 }
 
 .Procedures {
-  /* background-color: #000; */
   height: 558px;
   overflow: scroll;
 }
@@ -83,4 +82,79 @@
 
 .MoreButton {
   margin-left: auto;
+}
+
+.BackButton {
+  padding-top: 11px;
+  padding-left: 7px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.ProcedureContainer {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.NewProcedureName {
+  margin-left: 0;
+}
+
+.ProcedureText {
+  margin-top: 30px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.ProcedureEntryBlock {
+  display: flex;
+}
+
+.noteText {
+  margin-top: 30px;
+  color: var(--active-button-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 2px;
+}
+
+.input {
+  display: flex;
+  outline: none;
+  height: 42px;
+  width: 565px;
+  border: 1px solid var(--active-button-color);
+  border-radius: 10px;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  margin-top: 13px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+textarea.input {
+  height: 85px;
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--active-button-color);
+  color: var(--header-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin-left: auto;
+  cursor: pointer;
+  outline: none;
 }
