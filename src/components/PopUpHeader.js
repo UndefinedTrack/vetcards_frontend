@@ -7,9 +7,16 @@ function PopUpHeader({ header }) {
   return (
     <header className={styles.Header}>
       <div className={styles.PopUpHeader}>
-        <a href="#/mypets" className={styles.NotPetButton}>
-          <BackButton className={styles.BackButton} />
-        </a>
+        {header === 'Добавление питомца' && (
+          <a href="#/mypets" className={styles.NotPetButton}>
+            <BackButton className={styles.BackButton} />
+          </a>
+        )}
+        {header === 'Настройка графика работы' && (
+          <a href="#/schedule" className={styles.NotPetButton}>
+            <BackButton className={styles.BackButton} />
+          </a>
+        )}
         <div className={`${styles.Name} ${styles.PopUpName}`}>{header}</div>
       </div>
     </header>
