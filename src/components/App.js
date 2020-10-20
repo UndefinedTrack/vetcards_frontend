@@ -10,7 +10,8 @@ import styles from '../styles/App.module.css'
 import PopUpHeader from './PopUpHeader'
 import PetCreator from './PetCreator'
 import Diary from './pet/Diary'
-// import { getUserProfileInfo } from '../actions/profile'
+import Schedule from './vet/Schedule'
+import CreateSchedule from './vet/CreateSchedule'
 
 function App({ profileInfo }) {
   return (
@@ -38,6 +39,14 @@ function App({ profileInfo }) {
         <Route path="/diary">
           <PopUpHeader header="Дневник питомца" isVet={false} />
           <Diary />
+        </Route>
+        <Route path="/schedule">
+          <Header header="profile" isVet />
+          <Schedule />
+        </Route>
+        <Route path="/create-schedule">
+          <PopUpHeader header="Настройка графика работы" isVet />
+          <CreateSchedule />
         </Route>
       </HashRouter>
     </div>
