@@ -16,6 +16,11 @@
   padding: 6.5px;
 }
 
+.Button:link,
+.Button:visited {
+  color: #000;
+}
+
 .Button:last-child {
   margin-bottom: 38px;
 }

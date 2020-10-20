@@ -57,7 +57,7 @@ export const createVetProc = (pid, uid, purpose, symptoms, diagnosis, recomms, r
 
     dispatch(createVetProcStarted())
 
-    fetch(`${API_URL}/users/create_vet`, { method: 'POST', body: data, credentials: 'include' })
+    fetch(`${API_URL}/cards/create_vet`, { method: 'POST', body: data, credentials: 'include' })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createVetProcSuccess(dat)))
       .catch((err) => dispatch(createVetProcFailure(err.message)))
@@ -74,7 +74,7 @@ export const createOwnerProc = (pid, uid, name, description) => {
 
     dispatch(createOwnerProcStarted())
 
-    fetch(`${API_URL}/users/create_owner`, { method: 'POST', body: data, credentials: 'include' })
+    fetch(`${API_URL}/cards/create_owner`, { method: 'POST', body: data /* credentials: 'include'  */ })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createOwnerProcSuccess(dat)))
       .catch((err) => dispatch(createOwnerProcFailure(err.message)))
