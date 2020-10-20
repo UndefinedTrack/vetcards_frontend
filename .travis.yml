@@ -20,5 +20,5 @@ deploy:
   on:
     branch:
       - master
-      - dev_pet_diary
+      - dev
       - devel
