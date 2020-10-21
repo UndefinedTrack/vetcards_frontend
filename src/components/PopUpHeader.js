@@ -7,7 +7,7 @@ function PopUpHeader({ header }) {
   return (
     <header className={styles.Header}>
       <div className={styles.PopUpHeader}>
-        {header === 'Добавление питомца' && (
+        {header === 'Дневник питомца' && (
           <a href="#/mypets" className={styles.NotPetButton}>
             <BackButton className={styles.BackButton} />
           </a>

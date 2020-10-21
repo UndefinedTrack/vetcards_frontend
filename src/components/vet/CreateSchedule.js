@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { createNewSchedule } from '../../actions/schedule'
 import styles from '../../styles/vet/CreateSchedule.module.css'
 
-function CreateSchedule({ createSch }) {
+function CreateSchedule() {
   return (
     <div className={styles.ScheduleCreatorContainer}>
       <div className={styles.ScheduleCreatorContent}>
-        <form className={styles.CreateScheduleForm}>
+        <form onSubmit={createNewSlots} className={styles.CreateScheduleForm}>
           <div className={styles.FormName}>Рабочие дни</div>
           <DaysOfWeek />
           <div className={styles.FormName}>Часы работы</div>
@@ -33,6 +33,8 @@ function CreateSchedule({ createSch }) {
     </div>
   )
 }
+
+function createNewSlots({ createSch }) {}
 
 function DaysOfWeek() {
   return (
@@ -94,7 +96,7 @@ function Duration() {
   )
 }
 
-CreateSchedule.propTypes = {
+createNewSlots.propTypes = {
   createSch: PropTypes.func.isRequired,
 }
 

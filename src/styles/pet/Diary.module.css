@@ -71,6 +71,10 @@
   margin-right: 46px;
 }
 
+.ProcedurePhoto {
+  height: 60px;
+}
+
 .InformationBlock {
   display: flex;
   flex-direction: column;

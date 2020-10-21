@@ -12,7 +12,7 @@ function HomeProcedure({ proc }) {
   console.log(proc)
   return (
     <div className={styles.ProcedureBlock}>
-      <Photo />
+      <Photo className={styles.ProcedurePhoto} />
       <div className={styles.InformationBlock}>
         <div>{proc.name}</div>
         <div>{proc.procDate}</div>
