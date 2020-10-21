@@ -10,11 +10,11 @@
 
 .profileWrapper {
   display: flex;
-  margin-top: 4vh;
-  margin-bottom: 4vh;
+  margin-top: 100px;
   background-color: var(--header-color);
   flex-direction: column;
-  width: 90vw;
+  width: 1318px;
+  min-height: 650px;
   border-radius: 10px;
 }
 
@@ -23,6 +23,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
+  margin-right: 86px;
 }
 
 .fieldsColumn {
@@ -35,18 +36,21 @@
 .saveButton {
   display: flex;
   align-self: flex-end;
+  align-items: center;
+  justify-content: center;
   border: none;
   border-radius: 10px;
   background-color: var(--active-button-color);
   color: var(--header-color);
-  font-size: 2.5vh;
-  padding-left: 3vw;
-  padding-right: 3vw;
-  padding-top: 2vh;
-  padding-bottom: 2vh;
-  height: auto;
-  width: auto;
-  margin: 5vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin-right: 50px;
+  margin-left: auto;
   cursor: pointer;
   outline: none;
 }
@@ -67,7 +71,7 @@
   width: 200px;
   height: 200px;
   background-color: var(--main-bg-color);
-  margin: 3vh;
+  margin: 50px;
 }
 
 .avatarWrapper {
@@ -85,16 +89,67 @@
   outline: none;
   border: 1px solid var(--active-button-color);
   border-radius: 10px;
-  font-size: 2.5vh;
   padding-left: 2vh;
   padding-right: 2vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .text {
   display: flex;
-  font-size: 2.5vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .noteText {
+  color: var(--active-button-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 2px;
+}
+
+.Success {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  height: 20px;
+  margin-right: 50px;
+  width: 182px;
+  margin-bottom: 50px;
+}
+
+.BirthdayContainer {
+  display: flex;
+}
+
+.BirthdayDay {
+  padding: 0;
+  padding-left: 13px;
+  box-sizing: border-box;
+  width: 46px;
+}
+
+.BirthdayYear {
+  padding: 0;
+  padding-left: 13px;
+  box-sizing: border-box;
+  width: 66px;
+}
+
+.BirthdayInputAndText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 14px;
+}
+
+.BirthdayText {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 19px;
   color: var(--active-button-color);
 }

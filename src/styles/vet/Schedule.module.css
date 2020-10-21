@@ -1,0 +1,90 @@
+@import url('../stylesConstants.css');
+
+.scheduleSpace {
+  display: flex;
+  background-color: var(--main-bg-color);
+  margin-top: 75px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dayColumn {
+  display: flex;
+  align-items: center;
+  background-color: var(--header-color);
+  height: 80vh;
+  flex-direction: column;
+  width: 170px;
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-top: 25px;
+  overflow-y: scroll;
+}
+
+.timeSlotVacant {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--header-color);
+  width: 150px;
+  height: 50px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.timeSlotTaken {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--link-button);
+  width: 130px;
+  height: 50px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.text {
+  display: flex;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.weekDayText {
+  display: flex;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 4px;
+}
+
+.arrows {
+  display: flex;
+  align-self: center;
+  height: 50px;
+  margin: 10px;
+}
+
+.settings {
+  position: absolute;
+  left: 2px;
+  top: 25px;
+}
+
+.arrowAndSettingsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.hr {
+  color: var(--active-button-color);
+  width: 130px;
+}
