@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import styles from '../../styles/vet/Schedule.module.css'
 import { ReactComponent as WeekBackButtonSvg } from '../../icons/arrow_back_week.svg'
 import { ReactComponent as WeekForwardButtonSvg } from '../../icons/arrow_forward_week.svg'
+import { ReactComponent as SettingsSvg } from '../../icons/settings.svg'
 
 function Schedule() {
   const scheduleArray = []
@@ -18,7 +20,12 @@ function Schedule() {
     <div className={styles.scheduleSpace} >
       <WeekBackButtonSvg className={styles.arrows} />
       {scheduleArray}
-      <WeekForwardButtonSvg className={styles.arrows} />
+      <div className={styles.arrowAndSettingsWrapper}>
+        <Link to='/create-schedule' >
+          <SettingsSvg className={styles.settings} />
+        </Link>
+        <WeekForwardButtonSvg className={styles.arrows} />
+      </div>
     </div>
   )
 }

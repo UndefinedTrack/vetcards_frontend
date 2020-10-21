@@ -26,7 +26,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--link-button);
+  background-color: var(--header-color);
   width: 150px;
   height: 50px;
   margin-top: 2px;
@@ -38,7 +38,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--active-button-color);
+  background-color: var(--link-button);
   width: 130px;
   height: 50px;
   margin-top: 2px;
@@ -69,6 +69,19 @@
   align-self: center;
   height: 50px;
   margin: 10px;
+}
+
+.settings {
+  position: absolute;
+  left: 2px;
+  top: 25px;
+}
+
+.arrowAndSettingsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
 .hr {
