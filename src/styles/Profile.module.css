@@ -108,6 +108,7 @@
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
+  margin-left: 2px;
 }
 
 .Success {
@@ -118,4 +119,37 @@
   margin-right: 50px;
   width: 182px;
   margin-bottom: 50px;
+}
+
+.BirthdayContainer {
+  display: flex;
+}
+
+.BirthdayDay {
+  padding: 0;
+  padding-left: 13px;
+  box-sizing: border-box;
+  width: 46px;
+}
+
+.BirthdayYear {
+  padding: 0;
+  padding-left: 13px;
+  box-sizing: border-box;
+  width: 66px;
+}
+
+.BirthdayInputAndText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 14px;
+}
+
+.BirthdayText {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--active-button-color);
 }

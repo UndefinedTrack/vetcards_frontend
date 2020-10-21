@@ -22,7 +22,7 @@ function CreateSchedule() {
           </div>
           <div className={styles.FormName}>Длительность временного слота</div>
           <Duration />
-          <button type="button" className={styles.saveButton}>
+          <button type="submit" className={styles.saveButton}>
             Сохранить
           </button>
         </form>
@@ -69,7 +69,15 @@ function DaysOfWeek() {
 }
 
 function TimeBlock() {
-  return <input type="text" maxLength="5" className={styles.TimeBlock} defaultValue="10:00" />
+  return (
+    <input
+      type="text"
+      maxLength="5"
+      pattern="([0-1]?[1-9]|[0-2][0-3]):([0-5]?[0-9])"
+      className={styles.TimeBlock}
+      defaultValue="10:00"
+    />
+  )
 }
 
 function Duration() {

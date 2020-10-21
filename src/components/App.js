@@ -41,7 +41,7 @@ function App({ profileInfo }) {
           <Diary />
         </Route>
         <Route path="/schedule">
-          <Header header="profile" isVet />
+          <Header header="schedule" isVet />
           <Schedule />
         </Route>
         <Route path="/create-schedule">

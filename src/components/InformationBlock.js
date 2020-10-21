@@ -7,11 +7,11 @@ export default function InformationBlock({ pet }) {
   return (
     <section className={styles.InformationBlock}>
       <InformationLine name="Вид:" value={pet.species} />
-      <InformationLine name="Порода:" value={pet.breed} />
-      <InformationLine name="Окрас:" value={pet.color} />
-      <InformationLine name="Дата рождения:" value={pet.birthDate} />
-      <InformationLine name="Пол:" value={pet.gender} />
-      <InformationLine name="Чип:" value={pet.chip} />
+      {pet.breed && <InformationLine name="Порода:" value={pet.breed} />}
+      {pet.color && <InformationLine name="Окрас:" value={pet.color} />}
+      {pet.birthDate && <InformationLine name="Дата рождения:" value={pet.birthDate} />}
+      {pet.gender && <InformationLine name="Пол:" value={pet.gender} />}
+      {pet.chip && <InformationLine name="Чип:" value={pet.chip} />}
     </section>
   )
 }
