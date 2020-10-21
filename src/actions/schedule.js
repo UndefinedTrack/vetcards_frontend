@@ -44,11 +44,11 @@ const createScheduleFailure = (error) => ({
   },
 })
 
-export const getSchedule = (uid, vid, dt) => {
+export const getSchedule = (vid, dt) => {
   return (dispatch, getState) => {
     dispatch(getScheduleStarted())
 
-    fetch(`${API_URL}/vet_day_sched?uid=${uid}&vid=${vid}&dt=${dt}`, { credentials: 'include' })
+    fetch(`${API_URL}/schedule/vet_day_sched?vid=${vid}&dt=${dt}`, { credentials: 'include' })
       .then((resp) => resp.json)
       .then((data) => {
         const slots = []
@@ -69,10 +69,10 @@ export const getSchedule = (uid, vid, dt) => {
   }
 }
 
-export const createSchedule = (vid, slotDate, slotTime) => {
+export const createNewSchedule = (vid, slotDate, slotTime) => {
   return (dispatch, getState) => {
     const data = new FormData()
-    data.append('vid', vid)
+    data.append('vet', vid)
     data.append('slot_date', slotDate)
     data.append('slot_time', slotTime)
 

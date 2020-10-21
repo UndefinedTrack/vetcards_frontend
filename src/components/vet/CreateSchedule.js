@@ -1,7 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createNewSchedule } from '../../actions/schedule'
 import styles from '../../styles/vet/CreateSchedule.module.css'
 
-function CreateSchedule() {
+function CreateSchedule({ createSch }) {
   return (
     <div className={styles.ScheduleCreatorContainer}>
       <div className={styles.ScheduleCreatorContent}>
@@ -91,4 +94,12 @@ function Duration() {
   )
 }
 
-export default CreateSchedule
+CreateSchedule.propTypes = {
+  createSch: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  createSch: (vid, slotDate, slotTime) => dispatch(createNewSchedule(vid, slotDate, slotTime)),
+})
+
+export default connect(null, mapDispatchToProps)(CreateSchedule)
