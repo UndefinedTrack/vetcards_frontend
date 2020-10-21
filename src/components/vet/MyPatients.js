@@ -23,8 +23,6 @@ function MyPatients({ patientsList, getPatients }) {
     // eslint-disable-next-line
   }, [getPatients])
 
-  console.log(patientsList)
-
   return (
     <div className={styles.PatientsContainer}>
       <SearchLine />

@@ -1,0 +1,145 @@
+@import url('../stylesConstants.css');
+
+.ScheduleCreatorContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.ScheduleCreatorContent {
+  background-color: #fff;
+  width: 1318px;
+  height: 514px;
+  border-radius: 10px;
+}
+
+.CreateScheduleForm {
+  margin-left: 26px;
+  margin-top: 7px;
+}
+
+.FormName {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  margin-top: 13px;
+}
+
+.DaysOfWeekContainer {
+  display: flex;
+  margin-top: 13px;
+}
+
+.Day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  border: 1px solid var(--active-button-color);
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 50px;
+  height: 42px;
+  background-color: #fff;
+  outline: none;
+}
+
+.Day:not(:last-child) {
+  margin-right: 2px;
+}
+
+.Timing {
+  display: flex;
+  align-items: center;
+  margin-top: 13px;
+}
+
+.TimeBlock {
+  padding-left: 13px;
+  border: 1px solid var(--active-button-color);
+  box-sizing: border-box;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  border-radius: 10px;
+  width: 74px;
+  height: 42px;
+  outline: none;
+}
+
+.TimeBlock:focus {
+  background-color: whitesmoke;
+}
+
+.Symbol {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 11px;
+  margin-right: 11px;
+}
+
+.Duration {
+  outline: none;
+  margin-top: 13px;
+  height: 42px;
+  width: 362px;
+}
+
+.mybox {
+  margin-top: 13px;
+  position: relative;
+  display: inline-block;
+}
+
+.SelectInput {
+  width: 362px;
+  height: 42px;
+  outline: none;
+  border: 1px solid var(--active-button-color);
+  border-radius: 10px;
+  padding-left: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.mybox .myarrow {
+  width: 23px;
+  height: 28px;
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  right: 4.5px;
+  background: url('../../icons/arrow_down.svg') right / 100% no-repeat #fff;
+  pointer-events: none;
+}
+
+.saveButton {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--active-button-color);
+  color: var(--header-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin-top: 44px;
+  margin-right: 50px;
+  margin-left: auto;
+  cursor: pointer;
+  outline: none;
+}
