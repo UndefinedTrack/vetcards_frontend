@@ -12,6 +12,7 @@ import PetCreator from './PetCreator'
 import Diary from './pet/Diary'
 import Schedule from './vet/Schedule'
 import CreateSchedule from './vet/CreateSchedule'
+import VisitsHistory from './vet/VisitsHistory'
 
 function App({ profileInfo }) {
   return (
@@ -33,11 +34,11 @@ function App({ profileInfo }) {
           <MyPatients />
         </Route>
         <Route path="/create-pet">
-          <PopUpHeader header="Добавление питомца" isVet={false} />
+          <PopUpHeader header="Добавление питомца" link="#/mypets" isVet={false} />
           <PetCreator />
         </Route>
         <Route path="/diary">
-          <PopUpHeader header="Дневник питомца" isVet={false} />
+          <PopUpHeader header="Дневник питомца" link="#/mypets" isVet={false} />
           <Diary />
         </Route>
         <Route path="/schedule">
@@ -45,8 +46,12 @@ function App({ profileInfo }) {
           <Schedule />
         </Route>
         <Route path="/create-schedule">
-          <PopUpHeader header="Настройка графика работы" isVet />
+          <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet />
           <CreateSchedule />
+        </Route>
+        <Route path="/visits-history">
+          <PopUpHeader header="История приемов" link="#/mypatients" isVet />
+          <VisitsHistory />
         </Route>
       </HashRouter>
     </div>

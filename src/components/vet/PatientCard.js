@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import styles from '../../styles/vet/PatientsCard.module.css'
 import { ReactComponent as Photo } from '../../icons/photo.svg'
 
@@ -11,7 +12,7 @@ function PatientCard({ patient }) {
       <Info sectionName="Пациент" value={patient.patient} />
       <Info sectionName="Владелец" value={patient.owner} />
       <Info sectionName="Номер карты" value={patient.card} />
-      <HistoryButton />
+      <HistoryButton pet={patient} />
     </div>
   )
 }
@@ -33,11 +34,13 @@ function Info({ sectionName, value }) {
   )
 }
 
-function HistoryButton() {
+function HistoryButton({ pet }) {
   return (
-    <a href="/vetcards_frontend#/patient-history" type="button" className={styles.HistoryButton}>
-      История приёмов
-    </a>
+    <Link to="./visits-history" className={styles.HistoryLink}>
+      <button type="button" className={styles.HistoryButton}>
+        История приёмов
+      </button>
+    </Link>
   )
 }
 
