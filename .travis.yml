@@ -20,5 +20,5 @@ deploy:
   on:
     branch:
       - master
-      - dev
+      - dev_hackathon_2.1
       - devel
