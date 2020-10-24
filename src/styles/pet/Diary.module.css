@@ -46,6 +46,7 @@
   margin-right: 20px;
   padding: 5px;
   padding-bottom: 0;
+  cursor: pointer;
 }
 
 .Line {
@@ -94,6 +95,7 @@
   height: 48px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .ProcedureContainer {
@@ -112,12 +114,28 @@
   line-height: 26px;
 }
 
+.ReminderText {
+  margin-top: 14px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+}
+
 .ProcedureEntryBlock {
   display: flex;
 }
 
 .noteText {
   margin-top: 30px;
+  color: var(--active-button-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 2px;
+}
+
+.noteReminderText {
+  margin-top: 14px;
   color: var(--active-button-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
@@ -161,4 +179,9 @@ textarea.input {
   margin-left: auto;
   cursor: pointer;
   outline: none;
+}
+
+.inputAndTextWrapper {
+  display: flex;
+  flex-direction: column;
 }
