@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../styles/pet/Diary.module.css'
 import { ReactComponent as BackButton } from '../../icons/mdi_keyboard_arrow_left.svg'
