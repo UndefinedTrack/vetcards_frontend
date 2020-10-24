@@ -8,9 +8,12 @@
   height: 125px;
   display: flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .Photo {
+  display: flex;
   margin-left: 16px;
   margin-right: 33px;
 }
@@ -18,19 +21,23 @@
 .InfoContainer {
   display: flex;
   flex-direction: column;
+  width: auto;
 }
 
 .InfoContainer:not(:last-child) {
-  margin-right: 55px;
+  margin-right: 30px;
 }
 
 .InfoText {
+  display: flex;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
+  width: auto;
 }
 
 .InfoName {
+  display: flex;
   font-weight: 500;
   color: var(--active-button-color);
 }
