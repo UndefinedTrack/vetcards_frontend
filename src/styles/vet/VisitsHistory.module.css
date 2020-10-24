@@ -1,0 +1,217 @@
+@import url('./../stylesConstants.css');
+
+.VHContainer {
+  display: flex;
+  height: 660px;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.VHContent {
+  display: flex;
+  width: 1318px;
+  border-radius: 10px;
+  background-color: var(--header-color);
+  padding-bottom: 16px;
+}
+
+.CreateVFContainer {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 18px;
+  margin-top: 16px;
+  width: 640px;
+}
+
+.VisitInf {
+  display: flex;
+  flex-direction: column;
+  width: 294px;
+}
+
+.VisitInf:first-child {
+  margin-right: 23px;
+}
+
+.mybox {
+  margin-top: 9px;
+  position: relative;
+  display: inline-block;
+}
+
+.SelectInput {
+  width: 294px;
+  height: 42px;
+  outline: none;
+  border: 1px solid var(--active-button-color);
+  border-radius: 10px;
+  padding-left: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  background-color: #fff;
+}
+
+.mybox .myarrow {
+  width: 23px;
+  height: 28px;
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  right: 4.5px;
+  background: url('../../icons/arrow_down.svg') right / 100% no-repeat #fff;
+  pointer-events: none;
+}
+
+.DFlex {
+  display: flex;
+}
+
+.DFlexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.InputBlock {
+  margin-top: 9px;
+  padding-left: 13px;
+  border: 1px solid var(--active-button-color);
+  box-sizing: border-box;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  border-radius: 10px;
+  width: 294px;
+  height: 42px;
+  outline: none;
+}
+
+.Input {
+  width: 611px;
+}
+
+.InputBlock:focus {
+  background-color: whitesmoke;
+}
+
+.TextArea {
+  height: 84px;
+  resize: none;
+  padding-top: 8px;
+}
+
+.FormName {
+  margin-top: 9px;
+}
+
+.noteText {
+  margin-top: 30px;
+  color: var(--active-button-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 2px;
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--active-button-color);
+  color: var(--header-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin-left: auto;
+  margin-right: 29px;
+  cursor: pointer;
+  outline: none;
+}
+
+.VLine {
+  border-left: 1px solid var(--active-button-color);
+  margin-top: 14px;
+  height: auto;
+}
+
+.SearchContainer {
+  display: flex;
+  align-items: center;
+  width: 625px;
+  height: 48px;
+  border: 1px solid var(--active-button-color);
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.SearchButton {
+  fill: var(--active-button-color);
+  height: 30px;
+  margin-left: 4px;
+}
+
+.SearchLine {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  padding: 0;
+  padding-left: 17px;
+  width: 442px;
+  height: 45px;
+  font-size: 18px;
+  line-height: 26px;
+  background-color: var(--header-color);
+  border: 0;
+}
+.SearchLine:focus {
+  outline: none;
+}
+
+.InputBlock::placeholder,
+.SearchLine::placeholder {
+  color: #c4c4c4;
+}
+
+.MyBoxFilter {
+  position: relative;
+  display: inline-block;
+}
+
+.MyBoxFilter .MyArrowFilter {
+  width: 23px;
+  height: 28px;
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  right: 4.5px;
+  background: url('../../icons/arrow_down.svg') right / 100% no-repeat #fff;
+  pointer-events: none;
+}
+
+.SelectInputFilter {
+  width: 125px;
+  height: 45px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  color: #c4c4c4;
+  background-color: #fff;
+}
+
+.CardsSection {
+  height: 580px;
+  overflow: auto;
+}
