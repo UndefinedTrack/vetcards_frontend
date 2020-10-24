@@ -52,6 +52,7 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
+  background-color: #fff;
 }
 
 .mybox .myarrow {
@@ -207,10 +208,10 @@
   font-size: 18px;
   line-height: 26px;
   color: #c4c4c4;
+  background-color: #fff;
 }
 
 .CardsSection {
   height: 580px;
-  /* background-color: #000; */
   overflow: auto;
 }

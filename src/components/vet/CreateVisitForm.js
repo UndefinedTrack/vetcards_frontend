@@ -108,7 +108,7 @@ function Date({ changeInputHandler }) {
       required
       type="text"
       onChange={changeInputHandler}
-      // pattern="[A-Za-zА-Яа-яЁё]{2,25}"
+      // pattern=""
       className={styles.InputBlock}
       // onChange={handleNameChange}
       name="date"
