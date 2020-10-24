@@ -2,7 +2,7 @@
 
 .MedicalCard {
   font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 18px;
   line-height: 26px;
   overflow: auto;
@@ -10,7 +10,11 @@
 
 .Card {
   display: flex;
-  margin-left: 30px;
+  margin-left: 14px;
+}
+
+.VisitReason {
+  font-weight: 500;
 }
 
 .Name {
@@ -20,7 +24,17 @@
 .Line {
   color: var(--active-button-color);
   background-color: var(--active-button-color);
-  width: 865px;
+  width: calc(100% - 30px);
   border: none;
   height: 1px;
+}
+
+.DFlex {
+  display: flex;
+}
+
+.NameAndDate {
+  display: flex;
+  width: 605px;
+  justify-content: space-between;
 }

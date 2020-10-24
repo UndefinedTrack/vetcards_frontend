@@ -57,4 +57,11 @@ a:visited {
   align-items: center;
   justify-content: center;
   color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.HistoryLink {
+  margin-left: auto;
 }
