@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styles from '../../styles/vet/VisitsHistory.module.css'
 import MedicalCard from '../MedicalCard'
@@ -8,12 +9,7 @@ import { getVetProcs } from '../../actions/procsList'
 // eslint-disable-next-line
 function MedicalHistoryForVet({ procsList, getVetProcs }) {
   const uid = 2
-  const pid = 3
-
-  if (procsList === undefined) {
-    procsList = []
-    getVetProcs(pid, uid)
-  }
+  const { pid } = useParams()
 
   useEffect(() => {
     setTimeout(() => getVetProcs(pid, uid), 100)

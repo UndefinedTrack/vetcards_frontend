@@ -49,7 +49,7 @@ function App({ profileInfo }) {
           <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet />
           <CreateSchedule />
         </Route>
-        <Route path="/visits-history">
+        <Route path="/visits-history/:pid">
           <PopUpHeader header="История приемов" link="#/mypatients" isVet />
           <VisitsHistory />
         </Route>
