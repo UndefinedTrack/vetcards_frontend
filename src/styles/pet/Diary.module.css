@@ -61,7 +61,7 @@
 
 .Procedures {
   height: 558px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .ProcedureBlock {
