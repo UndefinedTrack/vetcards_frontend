@@ -6,6 +6,7 @@ import procsList from './procsList'
 import profile from './profile'
 import userCreate from './userCreate'
 import schedule from './schedule'
+import avatar from './avatar'
 import petSearch from './petSearch'
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   profile,
   userCreate,
   schedule,
+  avatar,
   petSearch,
 })
 

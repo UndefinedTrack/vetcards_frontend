@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
 import { getUserProfileInfo } from '../actions/profile'
+import { uploadUserAvatar } from '../actions/avatar'
 
-function Profile({ profileInfo, getProfileInfo }) {
+function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
   const uid = 3
   if (profileInfo === undefined) {
     profileInfo = []
@@ -45,6 +46,10 @@ function Profile({ profileInfo, getProfileInfo }) {
   //   setEmail(event.target.value)
   // }
 
+  function handleAvatarChange(event) {
+    uploadAvatar(uid, event.target.files)
+  }
+
   function handleSubmit(event) {
     event.preventDefault()
   }
@@ -52,7 +57,7 @@ function Profile({ profileInfo, getProfileInfo }) {
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
         <form onSubmit={handleSubmit} className={styles.formSpace}>
-          <ChangeAvatar />
+          <ChangeAvatar handleAvatarChange={handleAvatarChange} />
           <div className={styles.fieldsColumn}>
             <LastName
               // handleLastNameChange={handleLastNameChange}
@@ -92,15 +97,38 @@ function Profile({ profileInfo, getProfileInfo }) {
   )
 }
 
-function ChangeAvatar(props) {
+function ChangeAvatar({ handleAvatarChange }) {
+  const imageInput = React.useRef(null)
+	function handleImageInput() {
+		if (imageInput.current) {
+			imageInput.current.click()
+		}
+  }
+  
   return (
     <div className={styles.avatarWrapper}>
       <div className={styles.avatarSample} />
-      <button type="button" className={styles.changeAvatar}>
+      <button
+        type="button"
+        className={styles.changeAvatar}
+        onClick={handleImageInput}>
         Изменить фото
       </button>
+      <input
+				id='image'
+				type='file'
+				multiple
+				accept='image/*'
+				onChange={handleAvatarChange}
+				ref={imageInput}
+				style={{ display: 'none' }}
+			/>
     </div>
   )
+}
+
+ChangeAvatar.propTypes = {
+  handleAvatarChange: PropTypes.func.isRequired,
 }
 
 function LastName({ handleLastNameChange, lastName }) {
@@ -214,10 +242,12 @@ Email.propTypes = {
 
 const mapStateToProps = (state) => ({
   profileInfo: state.profile.profile,
+  avatar: state.avatar.avatar,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid) => dispatch(getUserProfileInfo(uid)),
+  uploadAvatar: (uid, files) => dispatch(uploadUserAvatar(uid, files)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
