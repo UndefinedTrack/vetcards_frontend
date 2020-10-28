@@ -12,8 +12,8 @@ export default function MedicalCard({ procs }) {
       <section className={styles.Card}>
         <div className={styles.VisitReason}>
           <div className={styles.NameAndDate}>
-            {procs.purpose}
-            <div>
+            <div className={styles.Name}>{procs.purpose}</div>
+            <div className={styles.Date}>
               {day}.{month}.{year}
             </div>
           </div>

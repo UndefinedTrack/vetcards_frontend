@@ -21,4 +21,5 @@ deploy:
     branch:
       - master
       - dev
+      - dev_revisions
       - devel

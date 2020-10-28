@@ -44,11 +44,11 @@ const getOwnerProcsFailure = (error) => ({
   },
 })
 
-export const getVetProcs = (pid, uid) => {
+export const getVetProcs = (pid, uid, name) => {
   return (dispatch, getState) => {
     dispatch(getVetProcsStarted())
 
-    fetch(`${API_URL}/cards/get_vet?uid=${uid}&pid=${pid}` /* , { credentials: 'include' } */)
+    fetch(`${API_URL}/cards/search_vet_procs?uid=${uid}&pid=${pid}&name=${name}` /* , { credentials: 'include' } */)
       .then((resp) => resp.json())
       .then((data) => {
         const procedures = []
@@ -76,11 +76,11 @@ export const getVetProcs = (pid, uid) => {
   }
 }
 
-export const getOwnerProcs = (pid, uid) => {
+export const getOwnerProcs = (pid, uid, name) => {
   return (dispatch, getState) => {
     dispatch(getOwnerProcsStarted())
 
-    fetch(`${API_URL}/cards/get_owner?uid=${uid}&pid=${pid}`, { credentials: 'include' })
+    fetch(`${API_URL}/cards/search_owner_procs?uid=${uid}&pid=${pid}&name=${name}`, { credentials: 'include' })
       .then((resp) => resp.json())
       .then((data) => {
         const procedures = []

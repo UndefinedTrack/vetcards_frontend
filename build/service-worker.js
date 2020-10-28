@@ -13,7 +13,7 @@
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js')
 
-importScripts('/vetcards_frontend/precache-manifest.21532049859775f63d58a4971e5ec387.js')
+importScripts('/vetcards_frontend/precache-manifest.b5b1b8d125a17eabb14dbdd324f80a51.js')
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
