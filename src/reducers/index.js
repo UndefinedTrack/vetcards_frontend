@@ -7,6 +7,7 @@ import profile from './profile'
 import userCreate from './userCreate'
 import schedule from './schedule'
 import avatar from './avatar'
+import petSearch from './petSearch'
 
 const rootReducer = combineReducers({
   petInfo,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   userCreate,
   schedule,
   avatar,
+  petSearch,
 })
 
 export default rootReducer

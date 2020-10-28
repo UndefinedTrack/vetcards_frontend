@@ -37,7 +37,7 @@ function App({ profileInfo }) {
           <PopUpHeader header="Добавление питомца" link="#/mypets" isVet={false} />
           <PetCreator />
         </Route>
-        <Route path="/diary">
+        <Route path="/diary/:pid">
           <PopUpHeader header="Дневник питомца" link="#/mypets" isVet={false} />
           <Diary />
         </Route>
@@ -49,7 +49,7 @@ function App({ profileInfo }) {
           <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet />
           <CreateSchedule />
         </Route>
-        <Route path="/visits-history">
+        <Route path="/visits-history/:pid">
           <PopUpHeader header="История приемов" link="#/mypatients" isVet />
           <VisitsHistory />
         </Route>

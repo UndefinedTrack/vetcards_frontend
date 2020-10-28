@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styles from '../../styles/pet/Diary.module.css'
 import { createOwnerProc } from '../../actions/procsCreate'
 import { ReactComponent as BackButton } from '../../icons/mdi_keyboard_arrow_left.svg'
 
 function CreateProcedure({ backClick, createProc }) {
+  const { pid } = useParams()
   const [state, setState] = useState({
     procedureName: '',
     date: '',
@@ -52,12 +54,16 @@ function CreateProcedure({ backClick, createProc }) {
           placeholder="Оставьте примечание"
         />
         <p className={styles.noteText}>* - обязательные для заполнения поля</p>
-        <button type="submit" className={styles.saveButton}>
+        <button type="submit" onClick={update} className={styles.saveButton}>
           Добавить
         </button>
       </form>
     </div>
   )
+
+  function update() {
+    setTimeout(() => window.location.reload(), 100)
+  }
 
   function changeInputHandler(event) {
     event.persist()
@@ -72,7 +78,7 @@ function CreateProcedure({ backClick, createProc }) {
   function submitHandler(event) {
     event.preventDefault()
 
-    createProc(5, 2, state.procedureName, state.remark)
+    createProc(pid, 3, state.procedureName, state.remark)
 
     setState({
       procedureName: '',

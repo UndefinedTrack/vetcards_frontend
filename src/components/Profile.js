@@ -7,7 +7,7 @@ import { getUserProfileInfo } from '../actions/profile'
 import { uploadUserAvatar } from '../actions/avatar'
 
 function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
-  const uid = 2
+  const uid = 3
   if (profileInfo === undefined) {
     profileInfo = []
     getProfileInfo(uid)
