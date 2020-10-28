@@ -6,6 +6,7 @@ import procsList from './procsList'
 import profile from './profile'
 import userCreate from './userCreate'
 import schedule from './schedule'
+import avatar from './avatar'
 
 const rootReducer = combineReducers({
   petInfo,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   profile,
   userCreate,
   schedule,
+  avatar,
 })
 
 export default rootReducer
