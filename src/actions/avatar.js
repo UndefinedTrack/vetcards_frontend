@@ -63,7 +63,6 @@ const uploadAvatarFailure = (error) => ({
 export const uploadUserAvatar = (uid, files) => {
   return (dispatch, getState) => {
     const data = new FormData()
-    console.log(uid)
     data.append('pk', uid)
     data.append('avatar', files[0])
 
@@ -76,12 +75,7 @@ export const uploadUserAvatar = (uid, files) => {
     })
     .then((resp) => resp.json())
     .then((dat) => {
-      const { userAvatar } = dat
-      const  avatar = {
-        id: userAvatar.id,
-        avatar: userAvatar.avatar,
-      }
-      dispatch(uploadAvatarSuccess(avatar))
+      dispatch(uploadAvatarSuccess(dat))
     })
     .catch((err) => dispatch(uploadAvatarFailure(err.message)))
   }
