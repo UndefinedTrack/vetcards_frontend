@@ -28,7 +28,7 @@ class PetCreator extends React.Component {
 
     const { name, species, breed, color, birthDate, gender, chip } = this.state
 
-    this.createPet(2, name, species, breed, color, birthDate, gender, chip)
+    this.createPet(3, name, species, breed, color, birthDate, gender, chip)
     this.setState({
       name: '',
       species: '',

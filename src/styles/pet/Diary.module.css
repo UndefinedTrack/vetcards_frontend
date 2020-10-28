@@ -185,3 +185,38 @@ textarea.input {
   display: flex;
   flex-direction: column;
 }
+
+.SearchContainer {
+  width: 700px;
+  height: 48px;
+  margin-top: 11px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.SearchLine {
+  padding: 0;
+  padding-left: 17px;
+  width: 530px;
+  height: 47px;
+  font-size: 18px;
+  line-height: 26px;
+  background-color: #fff;
+  border: 0;
+}
+
+.SearchLine:focus {
+  outline: none;
+}
+
+.SearchLine::placeholder {
+  color: #c4c4c4;
+}
+
+.SearchButton {
+  fill: var(--active-button-color);
+  height: 30px;
+  margin-left: 20px;
+}

@@ -6,7 +6,7 @@ import styles from '../styles/Profile.module.css'
 import { getUserProfileInfo } from '../actions/profile'
 
 function Profile({ profileInfo, getProfileInfo }) {
-  const uid = 2
+  const uid = 3
   if (profileInfo === undefined) {
     profileInfo = []
     getProfileInfo(uid)

@@ -9,7 +9,6 @@ function HomeProcedure({ proc }) {
   if (proc === undefined) {
     return <></>
   }
-  console.log(proc)
   return (
     <div className={styles.ProcedureBlock}>
       <Photo className={styles.ProcedurePhoto} />
