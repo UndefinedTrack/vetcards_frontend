@@ -47,7 +47,7 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
   // }
 
   function handleAvatarChange(event) {
-    uploadAvatar(event.target.files)
+    uploadAvatar(uid, event.target.files)
   }
 
   function handleSubmit(event) {

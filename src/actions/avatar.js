@@ -63,11 +63,13 @@ const uploadAvatarFailure = (error) => ({
 export const uploadUserAvatar = (uid, files) => {
   return (dispatch, getState) => {
     const data = new FormData()
+    console.log(uid)
+    data.append('pk', uid)
     data.append('avatar', files[0])
 
     dispatch(uploadAvatarStarted())
 
-    fetch(`${API_URL}/users/avatar?pk=${uid}`, {
+    fetch(`${API_URL}/users/avatar`, {
       method: 'POST',
       body: data,
       credentials: 'include'
