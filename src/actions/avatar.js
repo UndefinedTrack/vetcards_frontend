@@ -1,7 +1,7 @@
 import {
-  GET_AVATAR_REQUEST,
-  GET_AVATAR_SUCCESS,
-  GET_AVATAR_FAILURE,
+  // GET_AVATAR_REQUEST,
+  // GET_AVATAR_SUCCESS,
+  // GET_AVATAR_FAILURE,
   UPLOAD_AVATAR_REQUEST,
   UPLOAD_AVATAR_SUCCESS,
   UPLOAD_AVATAR_FAILURE
@@ -12,21 +12,21 @@ import {
   // TEST_API_URL
 } from '../constants/constants'
 
-const getAvatarStarted= () => ({
-  type: GET_AVATAR_REQUEST,
-})
+// const getAvatarStarted= () => ({
+//   type: GET_AVATAR_REQUEST,
+// })
 
-const getAvatarSuccess = (info) => ({
-  type: GET_AVATAR_SUCCESS,
-  payload: info,
-})
+// const getAvatarSuccess = (info) => ({
+//   type: GET_AVATAR_SUCCESS,
+//   payload: info,
+// })
 
-const getAvatarFailure = (error) => ({
-  type: GET_AVATAR_FAILURE,
-  payload: {
-    error,
-  },
-})
+// const getAvatarFailure = (error) => ({
+//   type: GET_AVATAR_FAILURE,
+//   payload: {
+//     error,
+//   },
+// })
 
 const uploadAvatarStarted = () => ({
   type: UPLOAD_AVATAR_REQUEST,
@@ -44,30 +44,30 @@ const uploadAvatarFailure = (error) => ({
   },
 })
 
-export const getUserAvatar = (uid) => {
-  return (dispatch, getState) => {
-    dispatch(getAvatarStarted())
+// export const getUserAvatar = (uid) => {
+//   return (dispatch, getState) => {
+//     dispatch(getAvatarStarted())
 
-    fetch(`${API_URL}/`)
-    // ............
-    .then((resp) => resp.json())
-    .then((data) => {
-      // ...
-      let avatar
-      dispatch(getAvatarSuccess(avatar))
-    })
-    .catch((err) => dispatch(getAvatarFailure(err.message)))
-  }
-}
+//     fetch(`${API_URL}/`)
+//     // ............
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//       // ...
+//       let avatar
+//       dispatch(getAvatarSuccess(avatar))
+//     })
+//     .catch((err) => dispatch(getAvatarFailure(err.message)))
+//   }
+// }
 
-export const uploadUserAvatar = (event, files = event.target.files) => {
+export const uploadUserAvatar = (uid, files) => {
   return (dispatch, getState) => {
     const data = new FormData()
-    data.append('image', files[0])
+    data.append('avatar', files[0])
 
     dispatch(uploadAvatarStarted())
 
-    fetch(`${API_URL}/users/avatar`, {
+    fetch(`${API_URL}/users/avatar?pk=${uid}`, {
       method: 'POST',
       body: data,
       credentials: 'include'
@@ -82,22 +82,6 @@ export const uploadUserAvatar = (event, files = event.target.files) => {
       dispatch(uploadAvatarSuccess(avatar))
     })
     .catch((err) => dispatch(uploadAvatarFailure(err.message)))
-  }
-}
-
-export const getPetAvatar = (uid) => {
-  return (dispatch, getState) => {
-    dispatch(getAvatarStarted())
-
-    fetch(`${API_URL}/`)
-    // ............
-    .then((resp) => resp.json())
-    .then((data) => {
-      // ...
-      let avatar
-      dispatch(getAvatarSuccess(avatar))
-    })
-    .catch((err) => dispatch(getAvatarFailure(err.message)))
   }
 }
 

@@ -46,8 +46,8 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
   //   setEmail(event.target.value)
   // }
 
-  function handleAvatarChange(event, files = event.target.files) {
-    uploadAvatar(event, files)
+  function handleAvatarChange(event) {
+    uploadAvatar(event.target.files)
   }
 
   function handleSubmit(event) {
@@ -247,7 +247,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid) => dispatch(getUserProfileInfo(uid)),
-  uploadAvatar: (uid) => dispatch(uploadUserAvatar(uid)),
+  uploadAvatar: (uid, files) => dispatch(uploadUserAvatar(uid, files)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
