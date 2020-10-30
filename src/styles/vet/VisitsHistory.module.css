@@ -215,3 +215,27 @@
   height: 580px;
   overflow: auto;
 }
+
+@media (max-width: 1400px) {
+  .VHContent {
+    width: 1000px;
+  }
+
+  .CreateVFContainer {
+    width: 480px;
+  }
+
+  .SearchContainer {
+    width: 475px;
+  }
+
+  .VisitInf,
+  .SelectInput,
+  .InputBlock {
+    width: 215px;
+  }
+
+  .Input {
+    width: 450px;
+  }
+}

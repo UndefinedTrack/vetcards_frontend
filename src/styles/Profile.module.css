@@ -14,7 +14,7 @@
   background-color: var(--header-color);
   flex-direction: column;
   width: 1318px;
-  height: 650px;
+  height: 550px;
   border-radius: 10px;
 }
 
@@ -180,8 +180,16 @@
   }
 }
 
-/* @media (max-height: 650px) {
+@media (max-height: 700px) {
   .profileWrapper {
-    height: 400px;
+    height: 450px;
   }
-} */
+
+  .saveButton {
+    margin-right: 10px;
+  }
+
+  .formSpace {
+    height: 395px;
+  }
+}
