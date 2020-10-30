@@ -24,3 +24,25 @@
 .Button:last-child {
   margin-bottom: 38px;
 }
+
+@media (max-width: 1400px) {
+  .Button {
+    width: 270px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .Button {
+    width: 200px;
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 950px) {
+  .Button {
+    width: 150px;
+    height: 25px;
+    font-size: 15px;
+  }
+}

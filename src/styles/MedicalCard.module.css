@@ -41,3 +41,10 @@
 .Date {
   margin-left: auto;
 }
+
+@media (max-width: 950px) {
+  .MedicalCard {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}

@@ -32,3 +32,38 @@
   border: none;
   height: 1px;
 }
+
+@media (max-width: 1400px) {
+  .Container {
+    width: 300px;
+  }
+
+  .Line {
+    width: 280px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .Container {
+    width: 250px;
+  }
+
+  .Line {
+    width: 230px;
+  }
+}
+
+@media (max-width: 950px) {
+  .Container {
+    width: 200px;
+  }
+
+  .PetName {
+    margin-top: 5px;
+    font-size: 19px;
+  }
+
+  .Line {
+    width: 180px;
+  }
+}

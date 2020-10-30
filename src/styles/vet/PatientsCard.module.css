@@ -12,6 +12,10 @@
   justify-content: space-between;
 }
 
+.PatientInfo {
+  display: flex;
+}
+
 .Photo {
   display: flex;
   margin-left: 16px;
@@ -19,9 +23,9 @@
 }
 
 .InfoContainer {
+  width: 430px;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  width: auto;
 }
 
 .InfoContainer:not(:last-child) {
@@ -33,12 +37,11 @@
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
-  width: auto;
 }
 
 .InfoName {
-  display: flex;
   font-weight: 500;
+  margin-right: 10px;
   color: var(--active-button-color);
 }
 a {
@@ -71,4 +74,33 @@ a:visited {
 
 .HistoryLink {
   margin-left: auto;
+}
+
+@media (max-width: 1400px) {
+  .PatientsContainer {
+    width: 1080px;
+  }
+
+  .InfoContainer {
+    width: 320px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .PatientsContainer {
+    width: 828px;
+  }
+
+  .Column {
+    margin: 0;
+  }
+
+  .HistoryButton {
+    width: 150px;
+    height: 60px;
+  }
+
+  .InfoContainer {
+    width: 240px;
+  }
 }

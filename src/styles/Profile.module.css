@@ -14,7 +14,7 @@
   background-color: var(--header-color);
   flex-direction: column;
   width: 1318px;
-  min-height: 650px;
+  height: 650px;
   border-radius: 10px;
 }
 
@@ -60,7 +60,7 @@
   border: none;
   color: var(--active-button-color);
   background-color: var(--header-color);
-  font-size: 2.5vh;
+  font-size: 18px;
   cursor: pointer;
   outline: none;
 }
@@ -84,12 +84,12 @@
 
 .input {
   display: flex;
-  height: 5.5vh;
+  height: 42px;
   width: 90%;
   outline: none;
   border: 1px solid var(--active-button-color);
   border-radius: 10px;
-  padding-left: 2vh;
+  padding-left: 16px;
   padding-right: 2vh;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
@@ -99,8 +99,9 @@
 .text {
   display: flex;
   font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
   font-size: 18px;
-  line-height: 26px;
+  line-height: 24px;
 }
 
 .noteText {
@@ -153,3 +154,34 @@
   line-height: 19px;
   color: var(--active-button-color);
 }
+
+@media (max-width: 1400px) {
+  .profileWrapper {
+    width: 1080px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .profileWrapper {
+    width: 828px;
+    height: 500px;
+  }
+
+  .text {
+    margin-bottom: 5px;
+    /* background-color: #000; */
+  }
+
+  .avatarSample {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 30px;
+  }
+}
+
+/* @media (max-height: 650px) {
+  .profileWrapper {
+    height: 400px;
+  }
+} */
