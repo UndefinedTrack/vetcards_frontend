@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -51,7 +52,7 @@ function CreateVisitForm({ createProc }) {
           <div>
             Цель визита <span className={styles.noteText}>*</span>
           </div>
-          <Duration hangeInputHandler={changeInputHandler} />
+          <VisitPurpose hangeInputHandler={changeInputHandler} />
         </div>
         <div className={styles.VisitInf}>
           <div>
@@ -82,15 +83,67 @@ function CreateVisitForm({ createProc }) {
   )
 }
 
-function Duration() {
+// function Duration() {
+//   return (
+//     <div className={styles.mybox}>
+//       <span className={styles.myarrow} />
+//       <select className={styles.SelectInput}>
+//         <option>Осмотр</option>
+//         {/* <option>Прививка</option>
+//         <option>Стерилизация</option> */}
+//       </select>
+//     </div>
+//   )
+// }
+
+function VisitPurpose() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const labels = ['Осмотр', 'Прививка']
+
+  const [chosenVisitPurpose, setChosenVisitPurpose] = useState(labels[0])
+
+  function handleOptionClick(optionName) {
+    setChosenVisitPurpose(optionName)
+    setIsVisible(false)
+  }
+
   return (
-    <div className={styles.mybox}>
-      <span className={styles.myarrow} />
-      <select className={styles.SelectInput}>
-        <option>Осмотр</option>
-        {/* <option>Прививка</option>
-        <option>Стерилизация</option> */}
-      </select>
+    <div className={styles.select}>
+      <div className={styles.selectTitle}>{chosenVisitPurpose}</div>
+      <OptionsList
+        isVisible={isVisible}
+        handleOptionClick={handleOptionClick}
+        labels={labels}
+      />
+    </div>
+  )
+}
+
+function OptionsList({ isVisible, handleOptionClick, labels }) {
+  if (isVisible) {
+    return (
+      <div className={styles.selectContent} >
+        <Option name={labels[0]} handleLabelClick={handleOptionClick} />
+        <Option name={labels[1]} handleLabelClick={handleOptionClick} />
+      </div>
+   )
+  }
+  return null
+}
+
+function Option({ name, handleOptionClick }) {
+  return (
+    <div>
+      <input
+        id={name}
+        type='checkbox'
+        value='0'
+        name='selectName'
+        className={styles.selectInput}
+        onClick={() => handleOptionClick(name)}
+      />
+      <label htmlFor={name}>{name}</label>
     </div>
   )
 }
