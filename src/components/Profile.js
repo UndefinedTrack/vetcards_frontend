@@ -99,30 +99,27 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
 
 function ChangeAvatar({ handleAvatarChange }) {
   const imageInput = React.useRef(null)
-	function handleImageInput() {
-		if (imageInput.current) {
-			imageInput.current.click()
-		}
+  function handleImageInput() {
+    if (imageInput.current) {
+      imageInput.current.click()
+    }
   }
-  
+
   return (
     <div className={styles.avatarWrapper}>
       <div className={styles.avatarSample} />
-      <button
-        type="button"
-        className={styles.changeAvatar}
-        onClick={handleImageInput}>
+      <button type="button" className={styles.changeAvatar} onClick={handleImageInput}>
         Изменить фото
       </button>
       <input
-				id='image'
-				type='file'
-				multiple
-				accept='image/*'
-				onChange={handleAvatarChange}
-				ref={imageInput}
-				style={{ display: 'none' }}
-			/>
+        id="image"
+        type="file"
+        multiple
+        accept="image/*"
+        onChange={handleAvatarChange}
+        ref={imageInput}
+        style={{ display: 'none' }}
+      />
     </div>
   )
 }
@@ -199,7 +196,7 @@ function MobilePhone({ handleMobilePhoneChange, mobilePhone }) {
   return (
     <div>
       <p className={styles.text}>
-        Номер мобильного телефона <span className={styles.noteText}>*</span>
+        Номер телефона <span className={styles.noteText}>*</span>
       </p>
       <input
         type="text"
@@ -221,7 +218,7 @@ function Email({ handleEmailChange, email }) {
   return (
     <div>
       <p className={styles.text}>
-        Адрес электронной почты
+        Электронная почта
         <span className={styles.noteText}>*</span>
       </p>
       <input

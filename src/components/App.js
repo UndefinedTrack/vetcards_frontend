@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Profile from './Profile'
@@ -15,6 +15,7 @@ import CreateSchedule from './vet/CreateSchedule'
 import VisitsHistory from './vet/VisitsHistory'
 
 function App({ profileInfo }) {
+  const [input, setInput] = useState([])
   return (
     <div className={styles.App}>
       <HashRouter>
@@ -27,10 +28,10 @@ function App({ profileInfo }) {
         </Route>
         <Route path="/mypets">
           <Header header="mypets" isVet={false} />
-          <MyPets />
+          <MyPets input={input} setInput={setInput} />
         </Route>
         <Route path="/mypatients">
-          <Header header="mypatients" isVet={false} />
+          <Header header="mypatients" isVet />
           <MyPatients />
         </Route>
         <Route path="/create-pet">
@@ -40,6 +41,10 @@ function App({ profileInfo }) {
         <Route path="/diary/:pid">
           <PopUpHeader header="Дневник питомца" link="#/mypets" isVet={false} />
           <Diary />
+        </Route>
+        <Route path="/vetprofile">
+          <Header header="profile" isVet />
+          <Profile />
         </Route>
         <Route path="/schedule">
           <Header header="schedule" isVet />

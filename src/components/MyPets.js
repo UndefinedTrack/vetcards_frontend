@@ -9,16 +9,16 @@ import { ReactComponent as Plus } from '../icons/plus.svg'
 import { getVetProcs } from '../actions/procsList'
 
 let procs
-let input
+let searchString
 // eslint-disable-next-line
-function MyPets({ petList, getInfo, procsList, getVetProcs }) {
+function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
   const uid = 3
   if (procs === undefined) {
     procs = []
   }
 
-  if (input === undefined) {
-    input = []
+  if (searchString === undefined) {
+    searchString = []
   }
 
   if (petList === undefined) {
@@ -57,7 +57,7 @@ function MyPets({ petList, getInfo, procsList, getVetProcs }) {
         petList.map((pet) => (
           <div className={styles.Container} key={pet.petId}>
             <AboutPet pet={pet} />
-            <MedicalHistory pet={pet} procs={procs} input={input} />
+            <MedicalHistory pet={pet} procs={procs} input={input} setInput={setInput} searchString={searchString} />
           </div>
         ))}
     </div>

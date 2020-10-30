@@ -73,3 +73,58 @@
 .SearchLine::placeholder {
   color: #c4c4c4;
 }
+
+@media (max-width: 1400px) {
+  .Container {
+    width: 750px;
+  }
+
+  .Line {
+    width: 730px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .Container {
+    width: 550px;
+  }
+
+  .Line {
+    width: 530px;
+  }
+
+  .SearchLine {
+    width: 450px;
+  }
+}
+
+@media (max-width: 950px) {
+  .Container {
+    width: 380px;
+  }
+
+  .Line {
+    width: 360px;
+  }
+
+  .SearchLine {
+    margin: 0;
+    width: 290px;
+    height: 35px;
+  }
+
+  .SearchContainer {
+    height: 36px;
+  }
+
+  .Name {
+    margin-top: 3px;
+    margin-left: 10px;
+    font-size: 19px;
+  }
+
+  .SearchButton {
+    margin-top: 3px;
+    margin-right: 10px;
+  }
+}
