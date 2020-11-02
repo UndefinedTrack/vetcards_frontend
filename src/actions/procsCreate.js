@@ -65,12 +65,13 @@ export const createVetProc = (pid, uid, date, purpose, symptoms, diagnosis, reco
   }
 }
 
-export const createOwnerProc = (pid, uid, name, description) => {
+export const createOwnerProc = (pid, uid, name, date, description) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pet', pid)
     data.append('user', uid)
     data.append('name', name)
+    data.append('proc_date', date)
     data.append('description', description)
 
     dispatch(createOwnerProcStarted())

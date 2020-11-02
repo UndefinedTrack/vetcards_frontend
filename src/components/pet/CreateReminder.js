@@ -3,12 +3,16 @@ import PropTypes from 'prop-types'
 import styles from '../../styles/pet/Diary.module.css'
 import { ReactComponent as BackButton } from '../../icons/mdi_keyboard_arrow_left.svg'
 
-export default function CreateReminder({ backClick }) {
+function CreateReminder({ backClick }) {
+  const today = new Date()
+  const formatter = new Intl.DateTimeFormat('ru')
+  const date = formatter.format(today)
+  // const [popUpDispl, setPopUpDispl] = useState(false)
   // const [reminderType, setReminderType] = useState('')
   // const [firstDate, setFirstDate] = useState('')
   // const [reminderFrequency, setReminderFrequency] = useState('')
   // const [remark, setRemark] = useState('')
-  
+
   function handleInputChange(event) {
     event.preventDefault()
   }
@@ -49,7 +53,8 @@ export default function CreateReminder({ backClick }) {
             className={styles.input}
             onChange={handleInputChange}
             name="date"
-            placeholder="14.10.2020"
+            placeholder={date}
+            defaultValue={date}
           />
         </div>
         <div className={styles.inputAndTextWrapper}>
@@ -87,5 +92,7 @@ export default function CreateReminder({ backClick }) {
 }
 
 CreateReminder.propTypes = {
-  backClick: PropTypes.func.isRequired
+  backClick: PropTypes.func.isRequired,
 }
+
+export default CreateReminder

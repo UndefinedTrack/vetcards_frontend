@@ -19,12 +19,7 @@ function MedicalHistoryForVet({ procsList, getVetProcs }) {
     <div className={styles.CreateVFContainer}>
       <SearchLine changeInputHandler={changeInputHandler} />
       <section className={styles.CardsSection}>
-        {procsList
-          .map((procs, ind) => (
-            // eslint-disable-next-line
-            <MedicalCard key={ind} procs={procs} />
-          ))
-          .reverse()}
+        {procsList.map((procs) => <MedicalCard key={procs.procId} procs={procs} />).reverse()}
       </section>
     </div>
   )

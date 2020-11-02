@@ -13,6 +13,10 @@ function CreateProcedure({ backClick, createProc }) {
     date: '',
     remark: '',
   })
+  const today = new Date()
+  const formatter = new Intl.DateTimeFormat('ru')
+  const date = formatter.format(today)
+
   return (
     <div className={styles.DiaryBlocks}>
       <div className={styles.NameAndSearch}>
@@ -41,7 +45,8 @@ function CreateProcedure({ backClick, createProc }) {
           className={styles.input}
           onChange={changeInputHandler}
           name="date"
-          placeholder="14.10.2020"
+          placeholder={date}
+          defaultValue={date}
         />
         <div className={styles.ProcedureEntryBlock}>
           <div className={styles.ProcedureText}>Примечание</div>
@@ -62,7 +67,7 @@ function CreateProcedure({ backClick, createProc }) {
   )
 
   function update() {
-    setTimeout(() => window.location.reload(), 100)
+    // setTimeout(() => window.location.reload(), 100)
   }
 
   function changeInputHandler(event) {
@@ -78,7 +83,7 @@ function CreateProcedure({ backClick, createProc }) {
   function submitHandler(event) {
     event.preventDefault()
 
-    createProc(pid, 3, state.procedureName, state.remark)
+    createProc(pid, 3, state.procedureName, state.date, state.remark)
 
     setState({
       procedureName: '',
@@ -96,7 +101,7 @@ CreateProcedure.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createProc: (pid, uid, name, description) => dispatch(createOwnerProc(pid, uid, name, description)),
+  createProc: (pid, uid, name, date, description) => dispatch(createOwnerProc(pid, uid, name, date, description)),
 })
 
 export default connect(null, mapDispatchToProps)(CreateProcedure)

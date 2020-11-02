@@ -96,6 +96,10 @@
   line-height: 26px;
 }
 
+.input:focus {
+  background-color: whitesmoke;
+}
+
 .text {
   display: flex;
   font-family: 'Noto Sans JP', sans-serif;

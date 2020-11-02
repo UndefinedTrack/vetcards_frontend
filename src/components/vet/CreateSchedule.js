@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createNewSchedule } from '../../actions/schedule'
 import styles from '../../styles/vet/CreateSchedule.module.css'
+import PopUpWindow from '../PopUpWindow'
 
 function CreateSchedule() {
+  const [popUpDispl, setPopUpDispl] = useState(false)
+
+  function popUpWindow() {
+    setPopUpDispl(true)
+    setTimeout(() => {
+      setPopUpDispl(false)
+    }, 2000)
+  }
+
   return (
     <div className={styles.ScheduleCreatorContainer}>
       <div className={styles.ScheduleCreatorContent}>
@@ -25,9 +35,10 @@ function CreateSchedule() {
           </div>
           <div className={styles.FormName}>Длительность временного слота</div>
           <Duration />
-          <button type="submit" className={styles.saveButton}>
+          <button type="submit" className={styles.saveButton} onClick={popUpWindow}>
             Сохранить
           </button>
+          <PopUpWindow displ={popUpDispl} />
         </form>
       </div>
     </div>

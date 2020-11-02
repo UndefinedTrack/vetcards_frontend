@@ -19,7 +19,6 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, s
     if (searchString[pid] === undefined) {
       searchString[pid] = ''
     }
-    console.log('')
     setTimeout(() => getVetProcs(pid, uid, searchString[pid]), 100)
     // eslint-disable-next-line
   }, [getVetProcs, pid, input])

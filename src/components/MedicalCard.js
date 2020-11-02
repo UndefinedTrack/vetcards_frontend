@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import styles from '../styles/MedicalCard.module.css'
 
 export default function MedicalCard({ procs }) {
+  if (procs === undefined) procs = []
   const year = procs.procDate.slice(0, 4)
   const month = procs.procDate.slice(5, 7)
   const day = procs.procDate.slice(8, 10)

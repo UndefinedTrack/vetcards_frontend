@@ -57,7 +57,7 @@ function CreateVisitForm({ createProc }) {
           <div>
             Дата визита <span className={styles.noteText}>*</span>
           </div>
-          <Date changeInputHandler={changeInputHandler} />
+          <DateBlock changeInputHandler={changeInputHandler} />
         </div>
       </div>
       <div className={styles.DFlexColumn}>
@@ -95,16 +95,19 @@ function Duration() {
   )
 }
 
-function Date({ changeInputHandler }) {
+function DateBlock({ changeInputHandler }) {
+  const today = new Date()
+  const formatter = new Intl.DateTimeFormat('ru')
+  const date = formatter.format(today)
   return (
     <input
       required
       type="text"
       onChange={changeInputHandler}
-      // pattern=""
       className={styles.InputBlock}
       name="date"
-      defaultValue="31.10.2020"
+      defaultValue={date}
+      placeholder={date}
       maxLength="10"
     />
   )

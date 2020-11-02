@@ -5,19 +5,16 @@ import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
 import { getUserProfileInfo } from '../actions/profile'
 import { uploadUserAvatar } from '../actions/avatar'
+import PopUpWindow from './PopUpWindow'
 
 function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
   const uid = 3
+
   if (profileInfo === undefined) {
     profileInfo = []
     getProfileInfo(uid)
   }
-
-  // const [lastName, setLastName] = useState('')
-  // const [firstName, setFirstName] = useState('')
   const [patronymic, setPatronymic] = useState('')
-  // const [mobilePhone, setMobilePhone] = useState('')
-  // const [email, setEmail] = useState('')
 
   useEffect(() => {
     if (profileInfo.userId === -1) {
@@ -26,25 +23,9 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
     // eslint-disable-next-line
   }, [getProfileInfo])
 
-  // function handleLastNameChange(event) {
-  //   setLastName(event.target.value)
-  // }
-
-  // function handleFirstNameChange(event) {
-  //   setFirstName(event.target.value)
-  // }
-
   function handlePatronymicChange(event) {
     setPatronymic(event.target.value)
   }
-
-  // function handleMobilePhoneChange(event) {
-  //   setMobilePhone(event.target.value)
-  // }
-
-  // function handleEmailChange(event) {
-  //   setEmail(event.target.value)
-  // }
 
   function handleAvatarChange(event) {
     uploadAvatar(uid, event.target.files)
@@ -59,16 +40,8 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
         <form onSubmit={handleSubmit} className={styles.formSpace}>
           <ChangeAvatar handleAvatarChange={handleAvatarChange} />
           <div className={styles.fieldsColumn}>
-            <LastName
-              // handleLastNameChange={handleLastNameChange}
-              handleSubmit={handleSubmit}
-              lastName={profileInfo.lastName}
-            />
-            <FirstName
-              // handleFirstNameChange={handleFirstNameChange}
-              handleSubmit={handleSubmit}
-              firstName={profileInfo.firstName}
-            />
+            <LastName handleSubmit={handleSubmit} lastName={profileInfo.lastName} />
+            <FirstName handleSubmit={handleSubmit} firstName={profileInfo.firstName} />
             <Patronymic
               handlePatronymicChange={handlePatronymicChange}
               handleSubmit={handleSubmit}
@@ -76,16 +49,8 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
             />
           </div>
           <div className={styles.fieldsColumn}>
-            <MobilePhone
-              // handleMobilePhoneChange={handleMobilePhoneChange}
-              handleSubmit={handleSubmit}
-              mobilePhone={profileInfo.phone}
-            />
-            <Email
-              // handleEmailChange={handleEmailChange}
-              handleSubmit={handleSubmit}
-              email={profileInfo.email}
-            />
+            <MobilePhone handleSubmit={handleSubmit} mobilePhone={profileInfo.phone} />
+            <Email handleSubmit={handleSubmit} email={profileInfo.email} />
             <p className={styles.noteText}>* - обязательные для заполнения поля</p>
           </div>
         </form>
@@ -98,28 +63,36 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
 }
 
 function ChangeAvatar({ handleAvatarChange }) {
+  const [popUpDispl, setPopUpDispl] = useState(false)
   const imageInput = React.useRef(null)
   function handleImageInput() {
-    if (imageInput.current) {
-      imageInput.current.click()
-    }
+    // if (imageInput.current) {
+    //   imageInput.current.click()
+    // }
+    setPopUpDispl(true)
+    setTimeout(() => {
+      setPopUpDispl(false)
+    }, 2000)
   }
 
   return (
-    <div className={styles.avatarWrapper}>
-      <div className={styles.avatarSample} />
-      <button type="button" className={styles.changeAvatar} onClick={handleImageInput}>
-        Изменить фото
-      </button>
-      <input
-        id="image"
-        type="file"
-        multiple
-        accept="image/*"
-        onChange={handleAvatarChange}
-        ref={imageInput}
-        style={{ display: 'none' }}
-      />
+    <div>
+      <PopUpWindow displ={popUpDispl} />
+      <div className={styles.avatarWrapper}>
+        <div className={styles.avatarSample} />
+        <button type="button" className={styles.changeAvatar} onClick={handleImageInput}>
+          Изменить фото
+        </button>
+        <input
+          id="image"
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={handleAvatarChange}
+          ref={imageInput}
+          style={{ display: 'none' }}
+        />
+      </div>
     </div>
   )
 }
