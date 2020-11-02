@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../styles/pet/Diary.module.css'
-import HomeProcedure from './HomeProcedure'
+// import HomeProcedure from './HomeProcedure'
 import { ReactComponent as Search } from '../../icons/search.svg'
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 
@@ -17,8 +17,10 @@ function Reminders({ name, search, plusClick }) {
       </div>
       <hr className={styles.Line} />
       <section className={styles.Procedures}>
-        <HomeProcedure />
-        <HomeProcedure />
+        <div className={styles.EmptyStoryContainer}>
+          <div className={styles.EmptyStory}>Нет ни одного напоминания</div>
+        </div>
+        {/* <HomeProcedure /> */}
       </section>
     </section>
   )

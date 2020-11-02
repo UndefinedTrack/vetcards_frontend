@@ -19,6 +19,11 @@ function MedicalHistoryForVet({ procsList, getVetProcs }) {
     <div className={styles.CreateVFContainer}>
       <SearchLine changeInputHandler={changeInputHandler} />
       <section className={styles.CardsSection}>
+        {procsList.length === 0 && (
+          <div className={styles.EmptyStoryContainer}>
+            <div className={styles.EmptyStory}>История приёмов пуста</div>
+          </div>
+        )}
         {procsList.map((procs) => <MedicalCard key={procs.procId} procs={procs} />).reverse()}
       </section>
     </div>

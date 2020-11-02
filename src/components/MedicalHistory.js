@@ -41,6 +41,11 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, s
       </div>
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
+        {procs[pet.petId] === undefined && (
+          <div className={styles.EmptyStoryContainer}>
+            <div className={styles.EmptyStory}>Здесь будут появляться записи вашего ветеринара</div>
+          </div>
+        )}
         {procs.map((procedures) => {
           if (pet.petId !== procedures[0].petId) {
             return <div key={procedures[0].procId} />
@@ -61,11 +66,8 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, s
 
   function changeInputHandler(event) {
     searchString[pid] = event.target.value
-    console.log(searchString)
     setInput(searchString[pid])
-    console.log(input)
     getVetProcs(pid, uid, searchString[pid])
-    // console.log(procsList)
   }
 }
 

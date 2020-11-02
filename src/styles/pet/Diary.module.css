@@ -59,6 +59,21 @@
   margin-left: 23.5px;
 }
 
+.EmptyStoryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+.EmptyStory {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  color: #c4c4c4;
+}
+
 .Procedures {
   height: 558px;
   overflow: auto;
@@ -74,6 +89,9 @@
 
 .ProcedurePhoto {
   height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: url(../../icons/tablet.svg) no-repeat 12px var(--active-button-color);
 }
 
 .InformationBlock {
