@@ -1,27 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styles from '../../styles/vet/Schedule.module.css'
 import { ReactComponent as WeekBackButtonSvg } from '../../icons/arrow_back_week.svg'
 import { ReactComponent as WeekForwardButtonSvg } from '../../icons/arrow_forward_week.svg'
 import { ReactComponent as SettingsSvg } from '../../icons/settings.svg'
+import PopUpWindow from '../PopUpWindow'
 
 function Schedule() {
+  const [popUpDispl, setPopUpDispl] = useState(true)
+  setTimeout(() => {
+    setPopUpDispl(false)
+  }, 2000)
   const scheduleArray = []
   for (let i = 0; i < 7; i += 1) {
-    scheduleArray.push(
-      <DayColumn
-        dayOfWeek='ПН'
-        date='01.01.2020'
-      />
-    )
+    scheduleArray.push(<DayColumn dayOfWeek="ПН" date="01.01.2020" />)
   }
   return (
-    <div className={styles.scheduleSpace} >
+    <div className={styles.scheduleSpace}>
+      <PopUpWindow displ={popUpDispl} page />
       <WeekBackButtonSvg className={styles.arrows} />
       {scheduleArray}
       <div className={styles.arrowAndSettingsWrapper}>
-        <Link to='/create-schedule' >
+        <Link to="/create-schedule">
           <SettingsSvg className={styles.settings} />
         </Link>
         <WeekForwardButtonSvg className={styles.arrows} />
@@ -32,19 +33,14 @@ function Schedule() {
 
 function DayColumn({ dayOfWeek, date }) {
   const timeSlotArray = []
-  for (let i = 0; i < 10; i += 1 ) {
-    timeSlotArray.push(
-    <TimeSlot
-      isVacant={false}
-      startTime='10:00'
-      endTime='10:15'
-      purpose='Осмотр'
-    />
-    )
+  for (let i = 0; i < 10; i += 1) {
+    timeSlotArray.push(<TimeSlot isVacant={false} startTime="10:00" endTime="10:15" purpose="Осмотр" />)
   }
   return (
-    <div className={styles.dayColumn} >
-      <p className={styles.weekDayText} >{dayOfWeek}, {date}</p>
+    <div className={styles.dayColumn}>
+      <p className={styles.weekDayText}>
+        {dayOfWeek}, {date}
+      </p>
       <hr className={styles.hr} />
       {timeSlotArray}
     </div>
@@ -59,15 +55,19 @@ DayColumn.propTypes = {
 function TimeSlot({ isVacant, purpose, startTime, endTime, patientId }) {
   if (isVacant) {
     return (
-      <div className={styles.timeSlotVacant} >
-        <p className={styles.text} >{startTime} - {endTime}</p>
+      <div className={styles.timeSlotVacant}>
+        <p className={styles.text}>
+          {startTime} - {endTime}
+        </p>
       </div>
     )
   }
   return (
-    <div className={styles.timeSlotTaken} >
-      <p className={styles.text} >{startTime} - {endTime}</p>
-      <p className={styles.text} >{purpose}</p>
+    <div className={styles.timeSlotTaken}>
+      <p className={styles.text}>
+        {startTime} - {endTime}
+      </p>
+      <p className={styles.text}>{purpose}</p>
     </div>
   )
 }

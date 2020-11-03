@@ -14,6 +14,7 @@
 }
 
 .VisitReason {
+  width: calc(100% - 30px);
   font-weight: 500;
 }
 
@@ -35,6 +36,15 @@
 
 .NameAndDate {
   display: flex;
-  width: 605px;
-  justify-content: space-between;
+}
+
+.Date {
+  margin-left: auto;
+}
+
+@media (max-width: 950px) {
+  .MedicalCard {
+    font-size: 15px;
+    line-height: 22px;
+  }
 }

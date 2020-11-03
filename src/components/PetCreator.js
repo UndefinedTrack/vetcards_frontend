@@ -14,21 +14,44 @@ class PetCreator extends React.Component {
       species: '',
       breed: '',
       color: '',
-      birthDate: '2020',
       gender: '',
       chip: '',
-      success: '',
+      day: '',
+      month: '',
+      year: '',
     }
 
     this.createPet = props.createPet
   }
 
   submitHandler = (event) => {
+    let birthDate = ''
     event.preventDefault()
 
-    const { name, species, breed, color, birthDate, gender, chip } = this.state
-
-    this.createPet(2, name, species, breed, color, birthDate, gender, chip)
+    const { name, species, breed, color, gender, chip, year } = this.state
+    let { day, month } = this.state
+    if (day.length === 1) {
+      day = `0${day}`
+    }
+    if (month.length === 1) {
+      month = `0${month}`
+    }
+    if (day === '') {
+      if (month !== '') {
+        if (year !== '') {
+          birthDate = `${month}.${year}`
+        } else {
+          birthDate = `${year}`
+        }
+      } else {
+        birthDate = `${year}`
+      }
+    } else if (month !== '' && year !== '') {
+      birthDate = `${day}.${month}.${year}`
+    } else {
+      birthDate = `${year}`
+    }
+    this.createPet(3, name, species, breed, color, birthDate, gender, chip)
     this.setState({
       name: '',
       species: '',
@@ -37,7 +60,6 @@ class PetCreator extends React.Component {
       birthDate: '',
       gender: '',
       chip: '',
-      success: 'Готово!',
     })
   }
 
@@ -52,7 +74,6 @@ class PetCreator extends React.Component {
   }
 
   render() {
-    const { success } = this.state
     return (
       <div className={styles.profileSpace}>
         <div className={styles.profileWrapper}>
@@ -88,10 +109,15 @@ class PetCreator extends React.Component {
                 <p className={styles.noteText}>* - обязательные для заполнения поля</p>
               </div>
             </div>
-            <button type="submit" className={styles.saveButton}>
+            <button
+              type="submit"
+              className={styles.saveButton}
+              onClick={() => {
+                window.location.href = '#/mypets'
+              }}
+            >
               Сохранить
             </button>
-            <div className={`${styles.noteText} ${styles.Success}`}>{success}</div>
           </form>
         </div>
       </div>
@@ -166,7 +192,13 @@ function Chip({ handleNameChange, name, heading, placeholder }) {
   )
 }
 
-function Birthday({ handleNameChange, name, heading, placeholder }) {
+function Birthday({ handleNameChange, heading, placeholder }) {
+  const today = new Date()
+  const formatter = new Intl.DateTimeFormat('ru')
+  const date = formatter.format(today)
+  const day = date.slice(0, 2)
+  const month = date.slice(3, 5)
+  const year = date.slice(6, 10)
   return (
     <div>
       <p className={styles.text}>{heading}</p>
@@ -175,11 +207,11 @@ function Birthday({ handleNameChange, name, heading, placeholder }) {
           <input
             type="text"
             className={`${styles.input} ${styles.BirthdayDay}`}
-            pattern="[0-9]{1,2}"
+            pattern="[0][1-9]|[1-2]?[1-9]|[1-3]?[1-1]|[1-3][0]"
             maxLength="2"
             onChange={handleNameChange}
-            name={name}
-            placeholder="01"
+            name="day"
+            placeholder={day}
           />
           <div className={styles.BirthdayText}>День</div>
         </div>
@@ -187,11 +219,11 @@ function Birthday({ handleNameChange, name, heading, placeholder }) {
           <input
             type="text"
             className={`${styles.input} ${styles.BirthdayDay}`}
-            pattern="[0-9]{1,2}"
+            pattern="[0]?[1-9]|[1]?[1-2]|[1][0]"
             maxLength="2"
             onChange={handleNameChange}
-            name={name}
-            placeholder="10"
+            name="month"
+            placeholder={month}
           />
           <div className={styles.BirthdayText}>Месяц</div>
         </div>
@@ -199,11 +231,11 @@ function Birthday({ handleNameChange, name, heading, placeholder }) {
           <input
             type="text"
             className={`${styles.input} ${styles.BirthdayYear}`}
-            pattern="[0-9]{4,4}"
+            pattern="[1][0-9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0]"
             maxLength="4"
             onChange={handleNameChange}
-            name={name}
-            placeholder="2020"
+            name="year"
+            placeholder={year}
           />
           <div className={styles.BirthdayText}>Год</div>
         </div>

@@ -9,8 +9,8 @@ function PopUpHeader({ header, link }) {
       <div className={styles.PopUpHeader}>
         <a href={link} className={styles.NotPetButton}>
           <BackButton className={styles.BackButton} />
+          <div className={`${styles.Name} ${styles.PopUpName}`}>{header}</div>
         </a>
-        <div className={`${styles.Name} ${styles.PopUpName}`}>{header}</div>
       </div>
     </header>
   )

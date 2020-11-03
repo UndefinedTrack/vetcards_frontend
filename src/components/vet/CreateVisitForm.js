@@ -1,35 +1,36 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../../styles/vet/VisitsHistory.module.css'
 import { createVetProc } from '../../actions/procsCreate'
+import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
+import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
-class CreateVisitForm extends React.Component {
-  constructor(props) {
-    super(props)
+function CreateVisitForm({ createProc }) {
+  const { pid } = useParams()
+  const today = new Date()
+  const formatter = new Intl.DateTimeFormat('ru')
+  const date = formatter.format(today)
+  const [state, setState] = useState({
+    date,
+    purpose: 'Осмотр',
+    symptoms: '',
+    diagnosis: '',
+    recomms: '',
+    recipe: '',
+  })
 
-    this.state = {
-      date: '',
-      purpose: 'Осмотр',
-      symptoms: '',
-      diagnosis: '',
-      recomms: '',
-      recipe: '',
-    }
+  function submitHandler(e) {
+    e.preventDefault()
 
-    this.createProc = props.createProc
-  }
+    const { purpose, symptoms, diagnosis, recomms, recipe } = state
+    const procDate = state.date
 
-  submitHandler = (event) => {
-    event.preventDefault()
-
-    const { purpose, symptoms, diagnosis, recomms, recipe } = this.state
-
-    // console.log(date, purpose, symptoms, diagnosis, recomms, recipe)
-
-    this.createProc(3, 2, purpose, symptoms, diagnosis, recomms, recipe)
-    this.setState({
+    createProc(pid, 4, procDate, purpose, symptoms, diagnosis, recomms, recipe)
+    setState({
       date: '',
       purpose: '',
       symptoms: '',
@@ -37,11 +38,13 @@ class CreateVisitForm extends React.Component {
       recomms: '',
       recipe: '',
     })
+
+    setTimeout(() => window.location.reload(), 100)
   }
 
-  changeInputHandler = (event) => {
+  function changeInputHandler(event) {
     event.persist()
-    this.setState((prev) => ({
+    setState((prev) => ({
       ...prev,
       ...{
         [event.target.name]: event.target.value,
@@ -49,70 +52,169 @@ class CreateVisitForm extends React.Component {
     }))
   }
 
-  render() {
-    return (
-      <form onSubmit={this.submitHandler} className={styles.CreateVFContainer}>
-        <div className={styles.DFlex}>
-          <div className={styles.VisitInf}>
-            <div>
-              Цель визита <span className={styles.noteText}>*</span>
-            </div>
-            <Duration hangeInputHandler={this.changeInputHandler} />
+  return (
+    <form onSubmit={submitHandler} className={styles.CreateVFContainer}>
+      <div className={styles.DFlex}>
+        <div className={styles.VisitInf}>
+          <div>
+            Цель визита <span className={styles.noteText}>*</span>
           </div>
-          <div className={styles.VisitInf}>
-            <div>
-              Дата визита <span className={styles.noteText}>*</span>
-            </div>
-            <Date changeInputHandler={this.changeInputHandler} />
+          <VisitPurpose hangeInputHandler={changeInputHandler} />
+        </div>
+        <div className={styles.VisitInf}>
+          <div>
+            Дата визита <span className={styles.noteText}>*</span>
           </div>
+          <DateBlock changeInputHandler={changeInputHandler} date={state.date} />
         </div>
-        <div className={styles.DFlexColumn}>
-          <div className={styles.FormName}>Симптомы</div>
-          <TextAreaBlock changeInputHandler={this.changeInputHandler} placeholder="Опишите симптомы" name="symptoms" />
-          <div className={styles.FormName}>Диагноз</div>
-          <InputBlock changeInputHandler={this.changeInputHandler} placeholder="Поставьте диагноз" name="diagnosis" />
-          <div className={styles.FormName}>Рекомендации по лечению</div>
-          <TextAreaBlock
-            changeInputHandler={this.changeInputHandler}
-            placeholder="Укажите рекомендации по лечению"
-            name="recomms"
-          />
-          <div className={styles.FormName}>Рецепт</div>
-          <InputBlock changeInputHandler={this.changeInputHandler} placeholder="Выпишете рецепт" name="recipe" />
-        </div>
-        <p className={styles.noteText}>* - обязательные для заполнения поля</p>
-        <button type="submit" className={styles.saveButton}>
-          Добавить
-        </button>
-      </form>
-    )
-  }
+      </div>
+      <div className={styles.DFlexColumn}>
+        <div className={styles.FormName}>Симптомы</div>
+        <TextAreaBlock changeInputHandler={changeInputHandler} placeholder="Опишите симптомы" name="symptoms" />
+        <div className={styles.FormName}>Диагноз</div>
+        <InputBlock changeInputHandler={changeInputHandler} placeholder="Поставьте диагноз" name="diagnosis" />
+        <div className={styles.FormName}>Рекомендации по лечению</div>
+        <TextAreaBlock
+          changeInputHandler={changeInputHandler}
+          placeholder="Укажите рекомендации по лечению"
+          name="recomms"
+        />
+        <div className={styles.FormName}>Рецепт</div>
+        <InputBlock changeInputHandler={changeInputHandler} placeholder="Выпишете рецепт" name="recipe" />
+      </div>
+      <p className={styles.noteText}>* - обязательные для заполнения поля</p>
+      <button type="submit" className={styles.saveButton}>
+        Добавить
+      </button>
+    </form>
+  )
 }
 
-function Duration() {
+// function Duration() {
+//   return (
+//     <div className={styles.mybox}>
+//       <span className={styles.myarrow} />
+//       <select className={styles.SelectInput}>
+//         <option>Осмотр</option>
+//         {/* <option>Прививка</option>
+//         <option>Стерилизация</option> */}
+//       </select>
+//     </div>
+//   )
+// }
+
+function VisitPurpose() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const labels = ['Осмотр', 'Прививка']
+
+  const [chosenVisitPurpose, setChosenVisitPurpose] = useState(labels[0])
+
+  function handleOptionClick(optionName) {
+    setChosenVisitPurpose(optionName)
+    setIsVisible(false)
+  }
+
+  function handleArrowClick() {
+    setIsVisible(!isVisible)
+  }
+
   return (
-    <div className={styles.mybox}>
-      <span className={styles.myarrow} />
-      <select className={styles.SelectInput}>
-        <option>Осмотр</option>
-        {/* <option>Прививка</option>
-        <option>Стерилизация</option> */}
-      </select>
+    <div>
+      <div className={styles.purposeBlock}>
+        {chosenVisitPurpose}
+        <Arrow
+          isVisible={isVisible}
+          handleArrowClick={handleArrowClick}
+        />
+        <OptionsList
+          isVisible={isVisible}
+          handleOptionClick={handleOptionClick}
+          labels={labels}
+        />
+      </div>
     </div>
   )
 }
 
-function Date({ changeInputHandler }) {
+function Arrow({ isVisible, handleArrowClick }) {
+  if (!isVisible) {
+    return (
+      <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowDown />
+      </button>
+    )
+  }
+  return (
+    <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowUp />
+      </button>
+  )
+}
+
+Arrow.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleArrowClick: PropTypes.func.isRequired,
+}
+
+function OptionsList({ isVisible, handleOptionClick, labels }) {
+  if (isVisible) {
+    return (
+      <div className={styles.purposeOptionsBox} >
+        <Option name={labels[0]} handleOptionClick={handleOptionClick} />
+        <Option name={labels[1]} handleOptionClick={handleOptionClick} />
+      </div>
+   )
+  }
+  return null
+}
+
+OptionsList.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+}
+
+function Option({ name, handleOptionClick }) {
+  return (
+    <div className={styles.purposeOption}>
+      <input
+        id={name}
+        type='checkbox'
+        value='0'
+        name='selectName'
+        className={styles.purposeOptionInput}
+        onClick={() => handleOptionClick(name)}
+      />
+      <label className={styles.purposeLabel} htmlFor={name}>{name}</label>
+    </div>
+  )
+}
+
+Option.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+}
+
+function DateBlock({ changeInputHandler, date }) {
   return (
     <input
       required
       type="text"
       onChange={changeInputHandler}
-      // pattern=""
       className={styles.InputBlock}
-      // onChange={handleNameChange}
       name="date"
-      defaultValue="24.10.2020"
+      title="Введите дату в формате дд.мм.гггг"
+      pattern="([0][1-9]|[1-2][1-9]|[1-3][1-1]|[1-3][0])\.([0][1-9]|[1][0-2])\.([1][0-9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0])"
+      defaultValue={date}
+      placeholder={date}
       maxLength="10"
     />
   )
@@ -153,8 +255,8 @@ InputBlock.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createProc: (pid, uid, purpose, symptoms, diagnosis, recomms, recipe) =>
-    dispatch(createVetProc(pid, uid, purpose, symptoms, diagnosis, recomms, recipe)),
+  createProc: (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe) =>
+    dispatch(createVetProc(pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe)),
 })
 
 export default connect(null, mapDispatchToProps)(CreateVisitForm)

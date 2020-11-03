@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Profile from './Profile'
@@ -13,13 +13,15 @@ import Diary from './pet/Diary'
 import Schedule from './vet/Schedule'
 import CreateSchedule from './vet/CreateSchedule'
 import VisitsHistory from './vet/VisitsHistory'
+import MainPage from './MainPage'
 
-function App({ profileInfo }) {
+function App() {
+  const [input, setInput] = useState([])
   return (
     <div className={styles.App}>
       <HashRouter>
         <Route exact path="/">
-          <h1>Пользуйтесь нашим великолепным сервисом!</h1>
+          <MainPage />
         </Route>
         <Route path="/profile">
           <Header header="profile" isVet={false} />
@@ -27,19 +29,23 @@ function App({ profileInfo }) {
         </Route>
         <Route path="/mypets">
           <Header header="mypets" isVet={false} />
-          <MyPets />
+          <MyPets input={input} setInput={setInput} />
         </Route>
         <Route path="/mypatients">
-          <Header header="mypatients" isVet={false} />
+          <Header header="mypatients" isVet />
           <MyPatients />
         </Route>
         <Route path="/create-pet">
           <PopUpHeader header="Добавление питомца" link="#/mypets" isVet={false} />
           <PetCreator />
         </Route>
-        <Route path="/diary">
+        <Route path="/diary/:pid">
           <PopUpHeader header="Дневник питомца" link="#/mypets" isVet={false} />
           <Diary />
+        </Route>
+        <Route path="/vetprofile">
+          <Header header="profile" isVet />
+          <Profile />
         </Route>
         <Route path="/schedule">
           <Header header="schedule" isVet />
@@ -49,7 +55,7 @@ function App({ profileInfo }) {
           <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet />
           <CreateSchedule />
         </Route>
-        <Route path="/visits-history">
+        <Route path="/visits-history/:pid">
           <PopUpHeader header="История приемов" link="#/mypatients" isVet />
           <VisitsHistory />
         </Route>

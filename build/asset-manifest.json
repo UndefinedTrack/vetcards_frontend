@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/vetcards_frontend/static/css/main.95941562.chunk.css",
-    "main.js": "/vetcards_frontend/static/js/main.367538eb.chunk.js",
-    "main.js.map": "/vetcards_frontend/static/js/main.367538eb.chunk.js.map",
+    "main.css": "/vetcards_frontend/static/css/main.f6dffb87.chunk.css",
+    "main.js": "/vetcards_frontend/static/js/main.67d7d7b7.chunk.js",
+    "main.js.map": "/vetcards_frontend/static/js/main.67d7d7b7.chunk.js.map",
     "runtime-main.js": "/vetcards_frontend/static/js/runtime-main.46d78c4b.js",
     "runtime-main.js.map": "/vetcards_frontend/static/js/runtime-main.46d78c4b.js.map",
-    "static/js/2.4a13d685.chunk.js": "/vetcards_frontend/static/js/2.4a13d685.chunk.js",
-    "static/js/2.4a13d685.chunk.js.map": "/vetcards_frontend/static/js/2.4a13d685.chunk.js.map",
+    "static/js/2.7a4bbba5.chunk.js": "/vetcards_frontend/static/js/2.7a4bbba5.chunk.js",
+    "static/js/2.7a4bbba5.chunk.js.map": "/vetcards_frontend/static/js/2.7a4bbba5.chunk.js.map",
     "index.html": "/vetcards_frontend/index.html",
-    "precache-manifest.21532049859775f63d58a4971e5ec387.js": "/vetcards_frontend/precache-manifest.21532049859775f63d58a4971e5ec387.js",
+    "precache-manifest.b5b1b8d125a17eabb14dbdd324f80a51.js": "/vetcards_frontend/precache-manifest.b5b1b8d125a17eabb14dbdd324f80a51.js",
     "service-worker.js": "/vetcards_frontend/service-worker.js",
-    "static/css/main.95941562.chunk.css.map": "/vetcards_frontend/static/css/main.95941562.chunk.css.map",
-    "static/js/2.4a13d685.chunk.js.LICENSE.txt": "/vetcards_frontend/static/js/2.4a13d685.chunk.js.LICENSE.txt",
+    "static/css/main.f6dffb87.chunk.css.map": "/vetcards_frontend/static/css/main.f6dffb87.chunk.css.map",
+    "static/js/2.7a4bbba5.chunk.js.LICENSE.txt": "/vetcards_frontend/static/js/2.7a4bbba5.chunk.js.LICENSE.txt",
     "static/media/arrow_back_week.bd98cf47.svg": "/vetcards_frontend/static/media/arrow_back_week.bd98cf47.svg",
     "static/media/CreateSchedule.module.css": "/vetcards_frontend/static/media/arrow_down.abb6693e.svg",
     "static/media/arrow_forward_week.381c7910.svg": "/vetcards_frontend/static/media/arrow_forward_week.381c7910.svg",
@@ -26,8 +26,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.46d78c4b.js",
-    "static/js/2.4a13d685.chunk.js",
-    "static/css/main.95941562.chunk.css",
-    "static/js/main.367538eb.chunk.js"
+    "static/js/2.7a4bbba5.chunk.js",
+    "static/css/main.f6dffb87.chunk.css",
+    "static/js/main.67d7d7b7.chunk.js"
   ]
 }

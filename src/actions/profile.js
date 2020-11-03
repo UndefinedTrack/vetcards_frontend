@@ -10,7 +10,7 @@ import {
   GET_PETS_LIST_FAILURE,
   GET_PATIENTS_LIST_REQUEST,
   GET_PATIENTS_LIST_SUCCESS,
-  GET_PATIENTS_LIST_FAILURE
+  GET_PATIENTS_LIST_FAILURE,
 } from '../constants/ActionTypes'
 
 import {
@@ -187,6 +187,10 @@ export const getPatientsList = (uid) => {
             patient: pt.patient,
             owner: pt.owner,
             card: pt.card,
+            color: pt.color,
+            birthDate: pt.birth_date,
+            gender: pt.gender,
+            chip: pt.chip,
           }
 
           patients.push(patient)

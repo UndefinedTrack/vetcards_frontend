@@ -21,4 +21,5 @@ deploy:
     branch:
       - master
       - dev
+      - dev_search_fix
       - devel

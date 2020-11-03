@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styles from '../../styles/vet/VisitsHistory.module.css'
 import MedicalCard from '../MedicalCard'
@@ -7,38 +8,49 @@ import { ReactComponent as SearchButton } from '../../icons/search.svg'
 import { getVetProcs } from '../../actions/procsList'
 // eslint-disable-next-line
 function MedicalHistoryForVet({ procsList, getVetProcs }) {
-  const uid = 2
-  const pid = 3
-
-  if (procsList === undefined) {
-    procsList = []
-    getVetProcs(pid, uid)
-  }
+  const uid = 4
+  const { pid } = useParams()
+  const [searchInput, setSearchInput] = useState('')
 
   useEffect(() => {
-    setTimeout(() => getVetProcs(pid, uid), 100)
-    // eslint-disable-next-line
-  }, [getVetProcs, procsList])
+    setTimeout(() => getVetProcs(pid, uid, searchInput), 100)
+  }, [getVetProcs, pid, searchInput])
   return (
     <div className={styles.CreateVFContainer}>
-      <SearchLine />
+      <SearchLine changeInputHandler={changeInputHandler} />
       <section className={styles.CardsSection}>
+        {procsList.length === 0 && (
+          <div className={styles.EmptyStoryContainer}>
+            <div className={styles.EmptyStory}>История приёмов пуста</div>
+          </div>
+        )}
         {procsList
-          .map((procs, ind) => (
-            // eslint-disable-next-line
-            <MedicalCard key={ind} procs={procs} />
-          ))
-          .reverse()}
+          .map((procs) => {
+            const day = procs.procDate.slice(8, 10)
+            const month = Number(procs.procDate.slice(5, 7)) - 1
+            const year = procs.procDate.slice(0, 4)
+            const date = new Date(year, month, day)
+            return <MedicalCard key={procs.procId} procs={procs} date={date} />
+          })
+          .reverse()
+          .sort((a, b) => {
+            return b.props.date - a.props.date
+          })}
       </section>
     </div>
   )
+
+  function changeInputHandler(event) {
+    setSearchInput(event.target.value)
+    getVetProcs(pid, uid, searchInput)
+  }
 }
 
-function SearchLine() {
+function SearchLine({ changeInputHandler }) {
   return (
     <div className={styles.SearchContainer}>
       <SearchButton className={styles.SearchButton} />
-      <input type="text" className={styles.SearchLine} placeholder="Поиск" />
+      <input type="text" onChange={changeInputHandler} className={styles.SearchLine} placeholder="Поиск" />
       <Duration />
     </div>
   )
@@ -60,7 +72,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getVetProcs: (pid, uid) => dispatch(getVetProcs(pid, uid)),
+  getVetProcs: (pid, uid, name) => dispatch(getVetProcs(pid, uid, name)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedicalHistoryForVet)

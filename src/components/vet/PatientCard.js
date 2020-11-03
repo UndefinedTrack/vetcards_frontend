@@ -6,17 +6,22 @@ import styles from '../../styles/vet/PatientsCard.module.css'
 import { ReactComponent as Photo } from '../../icons/photo.svg'
 
 function PatientCard({ patient }) {
-  console.log(patient)
   return (
     <div className={styles.PatientsContainer}>
       <Photo className={styles.Photo} />
-      <Info sectionName="Пациент" value={patient.patient} />
-      <Info sectionName="Окрас" value='Окрас' />
-      <Info sectionName="Дата рождения" value='1970-01-01' />
-      <Info sectionName="Пол" value='male' />
-      <Info sectionName="Чип" value='000000000000000' />
-      <Info sectionName="Владелец" value={patient.owner} />
-      <Info sectionName="Номер карты" value={patient.card} />
+      <div className={styles.PatientInfo}>
+        <div className={styles.Column}>
+          <Info sectionName="Пациент" value={patient.patient} />
+          <Info sectionName="Владелец" value={patient.owner} />
+          <Info sectionName="Номер карты" value={patient.card} />
+        </div>
+        {/* <Info sectionName="Окрас" value="Окрас" /> */}
+        <div className={styles.Column}>
+          <Info sectionName="Пол" value={patient.gender} />
+          <Info sectionName="Дата рождения" value={patient.birthDate} />
+          <Info sectionName="Чип" value={patient.chip} />
+        </div>
+      </div>
       <HistoryButton pet={patient} />
     </div>
   )
@@ -33,7 +38,7 @@ function Info({ sectionName, value }) {
   }
   return (
     <div className={styles.InfoContainer}>
-      <div className={`${styles.InfoName} ${styles.InfoText}`}>{sectionName}</div>
+      {value && <div className={`${styles.InfoName} ${styles.InfoText}`}>{sectionName}</div>}
       <div className={`${styles.InfoData} ${styles.InfoText}`}>{sectionData}</div>
     </div>
   )
@@ -41,7 +46,7 @@ function Info({ sectionName, value }) {
 
 function HistoryButton({ pet }) {
   return (
-    <Link to="./visits-history" className={styles.HistoryLink}>
+    <Link to={`./visits-history/${pet.card}`} className={styles.HistoryLink}>
       <button type="button" className={styles.HistoryButton}>
         История приёмов
       </button>

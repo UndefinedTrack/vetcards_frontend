@@ -34,3 +34,23 @@
   height: 30px;
   margin-left: 11px;
 }
+
+@media (max-width: 1400px) {
+  .SearchContainer {
+    width: 1080px;
+  }
+
+  .SearchLine {
+    width: 1000px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .SearchContainer {
+    width: 828px;
+  }
+
+  .SearchLine {
+    width: 760px;
+  }
+}

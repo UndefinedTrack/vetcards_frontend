@@ -4,19 +4,18 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
 import { getUserProfileInfo } from '../actions/profile'
+import { uploadUserAvatar } from '../actions/avatar'
+import PopUpWindow from './PopUpWindow'
 
-function Profile({ profileInfo, getProfileInfo }) {
-  const uid = 2
+function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
+  const uid = 3
+  const [popUpDispl, setPopUpDispl] = useState(false)
+
   if (profileInfo === undefined) {
     profileInfo = []
     getProfileInfo(uid)
   }
-
-  // const [lastName, setLastName] = useState('')
-  // const [firstName, setFirstName] = useState('')
   const [patronymic, setPatronymic] = useState('')
-  // const [mobilePhone, setMobilePhone] = useState('')
-  // const [email, setEmail] = useState('')
 
   useEffect(() => {
     if (profileInfo.userId === -1) {
@@ -25,45 +24,33 @@ function Profile({ profileInfo, getProfileInfo }) {
     // eslint-disable-next-line
   }, [getProfileInfo])
 
-  // function handleLastNameChange(event) {
-  //   setLastName(event.target.value)
-  // }
-
-  // function handleFirstNameChange(event) {
-  //   setFirstName(event.target.value)
-  // }
-
   function handlePatronymicChange(event) {
     setPatronymic(event.target.value)
   }
 
-  // function handleMobilePhoneChange(event) {
-  //   setMobilePhone(event.target.value)
-  // }
-
-  // function handleEmailChange(event) {
-  //   setEmail(event.target.value)
-  // }
+  function handleAvatarChange(event) {
+    uploadAvatar(uid, event.target.files)
+  }
 
   function handleSubmit(event) {
     event.preventDefault()
   }
+
+  function popUpOpen() {
+    setPopUpDispl(true)
+    setTimeout(() => {
+      setPopUpDispl(false)
+    }, 2000)
+  }
+
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
         <form onSubmit={handleSubmit} className={styles.formSpace}>
-          <ChangeAvatar />
+          <ChangeAvatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
           <div className={styles.fieldsColumn}>
-            <LastName
-              // handleLastNameChange={handleLastNameChange}
-              handleSubmit={handleSubmit}
-              lastName={profileInfo.lastName}
-            />
-            <FirstName
-              // handleFirstNameChange={handleFirstNameChange}
-              handleSubmit={handleSubmit}
-              firstName={profileInfo.firstName}
-            />
+            <LastName handleSubmit={handleSubmit} lastName={profileInfo.lastName} />
+            <FirstName handleSubmit={handleSubmit} firstName={profileInfo.firstName} />
             <Patronymic
               handlePatronymicChange={handlePatronymicChange}
               handleSubmit={handleSubmit}
@@ -71,36 +58,52 @@ function Profile({ profileInfo, getProfileInfo }) {
             />
           </div>
           <div className={styles.fieldsColumn}>
-            <MobilePhone
-              // handleMobilePhoneChange={handleMobilePhoneChange}
-              handleSubmit={handleSubmit}
-              mobilePhone={profileInfo.phone}
-            />
-            <Email
-              // handleEmailChange={handleEmailChange}
-              handleSubmit={handleSubmit}
-              email={profileInfo.email}
-            />
+            <MobilePhone handleSubmit={handleSubmit} mobilePhone={profileInfo.phone} />
+            <Email handleSubmit={handleSubmit} email={profileInfo.email} />
             <p className={styles.noteText}>* - обязательные для заполнения поля</p>
           </div>
         </form>
-        <button type="button" className={styles.saveButton}>
+        <button type="button" className={styles.saveButton} onClick={popUpOpen}>
           Сохранить
         </button>
+      </div>
+      <PopUpWindow displ={popUpDispl} />
+    </div>
+  )
+}
+
+function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
+  const imageInput = React.useRef(null)
+  function handleImageInput() {
+    // if (imageInput.current) {
+    //   imageInput.current.click()
+    // }
+    popUpOpen()
+  }
+
+  return (
+    <div>
+      <div className={styles.avatarWrapper}>
+        <div className={styles.avatarSample} />
+        <button type="button" className={styles.changeAvatar} onClick={handleImageInput}>
+          Изменить фото
+        </button>
+        <input
+          id="image"
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={handleAvatarChange}
+          ref={imageInput}
+          style={{ display: 'none' }}
+        />
       </div>
     </div>
   )
 }
 
-function ChangeAvatar(props) {
-  return (
-    <div className={styles.avatarWrapper}>
-      <div className={styles.avatarSample} />
-      <button type="button" className={styles.changeAvatar}>
-        Изменить фото
-      </button>
-    </div>
-  )
+ChangeAvatar.propTypes = {
+  handleAvatarChange: PropTypes.func.isRequired,
 }
 
 function LastName({ handleLastNameChange, lastName }) {
@@ -171,7 +174,7 @@ function MobilePhone({ handleMobilePhoneChange, mobilePhone }) {
   return (
     <div>
       <p className={styles.text}>
-        Номер мобильного телефона <span className={styles.noteText}>*</span>
+        Номер телефона <span className={styles.noteText}>*</span>
       </p>
       <input
         type="text"
@@ -193,7 +196,7 @@ function Email({ handleEmailChange, email }) {
   return (
     <div>
       <p className={styles.text}>
-        Адрес электронной почты
+        Электронная почта
         <span className={styles.noteText}>*</span>
       </p>
       <input
@@ -214,10 +217,12 @@ Email.propTypes = {
 
 const mapStateToProps = (state) => ({
   profileInfo: state.profile.profile,
+  avatar: state.avatar.avatar,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid) => dispatch(getUserProfileInfo(uid)),
+  uploadAvatar: (uid, files) => dispatch(uploadUserAvatar(uid, files)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

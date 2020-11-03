@@ -18,6 +18,8 @@
 }
 
 .Line {
+  margin: 0;
+  margin-left: 10px;
   color: var(--active-button-color);
   background-color: var(--active-button-color);
   width: 884px;
@@ -29,15 +31,115 @@
   height: 30px;
   fill: var(--active-button-color);
   margin-right: 36px;
-  margin-top: 17px;
+  margin-top: 13px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 .NameAndSearch {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 5px;
+}
+
+.EmptyStoryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+.EmptyStory {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  color: #c4c4c4;
 }
 
 .MedicalCardContainer {
   overflow: auto;
+}
+
+.SearchContainer {
+  width: 700px;
+  height: 48px;
+  margin-top: 2px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  align-content: center;
+}
+
+.SearchLine {
+  width: 530px;
+  margin-top: 5px;
+  height: 47px;
+  font-size: 18px;
+  line-height: 26px;
+  border: 0;
+}
+
+.SearchLine:focus {
+  outline: none;
+}
+
+.SearchLine::placeholder {
+  color: #c4c4c4;
+}
+
+@media (max-width: 1400px) {
+  .Container {
+    width: 750px;
+  }
+
+  .Line {
+    width: 730px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .Container {
+    width: 550px;
+  }
+
+  .Line {
+    width: 530px;
+  }
+
+  .SearchLine {
+    width: 450px;
+  }
+}
+
+@media (max-width: 950px) {
+  .Container {
+    width: 380px;
+  }
+
+  .Line {
+    width: 360px;
+  }
+
+  .SearchLine {
+    margin: 0;
+    width: 290px;
+    height: 35px;
+  }
+
+  .SearchContainer {
+    height: 36px;
+  }
+
+  .Name {
+    margin-top: 3px;
+    margin-left: 10px;
+    font-size: 19px;
+  }
+
+  .SearchButton {
+    margin-top: 3px;
+    margin-right: 10px;
+  }
 }

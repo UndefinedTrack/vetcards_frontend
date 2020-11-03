@@ -2,12 +2,24 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styles from '../styles/MyPets.module.css'
+import AboutPet from './AboutPet'
 import { getPetsList } from '../actions/profile'
-import LoadMedicalHistory from './LoadMedicalHistory'
+import MedicalHistory from './MedicalHistory'
 import { ReactComponent as Plus } from '../icons/plus.svg'
+import { getVetProcs } from '../actions/procsList'
 
-function MyPets({ petList, getInfo, procsList, getProcs }) {
-  const uid = 2
+let procs
+let searchString
+// eslint-disable-next-line
+function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
+  const uid = 3
+  if (procs === undefined) {
+    procs = []
+  }
+
+  if (searchString === undefined) {
+    searchString = []
+  }
 
   if (petList === undefined) {
     petList = []
@@ -41,17 +53,27 @@ function MyPets({ petList, getInfo, procsList, getProcs }) {
           </a>
         </div>
       )}
-      {Boolean(petList.length) && petList.map((pet) => <LoadMedicalHistory key={pet.petId} pet={pet} />)}
+      {Boolean(petList.length) &&
+        petList
+          .map((pet) => (
+            <div className={styles.Container} key={pet.petId}>
+              <AboutPet pet={pet} />
+              <MedicalHistory pet={pet} procs={procs} input={input} setInput={setInput} searchString={searchString} />
+            </div>
+          ))
+          .reverse()}
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
   petList: state.profile.petsList,
+  procsList: state.procsList.vetProcs,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getInfo: (uid) => dispatch(getPetsList(uid)),
+  getVetProcs: (pid, uid, name) => dispatch(getVetProcs(pid, uid, name)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPets)

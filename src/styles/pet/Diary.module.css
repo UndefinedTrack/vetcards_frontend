@@ -2,7 +2,7 @@
 
 .DiaryContainer {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   width: auto;
   height: 618px;
@@ -59,6 +59,21 @@
   margin-left: 23.5px;
 }
 
+.EmptyStoryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+.EmptyStory {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  color: #c4c4c4;
+}
+
 .Procedures {
   height: 558px;
   overflow: auto;
@@ -74,6 +89,9 @@
 
 .ProcedurePhoto {
   height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: url(../../icons/tablet.svg) no-repeat 12px var(--active-button-color);
 }
 
 .InformationBlock {
@@ -132,6 +150,7 @@
   font-size: 18px;
   line-height: 26px;
   margin-left: 2px;
+  margin-top: 30px;
 }
 
 .noteReminderText {
@@ -150,12 +169,16 @@
   width: 565px;
   border: 1px solid var(--active-button-color);
   border-radius: 10px;
-  padding-left: 2vh;
-  padding-right: 2vh;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-top: 13px;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
+}
+
+.input:focus {
+  background-color: whitesmoke;
 }
 
 textarea.input {
@@ -184,4 +207,117 @@ textarea.input {
 .inputAndTextWrapper {
   display: flex;
   flex-direction: column;
+}
+
+.SearchContainer {
+  width: 700px;
+  height: 48px;
+  margin-top: 11px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.SearchLine {
+  padding: 0;
+  padding-left: 17px;
+  width: 530px;
+  height: 47px;
+  font-size: 18px;
+  line-height: 26px;
+  background-color: #fff;
+  border: 0;
+}
+
+.SearchLine:focus {
+  outline: none;
+}
+
+.SearchLine::placeholder {
+  color: #c4c4c4;
+}
+
+.SearchButton {
+  fill: var(--active-button-color);
+  height: 30px;
+  margin-left: 20px;
+}
+
+@media (max-height: 750px) {
+  .DiaryBlocks {
+    height: 550px;
+  }
+
+  .ProcedureText {
+    margin-top: 10px;
+  }
+
+  .ReminderText {
+    margin-top: 10px;
+  }
+
+  .input {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    height: 35px;
+  }
+
+  .saveButton {
+    height: 40px;
+  }
+
+  .noteText {
+    margin-top: 10px;
+  }
+
+  .noteReminderText {
+    margin-top: 10px;
+  }
+
+  .Procedures {
+    height: 490px;
+  }
+}
+
+/* @media (max-height: 670px) {
+  .DiaryBlocks {
+    height: 450px;
+  }
+} */
+
+@media (max-width: 1400px) {
+  .DiaryBlocks {
+    width: 580px;
+  }
+
+  .Line {
+    width: 550px;
+  }
+
+  .SearchLine {
+    width: 460px;
+  }
+
+  .input {
+    width: 490px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .DiaryBlocks {
+    width: 480px;
+  }
+
+  .Line {
+    width: 450px;
+  }
+
+  .SearchLine {
+    width: 300px;
+  }
+
+  .input {
+    width: 390px;
+  }
 }

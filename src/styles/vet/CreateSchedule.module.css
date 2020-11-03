@@ -96,6 +96,7 @@
   margin-top: 13px;
   position: relative;
   display: inline-block;
+  background-color: #fff;
 }
 
 .SelectInput {
@@ -109,6 +110,7 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
+  background-color: #fff;
 }
 
 .mybox .myarrow {
@@ -142,4 +144,22 @@
   margin-left: auto;
   cursor: pointer;
   outline: none;
+}
+
+@media (max-width: 1400px) {
+  .ScheduleCreatorContent {
+    width: 1080px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .ScheduleCreatorContent {
+    width: 828px;
+  }
+}
+
+@media (max-width: 950px) {
+  .ScheduleCreatorContent {
+    width: 600px;
+  }
 }
