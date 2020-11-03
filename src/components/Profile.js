@@ -9,6 +9,7 @@ import PopUpWindow from './PopUpWindow'
 
 function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
   const uid = 3
+  const [popUpDispl, setPopUpDispl] = useState(false)
 
   if (profileInfo === undefined) {
     profileInfo = []
@@ -34,11 +35,19 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
   function handleSubmit(event) {
     event.preventDefault()
   }
+
+  function popUpOpen() {
+    setPopUpDispl(true)
+    setTimeout(() => {
+      setPopUpDispl(false)
+    }, 2000)
+  }
+
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
         <form onSubmit={handleSubmit} className={styles.formSpace}>
-          <ChangeAvatar handleAvatarChange={handleAvatarChange} />
+          <ChangeAvatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
           <div className={styles.fieldsColumn}>
             <LastName handleSubmit={handleSubmit} lastName={profileInfo.lastName} />
             <FirstName handleSubmit={handleSubmit} firstName={profileInfo.firstName} />
@@ -54,30 +63,26 @@ function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
             <p className={styles.noteText}>* - обязательные для заполнения поля</p>
           </div>
         </form>
-        <button type="button" className={styles.saveButton}>
+        <button type="button" className={styles.saveButton} onClick={popUpOpen}>
           Сохранить
         </button>
       </div>
+      <PopUpWindow displ={popUpDispl} />
     </div>
   )
 }
 
-function ChangeAvatar({ handleAvatarChange }) {
-  const [popUpDispl, setPopUpDispl] = useState(false)
+function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
   const imageInput = React.useRef(null)
   function handleImageInput() {
     // if (imageInput.current) {
     //   imageInput.current.click()
     // }
-    setPopUpDispl(true)
-    setTimeout(() => {
-      setPopUpDispl(false)
-    }, 2000)
+    popUpOpen()
   }
 
   return (
     <div>
-      <PopUpWindow displ={popUpDispl} />
       <div className={styles.avatarWrapper}>
         <div className={styles.avatarSample} />
         <button type="button" className={styles.changeAvatar} onClick={handleImageInput}>

@@ -5,10 +5,13 @@ import styles from '../styles/MedicalHistory.module.css'
 import MedicalCard from './MedicalCard'
 import { ReactComponent as Search } from '../icons/search.svg'
 import { getVetProcs } from '../actions/procsList'
+import PopUpWindow from './PopUpWindow'
+
 // eslint-disable-next-line
 function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, searchString }) {
   const uid = 4
   const pid = pet.petId
+  const [popUpDispl, setPopUpDispl] = useState(false)
   const [searchLine, setSearchLine] = useState(false)
 
   if (procsList[0] === undefined) {
@@ -57,11 +60,16 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, s
           )
         })}
       </section>
+      <PopUpWindow displ={popUpDispl} />
     </div>
   )
 
   function searchLineDisplay() {
     setSearchLine(!searchLine)
+    setPopUpDispl(true)
+    setTimeout(() => {
+      setPopUpDispl(false)
+    }, 2000)
   }
 
   function changeInputHandler(event) {
