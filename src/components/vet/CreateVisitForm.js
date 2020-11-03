@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../../styles/vet/VisitsHistory.module.css'
 import { createVetProc } from '../../actions/procsCreate'
+import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
+import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
 function CreateVisitForm({ createProc }) {
   const { pid } = useParams()
@@ -51,7 +54,7 @@ function CreateVisitForm({ createProc }) {
           <div>
             Цель визита <span className={styles.noteText}>*</span>
           </div>
-          <Duration hangeInputHandler={changeInputHandler} />
+          <VisitPurpose hangeInputHandler={changeInputHandler} />
         </div>
         <div className={styles.VisitInf}>
           <div>
@@ -82,17 +85,117 @@ function CreateVisitForm({ createProc }) {
   )
 }
 
-function Duration() {
+// function Duration() {
+//   return (
+//     <div className={styles.mybox}>
+//       <span className={styles.myarrow} />
+//       <select className={styles.SelectInput}>
+//         <option>Осмотр</option>
+//         {/* <option>Прививка</option>
+//         <option>Стерилизация</option> */}
+//       </select>
+//     </div>
+//   )
+// }
+
+function VisitPurpose() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const labels = ['Осмотр', 'Прививка']
+
+  const [chosenVisitPurpose, setChosenVisitPurpose] = useState(labels[0])
+
+  function handleOptionClick(optionName) {
+    setChosenVisitPurpose(optionName)
+    setIsVisible(false)
+  }
+
+  function handleArrowClick() {
+    setIsVisible(!isVisible)
+  }
+
   return (
-    <div className={styles.mybox}>
-      <span className={styles.myarrow} />
-      <select className={styles.SelectInput}>
-        <option>Осмотр</option>
-        {/* <option>Прививка</option>
-        <option>Стерилизация</option> */}
-      </select>
+    <div>
+      <div className={styles.purposeBlock}>
+        {chosenVisitPurpose}
+        <Arrow
+          isVisible={isVisible}
+          handleArrowClick={handleArrowClick}
+        />
+        <OptionsList
+          isVisible={isVisible}
+          handleOptionClick={handleOptionClick}
+          labels={labels}
+        />
+      </div>
     </div>
   )
+}
+
+function Arrow({ isVisible, handleArrowClick }) {
+  if (!isVisible) {
+    return (
+      <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowDown />
+      </button>
+    )
+  }
+  return (
+    <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowUp />
+      </button>
+  )
+}
+
+Arrow.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleArrowClick: PropTypes.func.isRequired,
+}
+
+function OptionsList({ isVisible, handleOptionClick, labels }) {
+  if (isVisible) {
+    return (
+      <div className={styles.purposeOptionsBox} >
+        <Option name={labels[0]} handleOptionClick={handleOptionClick} />
+        <Option name={labels[1]} handleOptionClick={handleOptionClick} />
+      </div>
+   )
+  }
+  return null
+}
+
+OptionsList.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+}
+
+function Option({ name, handleOptionClick }) {
+  return (
+    <div className={styles.purposeOption}>
+      <input
+        id={name}
+        type='checkbox'
+        value='0'
+        name='selectName'
+        className={styles.purposeOptionInput}
+        onClick={() => handleOptionClick(name)}
+      />
+      <label className={styles.purposeLabel} htmlFor={name}>{name}</label>
+    </div>
+  )
+}
+
+Option.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
 }
 
 function Date({ changeInputHandler }) {
