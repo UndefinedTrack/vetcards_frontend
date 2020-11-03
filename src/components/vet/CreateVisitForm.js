@@ -6,8 +6,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../../styles/vet/VisitsHistory.module.css'
 import { createVetProc } from '../../actions/procsCreate'
-import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
-import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
+import DropDownList from '../DropDownList.js'
 
 function CreateVisitForm({ createProc }) {
   const { pid } = useParams()
@@ -47,6 +46,8 @@ function CreateVisitForm({ createProc }) {
     }))
   }
 
+  const visitPurposes = ['Осмотр', 'Прививка', 'Стерилизация']
+
   return (
     <form onSubmit={submitHandler} className={styles.CreateVFContainer}>
       <div className={styles.DFlex}>
@@ -54,7 +55,9 @@ function CreateVisitForm({ createProc }) {
           <div>
             Цель визита <span className={styles.noteText}>*</span>
           </div>
-          <VisitPurpose hangeInputHandler={changeInputHandler} />
+          <DropDownList
+            сhangeInputHandler={changeInputHandler}
+            options={visitPurposes} />
         </div>
         <div className={styles.VisitInf}>
           <div>
@@ -85,113 +88,6 @@ function CreateVisitForm({ createProc }) {
   )
 }
 
-function VisitPurpose() {
-  const [isVisible, setIsVisible] = useState(false)
-
-  const purposes = ['Осмотр', 'Прививка', 'Стерилизация']
-
-  const [chosenVisitPurpose, setChosenVisitPurpose] = useState(purposes[0])
-
-  function handleOptionClick(optionName) {
-    setChosenVisitPurpose(optionName)
-    setIsVisible(false)
-  }
-
-  function handleArrowClick() {
-    setIsVisible(!isVisible)
-  }
-
-  return (
-    <div>
-      <div className={styles.purposeBlock}>
-        {chosenVisitPurpose}
-        <Arrow
-          isVisible={isVisible}
-          handleArrowClick={handleArrowClick}
-        />
-        <OptionsList
-          isVisible={isVisible}
-          handleOptionClick={handleOptionClick}
-          purposes={purposes}
-        />
-      </div>
-    </div>
-  )
-}
-
-function Arrow({ isVisible, handleArrowClick }) {
-  if (!isVisible) {
-    return (
-      <button
-        type='button'
-        onClick={handleArrowClick}
-        className={styles.purposeArrowButton}
-      >
-        <ArrowDown />
-      </button>
-    )
-  }
-  return (
-    <button
-        type='button'
-        onClick={handleArrowClick}
-        className={styles.purposeArrowButton}
-      >
-        <ArrowUp />
-      </button>
-  )
-}
-
-Arrow.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  handleArrowClick: PropTypes.func.isRequired,
-}
-
-function OptionsList({ isVisible, handleOptionClick, purposes }) {
-  const options = []
-  for (let i = 0; i < purposes.length; i += 1) {
-    options.push(
-      <Option
-        name={purposes[i]}
-        handleOptionClick={handleOptionClick}
-      />
-    )
-  }
-  if (isVisible) {
-    return (
-      <div className={styles.purposeOptionsBox} >
-        {options}
-      </div>
-   )
-  }
-  return null
-}
-
-OptionsList.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  handleOptionClick: PropTypes.func.isRequired,
-}
-
-function Option({ name, handleOptionClick }) {
-  return (
-    <div className={styles.purposeOption}>
-      <input
-        id={name}
-        type='checkbox'
-        value='0'
-        name='selectName'
-        className={styles.purposeOptionInput}
-        onClick={() => handleOptionClick(name)}
-      />
-      <label className={styles.purposeLabel} htmlFor={name}>{name}</label>
-    </div>
-  )
-}
-
-Option.propTypes = {
-  name: PropTypes.string.isRequired,
-  handleOptionClick: PropTypes.func.isRequired,
-}
 
 function Date({ changeInputHandler }) {
   return (
