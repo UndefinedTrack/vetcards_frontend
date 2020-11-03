@@ -254,3 +254,78 @@
     width: 450px;
   }
 }
+
+/* выпадающие спиския */
+
+.purposeArrowButton {
+  position: absolute;
+  display: inline-block;
+  top: 4px;
+  right: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  width: 35px;
+  height: 35px;
+  outline: none;
+  padding: 0;
+}
+
+.purposeBlock {
+  position: relative;
+  margin-top: 9px;
+  padding-left: 13px;
+  padding-top: 5.5px;
+  border: 1px solid var(--active-button-color);
+  box-sizing: border-box;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  border-radius: 10px;
+  width: 294px;
+  height: 42px;
+  outline: none;
+}
+
+.purposeOptionsBox {
+  position: absolute;
+  top: 40px;
+  left: 6px;
+  background-color: #fff;
+  width: 280px;
+  border: 1px solid var(--active-button-color);
+  border-top: none;
+  border-radius: 5px;
+}
+
+.purposeOption {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid var(--active-button-color);
+  height: 42px;  
+}
+.purposeOption:hover {
+  background-color: var(--active-button-color);
+  color: #fff;
+  font-weight: 500;
+}
+
+.purposeOptionInput {
+  display: none;
+}
+
+.purposeLabel {
+  display: flex;
+  padding-left: 13px;
+  padding-top: 13px;
+  cursor: pointer;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  width: 280px;
+  height: 42px;
+}
+
