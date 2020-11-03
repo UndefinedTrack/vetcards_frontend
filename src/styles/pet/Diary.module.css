@@ -177,6 +177,10 @@
   line-height: 26px;
 }
 
+.input:focus {
+  background-color: whitesmoke;
+}
+
 textarea.input {
   height: 85px;
 }

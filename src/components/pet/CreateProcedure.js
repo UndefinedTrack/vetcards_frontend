@@ -8,14 +8,14 @@ import { ReactComponent as BackButton } from '../../icons/mdi_keyboard_arrow_lef
 
 function CreateProcedure({ backClick, createProc }) {
   const { pid } = useParams()
-  const [state, setState] = useState({
-    procedureName: '',
-    date: '',
-    remark: '',
-  })
   const today = new Date()
   const formatter = new Intl.DateTimeFormat('ru')
   const date = formatter.format(today)
+  const [state, setState] = useState({
+    procedureName: '',
+    date,
+    remark: '',
+  })
 
   return (
     <div className={styles.DiaryBlocks}>
@@ -67,7 +67,7 @@ function CreateProcedure({ backClick, createProc }) {
   )
 
   function update() {
-    // setTimeout(() => window.location.reload(), 100)
+    setTimeout(() => window.location.reload(), 100)
   }
 
   function changeInputHandler(event) {

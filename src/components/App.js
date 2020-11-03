@@ -13,14 +13,15 @@ import Diary from './pet/Diary'
 import Schedule from './vet/Schedule'
 import CreateSchedule from './vet/CreateSchedule'
 import VisitsHistory from './vet/VisitsHistory'
+import MainPage from './MainPage'
 
-function App({ profileInfo }) {
+function App() {
   const [input, setInput] = useState([])
   return (
     <div className={styles.App}>
       <HashRouter>
         <Route exact path="/">
-          <h1>Пользуйтесь нашим великолепным сервисом!</h1>
+          <MainPage />
         </Route>
         <Route path="/profile">
           <Header header="profile" isVet={false} />
