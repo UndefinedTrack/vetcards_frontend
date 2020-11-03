@@ -5,10 +5,13 @@ import styles from '../styles/MedicalHistory.module.css'
 import MedicalCard from './MedicalCard'
 import { ReactComponent as Search } from '../icons/search.svg'
 import { getVetProcs } from '../actions/procsList'
+import PopUpWindow from './PopUpWindow'
+
 // eslint-disable-next-line
 function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, searchString }) {
   const uid = 4
   const pid = pet.petId
+  const [popUpDispl, setPopUpDispl] = useState(false)
   const [searchLine, setSearchLine] = useState(false)
 
   if (procsList[0] === undefined) {
@@ -19,7 +22,6 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, s
     if (searchString[pid] === undefined) {
       searchString[pid] = ''
     }
-    console.log('')
     setTimeout(() => getVetProcs(pid, uid, searchString[pid]), 100)
     // eslint-disable-next-line
   }, [getVetProcs, pid, input])
@@ -42,6 +44,11 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, s
       </div>
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
+        {procs[pet.petId] === undefined && (
+          <div className={styles.EmptyStoryContainer}>
+            <div className={styles.EmptyStory}>Здесь будут появляться записи вашего ветеринара</div>
+          </div>
+        )}
         {procs.map((procedures) => {
           if (pet.petId !== procedures[0].petId) {
             return <div key={procedures[0].procId} />
@@ -53,20 +60,22 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, s
           )
         })}
       </section>
+      <PopUpWindow displ={popUpDispl} />
     </div>
   )
 
   function searchLineDisplay() {
     setSearchLine(!searchLine)
+    setPopUpDispl(true)
+    setTimeout(() => {
+      setPopUpDispl(false)
+    }, 2000)
   }
 
   function changeInputHandler(event) {
     searchString[pid] = event.target.value
-    console.log(searchString)
     setInput(searchString[pid])
-    console.log(input)
     getVetProcs(pid, uid, searchString[pid])
-    // console.log(procsList)
   }
 }
 

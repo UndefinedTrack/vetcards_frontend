@@ -54,12 +54,14 @@ function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
         </div>
       )}
       {Boolean(petList.length) &&
-        petList.map((pet) => (
-          <div className={styles.Container} key={pet.petId}>
-            <AboutPet pet={pet} />
-            <MedicalHistory pet={pet} procs={procs} input={input} setInput={setInput} searchString={searchString} />
-          </div>
-        ))}
+        petList
+          .map((pet) => (
+            <div className={styles.Container} key={pet.petId}>
+              <AboutPet pet={pet} />
+              <MedicalHistory pet={pet} procs={procs} input={input} setInput={setInput} searchString={searchString} />
+            </div>
+          ))
+          .reverse()}
     </div>
   )
 }

@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 16px;
+  /* margin-top: 16px; */
   width: 331px;
   height: 48px;
   border-radius: 7px;
@@ -22,7 +22,7 @@
 }
 
 .Button:last-child {
-  margin-bottom: 38px;
+  margin-bottom: 18px;
 }
 
 @media (max-width: 1400px) {

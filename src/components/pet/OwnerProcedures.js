@@ -42,7 +42,24 @@ function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs }) 
       </div>
       <hr className={styles.Line} />
       <section className={styles.Procedures}>
-        {procsList.map((proc) => <HomeProcedure key={proc.procId} proc={proc} />).reverse()}
+        {procsList.length === 0 && (
+          <div className={styles.EmptyStoryContainer}>
+            <div className={styles.EmptyStory}>Не проведено ни одной процедуры</div>
+          </div>
+        )}
+        {procsList
+          .map((proc) => {
+            // console.log(<HomeProcedure key={proc.procId} proc={proc} date={proc.procDate} />)
+            const day = proc.procDate.slice(8, 10)
+            const month = Number(proc.procDate.slice(5, 7)) - 1
+            const year = proc.procDate.slice(0, 4)
+            const date = new Date(year, month, day)
+            return <HomeProcedure key={proc.procId} proc={proc} date={date} />
+          })
+          .reverse()
+          .sort((a, b) => {
+            return b.props.date - a.props.date
+          })}
       </section>
     </section>
   )

@@ -19,12 +19,23 @@ function MedicalHistoryForVet({ procsList, getVetProcs }) {
     <div className={styles.CreateVFContainer}>
       <SearchLine changeInputHandler={changeInputHandler} />
       <section className={styles.CardsSection}>
+        {procsList.length === 0 && (
+          <div className={styles.EmptyStoryContainer}>
+            <div className={styles.EmptyStory}>История приёмов пуста</div>
+          </div>
+        )}
         {procsList
-          .map((procs, ind) => (
-            // eslint-disable-next-line
-            <MedicalCard key={ind} procs={procs} />
-          ))
-          .reverse()}
+          .map((procs) => {
+            const day = procs.procDate.slice(8, 10)
+            const month = Number(procs.procDate.slice(5, 7)) - 1
+            const year = procs.procDate.slice(0, 4)
+            const date = new Date(year, month, day)
+            return <MedicalCard key={procs.procId} procs={procs} date={date} />
+          })
+          .reverse()
+          .sort((a, b) => {
+            return b.props.date - a.props.date
+          })}
       </section>
     </div>
   )
