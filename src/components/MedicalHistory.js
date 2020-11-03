@@ -6,7 +6,7 @@ import MedicalCard from './MedicalCard'
 import { ReactComponent as Search } from '../icons/search.svg'
 import { getVetProcs } from '../actions/procsList'
 // eslint-disable-next-line
-function MedicalHistory({ pet, procsList, getVetProcs, procs, input }) {
+function MedicalHistory({ pet, procsList, getVetProcs, procs, input, setInput, searchString }) {
   const uid = 4
   const pid = pet.petId
   const [searchLine, setSearchLine] = useState(false)
@@ -16,9 +16,13 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input }) {
   }
 
   useEffect(() => {
-    setTimeout(() => getVetProcs(pid, uid, ''), 100)
+    if (searchString[pid] === undefined) {
+      searchString[pid] = ''
+    }
+    console.log('')
+    setTimeout(() => getVetProcs(pid, uid, searchString[pid]), 100)
     // eslint-disable-next-line
-  }, [])
+  }, [getVetProcs, pid, input])
 
   if (pid === procsList[0].petId && procs[pid] === undefined) {
     procs[pid] = procsList
@@ -29,31 +33,21 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input }) {
       <div className={styles.NameAndSearch}>
         {!searchLine && <div className={styles.Name}>История приёмов</div>}
         {!searchLine && <Search onClick={searchLineDisplay} className={styles.SearchButton} />}
-        {searchLine &&
-          procs.map((procedures, ind) => {
-            if (pet.petId !== procedures[0].petId) {
-              return <></>
-            }
-            return (
-              // eslint-disable-next-line
-              <div key={ind}>
-                <div className={styles.SearchContainer}>
-                  <Search className={styles.SearchButton} />
-                  <input type="text" onChange={changeInputHandler} className={styles.SearchLine} placeholder="Поиск" />
-                </div>
-              </div>
-            )
-          })}
+        {searchLine && (
+          <div className={styles.SearchContainer}>
+            <Search className={styles.SearchButton} />
+            <input type="text" onChange={changeInputHandler} className={styles.SearchLine} placeholder="Поиск" />
+          </div>
+        )}
       </div>
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
-        {procs.map((procedures, ind) => {
+        {procs.map((procedures) => {
           if (pet.petId !== procedures[0].petId) {
-            return <></>
+            return <div key={procedures[0].procId} />
           }
           return (
-            // eslint-disable-next-line
-            <div key={ind}>
+            <div key={procedures[0].procId}>
               <LoadProcedures procedures={procedures} />
             </div>
           )
@@ -67,17 +61,20 @@ function MedicalHistory({ pet, procsList, getVetProcs, procs, input }) {
   }
 
   function changeInputHandler(event) {
-    input[pid] = event.target.value
-    getVetProcs(pid, uid, input[pid])
+    searchString[pid] = event.target.value
+    console.log(searchString)
+    setInput(searchString[pid])
+    console.log(input)
+    getVetProcs(pid, uid, searchString[pid])
+    // console.log(procsList)
   }
 }
 
 function LoadProcedures({ procedures }) {
   return (
     <div>
-      {procedures.map((proc, ind) => (
-        // eslint-disable-next-line
-        <MedicalCard key={ind} procs={proc} />
+      {procedures.map((proc) => (
+        <MedicalCard key={proc.procId} procs={proc} />
       ))}
     </div>
   )

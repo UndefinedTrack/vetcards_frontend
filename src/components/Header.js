@@ -4,7 +4,6 @@ import HeaderButton from './HeaderButton'
 import styles from '../styles/Header.module.css'
 
 function Header({ header, isVet }) {
-  isVet = true
   let myPetStyles = 'disabled'
   let profileStyles = 'disabled'
   let myPatientsStyles = 'disabled'
@@ -27,7 +26,8 @@ function Header({ header, isVet }) {
         {!isVet && <HeaderButton buttonStyles={myPetStyles} header="mypets" buttonName="Мои питомцы" />}
         {isVet && <HeaderButton buttonStyles={scheduleStyles} header="schedule" buttonName="График работы" />}
         {isVet && <HeaderButton buttonStyles={myPatientsStyles} header="mypatients" buttonName="Мои пациенты" />}
-        <HeaderButton buttonStyles={profileStyles} header="profile" buttonName="Профиль" />
+        {!isVet && <HeaderButton buttonStyles={profileStyles} header="profile" buttonName="Профиль" />}
+        {isVet && <HeaderButton buttonStyles={profileStyles} header="vetprofile" buttonName="Профиль" />}
       </div>
     </header>
   )

@@ -88,3 +88,9 @@
   color: var(--active-button-color);
   width: 130px;
 }
+
+@media (max-width: 1200px) {
+  .timeSlotTaken {
+    width: 110px;
+  }
+}

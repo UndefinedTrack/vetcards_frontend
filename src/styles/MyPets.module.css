@@ -70,3 +70,30 @@ a:visited {
   margin-top: 4px;
   height: 35px;
 }
+
+@media (max-width: 1400px) {
+  .Container {
+    height: 500px;
+  }
+
+  .NewPetButton {
+    width: 1080px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .NewPetButton {
+    width: 828px;
+  }
+}
+
+@media (max-width: 950px) {
+  .Container {
+    height: 400px;
+    margin-bottom: 30px;
+  }
+
+  .NewPetButton {
+    width: 600px;
+  }
+}

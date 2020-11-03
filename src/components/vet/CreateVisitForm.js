@@ -12,7 +12,7 @@ import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 function CreateVisitForm({ createProc }) {
   const { pid } = useParams()
   const [state, setState] = useState({
-    date: '',
+    date: '31.10.2020',
     purpose: 'Осмотр',
     symptoms: '',
     diagnosis: '',
@@ -23,9 +23,9 @@ function CreateVisitForm({ createProc }) {
   function submitHandler(e) {
     e.preventDefault()
 
-    const { purpose, symptoms, diagnosis, recomms, recipe } = state
+    const { date, purpose, symptoms, diagnosis, recomms, recipe } = state
 
-    createProc(pid, 4, purpose, symptoms, diagnosis, recomms, recipe)
+    createProc(pid, 4, date, purpose, symptoms, diagnosis, recomms, recipe)
     setState({
       date: '',
       purpose: '',
@@ -207,7 +207,7 @@ function Date({ changeInputHandler }) {
       // pattern=""
       className={styles.InputBlock}
       name="date"
-      defaultValue="28.10.2020"
+      defaultValue="31.10.2020"
       maxLength="10"
     />
   )
@@ -248,8 +248,8 @@ InputBlock.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createProc: (pid, uid, purpose, symptoms, diagnosis, recomms, recipe) =>
-    dispatch(createVetProc(pid, uid, purpose, symptoms, diagnosis, recomms, recipe)),
+  createProc: (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe) =>
+    dispatch(createVetProc(pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe)),
 })
 
 export default connect(null, mapDispatchToProps)(CreateVisitForm)
