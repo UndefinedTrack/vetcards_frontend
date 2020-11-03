@@ -85,25 +85,12 @@ function CreateVisitForm({ createProc }) {
   )
 }
 
-// function Duration() {
-//   return (
-//     <div className={styles.mybox}>
-//       <span className={styles.myarrow} />
-//       <select className={styles.SelectInput}>
-//         <option>Осмотр</option>
-//         {/* <option>Прививка</option>
-//         <option>Стерилизация</option> */}
-//       </select>
-//     </div>
-//   )
-// }
-
 function VisitPurpose() {
   const [isVisible, setIsVisible] = useState(false)
 
-  const labels = ['Осмотр', 'Прививка']
+  const purposes = ['Осмотр', 'Прививка', 'Стерилизация']
 
-  const [chosenVisitPurpose, setChosenVisitPurpose] = useState(labels[0])
+  const [chosenVisitPurpose, setChosenVisitPurpose] = useState(purposes[0])
 
   function handleOptionClick(optionName) {
     setChosenVisitPurpose(optionName)
@@ -125,7 +112,7 @@ function VisitPurpose() {
         <OptionsList
           isVisible={isVisible}
           handleOptionClick={handleOptionClick}
-          labels={labels}
+          purposes={purposes}
         />
       </div>
     </div>
@@ -160,12 +147,20 @@ Arrow.propTypes = {
   handleArrowClick: PropTypes.func.isRequired,
 }
 
-function OptionsList({ isVisible, handleOptionClick, labels }) {
+function OptionsList({ isVisible, handleOptionClick, purposes }) {
+  const options = []
+  for (let i = 0; i < purposes.length; i += 1) {
+    options.push(
+      <Option
+        name={purposes[i]}
+        handleOptionClick={handleOptionClick}
+      />
+    )
+  }
   if (isVisible) {
     return (
       <div className={styles.purposeOptionsBox} >
-        <Option name={labels[0]} handleOptionClick={handleOptionClick} />
-        <Option name={labels[1]} handleOptionClick={handleOptionClick} />
+        {options}
       </div>
    )
   }
