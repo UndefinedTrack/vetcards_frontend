@@ -25,8 +25,8 @@ class PetCreator extends React.Component {
   }
 
   submitHandler = (event) => {
-    let birthDate = ''
     event.preventDefault()
+    let birthDate = ''
 
     const { name, species, breed, color, gender, chip, year } = this.state
     let { day, month } = this.state
@@ -61,6 +61,10 @@ class PetCreator extends React.Component {
       gender: '',
       chip: '',
     })
+
+    setTimeout(() => {
+      window.location.href = '#/mypets'
+    }, 100)
   }
 
   changeInputHandler = (event) => {
@@ -109,13 +113,7 @@ class PetCreator extends React.Component {
                 <p className={styles.noteText}>* - обязательные для заполнения поля</p>
               </div>
             </div>
-            <button
-              type="submit"
-              className={styles.saveButton}
-              onClick={() => {
-                window.location.href = '#/mypets'
-              }}
-            >
+            <button type="submit" className={styles.saveButton}>
               Сохранить
             </button>
           </form>
@@ -146,10 +144,11 @@ function Name({ handleNameChange, name, heading, placeholder, rec }) {
       {!rec && (
         <input
           type="text"
-          pattern="[A-Za-zА-Яа-яЁё]{2,25}"
+          pattern="([A-Za-zА-Яа-яЁё]| |-){2,25}"
           className={styles.input}
           onChange={handleNameChange}
           name={name}
+          title="При заполнении данного поля вы можете использовать буквы, пробелы и дефисы"
           placeholder={placeholder}
         />
       )}
