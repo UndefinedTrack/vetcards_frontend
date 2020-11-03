@@ -49,7 +49,7 @@ export const createVetProc = (pid, uid, date, purpose, symptoms, diagnosis, reco
     const data = new FormData()
     data.append('pet', pid)
     data.append('user', uid)
-    data.append('date', date)
+    data.append('proc_date', date)
     data.append('purpose', purpose)
     data.append('symptoms', symptoms)
     data.append('diagnosis', diagnosis)

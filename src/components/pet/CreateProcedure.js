@@ -34,7 +34,11 @@ function CreateProcedure({ backClick, createProc }) {
           className={styles.input}
           onChange={changeInputHandler}
           name="procedureName"
-          placeholder="Выберите процедуру"
+          required
+          pattern=".{3,}"
+          title="Название процедуры должно содержать не менее 3 символов"
+          maxLength="25"
+          placeholder="Назовите процедуру"
         />
         <div className={styles.ProcedureEntryBlock}>
           <div className={styles.ProcedureText}>Дата проведения</div>
@@ -44,7 +48,10 @@ function CreateProcedure({ backClick, createProc }) {
           type="text"
           className={styles.input}
           onChange={changeInputHandler}
+          required
           name="date"
+          title="Введите дату в формате дд.мм.гггг"
+          pattern="([0][1-9]|[1-2][1-9]|[1-3][1-1]|[1-3][0])\.([0][1-9]|[1][0-2])\.([1][0-9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0])"
           placeholder={date}
           defaultValue={date}
         />
@@ -59,16 +66,12 @@ function CreateProcedure({ backClick, createProc }) {
           placeholder="Оставьте примечание"
         />
         <p className={styles.noteText}>* - обязательные для заполнения поля</p>
-        <button type="submit" onClick={update} className={styles.saveButton}>
+        <button type="submit" className={styles.saveButton}>
           Добавить
         </button>
       </form>
     </div>
   )
-
-  function update() {
-    setTimeout(() => window.location.reload(), 100)
-  }
 
   function changeInputHandler(event) {
     event.persist()
@@ -92,6 +95,7 @@ function CreateProcedure({ backClick, createProc }) {
     })
 
     backClick()
+    setTimeout(() => window.location.reload(), 100)
   }
 }
 

@@ -56,6 +56,7 @@ function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs }) 
             const date = new Date(year, month, day)
             return <HomeProcedure key={proc.procId} proc={proc} date={date} />
           })
+          .reverse()
           .sort((a, b) => {
             return b.props.date - a.props.date
           })}

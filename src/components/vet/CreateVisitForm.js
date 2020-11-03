@@ -8,8 +8,11 @@ import { createVetProc } from '../../actions/procsCreate'
 
 function CreateVisitForm({ createProc }) {
   const { pid } = useParams()
+  const today = new Date()
+  const formatter = new Intl.DateTimeFormat('ru')
+  const date = formatter.format(today)
   const [state, setState] = useState({
-    date: '31.10.2020',
+    date,
     purpose: 'Осмотр',
     symptoms: '',
     diagnosis: '',
@@ -20,9 +23,10 @@ function CreateVisitForm({ createProc }) {
   function submitHandler(e) {
     e.preventDefault()
 
-    const { date, purpose, symptoms, diagnosis, recomms, recipe } = state
+    const { purpose, symptoms, diagnosis, recomms, recipe } = state
+    const procDate = state.date
 
-    createProc(pid, 4, date, purpose, symptoms, diagnosis, recomms, recipe)
+    createProc(pid, 4, procDate, purpose, symptoms, diagnosis, recomms, recipe)
     setState({
       date: '',
       purpose: '',
@@ -31,6 +35,7 @@ function CreateVisitForm({ createProc }) {
       recomms: '',
       recipe: '',
     })
+
     setTimeout(() => window.location.reload(), 100)
   }
 
@@ -57,7 +62,7 @@ function CreateVisitForm({ createProc }) {
           <div>
             Дата визита <span className={styles.noteText}>*</span>
           </div>
-          <DateBlock changeInputHandler={changeInputHandler} />
+          <DateBlock changeInputHandler={changeInputHandler} date={state.date} />
         </div>
       </div>
       <div className={styles.DFlexColumn}>
@@ -95,10 +100,7 @@ function Duration() {
   )
 }
 
-function DateBlock({ changeInputHandler }) {
-  const today = new Date()
-  const formatter = new Intl.DateTimeFormat('ru')
-  const date = formatter.format(today)
+function DateBlock({ changeInputHandler, date }) {
   return (
     <input
       required
@@ -106,6 +108,8 @@ function DateBlock({ changeInputHandler }) {
       onChange={changeInputHandler}
       className={styles.InputBlock}
       name="date"
+      title="Введите дату в формате дд.мм.гггг"
+      pattern="([0][1-9]|[1-2][1-9]|[1-3][1-1]|[1-3][0])\.([0][1-9]|[1][0-2])\.([1][0-9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0])"
       defaultValue={date}
       placeholder={date}
       maxLength="10"

@@ -40,7 +40,11 @@ function CreateReminder({ backClick }) {
             className={styles.input}
             onChange={handleInputChange}
             name="reminderName"
-            placeholder="Выберите тип напоминания"
+            required
+            pattern=".{3,}"
+            title="Название напоминания должно содержать не менее 3 символов"
+            maxLength="25"
+            placeholder="Назовите напоминание"
           />
         </div>
         <div className={styles.inputAndTextWrapper}>
@@ -52,7 +56,10 @@ function CreateReminder({ backClick }) {
             type="text"
             className={styles.input}
             onChange={handleInputChange}
+            required
             name="date"
+            title="Введите дату в формате дд.мм.гггг"
+            pattern="([0][1-9]|[1-2][1-9]|[1-3][1-1]|[1-3][0])\.([0][1-9]|[1][0-2])\.([1][0-9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0])"
             placeholder={date}
             defaultValue={date}
           />

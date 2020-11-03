@@ -113,7 +113,7 @@ class PetCreator extends React.Component {
               type="submit"
               className={styles.saveButton}
               onClick={() => {
-                // window.location.href = '#/mypets'
+                window.location.href = '#/mypets'
               }}
             >
               Сохранить

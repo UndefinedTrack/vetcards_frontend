@@ -24,7 +24,18 @@ function MedicalHistoryForVet({ procsList, getVetProcs }) {
             <div className={styles.EmptyStory}>История приёмов пуста</div>
           </div>
         )}
-        {procsList.map((procs) => <MedicalCard key={procs.procId} procs={procs} />).reverse()}
+        {procsList
+          .map((procs) => {
+            const day = procs.procDate.slice(8, 10)
+            const month = Number(procs.procDate.slice(5, 7)) - 1
+            const year = procs.procDate.slice(0, 4)
+            const date = new Date(year, month, day)
+            return <MedicalCard key={procs.procId} procs={procs} date={date} />
+          })
+          .reverse()
+          .sort((a, b) => {
+            return b.props.date - a.props.date
+          })}
       </section>
     </div>
   )
