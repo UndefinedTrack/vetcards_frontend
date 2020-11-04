@@ -152,6 +152,7 @@
   box-sizing: border-box;
   border-radius: 10px;
   margin-bottom: 14px;
+  position: relative;
 }
 
 .SearchButton {
@@ -165,7 +166,7 @@
   font-weight: 300;
   padding: 0;
   padding-left: 17px;
-  width: 442px;
+  width: 437px;
   height: 45px;
   font-size: 18px;
   line-height: 26px;
@@ -182,8 +183,9 @@
 }
 
 .MyBoxFilter {
-  position: relative;
+  position: absolute;
   display: inline-block;
+  right: 10px;
 }
 
 .MyBoxFilter .MyArrowFilter {
@@ -229,6 +231,10 @@
     width: 475px;
   }
 
+  .SearchLine {
+    width: 287px;
+  }
+
   .VisitInf,
   .SelectInput,
   .InputBlock {
@@ -240,7 +246,7 @@
   }
 }
 
-/* выпадающие спиския */
+/* выпадающие списки */
 
 .purposeArrowButton {
   position: absolute;
@@ -314,3 +320,13 @@
   height: 42px;
 }
 
+@media (max-width: 1400px) {
+  .purposeBlock {
+    width: 215px;
+  }
+
+  .purposeOptionsBox {
+    width: 201px;
+    left: 5px;
+  }
+}
