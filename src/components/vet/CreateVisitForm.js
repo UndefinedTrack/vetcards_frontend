@@ -56,7 +56,7 @@ function CreateVisitForm({ createProc }) {
             Цель визита <span className={styles.noteText}>*</span>
           </div>
           <DropDownList
-            сhangeInputHandler={changeInputHandler}
+            changeInputHandler={changeInputHandler}
             options={visitPurposes} />
         </div>
         <div className={styles.VisitInf}>

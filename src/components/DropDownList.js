@@ -10,10 +10,9 @@ export default function DropDownList({ changeInputHandler, options }) {
 
   const [chosenOption, setChosenOption] = useState(options[0])
 
-  function handleOptionClick(event, optionName) {
+  function handleOptionClick(optionName) {
     setChosenOption(optionName)
     setIsVisible(false)
-    changeInputHandler(event)
   }
 
   function handleArrowClick() {
@@ -32,6 +31,7 @@ export default function DropDownList({ changeInputHandler, options }) {
           isVisible={isVisible}
           handleOptionClick={handleOptionClick}
           options={options}
+          changeInputHandler={changeInputHandler}
         />
       </div>
     </div>
@@ -71,13 +71,15 @@ Arrow.propTypes = {
   handleArrowClick: PropTypes.func.isRequired,
 }
 
-function OptionsList({ isVisible, handleOptionClick, options }) {
+function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler }) {
   const optionsComponents = []
   for (let i = 0; i < options.length; i += 1) {
     optionsComponents.push(
       <Option
+        key={i}
         name={options[i]}
         handleOptionClick={handleOptionClick}
+        changeInputHandler={changeInputHandler}
       />
     )
   }
@@ -95,18 +97,20 @@ OptionsList.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   handleOptionClick: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
 }
 
-function Option({ name, handleOptionClick }) {
+function Option({ name, handleOptionClick, changeInputHandler }) {
   return (
     <div className={styles.purposeOption}>
       <input
         id={name}
         type='checkbox'
-        value='0'
-        name='selectName'
+        value={name}
+        name='purpose'
         className={styles.purposeOptionInput}
         onClick={() => handleOptionClick(name)}
+        onChange={changeInputHandler}
       />
       <label className={styles.purposeLabel} htmlFor={name}>{name}</label>
     </div>
@@ -116,4 +120,5 @@ function Option({ name, handleOptionClick }) {
 Option.propTypes = {
   name: PropTypes.string.isRequired,
   handleOptionClick: PropTypes.func.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
 }
