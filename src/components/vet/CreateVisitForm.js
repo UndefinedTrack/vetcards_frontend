@@ -24,6 +24,8 @@ function CreateVisitForm({ createProc }) {
     recipe: '',
   })
 
+  const visitPurposes = ['Осмотр', 'Прививка', 'Стерилизация']
+
   function submitHandler(e) {
     e.preventDefault()
 
@@ -52,8 +54,6 @@ function CreateVisitForm({ createProc }) {
       },
     }))
   }
-
-  const visitPurposes = ['Осмотр', 'Прививка', 'Стерилизация']
 
   return (
     <form onSubmit={submitHandler} className={styles.CreateVFContainer}>
