@@ -1,20 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import styles from '../styles/HeaderButton.module.css'
 
 function HeaderButton({ buttonName, buttonStyles, header }) {
+  function reload() {
+    window.location.href = header
+    if (header === '#/mypets') {
+      window.location.reload()
+    }
+  }
+
   return (
     <div>
       {buttonStyles === 'enabled' && (
-        <Link to={header} className={`${styles.Enabled} ${styles.Button}`}>
+        <button type="button" onClick={reload} className={`${styles.Enabled} ${styles.Button}`}>
           <p>{buttonName}</p>
-        </Link>
+        </button>
       )}
       {buttonStyles === 'disabled' && (
-        <Link to={header} className={`${styles.Disabled} ${styles.Button}`}>
+        <button type="button" onClick={reload} className={`${styles.Disabled} ${styles.Button}`}>
           <p>{buttonName}</p>
-        </Link>
+        </button>
       )}
     </div>
   )
@@ -25,5 +31,4 @@ HeaderButton.propTypes = {
   buttonStyles: PropTypes.string.isRequired,
   header: PropTypes.string.isRequired,
 }
-
 export default HeaderButton

@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import styles from '../styles/LinkButton.module.css'
 import PopUpWindow from './PopUpWindow'
 
-function LinkButton({ nameButton, href }) {
+// eslint-disable-next-line
+function LinkButton({ nameButton, href, closeSearchString }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
   return (
     <div>
@@ -15,9 +16,12 @@ function LinkButton({ nameButton, href }) {
         </Link>
       )}
       {nameButton !== 'Записаться на приём' && (
-        <Link to={href} className={styles.Button}>
+        <a href={href} className={styles.Button}>
           {nameButton}
-        </Link>
+        </a>
+        // <Link onClick={closeSearchString} to={href} className={styles.Button}>
+        //   {nameButton}
+        // </Link>
       )}
     </div>
   )

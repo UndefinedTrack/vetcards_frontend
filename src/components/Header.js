@@ -23,11 +23,11 @@ function Header({ header, isVet }) {
     <header className={styles.Header}>
       <p className={styles.Name}>Личный кабинет</p>
       <div className={styles.ButtonContainer}>
-        {!isVet && <HeaderButton buttonStyles={myPetStyles} header="mypets" buttonName="Мои питомцы" />}
-        {isVet && <HeaderButton buttonStyles={scheduleStyles} header="schedule" buttonName="График работы" />}
-        {isVet && <HeaderButton buttonStyles={myPatientsStyles} header="mypatients" buttonName="Мои пациенты" />}
-        {!isVet && <HeaderButton buttonStyles={profileStyles} header="profile" buttonName="Профиль" />}
-        {isVet && <HeaderButton buttonStyles={profileStyles} header="vetprofile" buttonName="Профиль" />}
+        {!isVet && <HeaderButton buttonStyles={myPetStyles} header="#/mypets" buttonName="Мои питомцы" />}
+        {isVet && <HeaderButton buttonStyles={scheduleStyles} header="#/schedule" buttonName="График работы" />}
+        {isVet && <HeaderButton buttonStyles={myPatientsStyles} header="#/mypatients" buttonName="Мои пациенты" />}
+        {!isVet && <HeaderButton buttonStyles={profileStyles} header="#/profile" buttonName="Профиль" />}
+        {isVet && <HeaderButton buttonStyles={profileStyles} header="#/vetprofile" buttonName="Профиль" />}
       </div>
     </header>
   )

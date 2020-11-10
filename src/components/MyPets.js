@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styles from '../styles/MyPets.module.css'
 import AboutPet from './AboutPet'
@@ -13,6 +13,8 @@ let searchString
 // eslint-disable-next-line
 function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
   const uid = 3
+  const [searchLine, setSearchLine] = useState(-1)
+
   if (procs === undefined) {
     procs = []
   }
@@ -24,6 +26,11 @@ function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
   if (petList === undefined) {
     petList = []
     getInfo(uid)
+  }
+
+  function closeSearchString() {
+    getVetProcs(searchLine, uid, '')
+    setSearchLine(-1)
   }
 
   useEffect(() => {
@@ -57,8 +64,17 @@ function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
         petList
           .map((pet) => (
             <div className={styles.Container} key={pet.petId}>
-              <AboutPet pet={pet} />
-              <MedicalHistory pet={pet} procs={procs} input={input} setInput={setInput} searchString={searchString} />
+              <AboutPet pet={pet} closeSearchString={closeSearchString} />
+              <MedicalHistory
+                pet={pet}
+                procs={procs}
+                input={input}
+                setInput={setInput}
+                searchString={searchString}
+                ind={pet.petId}
+                searchLine={searchLine}
+                setSearchLine={setSearchLine}
+              />
             </div>
           ))
           .reverse()}
