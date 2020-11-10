@@ -21,7 +21,6 @@ function MedicalHistory({
 }) {
   const uid = 4
   const pid = pet.petId
-  // const [proces, setProces] = useState(procs)
 
   if (procsList[0] === undefined) {
     procsList[0] = []
@@ -42,7 +41,6 @@ function MedicalHistory({
 
   if (pid === procsList[0].petId && procs[pid] !== procsList) {
     procs[pid] = procsList
-    // setProces(procs)
   }
   return (
     <div className={styles.Container}>
@@ -52,17 +50,20 @@ function MedicalHistory({
         {pet.petId === searchLine && (
           <div className={styles.SearchContainer}>
             <Search className={styles.SearchButton} />
-            <input type="text" onChange={changeInputHandler} className={styles.SearchLine} placeholder="Поиск" />
+            <input
+              type="text"
+              // eslint-disable-next-line
+              autoFocus
+              onChange={changeInputHandler}
+              id="search-input"
+              className={styles.SearchLine}
+              placeholder="Поиск"
+            />
           </div>
         )}
       </div>
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
-        {/* {console.log(procs[pid] === undefined || procs[pid].length === 0) && (
-          <div className={styles.EmptyStoryContainer}>
-            <div className={styles.EmptyStory}>Здесь будут появляться записи вашего ветеринара</div>
-          </div>
-        )} */}
         {procs.map((procedures) => {
           if (pet.petId !== procedures[0].petId) {
             return <div key={procedures[0].procId} />
@@ -92,9 +93,7 @@ function MedicalHistory({
 
   function searchLineDisplay() {
     setInput('')
-    // searchString[pid] = ''
     getVetProcs(searchLine, uid, '')
-
     setSearchLine(ind)
     getVetProcs(pid, uid, '')
     getVetProcs(ind, uid, '')

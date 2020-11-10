@@ -32,7 +32,14 @@ function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs }) 
         {searchLine && (
           <div className={styles.SearchContainer}>
             <Search className={styles.SearchButton} />
-            <input type="text" onChange={changeInputHandler} className={styles.SearchLine} placeholder="Поиск" />
+            <input
+              type="text"
+              // eslint-disable-next-line
+              autoFocus
+              onChange={changeInputHandler}
+              className={styles.SearchLine}
+              placeholder="Поиск"
+            />
           </div>
         )}
         <div className={styles.Buttons}>
