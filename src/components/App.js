@@ -14,6 +14,7 @@ import Schedule from './vet/Schedule'
 import CreateSchedule from './vet/CreateSchedule'
 import VisitsHistory from './vet/VisitsHistory'
 import MainPage from './MainPage'
+import SignUp from './SignUp.js'
 
 function App() {
   const [input, setInput] = useState([])
@@ -22,6 +23,9 @@ function App() {
       <HashRouter>
         <Route exact path="/">
           <MainPage />
+        </Route>
+        <Route exact path="/sign-up">
+          <SignUp />
         </Route>
         <Route path="/profile">
           <Header header="profile" isVet={false} />
