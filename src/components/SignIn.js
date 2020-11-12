@@ -10,9 +10,11 @@ function SignIn({ userToken, createJWT }) {
     username: '',
     password: '',
   })
+  // eslint-disable-next-line
   if (userToken && userToken.detail !== undefined) {
     wrong = true
   }
+  // eslint-disable-next-line
   if (userToken && userToken.access !== undefined) {
     wrong = false
     localStorage.getItem('userReg', true)

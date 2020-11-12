@@ -1,33 +1,36 @@
 {
   "files": {
-    "main.css": "/vetcards_frontend/static/css/main.f6dffb87.chunk.css",
-    "main.js": "/vetcards_frontend/static/js/main.67d7d7b7.chunk.js",
-    "main.js.map": "/vetcards_frontend/static/js/main.67d7d7b7.chunk.js.map",
+    "main.css": "/vetcards_frontend/static/css/main.c24f5c9f.chunk.css",
+    "main.js": "/vetcards_frontend/static/js/main.714c48d7.chunk.js",
+    "main.js.map": "/vetcards_frontend/static/js/main.714c48d7.chunk.js.map",
     "runtime-main.js": "/vetcards_frontend/static/js/runtime-main.46d78c4b.js",
     "runtime-main.js.map": "/vetcards_frontend/static/js/runtime-main.46d78c4b.js.map",
-    "static/js/2.7a4bbba5.chunk.js": "/vetcards_frontend/static/js/2.7a4bbba5.chunk.js",
-    "static/js/2.7a4bbba5.chunk.js.map": "/vetcards_frontend/static/js/2.7a4bbba5.chunk.js.map",
+    "static/js/2.3455ef8a.chunk.js": "/vetcards_frontend/static/js/2.3455ef8a.chunk.js",
+    "static/js/2.3455ef8a.chunk.js.map": "/vetcards_frontend/static/js/2.3455ef8a.chunk.js.map",
     "index.html": "/vetcards_frontend/index.html",
-    "precache-manifest.b5b1b8d125a17eabb14dbdd324f80a51.js": "/vetcards_frontend/precache-manifest.b5b1b8d125a17eabb14dbdd324f80a51.js",
+    "precache-manifest.9dddbcde15c0b96f7af0d81ea80bc07f.js": "/vetcards_frontend/precache-manifest.9dddbcde15c0b96f7af0d81ea80bc07f.js",
     "service-worker.js": "/vetcards_frontend/service-worker.js",
-    "static/css/main.f6dffb87.chunk.css.map": "/vetcards_frontend/static/css/main.f6dffb87.chunk.css.map",
-    "static/js/2.7a4bbba5.chunk.js.LICENSE.txt": "/vetcards_frontend/static/js/2.7a4bbba5.chunk.js.LICENSE.txt",
+    "static/css/main.c24f5c9f.chunk.css.map": "/vetcards_frontend/static/css/main.c24f5c9f.chunk.css.map",
+    "static/js/2.3455ef8a.chunk.js.LICENSE.txt": "/vetcards_frontend/static/js/2.3455ef8a.chunk.js.LICENSE.txt",
     "static/media/arrow_back_week.bd98cf47.svg": "/vetcards_frontend/static/media/arrow_back_week.bd98cf47.svg",
     "static/media/CreateSchedule.module.css": "/vetcards_frontend/static/media/arrow_down.abb6693e.svg",
+    "static/media/arrow_down_square.159134ea.svg": "/vetcards_frontend/static/media/arrow_down_square.159134ea.svg",
     "static/media/arrow_forward_week.381c7910.svg": "/vetcards_frontend/static/media/arrow_forward_week.381c7910.svg",
+    "static/media/arrow_up.d43c7767.svg": "/vetcards_frontend/static/media/arrow_up.d43c7767.svg",
     "static/media/back_button.cb2cf206.svg": "/vetcards_frontend/static/media/back_button.cb2cf206.svg",
     "static/media/mdi_keyboard_arrow_left.4f36debd.svg": "/vetcards_frontend/static/media/mdi_keyboard_arrow_left.4f36debd.svg",
     "static/media/mdi_more_vert.675287bf.svg": "/vetcards_frontend/static/media/mdi_more_vert.675287bf.svg",
-    "static/media/photo.f72c33e2.svg": "/vetcards_frontend/static/media/photo.f72c33e2.svg",
+    "static/media/photo.5b2c2da7.svg": "/vetcards_frontend/static/media/photo.5b2c2da7.svg",
     "static/media/photo_pet.b5e9db2d.svg": "/vetcards_frontend/static/media/photo_pet.b5e9db2d.svg",
     "static/media/plus.c86f5b37.svg": "/vetcards_frontend/static/media/plus.c86f5b37.svg",
     "static/media/search.c087e16a.svg": "/vetcards_frontend/static/media/search.c087e16a.svg",
-    "static/media/settings.f65c4fb8.svg": "/vetcards_frontend/static/media/settings.f65c4fb8.svg"
+    "static/media/settings.f65c4fb8.svg": "/vetcards_frontend/static/media/settings.f65c4fb8.svg",
+    "static/media/Diary.module.css": "/vetcards_frontend/static/media/tablet.8b9b72a7.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.46d78c4b.js",
-    "static/js/2.7a4bbba5.chunk.js",
-    "static/css/main.f6dffb87.chunk.css",
-    "static/js/main.67d7d7b7.chunk.js"
+    "static/js/2.3455ef8a.chunk.js",
+    "static/css/main.c24f5c9f.chunk.css",
+    "static/js/main.714c48d7.chunk.js"
   ]
 }
