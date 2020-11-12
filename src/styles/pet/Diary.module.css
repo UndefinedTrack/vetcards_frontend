@@ -327,7 +327,7 @@ textarea.input {
 .diaryOptionArrowButton {
   position: absolute;
   display: inline-block;
-  top: 4px;
+  top: 5px;
   right: 10px;
   cursor: pointer;
   border: none;
@@ -359,10 +359,10 @@ textarea.input {
 
 .diaryOptionsBox {
   position: absolute;
-  top: 49px;
+  top: 58px;
   left: 6px;
   background-color: #fff;
-  width: 280px;
+  width: 594px;
   border: 1px solid var(--active-button-color);
   border-top: none;
   border-radius: 5px;
@@ -404,22 +404,22 @@ textarea.input {
 
 @media (max-width: 1400px) {
   .diaryOptionBlock {
-    width: 390px;
+    width: 532px;
   }
 
   .diaryOptionsBox {
-    width: 201px;
+    width: 520px;
     left: 5px;
   }
 }
 
 @media (max-width: 1200px) {
   .diaryOptionBlock {
-    width: 390px;
+    width: 432px;
   }
 
   .diaryOptionsBox {
-    width: 201px;
+    width: 420px;
     left: 5px;
   }
 }
@@ -427,14 +427,20 @@ textarea.input {
 
 @media (max-height: 750px) {
   .diaryOptionBlock {
-    height: 35px;
+    height: 39px;
+    line-height: 22px;
     margin-top: 4px;
     margin-bottom: 4px;
   }
 
   .diaryOptionsBox {
-    width: 201px;
+    width: 420px;
+    top: 42px;
     left: 5px;
+  }
+
+  .diaryOptionArrowButton {
+    top: 3px;
   }
 }
 
