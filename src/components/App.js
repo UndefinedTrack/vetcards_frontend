@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import styles from '../styles/App.module.css'
 import MainPage from './MainPage'
@@ -9,7 +9,7 @@ import RegisteredPart from './RegisteredPart'
 
 // eslint-disable-next-line
 function App() {
-  const userReg = localStorage.getItem('userReg')
+  const [userReg, setUserReg] = useState(localStorage.getItem('userReg'))
   return (
     <div className={styles.App}>
       <HashRouter>
@@ -25,7 +25,7 @@ function App() {
         )}
         {!userReg && (
           <Route exact path="/sign-in">
-            <SignIn />
+            <SignIn setUserReg={setUserReg} />
           </Route>
         )}
         {userReg && <RegisteredPart />}

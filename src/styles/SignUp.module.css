@@ -32,6 +32,11 @@
   color: var(--active-button-color);
 }
 
+.Block {
+  display: flex;
+  flex-direction: row;
+}
+
 .FormInput {
   margin: 19.5px;
   height: 40px;
