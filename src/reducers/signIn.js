@@ -1,49 +1,54 @@
 import {
-  CREATE_USER_REQUEST,
-  CREATE_USER_SUCCESS,
-  CREATE_USER_FAILURE,
-  CREATE_JWT_REQUEST,
-  CREATE_JWT_SUCCESS,
-  CREATE_JWT_FAILURE,
+  GET_ME_REQUEST,
+  GET_ME_SUCCESS,
+  GET_ME_FAILURE,
+  REFRESH_JWT_REQUEST,
+  REFRESH_JWT_SUCCESS,
+  REFRESH_JWT_FAILURE,
 } from '../constants/ActionTypes'
 
 const initialState = {
   loading: false,
-  user: null,
+  user: {
+    email: '',
+    id: '',
+    username: '',
+    access: '',
+  },
   error: null,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_USER_REQUEST:
+    case GET_ME_REQUEST:
       return {
         ...state,
         loading: true,
       }
-    case CREATE_USER_SUCCESS:
+    case GET_ME_SUCCESS:
       return {
         loading: false,
         error: null,
         user: action.payload,
       }
-    case CREATE_USER_FAILURE:
+    case GET_ME_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload.error,
       }
-    case CREATE_JWT_REQUEST:
+    case REFRESH_JWT_REQUEST:
       return {
         ...state,
         loading: true,
       }
-    case CREATE_JWT_SUCCESS:
+    case REFRESH_JWT_SUCCESS:
       return {
         loading: false,
         error: null,
         user: action.payload,
       }
-    case CREATE_JWT_FAILURE:
+    case REFRESH_JWT_FAILURE:
       return {
         ...state,
         loading: false,

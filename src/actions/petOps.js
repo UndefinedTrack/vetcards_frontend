@@ -44,7 +44,7 @@ const deletePetFailure = (error) => ({
   },
 })
 
-export const createPet = (uid, name, species, breed, color, birthDate, gender, chip) => {
+export const createPet = (uid, name, species, breed, color, birthDate, gender, chip, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('user', uid)
@@ -58,7 +58,14 @@ export const createPet = (uid, name, species, breed, color, birthDate, gender, c
 
     dispatch(createPetStarted())
 
-    fetch(`${API_URL}/pets/create`, { method: 'POST', body: data /* credentials: 'include' */ })
+    fetch(`${API_URL}/pets/create`, {
+      method: 'POST',
+      body: data,
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createPetSuccess(dat)))
       .catch((err) => dispatch(createPetFailure(err.message)))

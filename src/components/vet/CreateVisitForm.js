@@ -10,11 +10,12 @@ import { createVetProc } from '../../actions/procsCreate'
 import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
 import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
-function CreateVisitForm({ createProc }) {
+function CreateVisitForm({ createProc, uid }) {
   const { pid } = useParams()
   const today = new Date()
   const formatter = new Intl.DateTimeFormat('ru')
   const date = formatter.format(today)
+  const token = localStorage.getItem('token')
   const [state, setState] = useState({
     date,
     purpose: 'Осмотр',
@@ -32,7 +33,7 @@ function CreateVisitForm({ createProc }) {
     const { purpose, symptoms, diagnosis, recomms, recipe } = state
     const procDate = state.date
 
-    createProc(pid, 4, procDate, purpose, symptoms, diagnosis, recomms, recipe)
+    createProc(pid, uid, procDate, purpose, symptoms, diagnosis, recomms, recipe, token)
     setState({
       date: '',
       purpose: '',
@@ -62,9 +63,7 @@ function CreateVisitForm({ createProc }) {
           <div>
             Цель визита <span className={styles.noteText}>*</span>
           </div>
-          <DropDownList
-            changeInputHandler={changeInputHandler}
-            options={visitPurposes} />
+          <DropDownList changeInputHandler={changeInputHandler} options={visitPurposes} />
         </div>
         <div className={styles.VisitInf}>
           <div>
@@ -94,7 +93,6 @@ function CreateVisitForm({ createProc }) {
     </form>
   )
 }
-
 
 function DateBlock({ changeInputHandler, date }) {
   return (
@@ -274,8 +272,8 @@ Option.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createProc: (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe) =>
-    dispatch(createVetProc(pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe)),
+  createProc: (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe, token) =>
+    dispatch(createVetProc(pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe, token)),
 })
 
 export default connect(null, mapDispatchToProps)(CreateVisitForm)

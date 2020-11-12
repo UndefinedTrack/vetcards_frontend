@@ -22,6 +22,8 @@ class PetCreator extends React.Component {
     }
 
     this.createPet = props.createPet
+    this.uid = props.uid
+    this.token = localStorage.getItem('token')
   }
 
   submitHandler = (event) => {
@@ -51,7 +53,7 @@ class PetCreator extends React.Component {
     } else {
       birthDate = `${year}`
     }
-    this.createPet(3, name, species, breed, color, birthDate, gender, chip)
+    this.createPet(this.uid, name, species, breed, color, birthDate, gender, chip, this.token)
     this.setState({
       name: '',
       species: '',
@@ -244,8 +246,8 @@ function Birthday({ handleNameChange, heading, placeholder }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createPet: (uid, name, species, breed, color, birthDate, gender, chip) =>
-    dispatch(createPet(uid, name, species, breed, color, birthDate, gender, chip)),
+  createPet: (uid, name, species, breed, color, birthDate, gender, chip, token) =>
+    dispatch(createPet(uid, name, species, breed, color, birthDate, gender, chip, token)),
 })
 
 export default connect(null, mapDispatchToProps)(PetCreator)

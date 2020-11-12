@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { connect } from 'react-redux'
 import LinkButton from './LinkButton'
 import InformationBlock from './InformationBlock'
 import styles from '../styles/AboutPets.module.css'
 import { ReactComponent as PhotoPet } from '../icons/photo_pet.svg'
-import { getPetInfo } from '../actions/petInfo'
 
 function AboutPet({ pet, closeSearchString }) {
   return (
@@ -21,12 +19,4 @@ function AboutPet({ pet, closeSearchString }) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  petInfo: state.petInfo.pet,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  getInfo: (pid, uid) => dispatch(getPetInfo(pid, uid)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(AboutPet)
+export default AboutPet

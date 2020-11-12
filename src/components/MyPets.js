@@ -11,9 +11,9 @@ import { getVetProcs } from '../actions/procsList'
 let procs
 let searchString
 // eslint-disable-next-line
-function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
-  const uid = 3
+function MyPets({ uid, petList, getInfo, procsList, getVetProcs, input, setInput }) {
   const [searchLine, setSearchLine] = useState(-1)
+  const token = localStorage.getItem('token')
 
   if (procs === undefined) {
     procs = []
@@ -25,20 +25,20 @@ function MyPets({ petList, getInfo, procsList, getVetProcs, input, setInput }) {
 
   if (petList === undefined) {
     petList = []
-    getInfo(uid)
+    getInfo(uid, token)
   }
 
   function closeSearchString() {
-    getVetProcs(searchLine, uid, '')
+    getVetProcs(searchLine, uid, '', token)
     setSearchLine(-1)
   }
 
   useEffect(() => {
     if (!petList.length) {
-      getInfo(uid)
+      getInfo(uid, token)
     }
 
-    setTimeout(() => getInfo(uid), 100)
+    setTimeout(() => getInfo(uid, token), 100)
     // eslint-disable-next-line
   }, [getInfo])
 
@@ -88,8 +88,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getInfo: (uid) => dispatch(getPetsList(uid)),
-  getVetProcs: (pid, uid, name) => dispatch(getVetProcs(pid, uid, name)),
+  getInfo: (uid, token) => dispatch(getPetsList(uid, token)),
+  getVetProcs: (pid, uid, name, token) => dispatch(getVetProcs(pid, uid, name, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPets)
