@@ -22,13 +22,13 @@ function Header({ header, isVet }) {
   return (
     <header className={styles.Header}>
       <p className={styles.Name}>Личный кабинет</p>
-      <div className={styles.ButtonContainer}>
-        {!isVet && <HeaderButton buttonStyles={myPetStyles} header="#/mypets" buttonName="Мои питомцы" />}
-        {isVet && <HeaderButton buttonStyles={scheduleStyles} header="#/schedule" buttonName="График работы" />}
-        {isVet && <HeaderButton buttonStyles={myPatientsStyles} header="#/mypatients" buttonName="Мои пациенты" />}
-        {!isVet && <HeaderButton buttonStyles={profileStyles} header="#/profile" buttonName="Профиль" />}
-        {isVet && <HeaderButton buttonStyles={profileStyles} header="#/vetprofile" buttonName="Профиль" />}
-      </div>
+      <ButtonContainer
+        isVet={isVet}
+        scheduleStyles={scheduleStyles}
+        myPatientsStyles={myPatientsStyles}
+        profileStyles={profileStyles}
+        myPetStyles={myPetStyles}
+      />
     </header>
   )
 }
@@ -36,6 +36,38 @@ function Header({ header, isVet }) {
 Header.propTypes = {
   header: PropTypes.string.isRequired,
   isVet: PropTypes.bool.isRequired,
+}
+
+function ButtonContainer({
+  isVet,
+  scheduleStyles,
+  myPatientsStyles,
+  profileStyles,
+  myPetStyles,
+}) {
+  if (isVet) {
+    return (
+      <div className={styles.ButtonContainer}>
+        <HeaderButton buttonStyles={scheduleStyles} header="#/schedule" buttonName="График работы" />
+        <HeaderButton buttonStyles={myPatientsStyles} header="#/mypatients" buttonName="Мои пациенты" />
+        <HeaderButton buttonStyles={profileStyles} header="#/vetprofile" buttonName="Профиль" />
+      </div>
+    )
+  }
+  return (
+    <div className={styles.ButtonContainer}>
+      <HeaderButton buttonStyles={myPetStyles} header="#/mypets" buttonName="Мои питомцы" />
+      <HeaderButton buttonStyles={profileStyles} header="#/profile" buttonName="Профиль" />
+    </div>
+  )
+}
+
+ButtonContainer.propTypes = {
+  isVet: PropTypes.bool.isRequired,
+  scheduleStyles: PropTypes.string.isRequired,
+  myPatientsStyles: PropTypes.string.isRequired,
+  profileStyles: PropTypes.string.isRequired,
+  myPetStyles: PropTypes.string.isRequired,
 }
 
 export default Header
