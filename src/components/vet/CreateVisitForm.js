@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../../styles/vet/VisitsHistory.module.css'
 import { createVetProc } from '../../actions/procsCreate'
-import DropDownList from '../DropDownList.js'
+import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
+import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
 function CreateVisitForm({ createProc, uid }) {
   const { pid } = useParams()
@@ -22,6 +24,8 @@ function CreateVisitForm({ createProc, uid }) {
     recomms: '',
     recipe: '',
   })
+
+  const visitPurposes = ['Осмотр', 'Прививка', 'Стерилизация']
 
   function submitHandler(e) {
     e.preventDefault()
@@ -51,8 +55,6 @@ function CreateVisitForm({ createProc, uid }) {
       },
     }))
   }
-
-  const visitPurposes = ['Осмотр', 'Прививка', 'Стерилизация']
 
   return (
     <form onSubmit={submitHandler} className={styles.CreateVFContainer}>
@@ -141,6 +143,132 @@ TextAreaBlock.propTypes = {
 InputBlock.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+}
+
+// Выпадающий список
+
+function DropDownList({ changeInputHandler, options }) {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const [chosenOption, setChosenOption] = useState(options[0])
+
+  function handleOptionClick(optionName) {
+    setChosenOption(optionName)
+    setIsVisible(false)
+  }
+
+  function handleArrowClick() {
+    setIsVisible(!isVisible)
+  }
+
+  return (
+    <div className={styles.purposeWrapper}>
+      <div
+        className={styles.purposeBlock}
+        role='button'
+        tabIndex='0'
+        onKeyDown={handleArrowClick}
+        onClick={handleArrowClick}
+      >
+        {chosenOption}
+        <Arrow
+          isVisible={isVisible}
+          handleArrowClick={handleArrowClick}
+        />
+      </div>
+      <OptionsList
+          isVisible={isVisible}
+          handleOptionClick={handleOptionClick}
+          options={options}
+          changeInputHandler={changeInputHandler}
+        />
+    </div>
+  )
+}
+
+DropDownList.propTypes = {
+  changeInputHandler: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+}
+
+function Arrow({ isVisible, handleArrowClick }) {
+  if (!isVisible) {
+    return (
+      <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowDown />
+      </button>
+    )
+  }
+  return (
+    <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowUp />
+      </button>
+  )
+}
+
+Arrow.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleArrowClick: PropTypes.func.isRequired,
+}
+
+function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler }) {
+  const optionsComponents = []
+  for (let i = 0; i < options.length; i += 1) {
+    optionsComponents.push(
+      <Option
+        key={i}
+        name={options[i]}
+        handleOptionClick={handleOptionClick}
+        changeInputHandler={changeInputHandler}
+      />
+    )
+  }
+  if (isVisible) {
+    return (
+      <div className={styles.purposeOptionsBox} >
+        {optionsComponents}
+      </div>
+   )
+  }
+  return null
+}
+
+OptionsList.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
+}
+
+function Option({ name, handleOptionClick, changeInputHandler }) {
+  return (
+    <div className={styles.purposeOption}>
+      <input
+        id={name}
+        type='checkbox'
+        value={name}
+        name='purpose'
+        className={styles.purposeOptionInput}
+        onClick={() => handleOptionClick(name)}
+        onChange={changeInputHandler}
+      />
+      <label className={styles.purposeLabel} htmlFor={name}>{name}</label>
+    </div>
+  )
+}
+
+Option.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({

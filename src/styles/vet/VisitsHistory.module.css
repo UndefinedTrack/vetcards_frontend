@@ -292,11 +292,12 @@
   width: 294px;
   height: 42px;
   outline: none;
+  cursor: pointer;
 }
 
 .purposeOptionsBox {
   position: absolute;
-  top: 40px;
+  top: 49px;
   left: 6px;
   background-color: #fff;
   width: 280px;
@@ -333,6 +334,10 @@
   line-height: 26px;
   width: 280px;
   height: 42px;
+}
+
+.purposeWrapper {
+  position: relative;
 }
 
 @media (max-width: 1400px) {
