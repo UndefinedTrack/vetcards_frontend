@@ -10,7 +10,7 @@ function HeaderButton({ buttonName, buttonStyles, header }) {
     }
   }
 
-  if ((header === 'profile') || (header === 'vetprofile')) {
+  if ((header === '#/profile') || (header === '#/vetprofile')) {
     return (
       <ProfileButton
         buttonName={buttonName}
@@ -102,7 +102,7 @@ function DropDownList({ isVisible, handleClick, header, reload }) {
     return (
       <div className={styles.optionsBox}>
         <button type='button' onClick={reload} className={styles.option}>
-          <p>Редактировать</p>
+          <p className={styles.optionText}>Редактировать</p>
         </button>
         <div
           role='button'
