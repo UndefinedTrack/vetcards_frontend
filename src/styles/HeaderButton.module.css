@@ -10,6 +10,8 @@
   line-height: 26px;
   width: 176px;
   height: 75px;
+  outline: none;
+  cursor: pointer;
 }
 
 .Enabled {
@@ -22,4 +24,36 @@
   color: black !important;
   text-decoration: none;
   background-color: var(--header-color);
+}
+
+.optionsBox {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 78px;
+  right: 3px;
+  background-color: white;
+  border: 1px solid var(--active-button-color);
+  border-radius: 5px;
+  width: 160px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid var(--active-button-color);
+  height: 42px;
+  color: black !important;
+  padding-left: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.option:hover {
+  background-color: var(--active-button-color);
+  color: #fff !important;
+  font-weight: 500;
+}
+.option:first-child {
+  border-top: none;
 }
