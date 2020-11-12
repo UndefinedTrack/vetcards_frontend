@@ -75,7 +75,7 @@ function SignUp({ createUser }) {
             onChange={changeInputHandler}
           />
         </div>
-        <div lassName={styles.Block}>
+        <div className={styles.Block}>
           <input
             type="tel"
             required
@@ -106,7 +106,7 @@ function SignUp({ createUser }) {
           className={styles.FormInput}
           onChange={changeInputHandler}
         />
-        <div lassName={styles.Block}>
+        <div className={styles.Block}>
           <input
             required
             name="password"
