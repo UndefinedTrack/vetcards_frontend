@@ -16,6 +16,7 @@ function HeaderButton({ buttonName, buttonStyles, header }) {
         buttonName={buttonName}
         buttonStyles={buttonStyles}
         header={header}
+        reload={reload}
       />
     )
   }
@@ -41,7 +42,7 @@ HeaderButton.propTypes = {
   header: PropTypes.string.isRequired,
 }
 
-function ProfileButton({ header, buttonStyles }) {
+function ProfileButton({ header, buttonStyles, reload }) {
   const [isVisible, setIsVisible] = useState(false)
 
   function handleClick() {
@@ -64,6 +65,7 @@ function ProfileButton({ header, buttonStyles }) {
           isVisible={isVisible}
           header={header}
           handleClick={handleClick}
+          reload={reload}
         />
       </div>
     )
@@ -83,6 +85,7 @@ function ProfileButton({ header, buttonStyles }) {
         isVisible={isVisible}
         header={header}
         handleClick={handleClick}
+        reload={reload}
       />
     </div>
   )
@@ -91,15 +94,16 @@ function ProfileButton({ header, buttonStyles }) {
 ProfileButton.propTypes = {
   header: PropTypes.string.isRequired,
   buttonStyles: PropTypes.string.isRequired,
+  reload: PropTypes.func.isRequired,
 }
 
-function DropDownList({ isVisible, handleClick, header }) {
+function DropDownList({ isVisible, handleClick, header, reload }) {
   if (isVisible) {
     return (
       <div className={styles.optionsBox}>
-        <Link to={header} className={styles.option}>
+        <button type='button' onClick={reload} className={styles.option}>
           <p>Редактировать</p>
-        </Link>
+        </button>
         <div
           role='button'
           tabIndex='0'
@@ -119,6 +123,7 @@ DropDownList.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
   header: PropTypes.string.isRequired,
+  reload: PropTypes.func.isRequired,
 }
 
 export default HeaderButton
