@@ -10,20 +10,20 @@ import { ReactComponent as Search } from '../../icons/search.svg'
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 
 // eslint-disable-next-line
-function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs }) {
-  const uid = 3
+function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs, uid }) {
   const { pid } = useParams()
   const [searchLine, setSearchLine] = useState(false)
   const [searchInput, setSearchInput] = useState('')
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     if (!procsList.length) {
-      getOwnerProcs(pid, uid, searchInput)
+      getOwnerProcs(pid, uid, searchInput, token)
     }
 
-    setTimeout(() => getOwnerProcs(pid, uid, searchInput), 100)
+    setTimeout(() => getOwnerProcs(pid, uid, searchInput, token), 100)
     // eslint-disable-next-line
-  }, [searchInput, pid])
+  }, [searchInput, pid, uid])
 
   return (
     <section className={styles.DiaryBlocks}>
@@ -56,7 +56,6 @@ function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs }) 
         )}
         {procsList
           .map((proc) => {
-            // console.log(<HomeProcedure key={proc.procId} proc={proc} date={proc.procDate} />)
             const day = proc.procDate.slice(8, 10)
             const month = Number(proc.procDate.slice(5, 7)) - 1
             const year = proc.procDate.slice(0, 4)
@@ -77,7 +76,7 @@ function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs }) 
 
   function changeInputHandler(event) {
     setSearchInput(event.target.value)
-    getOwnerProcs(pid, uid, searchInput)
+    getOwnerProcs(pid, uid, searchInput, token)
   }
 }
 
@@ -96,7 +95,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getOwnerProcs: (pid, uid, name) => dispatch(getOwnerProcs(pid, uid, name)),
+  getOwnerProcs: (pid, uid, name, token) => dispatch(getOwnerProcs(pid, uid, name, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OwnerProcedures)

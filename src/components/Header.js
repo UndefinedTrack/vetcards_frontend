@@ -9,12 +9,11 @@ function Header({ header, isVet }) {
   let myPatientsStyles = 'disabled'
   let scheduleStyles = 'disabled'
 
-  if (header === 'mypets') {
+  if (header === 'my-acc') {
+    myPatientsStyles = 'enabled'
     myPetStyles = 'enabled'
   } else if (header === 'profile') {
     profileStyles = 'enabled'
-  } else if (header === 'mypatients') {
-    myPatientsStyles = 'enabled'
   } else if (header === 'schedule') {
     scheduleStyles = 'enabled'
   }
@@ -23,9 +22,9 @@ function Header({ header, isVet }) {
     <header className={styles.Header}>
       <p className={styles.Name}>Личный кабинет</p>
       <div className={styles.ButtonContainer}>
-        {!isVet && <HeaderButton buttonStyles={myPetStyles} header="#/mypets" buttonName="Мои питомцы" />}
+        {!isVet && <HeaderButton buttonStyles={myPetStyles} header="#/my-acc" buttonName="Мои питомцы" />}
         {isVet && <HeaderButton buttonStyles={scheduleStyles} header="#/schedule" buttonName="График работы" />}
-        {isVet && <HeaderButton buttonStyles={myPatientsStyles} header="#/mypatients" buttonName="Мои пациенты" />}
+        {isVet && <HeaderButton buttonStyles={myPatientsStyles} header="#/my-acc" buttonName="Мои пациенты" />}
         {!isVet && <HeaderButton buttonStyles={profileStyles} header="#/profile" buttonName="Профиль" />}
         {isVet && <HeaderButton buttonStyles={profileStyles} header="#/vetprofile" buttonName="Профиль" />}
       </div>

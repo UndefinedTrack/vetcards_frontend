@@ -82,11 +82,16 @@ const getPatientsListFailure = (error) => ({
   },
 })
 
-export const getUserProfileInfo = (uid) => {
+export const getUserProfileInfo = (uid, token) => {
   return (dispatch, getState) => {
     dispatch(getProfileInfoStarted())
 
-    fetch(`${API_URL}/users/info?uid=${uid}` /* , { credentials: 'include' } */)
+    fetch(`${API_URL}/users/info?uid=${uid}`, {
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         const uinfo = data.user
@@ -107,7 +112,7 @@ export const getUserProfileInfo = (uid) => {
   }
 }
 
-export const updateProfileInfo = (uid, username, firstName, patronymic, lastName, phone, email) => {
+export const updateProfileInfo = (uid, username, firstName, patronymic, lastName, phone, email, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('id', uid)
@@ -119,7 +124,14 @@ export const updateProfileInfo = (uid, username, firstName, patronymic, lastName
 
     dispatch(updateProfileInfoStarted())
 
-    fetch(`${API_URL}/users/update`, { method: 'POST', body: data, credentials: 'include' })
+    fetch(`${API_URL}/users/update`, {
+      method: 'POST',
+      body: data,
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((dat) => {
         const uinfo = dat.user
@@ -138,11 +150,16 @@ export const updateProfileInfo = (uid, username, firstName, patronymic, lastName
   }
 }
 
-export const getPetsList = (uid) => {
+export const getPetsList = (uid, token) => {
   return (dispatch, getState) => {
     dispatch(getPetsListStarted())
 
-    fetch(`${API_URL}/pets/list?uid=${uid}` /* , { credentials: 'include' } */)
+    fetch(`${API_URL}/pets/list?uid=${uid}`, {
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         const pets = []
@@ -171,11 +188,16 @@ export const getPetsList = (uid) => {
   }
 }
 
-export const getPatientsList = (uid) => {
+export const getPatientsList = (uid, token) => {
   return (dispatch, getState) => {
     dispatch(getPatientsListStarted())
 
-    fetch(`${API_URL}/pets/patients?uid=${uid}` /* , { credentials: 'include' } */)
+    fetch(`${API_URL}/pets/patients?uid=${uid}`, {
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         const patients = []

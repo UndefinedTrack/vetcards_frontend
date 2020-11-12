@@ -18,8 +18,14 @@
   border-radius: 10px;
 }
 
+.SignInContainer {
+  width: 248px;
+  height: 285px;
+}
+
 .FormName {
   margin: 20px;
+  margin-bottom: 0;
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -33,6 +39,10 @@
   line-height: 21px;
   border: none;
   border-bottom: 1px solid #c4c4c4;
+}
+
+.FormInputIn {
+  margin: 15px 19.5px;
 }
 
 .FormInput::placeholder {
@@ -67,6 +77,10 @@
   cursor: pointer;
 }
 
+.SubmitSignIn {
+  margin-top: 34px;
+}
+
 .SignIn {
   margin-top: 25px;
   color: var(--active-button-color);
@@ -87,4 +101,12 @@
 
 .SignInButton:visited {
   color: var(--active-button-color);
+}
+
+.WrongLogOrPassw {
+  position: absolute;
+  padding-left: 20px;
+  color: rgb(226, 0, 0);
+  font-size: 16px;
+  line-height: 16px;
 }

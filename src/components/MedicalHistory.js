@@ -21,6 +21,7 @@ function MedicalHistory({
 }) {
   const uid = 4
   const pid = pet.petId
+  const token = localStorage.getItem('token')
 
   if (procsList[0] === undefined) {
     procsList[0] = []
@@ -31,7 +32,7 @@ function MedicalHistory({
       searchString[pid] = ''
     }
     setTimeout(() => {
-      getVetProcs(pid, uid, searchString[pid])
+      getVetProcs(pid, uid, searchString[pid], token)
       if (procs[pid] !== procsList) {
         procs[pid] = procsList
       }
@@ -93,10 +94,10 @@ function MedicalHistory({
 
   function searchLineDisplay() {
     setInput('')
-    getVetProcs(searchLine, uid, '')
+    getVetProcs(searchLine, uid, '', token)
     setSearchLine(ind)
-    getVetProcs(pid, uid, '')
-    getVetProcs(ind, uid, '')
+    getVetProcs(pid, uid, '', token)
+    getVetProcs(ind, uid, '', token)
   }
 
   function changeInputHandler(event) {
@@ -120,7 +121,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getVetProcs: (pid, uid, name) => dispatch(getVetProcs(pid, uid, name)),
+  getVetProcs: (pid, uid, name, token) => dispatch(getVetProcs(pid, uid, name, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedicalHistory)

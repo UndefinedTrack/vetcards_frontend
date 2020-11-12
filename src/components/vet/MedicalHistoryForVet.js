@@ -7,13 +7,14 @@ import MedicalCard from '../MedicalCard'
 import { ReactComponent as SearchButton } from '../../icons/search.svg'
 import { getVetProcs } from '../../actions/procsList'
 // eslint-disable-next-line
-function MedicalHistoryForVet({ procsList, getVetProcs }) {
-  const uid = 4
+function MedicalHistoryForVet({ procsList, getVetProcs, uid }) {
   const { pid } = useParams()
   const [searchInput, setSearchInput] = useState('')
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
-    setTimeout(() => getVetProcs(pid, uid, searchInput), 100)
+    setTimeout(() => getVetProcs(pid, uid, searchInput, token), 100)
+    // eslint-disable-next-line
   }, [getVetProcs, pid, searchInput])
   return (
     <div className={styles.CreateVFContainer}>
@@ -42,7 +43,7 @@ function MedicalHistoryForVet({ procsList, getVetProcs }) {
 
   function changeInputHandler(event) {
     setSearchInput(event.target.value)
-    getVetProcs(pid, uid, searchInput)
+    getVetProcs(pid, uid, searchInput, token)
   }
 }
 
@@ -72,7 +73,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getVetProcs: (pid, uid, name) => dispatch(getVetProcs(pid, uid, name)),
+  getVetProcs: (pid, uid, name, token) => dispatch(getVetProcs(pid, uid, name, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedicalHistoryForVet)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import styles from '../../styles/pet/Diary.module.css'
 import Reminders from './Reminders'
 import CreateReminder from './CreateReminder'
@@ -8,7 +8,7 @@ import PopUpWindow from '../PopUpWindow'
 import OwnerProcedures from './OwnerProcedures'
 // import { ReactComponent as BackButton } from '../icons/back_button.svg'
 
-function Diary() {
+function Diary({ uid }) {
   const [createProcedureWindow, setCreateProcedureWindow] = useState(false)
   const [createReminderWindow, setCreateReminderWindow] = useState(false)
   const [popUpDispl, setPopUpDispl] = useState(false)
@@ -20,20 +20,22 @@ function Diary() {
           className={styles.DiaryBlocks}
           name="Напоминания"
           search={false}
+          uid={uid}
           plusClick={openCreateReminderWindow}
         />
       )}
-      {createReminderWindow && <CreateReminder backClick={openCreateReminderWindow} />}
+      {createReminderWindow && <CreateReminder uid={uid} backClick={openCreateReminderWindow} />}
       {!createProcedureWindow && (
         <OwnerProcedures
           className={styles.DiaryBlocks}
           name="Домашние процедуры"
+          uid={uid}
           search
           plusClick={openCreateProcedureWindow}
         />
       )}
       <PopUpWindow displ={popUpDispl} />
-      {createProcedureWindow && <CreateProcedure backClick={openCreateProcedureWindow} />}
+      {createProcedureWindow && <CreateProcedure uid={uid} backClick={openCreateProcedureWindow} />}
     </main>
   )
 
@@ -50,6 +52,10 @@ function Diary() {
     }
     setCreateReminderWindow(!createReminderWindow)
   }
+}
+
+Diary.propTypes = {
+  uid: PropTypes.number.isRequired,
 }
 
 export default Diary

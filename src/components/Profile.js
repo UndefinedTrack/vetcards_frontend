@@ -7,8 +7,7 @@ import { getUserProfileInfo } from '../actions/profile'
 import { uploadUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
-function Profile({ profileInfo, getProfileInfo, uploadAvatar }) {
-  const uid = 3
+function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
 
   if (profileInfo === undefined) {

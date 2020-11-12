@@ -51,7 +51,7 @@ function SignUp({ createUser }) {
 
   return (
     <div className={styles.Container}>
-      <form className={`${styles.SignUpForm} form`} onSubmit={submitHandler}>
+      <form className={styles.SignUpForm} onSubmit={submitHandler}>
         <div className={styles.FormName}>Регистрация</div>
         <div>
           <input

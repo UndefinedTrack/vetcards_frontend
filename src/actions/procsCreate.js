@@ -44,7 +44,7 @@ const createOwnerProcFailure = (error) => ({
   },
 })
 
-export const createVetProc = (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe) => {
+export const createVetProc = (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pet', pid)
@@ -58,14 +58,21 @@ export const createVetProc = (pid, uid, date, purpose, symptoms, diagnosis, reco
 
     dispatch(createVetProcStarted())
 
-    fetch(`${API_URL}/cards/create_vet`, { method: 'POST', body: data, credentials: 'include' })
+    fetch(`${API_URL}/cards/create_vet`, {
+      method: 'POST',
+      body: data,
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createVetProcSuccess(dat)))
       .catch((err) => dispatch(createVetProcFailure(err.message)))
   }
 }
 
-export const createOwnerProc = (pid, uid, name, date, description) => {
+export const createOwnerProc = (pid, uid, name, date, description, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pet', pid)
@@ -76,7 +83,14 @@ export const createOwnerProc = (pid, uid, name, date, description) => {
 
     dispatch(createOwnerProcStarted())
 
-    fetch(`${API_URL}/cards/create_owner`, { method: 'POST', body: data /* credentials: 'include'  */ })
+    fetch(`${API_URL}/cards/create_owner`, {
+      method: 'POST',
+      body: data,
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createOwnerProcSuccess(dat)))
       .catch((err) => dispatch(createOwnerProcFailure(err.message)))

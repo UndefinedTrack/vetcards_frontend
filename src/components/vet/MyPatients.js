@@ -6,23 +6,23 @@ import SearchLine from './SearchLine'
 import PatientCard from './PatientCard'
 import { searchPets } from '../../actions/petSearch'
 
-function MyPatients({ patientsList, getPatients }) {
-  const uid = 4
+function MyPatients({ patientsList, getPatients, uid }) {
   let searchInput = ''
+  const token = localStorage.getItem('token')
 
   if (patientsList === undefined) {
     patientsList = []
-    getPatients(uid, searchInput)
+    getPatients(uid, searchInput, token)
   }
 
   useEffect(() => {
     if (!patientsList.length) {
-      getPatients(uid, searchInput)
+      getPatients(uid, searchInput, token)
     }
 
-    setTimeout(() => getPatients(uid, searchInput), 100)
+    setTimeout(() => getPatients(uid, searchInput, token), 100)
     // eslint-disable-next-line
-  }, [getPatients])
+  }, [getPatients, uid])
 
   return (
     <div className={styles.PatientsContainer}>
@@ -37,7 +37,7 @@ function MyPatients({ patientsList, getPatients }) {
 
   function changeInputHandler(event) {
     searchInput = event.target.value
-    getPatients(uid, searchInput)
+    getPatients(uid, searchInput, token)
   }
 }
 
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getPatients: (uid, name) => dispatch(searchPets(uid, name)),
+  getPatients: (uid, name, token) => dispatch(searchPets(uid, name, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPatients)
