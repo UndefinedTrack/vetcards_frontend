@@ -23,7 +23,7 @@ function App() {
             <SignUp />
           </Route>
         )}
-        {true && (
+        {!userReg && (
           <Route exact path="/sign-in">
             <SignIn />
           </Route>
