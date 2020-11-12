@@ -47,4 +47,9 @@
 .NotPetButton {
   display: flex;
   align-items: center;
+  height: 75px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
 }
