@@ -4,7 +4,7 @@ import { createJWT } from '../actions/userCreate.js'
 import styles from '../styles/SignUp.module.css'
 
 // eslint-disable-next-line
-function SignIn({ userToken, createJWT }) {
+function SignIn({ userToken, createJWT, setUserReg }) {
   let wrong = false
   const [state, setState] = useState({
     username: '',
@@ -17,7 +17,8 @@ function SignIn({ userToken, createJWT }) {
   // eslint-disable-next-line
   if (userToken && userToken.access !== undefined) {
     wrong = false
-    localStorage.getItem('userReg', true)
+    localStorage.setItem('userReg', true)
+    setUserReg(true)
     window.location.href = '#/my-acc'
   }
 

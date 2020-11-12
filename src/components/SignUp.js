@@ -53,7 +53,7 @@ function SignUp({ createUser }) {
     <div className={styles.Container}>
       <form className={styles.SignUpForm} onSubmit={submitHandler}>
         <div className={styles.FormName}>Регистрация</div>
-        <div>
+        <div className={styles.Block}>
           <input
             required
             name="last_name"
@@ -75,7 +75,7 @@ function SignUp({ createUser }) {
             onChange={changeInputHandler}
           />
         </div>
-        <div>
+        <div lassName={styles.Block}>
           <input
             type="tel"
             required
@@ -106,7 +106,7 @@ function SignUp({ createUser }) {
           className={styles.FormInput}
           onChange={changeInputHandler}
         />
-        <div>
+        <div lassName={styles.Block}>
           <input
             required
             name="password"
