@@ -7,6 +7,7 @@ import { getUserProfileInfo, updateProfileInfo } from '../actions/profile'
 import { uploadUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
+// eslint-disable-next-line
 function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfileInfo }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
   const token = localStorage.getItem('token')
