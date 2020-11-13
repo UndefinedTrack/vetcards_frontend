@@ -49,6 +49,13 @@ function ProfileButton({ header, buttonStyles, reload }) {
     setIsVisible(!isVisible)
   }
 
+  function handleExitClick() {
+    handleClick()
+    localStorage.clear()
+    window.location.href = '#/sign-in'
+    window.location.reload()
+  }
+
   if (buttonStyles === 'enabled') {
     return (
       <div>
@@ -64,7 +71,7 @@ function ProfileButton({ header, buttonStyles, reload }) {
         <DropDownList
           isVisible={isVisible}
           header={header}
-          handleClick={handleClick}
+          handleExitClick={handleExitClick}
           reload={reload}
         />
       </div>
@@ -84,7 +91,7 @@ function ProfileButton({ header, buttonStyles, reload }) {
       <DropDownList
         isVisible={isVisible}
         header={header}
-        handleClick={handleClick}
+        handleExitClick={handleExitClick}
         reload={reload}
       />
     </div>
@@ -97,22 +104,20 @@ ProfileButton.propTypes = {
   reload: PropTypes.func.isRequired,
 }
 
-function DropDownList({ isVisible, handleClick, header, reload }) {
+function DropDownList({ isVisible, handleExitClick, header, reload }) {
   if (isVisible) {
     return (
       <div className={styles.optionsBox}>
         <button type='button' onClick={reload} className={styles.option}>
           <p className={styles.optionText}>Редактировать</p>
         </button>
-        <div
-          role='button'
-          tabIndex='0'
-          onKeyDown={handleClick}
-          onClick={handleClick}
+        <button
+          type='button'
+          onClick={handleExitClick}
           className={styles.option}
         >
           Выйти
-        </div>
+        </button>
       </div>
     )
   }
@@ -121,7 +126,7 @@ function DropDownList({ isVisible, handleClick, header, reload }) {
 
 DropDownList.propTypes = {
   isVisible: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  handleExitClick: PropTypes.func.isRequired,
   header: PropTypes.string.isRequired,
   reload: PropTypes.func.isRequired,
 }
