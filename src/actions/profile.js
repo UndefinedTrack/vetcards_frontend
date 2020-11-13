@@ -112,7 +112,7 @@ export const getUserProfileInfo = (uid, token) => {
   }
 }
 
-export const updateProfileInfo = (uid, username, firstName, patronymic, lastName, phone, email, token) => {
+export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, email, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('id', uid)

@@ -13,7 +13,7 @@ function AboutPet({ pet, closeSearchString }) {
       <hr className={styles.Line} />
       <InformationBlock pet={pet} />
       <hr className={styles.Line} />
-      <LinkButton nameButton="Записаться на приём" href="./mypets" />
+      <LinkButton nameButton="Записаться на приём" href="./my-acc" />
       <LinkButton closeSearchString={closeSearchString} nameButton="Дневник" href={`#/diary/${pet.petId}`} />
     </section>
   )

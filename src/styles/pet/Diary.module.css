@@ -183,6 +183,7 @@
 
 textarea.input {
   height: 85px;
+  resize: none;
 }
 
 .saveButton {
@@ -373,7 +374,7 @@ textarea.input {
   flex-direction: row;
   align-items: center;
   border-top: 1px solid var(--active-button-color);
-  height: 42px;  
+  height: 42px;
 }
 .diaryOption:hover {
   background-color: var(--active-button-color);
@@ -424,7 +425,6 @@ textarea.input {
   }
 }
 
-
 @media (max-height: 750px) {
   .diaryOptionBlock {
     height: 39px;
@@ -443,4 +443,3 @@ textarea.input {
     top: 3px;
   }
 }
-

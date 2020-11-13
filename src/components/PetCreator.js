@@ -65,7 +65,7 @@ class PetCreator extends React.Component {
     })
 
     setTimeout(() => {
-      window.location.href = '#/mypets'
+      window.location.href = '#/my-acc'
     }, 100)
   }
 

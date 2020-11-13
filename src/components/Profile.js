@@ -3,17 +3,25 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
-import { getUserProfileInfo } from '../actions/profile'
+import { getUserProfileInfo, updateProfileInfo } from '../actions/profile'
 import { uploadUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
-function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar }) {
+function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfileInfo }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
+  const token = localStorage.getItem('token')
 
   if (profileInfo === undefined) {
     profileInfo = []
     getProfileInfo(uid)
   }
+  const [state, setState] = useState({
+    firstName: '',
+    patronymic: '',
+    lastName: '',
+    phone: '',
+    email: '',
+  })
   const [patronymic, setPatronymic] = useState('')
 
   useEffect(() => {
@@ -23,6 +31,35 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar }) {
     // eslint-disable-next-line
   }, [getProfileInfo])
 
+  function changeInputHandler(event) {
+    event.persist()
+    setState((prev) => ({
+      ...prev,
+      ...{
+        [event.target.name]: event.target.value,
+      },
+    }))
+  }
+
+  function submitHandler(event) {
+    event.preventDefault()
+    if (state.firstName === '') state.firstName = profileInfo.firstName
+    if (state.lastName === '') state.lastName = profileInfo.lastName
+    if (state.phone === '') state.phone = profileInfo.phone
+    if (state.email === '') state.email = profileInfo.email
+    if (state.patronymic === '') state.patronymic = profileInfo.patronymic
+    // uid, firstName, patronymic, lastName, phone, email, token
+    updateProfileInfo(uid, state.firstName, state.patronymic, state.lastName, state.phone, state.email, token)
+
+    setState({
+      firstName: '',
+      patronymic: '',
+      lastName: '',
+      phone: '',
+      email: '',
+    })
+  }
+
   function handlePatronymicChange(event) {
     setPatronymic(event.target.value)
   }
@@ -31,9 +68,9 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar }) {
     uploadAvatar(uid, event.target.files)
   }
 
-  function handleSubmit(event) {
-    event.preventDefault()
-  }
+  // function handleSubmit(event) {
+  //   event.preventDefault()
+  // }
 
   function popUpOpen() {
     setPopUpDispl(true)
@@ -45,26 +82,27 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar }) {
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
-        <form onSubmit={handleSubmit} className={styles.formSpace}>
+        <form onSubmit={submitHandler} className={styles.formSpace}>
           <ChangeAvatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
           <div className={styles.fieldsColumn}>
-            <LastName handleSubmit={handleSubmit} lastName={profileInfo.lastName} />
-            <FirstName handleSubmit={handleSubmit} firstName={profileInfo.firstName} />
+            <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} />
+            <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} />
             <Patronymic
+              name="patronymic"
+              changeInputHandler={changeInputHandler}
               handlePatronymicChange={handlePatronymicChange}
-              handleSubmit={handleSubmit}
               patronymic={patronymic}
             />
           </div>
           <div className={styles.fieldsColumn}>
-            <MobilePhone handleSubmit={handleSubmit} mobilePhone={profileInfo.phone} />
-            <Email handleSubmit={handleSubmit} email={profileInfo.email} />
+            <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} />
+            <Email changeInputHandler={changeInputHandler} email={profileInfo.email} />
             <p className={styles.noteText}>* - обязательные для заполнения поля</p>
           </div>
+          <button type="submit" className={styles.saveButton}>
+            Сохранить
+          </button>
         </form>
-        <button type="button" className={styles.saveButton} onClick={popUpOpen}>
-          Сохранить
-        </button>
       </div>
       <PopUpWindow displ={popUpDispl} />
     </div>
@@ -105,7 +143,7 @@ ChangeAvatar.propTypes = {
   handleAvatarChange: PropTypes.func.isRequired,
 }
 
-function LastName({ handleLastNameChange, lastName }) {
+function LastName({ lastName, changeInputHandler }) {
   return (
     <div>
       <p className={styles.text}>
@@ -113,8 +151,9 @@ function LastName({ handleLastNameChange, lastName }) {
       </p>
       <input
         type="text"
+        name="lastName"
+        onChange={changeInputHandler}
         className={styles.input}
-        onChange={handleLastNameChange}
         defaultValue={lastName}
         placeholder="Иванов"
       />
@@ -127,7 +166,7 @@ LastName.propTypes = {
   lastName: PropTypes.string.isRequired,
 }
 
-function FirstName({ handleFirstNameChange, firstName }) {
+function FirstName({ firstName, changeInputHandler }) {
   return (
     <div>
       <p className={styles.text}>
@@ -135,8 +174,9 @@ function FirstName({ handleFirstNameChange, firstName }) {
       </p>
       <input
         type="text"
+        name="firstName"
+        onChange={changeInputHandler}
         className={styles.input}
-        onChange={handleFirstNameChange}
         defaultValue={firstName}
         placeholder="Иван"
       />
@@ -149,14 +189,15 @@ FirstName.propTypes = {
   firstName: PropTypes.string.isRequired,
 }
 
-function Patronymic({ handlePatronymicChange, patronymic }) {
+function Patronymic({ patronymic, changeInputHandler }) {
   return (
     <div>
       <p className={styles.text}>Отчество</p>
       <input
         type="text"
+        name="patronymic"
+        onChange={changeInputHandler}
         className={styles.input}
-        onChange={handlePatronymicChange}
         defaultValue={patronymic}
         placeholder="Иванович"
       />
@@ -169,7 +210,7 @@ Patronymic.propTypes = {
   patronymic: PropTypes.string.isRequired,
 }
 
-function MobilePhone({ handleMobilePhoneChange, mobilePhone }) {
+function MobilePhone({ mobilePhone, changeInputHandler }) {
   return (
     <div>
       <p className={styles.text}>
@@ -177,8 +218,9 @@ function MobilePhone({ handleMobilePhoneChange, mobilePhone }) {
       </p>
       <input
         type="text"
+        name="phone"
+        onChange={changeInputHandler}
         className={styles.input}
-        onChange={handleMobilePhoneChange}
         defaultValue={mobilePhone}
         placeholder="+79990000000"
       />
@@ -191,7 +233,7 @@ MobilePhone.propTypes = {
   mobilePhone: PropTypes.string.isRequired,
 }
 
-function Email({ handleEmailChange, email }) {
+function Email({ email, changeInputHandler }) {
   return (
     <div>
       <p className={styles.text}>
@@ -200,8 +242,9 @@ function Email({ handleEmailChange, email }) {
       </p>
       <input
         type="text"
+        name="email"
+        onChange={changeInputHandler}
         className={styles.input}
-        onChange={handleEmailChange}
         defaultValue={email}
         placeholder="example@gmail.com"
       />
@@ -221,6 +264,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid) => dispatch(getUserProfileInfo(uid)),
+  updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, token) =>
+    dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, token)),
   uploadAvatar: (uid, files) => dispatch(uploadUserAvatar(uid, files)),
 })
 
