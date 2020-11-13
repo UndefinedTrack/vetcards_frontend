@@ -115,7 +115,7 @@ export const getUserProfileInfo = (uid, token) => {
 export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, email, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
-    data.append('id', uid)
+    data.append('pk', uid)
     data.append('first_name', firstName)
     data.append('patronymic', patronymic)
     data.append('last_name', lastName)

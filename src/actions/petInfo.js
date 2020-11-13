@@ -78,7 +78,7 @@ export const getPetInfo = (pid, uid, token) => {
 export const updatePetInfo = (pid, uid, name, species, breed, color, birthDate, gender, chip, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
-    data.append('id', pid)
+    data.append('pk', pid)
     data.append('user', uid)
     data.append('name', name)
     data.append('species', species)
