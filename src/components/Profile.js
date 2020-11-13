@@ -83,22 +83,24 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
-        <form onSubmit={submitHandler} className={styles.formSpace}>
-          <ChangeAvatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
-          <div className={styles.fieldsColumn}>
-            <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} />
-            <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} />
-            <Patronymic
-              name="patronymic"
-              changeInputHandler={changeInputHandler}
-              handlePatronymicChange={handlePatronymicChange}
-              patronymic={patronymic}
-            />
-          </div>
-          <div className={styles.fieldsColumn}>
-            <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} />
-            <Email changeInputHandler={changeInputHandler} email={profileInfo.email} />
-            <p className={styles.noteText}>* - обязательные для заполнения поля</p>
+        <form onSubmit={submitHandler}>
+          <div className={styles.formSpace}>
+            <ChangeAvatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
+            <div className={styles.fieldsColumn}>
+              <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} />
+              <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} />
+              <Patronymic
+                name="patronymic"
+                changeInputHandler={changeInputHandler}
+                handlePatronymicChange={handlePatronymicChange}
+                patronymic={patronymic}
+              />
+            </div>
+            <div className={styles.fieldsColumn}>
+              <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} />
+              <Email changeInputHandler={changeInputHandler} email={profileInfo.email} />
+              <p className={styles.noteText}>* - обязательные для заполнения поля</p>
+            </div>
           </div>
           <button type="submit" className={styles.saveButton}>
             Сохранить
