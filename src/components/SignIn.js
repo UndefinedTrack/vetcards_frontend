@@ -71,7 +71,7 @@ function SignIn({ userToken, createJWT, setUserReg }) {
             onChange={changeInputHandler}
           />
         </div>
-        {wrong && <div className={styles.WrongLogOrPassw}>Неверный логин или пароль</div>}
+        {wrong && <div className={styles.WrongMessage}>Неверный логин или пароль</div>}
         <button type="submit" id="submit" className={`${styles.SubmitButton} ${styles.SubmitSignIn}`}>
           ВОЙТИ
         </button>

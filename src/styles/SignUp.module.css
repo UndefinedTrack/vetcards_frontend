@@ -109,8 +109,10 @@
   color: var(--active-button-color);
 }
 
-.WrongLogOrPassw {
+.WrongMessage {
   position: absolute;
+  width: 500px;
+  text-align: center;
   padding-left: 20px;
   color: rgb(226, 0, 0);
   font-size: 16px;

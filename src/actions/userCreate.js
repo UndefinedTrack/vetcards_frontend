@@ -60,7 +60,7 @@ export const createUser = (username, password, firstName, patronymic, lastName, 
     fetch(`${API_URL}/auth/users/`, { method: 'POST', body: data, credentials: 'include' })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createUserSuccess(dat)))
-      .catch((err) => dispatch(createUserFailure(err.message)))
+      .catch((err) => dispatch(createUserFailure(err.statusText)))
   }
 }
 

@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { createUser } from '../actions/userCreate.js'
+import { createUser, createJWT } from '../actions/userCreate.js'
 import styles from '../styles/SignUp.module.css'
 
 // eslint-disable-next-line
-function SignUp({ createUser }) {
+function SignUp({ createUser, createJWT, userToken, setUserReg, regFailed }) {
+  let wrong
   const [state, setState] = useState({
     last_name: '',
     first_name: '',
@@ -27,15 +29,28 @@ function SignUp({ createUser }) {
   function submitHandler(event) {
     event.preventDefault()
     createUser(state.username, state.password, state.first_name, '', state.last_name, state.phone, state.email)
+  }
 
-    setState({
-      last_name: '',
-      first_name: '',
-      phone: '',
-      email: '',
-      username: '',
-      password: '',
-    })
+  if (userToken && userToken.id !== undefined) {
+    wrong = ''
+    createJWT(state.username, state.password)
+  }
+  if (userToken && userToken.username !== undefined && userToken.username !== state.username) {
+    ;[wrong] = userToken.username
+  }
+  if (userToken && userToken.password !== undefined && userToken.password !== state.password) {
+    ;[wrong] = userToken.password
+  }
+
+  if (userToken !== null && userToken !== undefined) {
+    localStorage.setItem('token', userToken.access)
+    localStorage.setItem('refresh', userToken.refresh)
+  }
+
+  if (userToken && userToken.access !== undefined) {
+    localStorage.setItem('userReg', true)
+    setUserReg(true)
+    window.location.href = '#/my-acc'
   }
 
   window.onload = () => {
@@ -112,8 +127,8 @@ function SignUp({ createUser }) {
             name="password"
             type="password"
             id="password"
-            title="Пароль не может быть короче 6 символов"
-            pattern=".{6,}"
+            title="Пароль не может быть короче 8 символов"
+            pattern=".{8,}"
             placeholder="Пароль"
             className={styles.FormInput}
             onChange={changeInputHandler}
@@ -127,6 +142,7 @@ function SignUp({ createUser }) {
           />
         </div>
         <div className={styles.Warning}>Все поля обязательны для заполнения</div>
+        <div className={styles.WrongMessage}>{wrong}</div>
         <button type="submit" id="submit" className={styles.SubmitButton}>
           ЗАРЕГИСТРИРОВАТЬСЯ
         </button>
@@ -141,9 +157,15 @@ function SignUp({ createUser }) {
   )
 }
 
+const mapStateToProps = (state) => ({
+  userToken: state.userCreate.user,
+  regFailed: state.signIn.error,
+})
+
 const mapDispatchToProps = (dispatch) => ({
   createUser: (username, password, firstName, patronymic, lastName, phone, email) =>
     dispatch(createUser(username, password, firstName, patronymic, lastName, phone, email)),
+  createJWT: (username, password) => dispatch(createJWT(username, password)),
 })
 
-export default connect(null, mapDispatchToProps)(SignUp)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
