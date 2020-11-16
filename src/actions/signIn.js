@@ -54,7 +54,7 @@ export const getMe = (token) => {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resp) => resp.json())
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((data) => {
         const user = {
           email: data.email,
@@ -64,7 +64,9 @@ export const getMe = (token) => {
 
         dispatch(getMeSuccess(user))
       })
-      .catch((err) => dispatch(getMeFailure(err.message)))
+      .catch((err) => {
+        dispatch(getMeFailure(err.statusText))
+      })
   }
 }
 

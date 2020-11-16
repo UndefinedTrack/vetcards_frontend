@@ -17,15 +17,21 @@ import CreateSchedule from './vet/CreateSchedule'
 import VisitsHistory from './vet/VisitsHistory'
 
 // eslint-disable-next-line
-function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT }) {
+function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT, loginFailed }) {
   const [input, setInput] = useState([])
   const token = localStorage.getItem('token')
 
   if (userInfo.userId === undefined) userInfo.userId = -1
   if (profileInfo === undefined) profileInfo = []
-
   const uid = userInfo.userId
   const isVet = profileInfo.vet
+
+  if (loginFailed === 'Unauthorized') {
+    localStorage.setItem('userReg', '')
+    window.location.href = '#/sign-in'
+    window.location.reload()
+  }
+
   useEffect(() => {
     if (uid === -1) {
       setTimeout(() => getMe(token), 100)
@@ -107,6 +113,7 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
 
 const mapStateToProps = (state) => ({
   userInfo: state.signIn.user,
+  loginFailed: state.signIn.error,
   profileInfo: state.profile.profile,
 })
 

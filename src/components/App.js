@@ -20,7 +20,7 @@ function App() {
         )}
         {!userReg && (
           <Route exact path="/sign-up">
-            <SignUp />
+            <SignUp setUserReg={setUserReg} />
           </Route>
         )}
         {!userReg && (
