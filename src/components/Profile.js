@@ -164,9 +164,13 @@ function LastName({ lastName, changeInputHandler }) {
   )
 }
 
+LastName.defaultProps = {
+  lastName: '',
+}
+
 LastName.propTypes = {
   // handleLastNameChange: PropTypes.func.isRequired,
-  lastName: PropTypes.string.isRequired,
+  lastName: PropTypes.string,
 }
 
 function FirstName({ firstName, changeInputHandler }) {
@@ -187,9 +191,13 @@ function FirstName({ firstName, changeInputHandler }) {
   )
 }
 
+FirstName.defaultProps = {
+  firstName: '',
+}
+
 FirstName.propTypes = {
   // handleFirstNameChange: PropTypes.func.isRequired,
-  firstName: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
 }
 
 function Patronymic({ patronymic, changeInputHandler }) {
@@ -208,9 +216,13 @@ function Patronymic({ patronymic, changeInputHandler }) {
   )
 }
 
+Patronymic.defaultProps = {
+  patronymic: '',
+}
+
 Patronymic.propTypes = {
   // handlePatronymicChange: PropTypes.func.isRequired,
-  patronymic: PropTypes.string.isRequired,
+  patronymic: PropTypes.string,
 }
 
 function MobilePhone({ mobilePhone, changeInputHandler }) {
@@ -231,9 +243,13 @@ function MobilePhone({ mobilePhone, changeInputHandler }) {
   )
 }
 
+MobilePhone.defaultProps = {
+  mobilePhone: '',
+}
+
 MobilePhone.propTypes = {
   // handleMobilePhoneChange: PropTypes.func.isRequired,
-  mobilePhone: PropTypes.string.isRequired,
+  mobilePhone: PropTypes.string,
 }
 
 function Email({ email, changeInputHandler }) {
@@ -255,9 +271,13 @@ function Email({ email, changeInputHandler }) {
   )
 }
 
+Email.defaultProps = {
+  email: '',
+}
+
 Email.propTypes = {
   // handleEmailChange: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
 }
 
 const mapStateToProps = (state) => ({

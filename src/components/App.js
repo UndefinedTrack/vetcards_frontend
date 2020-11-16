@@ -2,10 +2,13 @@
 import React, { useState } from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import styles from '../styles/App.module.css'
-import MainPage from './MainPage'
 import SignUp from './SignUp.js'
 import SignIn from './SignIn.js'
 import RegisteredPart from './RegisteredPart'
+import VetPage from './mainPage/VetPage'
+import ContactsPage from './mainPage/ContactsPage'
+import ClientPage from './mainPage/ClientPage'
+import Header from './mainPage/Header'
 
 // eslint-disable-next-line
 function App() {
@@ -15,7 +18,20 @@ function App() {
       <HashRouter>
         {!userReg && (
           <Route exact path="/">
-            <MainPage />
+            <Header header="#/" />
+            <VetPage />
+          </Route>
+        )}
+        {!userReg && (
+          <Route exact path="/clients">
+            <Header header="#/clients" />
+            <ClientPage setUserReg={setUserReg} />
+          </Route>
+        )}
+        {!userReg && (
+          <Route exact path="/contacts">
+            <Header header="#/contacts" />
+            <ContactsPage />
           </Route>
         )}
         {!userReg && (

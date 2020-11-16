@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styles from '../styles/MainPage.module.css'
+import styles from '../styles/mainPage/MainPage.module.css'
 
 function MainPage() {
   return (

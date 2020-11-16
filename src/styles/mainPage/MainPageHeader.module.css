@@ -1,0 +1,93 @@
+@import url('../stylesConstants.css');
+
+.MainPageHeader {
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 75px;
+  background-color: var(--main-page);
+  align-items: center;
+  position: fixed;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.Name {
+  color: var(--active-button-color);
+  margin-left: 23px;
+  font-size: 48px;
+  line-height: 70px;
+}
+
+.Nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.ButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  width: 187px;
+  height: 75px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.Enabled {
+  color: black !important;
+  text-decoration: none;
+  background-color: var(--header-color);
+}
+
+.Disabled {
+  color: var(--active-button-color) !important;
+  text-decoration: none;
+}
+
+.SignIn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 129px;
+  height: 36px;
+  color: var(--active-button-color);
+  border: 1px solid var(--active-button-color);
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 18px;
+  line-height: 26px;
+  cursor: pointer;
+  margin: 0 20px;
+}
+
+.SignUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--active-button-color);
+  background-color: var(--active-button-color);
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 241px;
+  height: 36px;
+  color: var(--header-color);
+  font-size: 18px;
+  line-height: 26px;
+  cursor: pointer;
+  margin: 0 20px;
+}
