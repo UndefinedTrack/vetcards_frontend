@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -9,11 +10,12 @@ import { createVetProc } from '../../actions/procsCreate'
 import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
 import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
-function CreateVisitForm({ createProc }) {
+function CreateVisitForm({ createProc, uid }) {
   const { pid } = useParams()
   const today = new Date()
   const formatter = new Intl.DateTimeFormat('ru')
   const date = formatter.format(today)
+  const token = localStorage.getItem('token')
   const [state, setState] = useState({
     date,
     purpose: 'Осмотр',
@@ -23,13 +25,15 @@ function CreateVisitForm({ createProc }) {
     recipe: '',
   })
 
+  const visitPurposes = ['Осмотр', 'Прививка', 'Стерилизация']
+
   function submitHandler(e) {
     e.preventDefault()
 
     const { purpose, symptoms, diagnosis, recomms, recipe } = state
     const procDate = state.date
 
-    createProc(pid, 4, procDate, purpose, symptoms, diagnosis, recomms, recipe)
+    createProc(pid, uid, procDate, purpose, symptoms, diagnosis, recomms, recipe, token)
     setState({
       date: '',
       purpose: '',
@@ -59,7 +63,7 @@ function CreateVisitForm({ createProc }) {
           <div>
             Цель визита <span className={styles.noteText}>*</span>
           </div>
-          <VisitPurpose hangeInputHandler={changeInputHandler} />
+          <DropDownList changeInputHandler={changeInputHandler} options={visitPurposes} />
         </div>
         <div className={styles.VisitInf}>
           <div>
@@ -88,119 +92,6 @@ function CreateVisitForm({ createProc }) {
       </button>
     </form>
   )
-}
-
-// function Duration() {
-//   return (
-//     <div className={styles.mybox}>
-//       <span className={styles.myarrow} />
-//       <select className={styles.SelectInput}>
-//         <option>Осмотр</option>
-//         {/* <option>Прививка</option>
-//         <option>Стерилизация</option> */}
-//       </select>
-//     </div>
-//   )
-// }
-
-function VisitPurpose() {
-  const [isVisible, setIsVisible] = useState(false)
-
-  const labels = ['Осмотр', 'Прививка']
-
-  const [chosenVisitPurpose, setChosenVisitPurpose] = useState(labels[0])
-
-  function handleOptionClick(optionName) {
-    setChosenVisitPurpose(optionName)
-    setIsVisible(false)
-  }
-
-  function handleArrowClick() {
-    setIsVisible(!isVisible)
-  }
-
-  return (
-    <div>
-      <div className={styles.purposeBlock}>
-        {chosenVisitPurpose}
-        <Arrow
-          isVisible={isVisible}
-          handleArrowClick={handleArrowClick}
-        />
-        <OptionsList
-          isVisible={isVisible}
-          handleOptionClick={handleOptionClick}
-          labels={labels}
-        />
-      </div>
-    </div>
-  )
-}
-
-function Arrow({ isVisible, handleArrowClick }) {
-  if (!isVisible) {
-    return (
-      <button
-        type='button'
-        onClick={handleArrowClick}
-        className={styles.purposeArrowButton}
-      >
-        <ArrowDown />
-      </button>
-    )
-  }
-  return (
-    <button
-        type='button'
-        onClick={handleArrowClick}
-        className={styles.purposeArrowButton}
-      >
-        <ArrowUp />
-      </button>
-  )
-}
-
-Arrow.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  handleArrowClick: PropTypes.func.isRequired,
-}
-
-function OptionsList({ isVisible, handleOptionClick, labels }) {
-  if (isVisible) {
-    return (
-      <div className={styles.purposeOptionsBox} >
-        <Option name={labels[0]} handleOptionClick={handleOptionClick} />
-        <Option name={labels[1]} handleOptionClick={handleOptionClick} />
-      </div>
-   )
-  }
-  return null
-}
-
-OptionsList.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  handleOptionClick: PropTypes.func.isRequired,
-}
-
-function Option({ name, handleOptionClick }) {
-  return (
-    <div className={styles.purposeOption}>
-      <input
-        id={name}
-        type='checkbox'
-        value='0'
-        name='selectName'
-        className={styles.purposeOptionInput}
-        onClick={() => handleOptionClick(name)}
-      />
-      <label className={styles.purposeLabel} htmlFor={name}>{name}</label>
-    </div>
-  )
-}
-
-Option.propTypes = {
-  name: PropTypes.string.isRequired,
-  handleOptionClick: PropTypes.func.isRequired,
 }
 
 function DateBlock({ changeInputHandler, date }) {
@@ -254,9 +145,135 @@ InputBlock.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
+// Выпадающий список
+
+function DropDownList({ changeInputHandler, options }) {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const [chosenOption, setChosenOption] = useState(options[0])
+
+  function handleOptionClick(optionName) {
+    setChosenOption(optionName)
+    setIsVisible(false)
+  }
+
+  function handleArrowClick() {
+    setIsVisible(!isVisible)
+  }
+
+  return (
+    <div className={styles.purposeWrapper}>
+      <div
+        className={styles.purposeBlock}
+        role='button'
+        tabIndex='0'
+        onKeyDown={handleArrowClick}
+        onClick={handleArrowClick}
+      >
+        {chosenOption}
+        <Arrow
+          isVisible={isVisible}
+          handleArrowClick={handleArrowClick}
+        />
+      </div>
+      <OptionsList
+          isVisible={isVisible}
+          handleOptionClick={handleOptionClick}
+          options={options}
+          changeInputHandler={changeInputHandler}
+        />
+    </div>
+  )
+}
+
+DropDownList.propTypes = {
+  changeInputHandler: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+}
+
+function Arrow({ isVisible, handleArrowClick }) {
+  if (!isVisible) {
+    return (
+      <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowDown />
+      </button>
+    )
+  }
+  return (
+    <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.purposeArrowButton}
+      >
+        <ArrowUp />
+      </button>
+  )
+}
+
+Arrow.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleArrowClick: PropTypes.func.isRequired,
+}
+
+function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler }) {
+  const optionsComponents = []
+  for (let i = 0; i < options.length; i += 1) {
+    optionsComponents.push(
+      <Option
+        key={i}
+        name={options[i]}
+        handleOptionClick={handleOptionClick}
+        changeInputHandler={changeInputHandler}
+      />
+    )
+  }
+  if (isVisible) {
+    return (
+      <div className={styles.purposeOptionsBox} >
+        {optionsComponents}
+      </div>
+   )
+  }
+  return null
+}
+
+OptionsList.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
+}
+
+function Option({ name, handleOptionClick, changeInputHandler }) {
+  return (
+    <div className={styles.purposeOption}>
+      <input
+        id={name}
+        type='checkbox'
+        value={name}
+        name='purpose'
+        className={styles.purposeOptionInput}
+        onClick={() => handleOptionClick(name)}
+        onChange={changeInputHandler}
+      />
+      <label className={styles.purposeLabel} htmlFor={name}>{name}</label>
+    </div>
+  )
+}
+
+Option.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
+}
+
 const mapDispatchToProps = (dispatch) => ({
-  createProc: (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe) =>
-    dispatch(createVetProc(pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe)),
+  createProc: (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe, token) =>
+    dispatch(createVetProc(pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe, token)),
 })
 
 export default connect(null, mapDispatchToProps)(CreateVisitForm)

@@ -1,18 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from '../../styles/vet/VisitsHistory.module.css'
 import CreateVisitForm from './CreateVisitForm'
-import MedivalHistoryForVet from './MedicalHistoryForVet'
+import MedicalHistoryForVet from './MedicalHistoryForVet'
 
-function VisitsHistory() {
+function VisitsHistory({ uid }) {
   return (
     <main className={styles.VHContainer}>
       <div className={styles.VHContent}>
-        <CreateVisitForm />
+        <CreateVisitForm uid={uid} />
         <div className={styles.VLine} />
-        <MedivalHistoryForVet />
+        <MedicalHistoryForVet uid={uid} />
       </div>
     </main>
   )
+}
+
+VisitsHistory.propTypes = {
+  uid: PropTypes.number.isRequired,
 }
 
 export default VisitsHistory

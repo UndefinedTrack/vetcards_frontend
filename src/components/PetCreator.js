@@ -22,11 +22,13 @@ class PetCreator extends React.Component {
     }
 
     this.createPet = props.createPet
+    this.uid = props.uid
+    this.token = localStorage.getItem('token')
   }
 
   submitHandler = (event) => {
-    let birthDate = ''
     event.preventDefault()
+    let birthDate = ''
 
     const { name, species, breed, color, gender, chip, year } = this.state
     let { day, month } = this.state
@@ -51,7 +53,7 @@ class PetCreator extends React.Component {
     } else {
       birthDate = `${year}`
     }
-    this.createPet(3, name, species, breed, color, birthDate, gender, chip)
+    this.createPet(this.uid, name, species, breed, color, birthDate, gender, chip, this.token)
     this.setState({
       name: '',
       species: '',
@@ -61,6 +63,10 @@ class PetCreator extends React.Component {
       gender: '',
       chip: '',
     })
+
+    setTimeout(() => {
+      window.location.href = '#/my-acc'
+    }, 100)
   }
 
   changeInputHandler = (event) => {
@@ -109,13 +115,7 @@ class PetCreator extends React.Component {
                 <p className={styles.noteText}>* - обязательные для заполнения поля</p>
               </div>
             </div>
-            <button
-              type="submit"
-              className={styles.saveButton}
-              onClick={() => {
-                window.location.href = '#/mypets'
-              }}
-            >
+            <button type="submit" className={styles.saveButton}>
               Сохранить
             </button>
           </form>
@@ -146,10 +146,11 @@ function Name({ handleNameChange, name, heading, placeholder, rec }) {
       {!rec && (
         <input
           type="text"
-          pattern="[A-Za-zА-Яа-яЁё]{2,25}"
+          pattern="([A-Za-zА-Яа-яЁё]| |-){2,25}"
           className={styles.input}
           onChange={handleNameChange}
           name={name}
+          title="При заполнении данного поля вы можете использовать буквы, пробелы и дефисы"
           placeholder={placeholder}
         />
       )}
@@ -245,8 +246,8 @@ function Birthday({ handleNameChange, heading, placeholder }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createPet: (uid, name, species, breed, color, birthDate, gender, chip) =>
-    dispatch(createPet(uid, name, species, breed, color, birthDate, gender, chip)),
+  createPet: (uid, name, species, breed, color, birthDate, gender, chip, token) =>
+    dispatch(createPet(uid, name, species, breed, color, birthDate, gender, chip, token)),
 })
 
 export default connect(null, mapDispatchToProps)(PetCreator)

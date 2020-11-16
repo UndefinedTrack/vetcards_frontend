@@ -31,11 +31,16 @@ const searchPetsFailure = (error) => ({
   },
 })
 
-export const searchPets = (uid, name) => {
+export const searchPets = (uid, name, token) => {
   return (dispatch, getState) => {
     dispatch(searchPetsStarted())
 
-    fetch(`${API_URL}/pets/search?uid=${uid}&name=${name}`, { credentials: 'include' })
+    fetch(`${API_URL}/pets/search?uid=${uid}&name=${name}`, {
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         const patients = []

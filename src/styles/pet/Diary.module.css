@@ -183,6 +183,7 @@
 
 textarea.input {
   height: 85px;
+  resize: none;
 }
 
 .saveButton {
@@ -319,5 +320,126 @@ textarea.input {
 
   .input {
     width: 390px;
+  }
+}
+
+/* выпадающие списки */
+
+.diaryOptionArrowButton {
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  width: 35px;
+  height: 35px;
+  outline: none;
+  padding: 0;
+}
+
+.diaryOptionBlock {
+  position: relative;
+  margin-top: 13px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 7px;
+  border: 1px solid var(--active-button-color);
+  box-sizing: border-box;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  border-radius: 10px;
+  width: 607px;
+  height: 46px;
+  outline: none;
+  cursor: pointer;
+}
+
+.diaryOptionsBox {
+  position: absolute;
+  top: 58px;
+  left: 6px;
+  background-color: #fff;
+  width: 594px;
+  border: 1px solid var(--active-button-color);
+  border-top: none;
+  border-radius: 5px;
+}
+
+.diaryOption {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid var(--active-button-color);
+  height: 42px;
+}
+.diaryOption:hover {
+  background-color: var(--active-button-color);
+  color: #fff;
+  font-weight: 500;
+}
+
+.diaryOptionInput {
+  display: none;
+}
+
+.diaryOptionLabel {
+  display: flex;
+  padding-left: 13px;
+  padding-top: 13px;
+  cursor: pointer;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  width: 280px;
+  height: 42px;
+}
+
+.diaryOptionWrapper {
+  position: relative;
+}
+
+@media (max-width: 1400px) {
+  .diaryOptionBlock {
+    width: 532px;
+  }
+
+  .diaryOptionsBox {
+    width: 520px;
+    left: 5px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .diaryOptionBlock {
+    width: 432px;
+  }
+
+  .diaryOptionsBox {
+    width: 420px;
+    left: 5px;
+  }
+}
+
+@media (max-height: 750px) {
+  .diaryOptionBlock {
+    height: 39px;
+    line-height: 22px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  .diaryOptionsBox {
+    width: 420px;
+    top: 42px;
+    left: 5px;
+  }
+
+  .diaryOptionArrowButton {
+    top: 3px;
   }
 }

@@ -44,11 +44,16 @@ const updatePetInfoFailure = (error) => ({
   },
 })
 
-export const getPetInfo = (pid, uid) => {
+export const getPetInfo = (pid, uid, token) => {
   return (dispatch, getState) => {
     dispatch(getPetInfoStarted())
 
-    fetch(`${API_URL}/pets/info?uid=${uid}&pid=${pid}` /* , { credentials: 'include' } */)
+    fetch(`${API_URL}/pets/info?uid=${uid}&pid=${pid}`, {
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((data) => {
         const pinfo = data.pet
@@ -70,10 +75,10 @@ export const getPetInfo = (pid, uid) => {
   }
 }
 
-export const updatePetInfo = (pid, uid, name, species, breed, color, birthDate, gender, chip) => {
+export const updatePetInfo = (pid, uid, name, species, breed, color, birthDate, gender, chip, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
-    data.append('id', pid)
+    data.append('pk', pid)
     data.append('user', uid)
     data.append('name', name)
     data.append('species', species)
@@ -85,7 +90,14 @@ export const updatePetInfo = (pid, uid, name, species, breed, color, birthDate, 
 
     dispatch(updatePetInfoStarted())
 
-    fetch(`${API_URL}/pets/update`, { method: 'POST', body: data, credentials: 'include' })
+    fetch(`${API_URL}/pets/update`, {
+      method: 'POST',
+      body: data,
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((dat) => {
         const pinfo = dat.pet

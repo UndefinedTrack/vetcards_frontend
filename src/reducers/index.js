@@ -8,6 +8,7 @@ import userCreate from './userCreate'
 import schedule from './schedule'
 import avatar from './avatar'
 import petSearch from './petSearch'
+import signIn from './signIn'
 
 const rootReducer = combineReducers({
   petInfo,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   schedule,
   avatar,
   petSearch,
+  signIn,
 })
 
 export default rootReducer

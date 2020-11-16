@@ -1,7 +1,10 @@
-import React from 'react'
+/* eslint-disable react/forbid-prop-types */
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from '../../styles/pet/Diary.module.css'
 import { ReactComponent as BackButton } from '../../icons/mdi_keyboard_arrow_left.svg'
+import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
+import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
 function CreateReminder({ backClick }) {
   const today = new Date()
@@ -12,6 +15,8 @@ function CreateReminder({ backClick }) {
   // const [firstDate, setFirstDate] = useState('')
   // const [reminderFrequency, setReminderFrequency] = useState('')
   // const [remark, setRemark] = useState('')
+
+  const reminderFrequencies = ['Раз в день', 'Раз в неделю', 'Раз в год']
 
   function handleInputChange(event) {
     event.preventDefault()
@@ -69,12 +74,9 @@ function CreateReminder({ backClick }) {
             <div className={styles.ReminderText}>Частота напоминаний</div>
             <span className={styles.noteReminderText}>*</span>
           </div>
-          <input
-            type="text"
-            className={styles.input}
-            onChange={handleInputChange}
-            name="reminderFrequency"
-            placeholder="Выберите частоту напоминаний"
+          <DropDownList
+            options={reminderFrequencies}
+            changeInputHandler={handleInputChange}
           />
         </div>
         <div className={styles.inputAndTextWrapper}>
@@ -100,6 +102,132 @@ function CreateReminder({ backClick }) {
 
 CreateReminder.propTypes = {
   backClick: PropTypes.func.isRequired,
+}
+
+// Выпадающий список
+
+function DropDownList({ changeInputHandler, options }) {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const [chosenOption, setChosenOption] = useState(options[0])
+
+  function handleOptionClick(optionName) {
+    setChosenOption(optionName)
+    setIsVisible(false)
+  }
+
+  function handleArrowClick() {
+    setIsVisible(!isVisible)
+  }
+
+  return (
+    <div className={styles.diaryOptionWrapper}>
+      <div
+        className={styles.diaryOptionBlock}
+        role='button'
+        tabIndex='0'
+        onKeyDown={handleArrowClick}
+        onClick={handleArrowClick}
+      >
+        {chosenOption}
+        <Arrow
+          isVisible={isVisible}
+          handleArrowClick={handleArrowClick}
+        />
+      </div>
+      <OptionsList
+          isVisible={isVisible}
+          handleOptionClick={handleOptionClick}
+          options={options}
+          changeInputHandler={changeInputHandler}
+        />
+    </div>
+  )
+}
+
+DropDownList.propTypes = {
+  changeInputHandler: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+}
+
+function Arrow({ isVisible, handleArrowClick }) {
+  if (!isVisible) {
+    return (
+      <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.diaryOptionArrowButton}
+      >
+        <ArrowDown />
+      </button>
+    )
+  }
+  return (
+    <button
+        type='button'
+        onClick={handleArrowClick}
+        className={styles.diaryOptionArrowButton}
+      >
+        <ArrowUp />
+      </button>
+  )
+}
+
+Arrow.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleArrowClick: PropTypes.func.isRequired,
+}
+
+function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler }) {
+  const optionsComponents = []
+  for (let i = 0; i < options.length; i += 1) {
+    optionsComponents.push(
+      <Option
+        key={i}
+        name={options[i]}
+        handleOptionClick={handleOptionClick}
+        changeInputHandler={changeInputHandler}
+      />
+    )
+  }
+  if (isVisible) {
+    return (
+      <div className={styles.diaryOptionsBox} >
+        {optionsComponents}
+      </div>
+   )
+  }
+  return null
+}
+
+OptionsList.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
+}
+
+function Option({ name, handleOptionClick, changeInputHandler }) {
+  return (
+    <div className={styles.diaryOption}>
+      <input
+        id={name}
+        type='checkbox'
+        value={name}
+        name='option'
+        className={styles.diaryOptionInput}
+        onClick={() => handleOptionClick(name)}
+        onChange={changeInputHandler}
+      />
+      <label className={styles.diaryOptionLabel} htmlFor={name}>{name}</label>
+    </div>
+  )
+}
+
+Option.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleOptionClick: PropTypes.func.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
 }
 
 export default CreateReminder

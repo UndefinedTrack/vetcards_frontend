@@ -44,11 +44,16 @@ const createScheduleFailure = (error) => ({
   },
 })
 
-export const getSchedule = (vid, dt) => {
+export const getSchedule = (vid, dt, token) => {
   return (dispatch, getState) => {
     dispatch(getScheduleStarted())
 
-    fetch(`${API_URL}/schedule/vet_day_sched?vid=${vid}&dt=${dt}`, { credentials: 'include' })
+    fetch(`${API_URL}/schedule/vet_day_sched?vid=${vid}&dt=${dt}`, {
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json)
       .then((data) => {
         const slots = []
@@ -69,7 +74,7 @@ export const getSchedule = (vid, dt) => {
   }
 }
 
-export const createNewSchedule = (vid, slotDate, slotTime) => {
+export const createNewSchedule = (vid, slotDate, slotTime, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('vet', vid)
@@ -78,7 +83,14 @@ export const createNewSchedule = (vid, slotDate, slotTime) => {
 
     dispatch(createScheduleStarted())
 
-    fetch(`${API_URL}/schedule/create`, { method: 'POST', body: data, credentials: 'include' })
+    fetch(`${API_URL}/schedule/create`, {
+      method: 'POST',
+      body: data,
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((resp) => resp.json())
       .then((dat) => dispatch(createScheduleSuccess(dat)))
       .catch((err) => dispatch(createScheduleFailure(err.message)))

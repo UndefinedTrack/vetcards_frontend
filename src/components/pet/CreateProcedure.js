@@ -6,11 +6,12 @@ import styles from '../../styles/pet/Diary.module.css'
 import { createOwnerProc } from '../../actions/procsCreate'
 import { ReactComponent as BackButton } from '../../icons/mdi_keyboard_arrow_left.svg'
 
-function CreateProcedure({ backClick, createProc }) {
+function CreateProcedure({ backClick, createProc, uid }) {
   const { pid } = useParams()
   const today = new Date()
   const formatter = new Intl.DateTimeFormat('ru')
   const date = formatter.format(today)
+  const token = localStorage.getItem('token')
   const [state, setState] = useState({
     procedureName: '',
     date,
@@ -86,7 +87,7 @@ function CreateProcedure({ backClick, createProc }) {
   function submitHandler(event) {
     event.preventDefault()
 
-    createProc(pid, 3, state.procedureName, state.date, state.remark)
+    createProc(pid, uid, state.procedureName, state.date, state.remark, token)
 
     setState({
       procedureName: '',
@@ -102,10 +103,12 @@ function CreateProcedure({ backClick, createProc }) {
 CreateProcedure.propTypes = {
   backClick: PropTypes.func.isRequired,
   createProc: PropTypes.func.isRequired,
+  uid: PropTypes.number.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createProc: (pid, uid, name, date, description) => dispatch(createOwnerProc(pid, uid, name, date, description)),
+  createProc: (pid, uid, name, date, description, token) =>
+    dispatch(createOwnerProc(pid, uid, name, date, description, token)),
 })
 
 export default connect(null, mapDispatchToProps)(CreateProcedure)
