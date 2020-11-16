@@ -64,14 +64,14 @@ function SignIn({ userToken, createJWT, setUserReg }) {
             name="password"
             type="password"
             id="password"
-            title="Пароль не может быть короче 6 символов"
-            pattern=".{6,}"
+            title="Пароль не может быть короче 8 символов"
+            pattern=".{8,}"
             placeholder="Пароль"
             className={`${styles.FormInput} ${styles.FormInputIn}`}
             onChange={changeInputHandler}
           />
         </div>
-        {wrong && <div className={styles.WrongMessage}>Неверный логин или пароль</div>}
+        {wrong && <div className={`${styles.WrongMessage} ${styles.SignInWidth}`}>Неверный логин или пароль</div>}
         <button type="submit" id="submit" className={`${styles.SubmitButton} ${styles.SubmitSignIn}`}>
           ВОЙТИ
         </button>
