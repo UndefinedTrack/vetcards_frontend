@@ -65,6 +65,9 @@ export const getMe = (token) => {
         dispatch(getMeSuccess(user))
       })
       .catch((err) => {
+        window.location.href = '#/sign-in'
+        localStorage.setItem('userReg', '')
+        window.location.reload()
         dispatch(getMeFailure(err.statusText))
       })
   }
@@ -80,6 +83,9 @@ export const refreshJWT = (refresh) => {
     fetch(`${API_URL}/auth/jwt/refresh`, { method: 'POST', body: data, credentials: 'include' })
       .then((resp) => resp.json())
       .then((dat) => dispatch(refreshJWTSuccess(dat)))
-      .catch((err) => dispatch(refreshJWTFailure(err.message)))
+      .catch((err) => {
+        console.log(err.statusText)
+        dispatch(refreshJWTFailure(err.statusText))
+      })
   }
 }

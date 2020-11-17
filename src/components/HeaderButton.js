@@ -5,20 +5,10 @@ import styles from '../styles/HeaderButton.module.css'
 function HeaderButton({ buttonName, buttonStyles, header }) {
   function reload() {
     window.location.href = header
-    if (header === '#/mypets') {
-      window.location.reload()
-    }
   }
 
-  if ((header === '#/profile') || (header === '#/vetprofile')) {
-    return (
-      <ProfileButton
-        buttonName={buttonName}
-        buttonStyles={buttonStyles}
-        header={header}
-        reload={reload}
-      />
-    )
+  if (header === '#/profile' || header === '#/vetprofile') {
+    return <ProfileButton buttonName={buttonName} buttonStyles={buttonStyles} header={header} reload={reload} />
   }
   return (
     <div>
@@ -60,40 +50,30 @@ function ProfileButton({ header, buttonStyles, reload }) {
     return (
       <div>
         <div
-          role='button'
+          role="button"
           onClick={handleClick}
           onKeyDown={handleClick}
-          tabIndex='0'
+          tabIndex="0"
           className={`${styles.Enabled} ${styles.Button}`}
         >
           <p>Профиль</p>
         </div>
-        <DropDownList
-          isVisible={isVisible}
-          header={header}
-          handleExitClick={handleExitClick}
-          reload={reload}
-        />
+        <DropDownList isVisible={isVisible} header={header} handleExitClick={handleExitClick} reload={reload} />
       </div>
     )
   }
   return (
     <div>
       <div
-          role='button'
-          onClick={handleClick}
-          onKeyDown={handleClick}
-          tabIndex='0'
-          className={`${styles.Disabled} ${styles.Button}`}
-        >
+        role="button"
+        onClick={handleClick}
+        onKeyDown={handleClick}
+        tabIndex="0"
+        className={`${styles.Disabled} ${styles.Button}`}
+      >
         <p>Профиль</p>
       </div>
-      <DropDownList
-        isVisible={isVisible}
-        header={header}
-        handleExitClick={handleExitClick}
-        reload={reload}
-      />
+      <DropDownList isVisible={isVisible} header={header} handleExitClick={handleExitClick} reload={reload} />
     </div>
   )
 }
@@ -108,14 +88,10 @@ function DropDownList({ isVisible, handleExitClick, header, reload }) {
   if (isVisible) {
     return (
       <div className={styles.optionsBox}>
-        <button type='button' onClick={reload} className={styles.option}>
+        <button type="button" onClick={reload} className={styles.option}>
           <p className={styles.optionText}>Редактировать</p>
         </button>
-        <button
-          type='button'
-          onClick={handleExitClick}
-          className={styles.option}
-        >
+        <button type="button" onClick={handleExitClick} className={styles.option}>
           Выйти
         </button>
       </div>

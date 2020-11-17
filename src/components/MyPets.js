@@ -8,20 +8,10 @@ import MedicalHistory from './MedicalHistory'
 import { ReactComponent as Plus } from '../icons/plus.svg'
 import { getVetProcs } from '../actions/procsList'
 
-let procs
-let searchString
 // eslint-disable-next-line
-function MyPets({ uid, petList, getInfo, procsList, getVetProcs, input, setInput }) {
+function MyPets({ uid, petList, getInfo, procsList }) {
   const [searchLine, setSearchLine] = useState(-1)
   const token = localStorage.getItem('token')
-
-  if (procs === undefined) {
-    procs = []
-  }
-
-  if (searchString === undefined) {
-    searchString = []
-  }
 
   if (petList === undefined) {
     petList = []
@@ -29,7 +19,6 @@ function MyPets({ uid, petList, getInfo, procsList, getVetProcs, input, setInput
   }
 
   function closeSearchString() {
-    getVetProcs(searchLine, uid, '', token)
     setSearchLine(-1)
   }
 
@@ -37,10 +26,11 @@ function MyPets({ uid, petList, getInfo, procsList, getVetProcs, input, setInput
     if (!petList.length) {
       getInfo(uid, token)
     }
-
-    setTimeout(() => getInfo(uid, token), 100)
+    if (uid !== -1) {
+      setTimeout(() => getInfo(uid, token), 100)
+    }
     // eslint-disable-next-line
-  }, [getInfo])
+  }, [procsList])
 
   return (
     <div className={styles.Content}>
@@ -67,10 +57,10 @@ function MyPets({ uid, petList, getInfo, procsList, getVetProcs, input, setInput
               <AboutPet pet={pet} closeSearchString={closeSearchString} />
               <MedicalHistory
                 pet={pet}
-                procs={procs}
-                input={input}
-                setInput={setInput}
-                searchString={searchString}
+                uid={uid}
+                // input={input}
+                // setInput={setInput}
+                // setPId={setPId}
                 ind={pet.petId}
                 searchLine={searchLine}
                 setSearchLine={setSearchLine}
