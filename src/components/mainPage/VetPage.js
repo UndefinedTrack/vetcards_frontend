@@ -8,7 +8,9 @@ function MainPage() {
   return (
     <main className={styles.Container}>
       <div className={styles.Advert}>
-        <div className={styles.Photo}>фото</div>
+        <span className={styles.BGColor}>
+          <div className={styles.Photo} />
+        </span>
         <div className={styles.Ad}>
           <div className={styles.LargeText}>Простой и удобный сервис для учёта пациентов</div>
           <button type="button" className={styles.Button}>
@@ -31,8 +33,10 @@ function MainPage() {
           <div className={styles.CardText}>Быстрый доступ к электронной медицинской карте пациента</div>
         </div>
       </div>
-      <div name="form" className={styles.ConnectPart}>
-        <ContactForm />
+      <div className={styles.ConnectPart}>
+        <div className={styles.BGImage}>
+          <ContactForm />
+        </div>
       </div>
     </main>
   )

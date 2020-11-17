@@ -5,7 +5,9 @@ function ContactForm() {
   return (
     <main>
       <form className={styles.ContactForm}>
-        <div className={styles.FormName}>Мы вам напишем!</div>
+        <div className={styles.FormName} id="contact-form">
+          Мы вам напишем!
+        </div>
         <div className={styles.Text}>Как к вам обращаться?</div>
         <div className={styles.Block}>
           <input

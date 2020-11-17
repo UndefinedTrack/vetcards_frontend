@@ -23,14 +23,6 @@ function MyPets({ uid, petList, getInfo, procsList, getVetProcs }) {
   }
 
   useEffect(() => {
-    if (petList.length !== 0 && uid !== -1) {
-      petList.forEach((pet) => {
-        // getVetProcs(pet.petId, uid, '', token)
-      })
-    }
-  }, [petList, procsList, getVetProcs, token, uid])
-
-  useEffect(() => {
     if (!petList.length) {
       getInfo(uid, token)
     }

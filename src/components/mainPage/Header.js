@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import HeaderButton from './HeaderButton'
 import styles from '../../styles/mainPage/MainPageHeader.module.css'
 
-function Header({ header }) {
+// eslint-disable-next-line
+function Header({ header, setSignInUp, signInUp }) {
   let vet = 'disabled'
   let clients = 'disabled'
   let contacts = 'disabled'
@@ -16,12 +17,18 @@ function Header({ header }) {
     contacts = 'enabled'
   }
 
+  function signInForm() {
+    setSignInUp(!signInUp)
+  }
+
   return (
     <header className={styles.MainPageHeader}>
       <p className={styles.Name}>VetCards</p>
       <div className={styles.Nav}>
         <ButtonContainer vet={vet} clients={clients} contacts={contacts} />
-        <div className={styles.SignIn}>Вход</div>
+        <button type="button" className={styles.SignIn} onClick={signInForm}>
+          Вход
+        </button>
         <div className={styles.SignUp}>Регистрация</div>
       </div>
     </header>

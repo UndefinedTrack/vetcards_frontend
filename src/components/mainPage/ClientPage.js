@@ -4,6 +4,7 @@ import SignUp from '../SignUp'
 import { ReactComponent as Heart } from '../../icons/emojione-monotone_yellow-heart.svg'
 import { ReactComponent as Monitor } from '../../icons/line-md_computer.svg'
 
+// eslint-disable-next-line
 function ClientPage({ setUserReg }) {
   return (
     <main className={styles.Container}>
@@ -15,7 +16,9 @@ function ClientPage({ setUserReg }) {
           </button>
           <div className={styles.SmallText}>Это бесплатно!</div>
         </div>
-        <div className={styles.Photo}>фото</div>
+        <div className={styles.BGColor}>
+          <div className={styles.ClientPhoto} />
+        </div>
       </div>
       <div className={styles.Cards}>
         <div className={styles.Card}>
@@ -32,7 +35,9 @@ function ClientPage({ setUserReg }) {
         </div>
       </div>
       <div name="form" className={styles.ConnectPart}>
-        <SignUp setUserReg={setUserReg} />
+        <div className={styles.BGClientImage}>
+          <SignUp setUserReg={setUserReg} />
+        </div>
       </div>
     </main>
   )

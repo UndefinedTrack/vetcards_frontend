@@ -27,7 +27,7 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
 
   if (loginFailed === 'Unauthorized') {
     localStorage.setItem('userReg', '')
-    window.location.href = '#/sign-in'
+    window.location.href = '#/'
     window.location.reload()
   }
 

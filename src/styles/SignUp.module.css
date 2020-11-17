@@ -1,6 +1,20 @@
 @import url('./stylesConstants.css');
 
 .Container {
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.SignUpContainer {
+  margin-right: 100px;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,18 +24,16 @@
 
 .SignUpForm {
   width: 540px;
-  height: 516px;
-  margin-right: 100px;
+  height: 570px;
   background-color: var(--header-color);
   border: 1px solid var(--active-button-color);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.55);
   border-radius: 10px;
-  box-sizing: border-box;
 }
 
 .SignInContainer {
   width: 271px;
-  height: 285px;
+  height: 375px;
 }
 
 .FormName {
@@ -78,7 +90,6 @@
   line-height: 28px;
   background-color: var(--active-button-color);
   color: #fff;
-  border-radius: 0px 0px 8px 8px;
   text-align: center;
   cursor: pointer;
 }
@@ -88,7 +99,8 @@
 }
 
 .SignIn {
-  margin-top: 25px;
+  text-align: center;
+  margin-top: 20px;
   color: var(--active-button-color);
   font-size: 18px;
   line-height: 21px;

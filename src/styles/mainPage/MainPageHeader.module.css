@@ -73,6 +73,8 @@
   line-height: 26px;
   cursor: pointer;
   margin: 0 20px;
+  background-color: var(--main-page);
+  outline: none;
 }
 
 .SignUp {
@@ -90,4 +92,22 @@
   line-height: 26px;
   cursor: pointer;
   margin: 0 20px;
+}
+
+@media (max-width: 1300px) {
+  .Button {
+    width: 140px;
+    padding: 0px 5px;
+    text-align: center;
+  }
+
+  .SignIn {
+    width: 100px;
+    margin-left: 10px;
+  }
+
+  .SignUp {
+    width: 180px;
+    margin: 0px 10px;
+  }
 }

@@ -42,7 +42,7 @@ function ProfileButton({ header, buttonStyles, reload }) {
   function handleExitClick() {
     handleClick()
     localStorage.clear()
-    window.location.href = '#/sign-in'
+    window.location.href = '#/'
     window.location.reload()
   }
 
