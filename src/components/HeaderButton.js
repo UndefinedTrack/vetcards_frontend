@@ -13,14 +13,14 @@ function HeaderButton({ buttonName, buttonStyles, header }) {
   return (
     <div>
       {buttonStyles === 'enabled' && (
-        <button type="button" onClick={reload} className={`${styles.Enabled} ${styles.Button}`}>
+        <a href={header} className={`${styles.Enabled} ${styles.Button}`}>
           <p>{buttonName}</p>
-        </button>
+        </a>
       )}
       {buttonStyles === 'disabled' && (
-        <button type="button" onClick={reload} className={`${styles.Disabled} ${styles.Button}`}>
+        <a href={header} className={`${styles.Disabled} ${styles.Button}`}>
           <p>{buttonName}</p>
-        </button>
+        </a>
       )}
     </div>
   )

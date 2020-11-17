@@ -43,6 +43,7 @@ const getOwnerProcsFailure = (error) => ({
     error,
   },
 })
+
 const procedures = []
 export const getVetProcs = (pid, uid, name, token) => {
   return (dispatch, getState) => {
@@ -57,7 +58,6 @@ export const getVetProcs = (pid, uid, name, token) => {
       .then((resp) => resp.json())
       .then((data) => {
         procedures[pid] = []
-        // flag[pid] = []
         const pinfo = data.procedures
 
         pinfo.forEach((proc) => {

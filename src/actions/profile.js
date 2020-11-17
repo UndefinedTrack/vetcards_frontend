@@ -121,7 +121,6 @@ export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, e
     data.append('last_name', lastName)
     data.append('phone', phone)
     data.append('email', email)
-    console.log(data)
     dispatch(updateProfileInfoStarted())
 
     fetch(`${API_URL}/users/update`, {

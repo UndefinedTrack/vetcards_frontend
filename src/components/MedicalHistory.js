@@ -7,20 +7,17 @@ import { ReactComponent as Search } from '../icons/search.svg'
 import { getVetProcs } from '../actions/procsList'
 
 // eslint-disable-next-line
-function MedicalHistory({ pet, uid, procsList, ind, searchLine, setSearchLine, getVetProcs }) {
+function MedicalHistory({ pet, uid, procsList, ind, searchLine, setSearchLine, getVetProcs, loading }) {
   const pid = pet.petId
   const [input, setInput] = useState('')
   const token = localStorage.getItem('token')
-  if (procsList[pid] === undefined || procsList[pid][0] === undefined) {
-    procsList[pid] = []
-    procsList[pid][0] = []
-  }
 
   useEffect(() => {
-    getVetProcs(pid, uid, input, token)
+    if (uid !== -1) {
+      setTimeout(() => getVetProcs(pid, uid, input, token), 100)
+    }
   }, [input, getVetProcs, pid, token, uid])
-  // console.log(input, procsList)
-  console.log(procsList, procsList[91])
+
   return (
     <div className={styles.Container}>
       <div className={styles.NameAndSearch}>
@@ -64,6 +61,7 @@ function MedicalHistory({ pet, uid, procsList, ind, searchLine, setSearchLine, g
 
 const mapStateToProps = (state) => ({
   procsList: state.procsList.vetProcs,
+  loading: state.procsList.loading,
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -9,7 +9,7 @@ import { ReactComponent as Plus } from '../icons/plus.svg'
 import { getVetProcs } from '../actions/procsList'
 
 // eslint-disable-next-line
-function MyPets({ uid, petList, getInfo, procsList }) {
+function MyPets({ uid, petList, getInfo, procsList, getVetProcs }) {
   const [searchLine, setSearchLine] = useState(-1)
   const token = localStorage.getItem('token')
 
@@ -21,6 +21,14 @@ function MyPets({ uid, petList, getInfo, procsList }) {
   function closeSearchString() {
     setSearchLine(-1)
   }
+
+  useEffect(() => {
+    if (petList.length !== 0 && uid !== -1) {
+      petList.forEach((pet) => {
+        // getVetProcs(pet.petId, uid, '', token)
+      })
+    }
+  }, [petList, procsList, getVetProcs, token, uid])
 
   useEffect(() => {
     if (!petList.length) {

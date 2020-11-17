@@ -12,10 +12,15 @@ function MedicalHistoryForVet({ procsList, getVetProcs, uid }) {
   const [searchInput, setSearchInput] = useState('')
   const token = localStorage.getItem('token')
 
+  if (procsList[pid] === undefined) {
+    procsList[pid] = []
+  }
+
   useEffect(() => {
-    setTimeout(() => getVetProcs(pid, uid, searchInput, token), 100)
+    setTimeout(() => getVetProcs(pid, uid, searchInput, token), 10)
     // eslint-disable-next-line
   }, [getVetProcs, pid, searchInput])
+
   return (
     <div className={styles.CreateVFContainer}>
       <SearchLine changeInputHandler={changeInputHandler} />
@@ -25,7 +30,7 @@ function MedicalHistoryForVet({ procsList, getVetProcs, uid }) {
             <div className={styles.EmptyStory}>История приёмов пуста</div>
           </div>
         )}
-        {procsList
+        {procsList[pid]
           .map((procs) => {
             const day = procs.procDate.slice(8, 10)
             const month = Number(procs.procDate.slice(5, 7)) - 1
@@ -43,7 +48,7 @@ function MedicalHistoryForVet({ procsList, getVetProcs, uid }) {
 
   function changeInputHandler(event) {
     setSearchInput(event.target.value)
-    getVetProcs(pid, uid, searchInput, token)
+    // getVetProcs(pid, uid, searchInput, token)
   }
 }
 
@@ -70,6 +75,7 @@ function Duration() {
 
 const mapStateToProps = (state) => ({
   procsList: state.procsList.vetProcs,
+  loading: state.procsList.loading,
 })
 
 const mapDispatchToProps = (dispatch) => ({
