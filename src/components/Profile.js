@@ -66,7 +66,7 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
   }
 
   function handleAvatarChange(event) {
-    uploadAvatar(uid, event.target.files)
+    // uploadAvatar(uid, event.target.files)
   }
 
   // function handleSubmit(event) {
@@ -85,7 +85,7 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
       <div className={styles.profileWrapper}>
         <form onSubmit={submitHandler}>
           <div className={styles.formSpace}>
-            <ChangeAvatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
+            <Avatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
             <div className={styles.fieldsColumn}>
               <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} />
               <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} />
@@ -112,20 +112,30 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
   )
 }
 
-function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
+function Avatar({ handleAvatarChange, popUpOpen }) {
+  const [previewURL, setPreviewURL] = useState('')
+
   const imageInput = React.useRef(null)
-  function handleImageInput() {
-    // if (imageInput.current) {
-    //   imageInput.current.click()
-    // }
-    popUpOpen()
+
+  function handleButtonClick() {
+    if (imageInput.current) {
+      imageInput.current.click()
+    }
+    // popUpOpen()
+  }
+
+  function handleImageInput(event) {
+    if (event.target.files[0]) {
+      handleAvatarChange()
+      setPreviewURL(URL.createObjectURL(event.target.files[0]))
+    }    
   }
 
   return (
     <div>
       <div className={styles.avatarWrapper}>
-        <div className={styles.avatarSample} />
-        <button type="button" className={styles.changeAvatar} onClick={handleImageInput}>
+        <AvatarImage previewURL={previewURL} />
+        <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
           Изменить фото
         </button>
         <input
@@ -133,7 +143,7 @@ function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
           type="file"
           multiple
           accept="image/*"
-          onChange={handleAvatarChange}
+          onChange={handleImageInput}
           ref={imageInput}
           style={{ display: 'none' }}
         />
@@ -142,8 +152,24 @@ function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
   )
 }
 
-ChangeAvatar.propTypes = {
+Avatar.propTypes = {
   handleAvatarChange: PropTypes.func.isRequired,
+  popUpOpen: PropTypes.func.isRequired,
+}
+
+function AvatarImage({ previewURL }) {
+  if (previewURL !== '') {
+    return(
+      <img src={previewURL} alt='' className={styles.avatarShape} />
+    )
+  }
+  return(
+    <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
+  )
+}
+
+AvatarImage.propTypes = {
+  previewURL: PropTypes.string.isRequired,
 }
 
 function LastName({ lastName, changeInputHandler }) {

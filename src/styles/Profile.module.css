@@ -68,13 +68,16 @@
   outline: none;
 }
 
-.avatarSample {
+.avatarShape {
   display: flex;
   border-radius: 50%;
   width: 200px;
   height: 200px;
-  background-color: var(--grey-green-color);
   margin: 50px;
+}
+
+.avatarSample {
+  background-color: var(--grey-green-color);
 }
 
 .avatarWrapper {
