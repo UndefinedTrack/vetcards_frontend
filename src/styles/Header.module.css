@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   height: 75px;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   align-items: center;
   position: fixed;
   border-bottom: 1px solid #7aa338;
@@ -16,7 +16,7 @@
 }
 
 .Name {
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
   font-family: 'Noto Sans JP', sans-serif;
   margin-left: 23px;
   font-weight: bold;

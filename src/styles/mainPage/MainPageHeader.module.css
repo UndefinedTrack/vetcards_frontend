@@ -6,7 +6,7 @@
   right: 0;
   display: flex;
   height: 75px;
-  background-color: var(--main-page);
+  background-color: var(--grey-yellow-color);
   align-items: center;
   position: fixed;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -15,7 +15,7 @@
 }
 
 .Name {
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
   margin-left: 23px;
   font-size: 48px;
   line-height: 70px;
@@ -51,11 +51,11 @@
 .Enabled {
   color: black !important;
   text-decoration: none;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
 }
 
 .Disabled {
-  color: var(--active-button-color) !important;
+  color: var(--dark-green-color) !important;
   text-decoration: none;
 }
 
@@ -65,15 +65,15 @@
   justify-content: center;
   width: 129px;
   height: 36px;
-  color: var(--active-button-color);
-  border: 1px solid var(--active-button-color);
+  color: var(--dark-green-color);
+  border: 1px solid var(--dark-green-color);
   box-sizing: border-box;
   border-radius: 10px;
   font-size: 18px;
   line-height: 26px;
   cursor: pointer;
   margin: 0 20px;
-  background-color: var(--main-page);
+  background-color: var(--grey-yellow-color);
   outline: none;
 }
 
@@ -81,13 +81,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--active-button-color);
-  background-color: var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
+  background-color: var(--dark-green-color);
   box-sizing: border-box;
   border-radius: 10px;
   width: 241px;
   height: 36px;
-  color: var(--header-color);
+  color: var(--white-color);
   font-size: 18px;
   line-height: 26px;
   cursor: pointer;

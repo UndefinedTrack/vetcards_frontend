@@ -3,7 +3,7 @@
 .Container {
   display: flex;
   flex-direction: column;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   width: 920px;
   border-radius: 10px;
   border: 1px solid #7aa338;
@@ -22,8 +22,8 @@
 .Line {
   margin: 0;
   margin-left: 10px;
-  color: var(--active-button-color);
-  background-color: var(--active-button-color);
+  color: var(--dark-green-color);
+  background-color: var(--dark-green-color);
   width: 884px;
   border: none;
   height: 1px;
@@ -31,7 +31,7 @@
 
 .SearchButton {
   height: 30px;
-  fill: var(--active-button-color);
+  fill: var(--dark-green-color);
   margin-right: 36px;
   margin-top: 13px;
   margin-left: 20px;

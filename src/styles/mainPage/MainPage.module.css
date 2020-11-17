@@ -54,7 +54,7 @@
 }
 
 .BGColor {
-  background-color: var(--link-button);
+  background-color: var(--light-green-color);
   width: 100%;
   height: 100%;
 }
@@ -79,10 +79,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: var(--active-button-color);
+  background-color: var(--dark-green-color);
   width: 50%;
   height: 100%;
-  color: var(--header-color);
+  color: var(--white-color);
 }
 
 .LargeText {
@@ -100,7 +100,7 @@
 }
 
 .Button {
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   outline: none;
   border: none;
   cursor: pointer;
@@ -116,7 +116,7 @@
 .Cards {
   display: flex;
   flex-direction: row;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
 }
 
 .Card {
@@ -129,7 +129,7 @@
 }
 
 .Card:nth-child(2) {
-  background-color: var(--link-button);
+  background-color: var(--light-green-color);
 }
 
 .CardText {
@@ -147,7 +147,7 @@
   justify-content: flex-end;
   width: 100vw;
   height: calc(100vh - 75px);
-  background-color: var(--link-button);
+  background-color: var(--light-green-color);
 }
 
 .BGImage {
@@ -171,7 +171,7 @@
 }
 
 .Green {
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
 }
 
 .Cursor {

@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   width: 370px;
   margin-right: 28px;
   border-radius: 10px;
@@ -28,8 +28,8 @@
 }
 
 .Line {
-  color: var(--active-button-color);
-  background-color: var(--active-button-color);
+  color: var(--dark-green-color);
+  background-color: var(--dark-green-color);
   width: 331px;
   border: none;
   height: 1px;

@@ -32,7 +32,7 @@
 }
 
 .SearchButton {
-  fill: var(--active-button-color);
+  fill: var(--dark-green-color);
   height: 30px;
   margin-left: 11px;
 }

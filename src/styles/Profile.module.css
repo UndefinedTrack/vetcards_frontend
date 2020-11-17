@@ -2,7 +2,7 @@
 
 .profileSpace {
   display: flex;
-  background-color: var(--main-bg-color);
+  background-color: var(--grey-green-color);
   height: 100%;
   width: 100%;
   justify-content: space-around;
@@ -11,7 +11,7 @@
 .profileWrapper {
   display: flex;
   margin-top: 100px;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   flex-direction: column;
   width: 1318px;
   height: 550px;
@@ -42,8 +42,8 @@
   justify-content: center;
   border: none;
   border-radius: 10px;
-  background-color: var(--active-button-color);
-  color: var(--header-color);
+  background-color: var(--dark-green-color);
+  color: var(--white-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -61,8 +61,8 @@
 .changeAvatar {
   display: flex;
   border: none;
-  color: var(--active-button-color);
-  background-color: var(--header-color);
+  color: var(--dark-green-color);
+  background-color: var(--white-color);
   font-size: 18px;
   cursor: pointer;
   outline: none;
@@ -73,7 +73,7 @@
   border-radius: 50%;
   width: 200px;
   height: 200px;
-  background-color: var(--main-bg-color);
+  background-color: var(--grey-green-color);
   margin: 50px;
 }
 
@@ -90,7 +90,7 @@
   height: 42px;
   width: 90%;
   outline: none;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   border-radius: 10px;
   padding-left: 16px;
   padding-right: 2vh;
@@ -112,7 +112,7 @@
 }
 
 .noteText {
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
@@ -159,7 +159,7 @@
   font-weight: 300;
   font-size: 13px;
   line-height: 19px;
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
 }
 
 @media (max-width: 1400px) {

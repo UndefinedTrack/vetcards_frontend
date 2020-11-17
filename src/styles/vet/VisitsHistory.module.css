@@ -11,7 +11,7 @@
   display: flex;
   width: 1318px;
   border-radius: 10px;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   padding-bottom: 16px;
   border: 1px solid #7aa338;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -62,7 +62,7 @@
   width: 294px;
   height: 42px;
   outline: none;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   border-radius: 10px;
   padding-left: 10px;
   font-family: 'Noto Sans JP', sans-serif;
@@ -95,7 +95,7 @@
 .InputBlock {
   margin-top: 9px;
   padding-left: 13px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   box-sizing: border-box;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
@@ -127,7 +127,7 @@
 
 .noteText {
   margin-top: 30px;
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
@@ -140,8 +140,8 @@
   justify-content: center;
   border: none;
   border-radius: 10px;
-  background-color: var(--active-button-color);
-  color: var(--header-color);
+  background-color: var(--dark-green-color);
+  color: var(--white-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
   font-size: 18px;
@@ -156,7 +156,7 @@
 }
 
 .VLine {
-  border-left: 1px solid var(--active-button-color);
+  border-left: 1px solid var(--dark-green-color);
   margin-top: 14px;
   height: auto;
 }
@@ -166,7 +166,7 @@
   align-items: center;
   width: 625px;
   height: 48px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   box-sizing: border-box;
   border-radius: 10px;
   margin-bottom: 14px;
@@ -174,7 +174,7 @@
 }
 
 .SearchButton {
-  fill: var(--active-button-color);
+  fill: var(--dark-green-color);
   height: 30px;
   margin-left: 4px;
 }
@@ -188,7 +188,7 @@
   height: 45px;
   font-size: 18px;
   line-height: 26px;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   border: 0;
 }
 .SearchLine:focus {
@@ -285,7 +285,7 @@
   margin-top: 9px;
   padding-left: 13px;
   padding-top: 5.5px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   box-sizing: border-box;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
@@ -304,7 +304,7 @@
   left: 6px;
   background-color: #fff;
   width: 280px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   border-top: none;
   border-radius: 5px;
 }
@@ -313,11 +313,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-top: 1px solid var(--active-button-color);
+  border-top: 1px solid var(--dark-green-color);
   height: 42px;
 }
 .purposeOption:hover {
-  background-color: var(--active-button-color);
+  background-color: var(--dark-green-color);
   color: #fff;
   font-weight: 500;
 }
