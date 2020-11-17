@@ -65,7 +65,7 @@ function SignUp({ createUser, createJWT, userToken, setUserReg, regFailed }) {
   }
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.SignUpContainer}>
       <form className={styles.SignUpForm} onSubmit={submitHandler}>
         <div className={styles.FormName}>Регистрация</div>
         <div className={styles.Block}>
@@ -146,13 +146,13 @@ function SignUp({ createUser, createJWT, userToken, setUserReg, regFailed }) {
         <button type="submit" id="submit" className={styles.SubmitButton}>
           ЗАРЕГИСТРИРОВАТЬСЯ
         </button>
+        <div className={styles.SignIn}>
+          Уже есть аккаунт?{' '}
+          <a href="#/" className={styles.SignInButton}>
+            Войти
+          </a>
+        </div>
       </form>
-      <div className={styles.SignIn}>
-        Уже есть аккаунт?{' '}
-        <a href="#/sign-in" className={styles.SignInButton}>
-          Войти
-        </a>
-      </div>
     </div>
   )
 }

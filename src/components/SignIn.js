@@ -75,13 +75,13 @@ function SignIn({ userToken, createJWT, setUserReg }) {
         <button type="submit" id="submit" className={`${styles.SubmitButton} ${styles.SubmitSignIn}`}>
           ВОЙТИ
         </button>
+        <div className={styles.SignIn}>
+          Нет аккаунта?{' '}
+          <a href="#/" className={styles.SignInButton}>
+            Зарегистрироваться
+          </a>
+        </div>
       </form>
-      <div className={styles.SignIn}>
-        Нет аккаунта?{' '}
-        <a href="#/sign-up" className={styles.SignInButton}>
-          Зарегистрироваться
-        </a>
-      </div>
     </div>
   )
 }

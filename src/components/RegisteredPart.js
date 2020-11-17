@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getMe, refreshJWT } from '../actions/signIn.js'
@@ -18,7 +18,6 @@ import VisitsHistory from './vet/VisitsHistory'
 
 // eslint-disable-next-line
 function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT, loginFailed }) {
-  const [input, setInput] = useState([])
   const token = localStorage.getItem('token')
 
   if (userInfo.userId === undefined) userInfo.userId = -1
@@ -28,7 +27,7 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
 
   if (loginFailed === 'Unauthorized') {
     localStorage.setItem('userReg', '')
-    window.location.href = '#/sign-in'
+    window.location.href = '#/'
     window.location.reload()
   }
 
@@ -42,7 +41,7 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
       }, 6000 * 14)
     }
     // eslint-disable-next-line
-  }, [userInfo])
+  }, [userInfo, uid])
 
   if (profileInfo)
     if (userInfo.access !== '' && userInfo.access !== undefined) {
@@ -61,7 +60,7 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
         {!isVet && (
           <Route path="/my-acc">
             <Header header="my-acc" isVet={isVet} />
-            <MyPets input={input} uid={uid} setInput={setInput} />
+            <MyPets uid={uid} />
           </Route>
         )}
         {isVet && (

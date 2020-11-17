@@ -2,7 +2,6 @@
 
 .DiaryContainer {
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   width: auto;
   height: 618px;
@@ -14,6 +13,8 @@
   width: 650px;
   height: 100%;
   background-color: var(--header-color);
+  border: 1px solid #7aa338;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .DiaryBlocks:first-child {
@@ -203,6 +204,7 @@ textarea.input {
   margin-left: auto;
   cursor: pointer;
   outline: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .inputAndTextWrapper {
