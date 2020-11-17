@@ -27,7 +27,7 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
 
   useEffect(() => {
     if (profileInfo.userId === -1) {
-      getProfileInfo(uid)
+      getProfileInfo(uid, token)
     }
     // eslint-disable-next-line
   }, [getProfileInfo])
