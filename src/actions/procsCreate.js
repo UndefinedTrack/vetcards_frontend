@@ -80,6 +80,7 @@ export const createOwnerProc = (pid, uid, name, date, description, token) => {
     data.append('name', name)
     data.append('proc_date', date)
     data.append('description', description)
+    console.log(token)
 
     dispatch(createOwnerProcStarted())
 

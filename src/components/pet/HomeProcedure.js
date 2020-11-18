@@ -16,7 +16,7 @@ function HomeProcedure({ proc, date }) {
       <div className={styles.InformationBlock}>
         <div>{proc.name}</div>
         <div>{procDate}</div>
-        {/* <div>{proc.description}</div> */}
+        <div>{proc.description}</div>
       </div>
       <More className={styles.MoreButton} />
     </div>

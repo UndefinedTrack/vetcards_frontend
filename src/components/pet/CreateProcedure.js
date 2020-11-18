@@ -27,7 +27,7 @@ function CreateProcedure({ backClick, createProc, uid }) {
       <hr className={styles.Line} />
       <form className={styles.ProcedureContainer} onSubmit={submitHandler}>
         <div className={styles.ProcedureEntryBlock}>
-          <div className={styles.ProcedureText}>Тип процедуры</div>
+          <div className={styles.ProcedureText}>Название процедуры</div>
           <span className={styles.noteText}>*</span>
         </div>
         <input
@@ -91,7 +91,7 @@ function CreateProcedure({ backClick, createProc, uid }) {
 
     setState({
       procedureName: '',
-      date: '',
+      date,
       remark: '',
     })
 

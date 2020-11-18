@@ -1,30 +1,53 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
+import { connect } from 'react-redux'
 import styles from '../../styles/pet/Diary.module.css'
+import { createNewNotification } from '../../actions/notifications'
 import { ReactComponent as BackButton } from '../../icons/mdi_keyboard_arrow_left.svg'
 import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
 import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
-function CreateReminder({ backClick }) {
+function CreateReminder({ backClick, uid, createNotification }) {
+  const { pid } = useParams()
   const today = new Date()
   const formatter = new Intl.DateTimeFormat('ru')
   const date = formatter.format(today)
-  // const [popUpDispl, setPopUpDispl] = useState(false)
-  // const [reminderType, setReminderType] = useState('')
-  // const [firstDate, setFirstDate] = useState('')
-  // const [reminderFrequency, setReminderFrequency] = useState('')
-  // const [remark, setRemark] = useState('')
+  const token = localStorage.getItem('token')
+  const [state, setState] = useState({
+    reminderName: '',
+    date,
+    option: 'Раз в день',
+    remark: '',
+  })
 
   const reminderFrequencies = ['Раз в день', 'Раз в неделю', 'Раз в год']
 
   function handleInputChange(event) {
-    event.preventDefault()
+    event.persist()
+    setState((prev) => ({
+      ...prev,
+      ...{
+        [event.target.name]: event.target.value,
+      },
+    }))
   }
 
   function handleSubmit(event) {
     event.preventDefault()
+
+    createNotification(pid, uid, state.reminderName, state.remark, state.option, token)
+
+    setState({
+      reminderName: '',
+      date,
+      option: 'Раз в день',
+      remark: '',
+    })
+
     backClick()
+    setTimeout(() => window.location.reload(), 100)
   }
 
   return (
@@ -37,7 +60,7 @@ function CreateReminder({ backClick }) {
       <form className={styles.ProcedureContainer} onSubmit={handleSubmit}>
         <div className={styles.inputAndTextWrapper}>
           <div className={styles.ProcedureEntryBlock}>
-            <div className={styles.ReminderText}>Тип напоминания</div>
+            <div className={styles.ReminderText}>Название напоминания</div>
             <span className={styles.noteReminderText}>*</span>
           </div>
           <input
@@ -74,10 +97,7 @@ function CreateReminder({ backClick }) {
             <div className={styles.ReminderText}>Частота напоминаний</div>
             <span className={styles.noteReminderText}>*</span>
           </div>
-          <DropDownList
-            options={reminderFrequencies}
-            changeInputHandler={handleInputChange}
-          />
+          <DropDownList options={reminderFrequencies} changeInputHandler={handleInputChange} />
         </div>
         <div className={styles.inputAndTextWrapper}>
           <div className={styles.ProcedureEntryBlock}>
@@ -102,6 +122,8 @@ function CreateReminder({ backClick }) {
 
 CreateReminder.propTypes = {
   backClick: PropTypes.func.isRequired,
+  createNotification: PropTypes.func.isRequired,
+  uid: PropTypes.number.isRequired,
 }
 
 // Выпадающий список
@@ -124,23 +146,20 @@ function DropDownList({ changeInputHandler, options }) {
     <div className={styles.diaryOptionWrapper}>
       <div
         className={styles.diaryOptionBlock}
-        role='button'
-        tabIndex='0'
+        role="button"
+        tabIndex="0"
         onKeyDown={handleArrowClick}
         onClick={handleArrowClick}
       >
         {chosenOption}
-        <Arrow
-          isVisible={isVisible}
-          handleArrowClick={handleArrowClick}
-        />
+        <Arrow isVisible={isVisible} handleArrowClick={handleArrowClick} />
       </div>
       <OptionsList
-          isVisible={isVisible}
-          handleOptionClick={handleOptionClick}
-          options={options}
-          changeInputHandler={changeInputHandler}
-        />
+        isVisible={isVisible}
+        handleOptionClick={handleOptionClick}
+        options={options}
+        changeInputHandler={changeInputHandler}
+      />
     </div>
   )
 }
@@ -153,23 +172,15 @@ DropDownList.propTypes = {
 function Arrow({ isVisible, handleArrowClick }) {
   if (!isVisible) {
     return (
-      <button
-        type='button'
-        onClick={handleArrowClick}
-        className={styles.diaryOptionArrowButton}
-      >
+      <button type="button" onClick={handleArrowClick} className={styles.diaryOptionArrowButton}>
         <ArrowDown />
       </button>
     )
   }
   return (
-    <button
-        type='button'
-        onClick={handleArrowClick}
-        className={styles.diaryOptionArrowButton}
-      >
-        <ArrowUp />
-      </button>
+    <button type="button" onClick={handleArrowClick} className={styles.diaryOptionArrowButton}>
+      <ArrowUp />
+    </button>
   )
 }
 
@@ -187,15 +198,11 @@ function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler
         name={options[i]}
         handleOptionClick={handleOptionClick}
         changeInputHandler={changeInputHandler}
-      />
+      />,
     )
   }
   if (isVisible) {
-    return (
-      <div className={styles.diaryOptionsBox} >
-        {optionsComponents}
-      </div>
-   )
+    return <div className={styles.diaryOptionsBox}>{optionsComponents}</div>
   }
   return null
 }
@@ -212,14 +219,16 @@ function Option({ name, handleOptionClick, changeInputHandler }) {
     <div className={styles.diaryOption}>
       <input
         id={name}
-        type='checkbox'
+        type="checkbox"
         value={name}
-        name='option'
+        name="option"
         className={styles.diaryOptionInput}
         onClick={() => handleOptionClick(name)}
         onChange={changeInputHandler}
       />
-      <label className={styles.diaryOptionLabel} htmlFor={name}>{name}</label>
+      <label className={styles.diaryOptionLabel} htmlFor={name}>
+        {name}
+      </label>
     </div>
   )
 }
@@ -230,4 +239,9 @@ Option.propTypes = {
   changeInputHandler: PropTypes.func.isRequired,
 }
 
-export default CreateReminder
+const mapDispatchToProps = (dispatch) => ({
+  createNotification: (pid, uid, notifType, description, repeat, token) =>
+    dispatch(createNewNotification(pid, uid, notifType, description, repeat, token)),
+})
+
+export default connect(null, mapDispatchToProps)(CreateReminder)

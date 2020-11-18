@@ -4,14 +4,12 @@ import styles from '../../styles/pet/Diary.module.css'
 import Reminders from './Reminders'
 import CreateReminder from './CreateReminder'
 import CreateProcedure from './CreateProcedure'
-import PopUpWindow from '../PopUpWindow'
 import OwnerProcedures from './OwnerProcedures'
 // import { ReactComponent as BackButton } from '../icons/back_button.svg'
 
 function Diary({ uid }) {
   const [createProcedureWindow, setCreateProcedureWindow] = useState(false)
   const [createReminderWindow, setCreateReminderWindow] = useState(false)
-  const [popUpDispl, setPopUpDispl] = useState(false)
 
   return (
     <main className={styles.DiaryContainer}>
@@ -34,7 +32,6 @@ function Diary({ uid }) {
           plusClick={openCreateProcedureWindow}
         />
       )}
-      <PopUpWindow displ={popUpDispl} />
       {createProcedureWindow && <CreateProcedure uid={uid} backClick={openCreateProcedureWindow} />}
     </main>
   )
@@ -44,12 +41,6 @@ function Diary({ uid }) {
   }
 
   function openCreateReminderWindow() {
-    if (!createReminderWindow) {
-      setPopUpDispl(true)
-      setTimeout(() => {
-        setPopUpDispl(false)
-      }, 2000)
-    }
     setCreateReminderWindow(!createReminderWindow)
   }
 }
