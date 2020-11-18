@@ -10,7 +10,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid #7aa338;
+  border: 1px solid --dark-green-color;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -45,7 +45,7 @@
 .InfoName {
   font-weight: 500;
   margin-right: 10px;
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
 }
 a {
   text-decoration: none;
@@ -60,7 +60,7 @@ a:visited {
   width: 203px;
   margin-left: auto;
   margin-right: 31px;
-  background-color: var(--active-button-color);
+  background-color: var(--dark-green-color);
   border-radius: 10px;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;

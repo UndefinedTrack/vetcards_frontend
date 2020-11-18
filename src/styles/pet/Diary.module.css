@@ -12,8 +12,8 @@
   border-radius: 10px;
   width: 650px;
   height: 100%;
-  background-color: var(--header-color);
-  border: 1px solid #7aa338;
+  background-color: var(--white-color);
+  border: 1px solid --dark-green-color;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -42,7 +42,7 @@
 
 .Button {
   height: 30px;
-  fill: var(--active-button-color);
+  fill: var(--dark-green-color);
   margin-top: 10px;
   margin-right: 20px;
   padding: 5px;
@@ -51,8 +51,8 @@
 }
 
 .Line {
-  color: var(--active-button-color);
-  background-color: var(--active-button-color);
+  color: var(--dark-green-color);
+  background-color: var(--dark-green-color);
   width: 601px;
   border: none;
   height: 1px;
@@ -92,7 +92,7 @@
   height: 60px;
   width: 60px;
   border-radius: 50%;
-  background: url(../../icons/tablet.svg) no-repeat 12px var(--active-button-color);
+  background: url(../../icons/tablet.svg) no-repeat 12px var(--dark-green-color);
 }
 
 .InformationBlock {
@@ -146,7 +146,7 @@
 
 .noteText {
   margin-top: 30px;
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
@@ -156,7 +156,7 @@
 
 .noteReminderText {
   margin-top: 14px;
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
@@ -168,7 +168,7 @@
   outline: none;
   height: 42px;
   width: 565px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   border-radius: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -193,8 +193,8 @@ textarea.input {
   justify-content: center;
   border: none;
   border-radius: 10px;
-  background-color: var(--active-button-color);
-  color: var(--header-color);
+  background-color: var(--dark-green-color);
+  color: var(--white-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
   font-size: 18px;
@@ -242,7 +242,7 @@ textarea.input {
 }
 
 .SearchButton {
-  fill: var(--active-button-color);
+  fill: var(--dark-green-color);
   height: 30px;
   margin-left: 20px;
 }
@@ -347,7 +347,7 @@ textarea.input {
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 7px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   box-sizing: border-box;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
@@ -366,7 +366,7 @@ textarea.input {
   left: 6px;
   background-color: #fff;
   width: 594px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   border-top: none;
   border-radius: 5px;
 }
@@ -375,11 +375,11 @@ textarea.input {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-top: 1px solid var(--active-button-color);
+  border-top: 1px solid var(--dark-green-color);
   height: 42px;
 }
 .diaryOption:hover {
-  background-color: var(--active-button-color);
+  background-color: var(--dark-green-color);
   color: #fff;
   font-weight: 500;
 }

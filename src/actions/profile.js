@@ -103,6 +103,7 @@ export const getUserProfileInfo = (uid, token) => {
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
+          avatar: uinfo.avatar,
           vet: uinfo.vet,
         }
 

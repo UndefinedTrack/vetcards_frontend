@@ -23,8 +23,8 @@
 }
 
 .Line {
-  color: var(--active-button-color);
-  background-color: var(--active-button-color);
+  color: var(--dark-green-color);
+  background-color: var(--dark-green-color);
   width: calc(100% - 30px);
   border: none;
   height: 1px;

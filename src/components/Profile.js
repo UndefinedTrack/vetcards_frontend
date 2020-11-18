@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
 import { getUserProfileInfo, updateProfileInfo } from '../actions/profile'
-import { uploadUserAvatar } from '../actions/avatar'
+import { uploadUserAvatar, getUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
 // eslint-disable-next-line
-function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfileInfo }) {
+function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAvatar, getAvatar, avatar }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
   const token = localStorage.getItem('token')
 
@@ -24,6 +24,10 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
     email: '',
   })
   const [patronymic, setPatronymic] = useState('')
+  
+  const avatarURL = profileInfo.avatar
+  getAvatar(avatarURL, token)
+  console.log(avatarURL, avatar)
 
   useEffect(() => {
     if (profileInfo.userId === -1) {
@@ -32,6 +36,8 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
     // eslint-disable-next-line
   }, [getProfileInfo])
 
+  console.log(profileInfo)
+  
   function changeInputHandler(event) {
     event.persist()
     setState((prev) => ({
@@ -65,13 +71,9 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
     setPatronymic(event.target.value)
   }
 
-  function handleAvatarChange(event) {
-    uploadAvatar(uid, event.target.files)
+  function handleAvatarChange(image) {
+    uploadAvatar(uid, token, image)
   }
-
-  // function handleSubmit(event) {
-  //   event.preventDefault()
-  // }
 
   function popUpOpen() {
     setPopUpDispl(true)
@@ -85,7 +87,12 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
       <div className={styles.profileWrapper}>
         <form onSubmit={submitHandler}>
           <div className={styles.formSpace}>
-            <ChangeAvatar handleAvatarChange={handleAvatarChange} popUpOpen={popUpOpen} />
+            <Avatar
+              handleAvatarChange={handleAvatarChange}
+              popUpOpen={popUpOpen}
+              avatarURL={profileInfo.avatar}
+              getAvatar={getAvatar}
+            />
             <div className={styles.fieldsColumn}>
               <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} />
               <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} />
@@ -112,20 +119,31 @@ function Profile({ uid, profileInfo, getProfileInfo, uploadAvatar, updateProfile
   )
 }
 
-function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
+function Avatar({ handleAvatarChange, avatarURL, popUpOpen }) {
+  const [previewURL, setPreviewURL] = useState('')
+
   const imageInput = React.useRef(null)
-  function handleImageInput() {
-    // if (imageInput.current) {
-    //   imageInput.current.click()
-    // }
-    popUpOpen()
+
+  function handleButtonClick() {
+    if (imageInput.current) {
+      imageInput.current.click()
+    }
+    // popUpOpen()
+  }
+
+  function handleImageInput(event) {
+    const image = event.target.files[0]
+    if (image) {
+      handleAvatarChange(image)
+      setPreviewURL(URL.createObjectURL(image))
+    }    
   }
 
   return (
     <div>
       <div className={styles.avatarWrapper}>
-        <div className={styles.avatarSample} />
-        <button type="button" className={styles.changeAvatar} onClick={handleImageInput}>
+        <AvatarImage previewURL={previewURL} avatarURL={avatarURL} />
+        <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
           Изменить фото
         </button>
         <input
@@ -133,7 +151,7 @@ function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
           type="file"
           multiple
           accept="image/*"
-          onChange={handleAvatarChange}
+          onChange={handleImageInput}
           ref={imageInput}
           style={{ display: 'none' }}
         />
@@ -142,8 +160,31 @@ function ChangeAvatar({ handleAvatarChange, popUpOpen }) {
   )
 }
 
-ChangeAvatar.propTypes = {
+Avatar.propTypes = {
   handleAvatarChange: PropTypes.func.isRequired,
+  popUpOpen: PropTypes.func.isRequired,
+  avatarURL: PropTypes.string.isRequired,
+}
+
+function AvatarImage({ previewURL, avatarURL }) {
+  // if (avatarURL !== '') {
+  //   return (
+  //     <img src={avatarURL} alt='' className={styles.avatarShape} />
+  //   )
+  // }
+  if (previewURL !== '') {
+    return(
+      <img src={previewURL} alt='' className={styles.avatarShape} />
+    )
+  }
+  return(
+    <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
+  )
+}
+
+AvatarImage.propTypes = {
+  previewURL: PropTypes.string.isRequired,
+  avatarURL: PropTypes.string.isRequired,
 }
 
 function LastName({ lastName, changeInputHandler }) {
@@ -289,7 +330,8 @@ const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid) => dispatch(getUserProfileInfo(uid)),
   updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, token) =>
     dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, token)),
-  uploadAvatar: (uid, files) => dispatch(uploadUserAvatar(uid, files)),
+  uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
+  getAvatar: (avatarURL, token) => dispatch(getUserAvatar(avatarURL, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
