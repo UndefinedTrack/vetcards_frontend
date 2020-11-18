@@ -11,7 +11,6 @@ import { uploadPetAvatar } from '../actions/avatar'
 function AboutPet({ pet, closeSearchString, uploadAvatar }) {
   const token = localStorage.getItem('token')
 
-  console.log(pet)
   function handleAvatarChange(image) {
     uploadAvatar(pet.userId, pet.petId, token, image)
   }
@@ -45,7 +44,7 @@ function Avatar({ handleAvatarChange }) {
     if (image) {
       handleAvatarChange(image)
       setPreviewURL(URL.createObjectURL(image))
-    }    
+    }
   }
 
   return (
@@ -80,13 +79,9 @@ function AvatarImage({ previewURL }) {
   //   )
   // }
   if (previewURL !== '') {
-    return(
-      <img src={previewURL} alt='' className={styles.avatarShape} />
-    )
+    return <img src={previewURL} alt="" className={styles.avatarShape} />
   }
-  return(
-    <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
-  )
+  return <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
 }
 
 AvatarImage.propTypes = {

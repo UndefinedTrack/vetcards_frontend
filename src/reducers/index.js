@@ -9,6 +9,7 @@ import schedule from './schedule'
 import avatar from './avatar'
 import petSearch from './petSearch'
 import signIn from './signIn'
+import notification from './notification'
 
 const rootReducer = combineReducers({
   petInfo,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   avatar,
   petSearch,
   signIn,
+  notification,
 })
 
 export default rootReducer

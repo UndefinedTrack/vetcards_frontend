@@ -58,9 +58,6 @@ function MyPets({ uid, petList, getInfo, procsList, getVetProcs }) {
               <MedicalHistory
                 pet={pet}
                 uid={uid}
-                // input={input}
-                // setInput={setInput}
-                // setPId={setPId}
                 ind={pet.petId}
                 searchLine={searchLine}
                 setSearchLine={setSearchLine}

@@ -14,7 +14,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
 
   if (profileInfo === undefined) {
     profileInfo = []
-    getProfileInfo(uid)
+    getProfileInfo(uid, token)
   }
   const [state, setState] = useState({
     firstName: '',
@@ -24,7 +24,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
     email: '',
   })
   const [patronymic, setPatronymic] = useState('')
-  
+
   const avatarURL = profileInfo.avatar
   getAvatar(avatarURL, token)
   console.log(avatarURL, avatar)
@@ -37,7 +37,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
   }, [getProfileInfo])
 
   console.log(profileInfo)
-  
+
   function changeInputHandler(event) {
     event.persist()
     setState((prev) => ({
@@ -136,7 +136,7 @@ function Avatar({ handleAvatarChange, avatar, popUpOpen }) {
     if (image) {
       handleAvatarChange(image)
       setPreviewURL(URL.createObjectURL(image))
-    }    
+    }
   }
 
   return (
@@ -173,13 +173,9 @@ function AvatarImage({ previewURL, avatar }) {
   //   )
   // }
   if (previewURL !== '') {
-    return(
-      <img src={previewURL} alt='' className={styles.avatarShape} />
-    )
+    return <img src={previewURL} alt="" className={styles.avatarShape} />
   }
-  return(
-    <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
-  )
+  return <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
 }
 
 AvatarImage.propTypes = {
@@ -327,7 +323,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getProfileInfo: (uid) => dispatch(getUserProfileInfo(uid)),
+  getProfileInfo: (uid, token) => dispatch(getUserProfileInfo(uid, token)),
   updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, token) =>
     dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, token)),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
