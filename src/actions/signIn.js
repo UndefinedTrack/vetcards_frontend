@@ -65,7 +65,7 @@ export const getMe = (token) => {
         dispatch(getMeSuccess(user))
       })
       .catch((err) => {
-        window.location.href = '#/sign-in'
+        window.location.href = '#/'
         localStorage.setItem('userReg', '')
         window.location.reload()
         dispatch(getMeFailure(err.statusText))
@@ -84,7 +84,6 @@ export const refreshJWT = (refresh) => {
       .then((resp) => resp.json())
       .then((dat) => dispatch(refreshJWTSuccess(dat)))
       .catch((err) => {
-        console.log(err.statusText)
         dispatch(refreshJWTFailure(err.statusText))
       })
   }

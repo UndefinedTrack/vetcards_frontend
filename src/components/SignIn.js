@@ -4,7 +4,7 @@ import { createJWT } from '../actions/userCreate.js'
 import styles from '../styles/SignUp.module.css'
 
 // eslint-disable-next-line
-function SignIn({ userToken, createJWT, setUserReg }) {
+function SignIn({ userToken, createJWT, setUserReg, setSignInUp }) {
   let wrong = false
   const [state, setState] = useState({
     username: '',
@@ -20,6 +20,7 @@ function SignIn({ userToken, createJWT, setUserReg }) {
     localStorage.setItem('userReg', true)
     setUserReg(true)
     window.location.href = '#/my-acc'
+    setSignInUp(false)
   }
 
   function changeInputHandler(event) {
@@ -72,7 +73,7 @@ function SignIn({ userToken, createJWT, setUserReg }) {
           />
         </div>
         {wrong && <div className={`${styles.WrongMessage} ${styles.SignInWidth}`}>Неверный логин или пароль</div>}
-        <button type="submit" id="submit" className={`${styles.SubmitButton} ${styles.SubmitSignIn}`}>
+        <button type="submit" id="sifn-in-submit" className={`${styles.SubmitButton} ${styles.SubmitSignIn}`}>
           ВОЙТИ
         </button>
         <div className={styles.SignIn}>

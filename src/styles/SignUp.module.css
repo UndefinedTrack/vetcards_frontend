@@ -1,7 +1,7 @@
 @import url('./stylesConstants.css');
 
 .Container {
-  position: absolute;
+  position: fixed;
   top: 100px;
   right: 50px;
   z-index: 1;
