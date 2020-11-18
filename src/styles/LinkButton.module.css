@@ -6,12 +6,12 @@
   align-items: center;
   /* margin-top: 16px; */
   width: 331px;
-  height: 48px;
+  height: 30px;
   border-radius: 7px;
   background-color: var(--light-green-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 35px;
   padding: 6.5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -30,12 +30,14 @@
   .Button {
     width: 270px;
     font-size: 20px;
+    height: 25px;
   }
 }
 
 @media (max-width: 1200px) {
   .Button {
     width: 200px;
+    height: 25px;
     font-size: 19px;
   }
 }
@@ -43,7 +45,7 @@
 @media (max-width: 950px) {
   .Button {
     width: 150px;
-    height: 25px;
+    height: 20px;
     font-size: 15px;
   }
 }

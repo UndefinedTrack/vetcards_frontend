@@ -86,10 +86,12 @@ export const uploadUserAvatar = (uid, token, image) => {
   }
 }
 
-export const uploadPetAvatar = (uid, token, files) => {
+export const uploadPetAvatar = (uid, pid, token, image) => {
   return (dispatch, getState) => {
     const data = new FormData()
-    data.append('avatar', files[0])
+    data.append('user', uid)
+    data.append('pk', pid)
+    data.append('avatar', image)
 
     dispatch(uploadAvatarStarted())
 

@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-import React /* { useState } */ from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { createPet } from '../actions/petOps'
+import { uploadPetAvatar } from '../actions/avatar'
 import styles from '../styles/Profile.module.css'
 
 class PetCreator extends React.Component {
@@ -22,11 +23,14 @@ class PetCreator extends React.Component {
     }
 
     this.createPet = props.createPet
+    this.uploadAvatar = props.uploadAvatar
     this.uid = props.uid
     this.token = localStorage.getItem('token')
   }
 
   submitHandler = (event) => {
+    // const { petInfo } = this.props
+
     event.preventDefault()
     let birthDate = ''
 
@@ -64,9 +68,20 @@ class PetCreator extends React.Component {
       chip: '',
     })
 
+    // this.uploadAvatar(this.uid, petInfo.petId, this.token, avatar)
+
     setTimeout(() => {
       window.location.href = '#/my-acc'
     }, 100)
+  }
+
+  handleAvatarChange = (image) => {
+    this.setState((prev) => ({
+      ...prev,
+      ...{
+        avatar: image,
+      }
+    }))
   }
 
   changeInputHandler = (event) => {
@@ -85,7 +100,8 @@ class PetCreator extends React.Component {
         <div className={styles.profileWrapper}>
           <form onSubmit={this.submitHandler}>
             <div className={styles.formSpace}>
-              <ChangeAvatar />
+              <Avatar handleAvatarChange={this.handleAvatarChange}
+              />
               <div className={styles.fieldsColumn}>
                 <Name
                   handleNameChange={this.changeInputHandler}
@@ -125,16 +141,71 @@ class PetCreator extends React.Component {
   }
 }
 
-function ChangeAvatar(props) {
+function Avatar({ handleAvatarChange, avatarURL }) {
+  const [previewURL, setPreviewURL] = useState('')
+
+  const imageInput = React.useRef(null)
+
+  function handleButtonClick() {
+    if (imageInput.current) {
+      imageInput.current.click()
+    }
+  }
+
+  function handleImageInput(event) {
+    const image = event.target.files[0]
+    if (image) {
+      handleAvatarChange(image)
+      setPreviewURL(URL.createObjectURL(image))
+    }    
+  }
+
   return (
-    <div className={styles.avatarWrapper}>
-      <div className={styles.avatarSample} />
-      <button type="button" className={styles.changeAvatar}>
-        Изменить фото
-      </button>
+    <div>
+      <div className={styles.avatarWrapper}>
+        <AvatarImage previewURL={previewURL} avatarURL={avatarURL} />
+        <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
+          Изменить фото
+        </button>
+        <input
+          id="image"
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={handleImageInput}
+          ref={imageInput}
+          style={{ display: 'none' }}
+        />
+      </div>
     </div>
   )
 }
+
+// Avatar.propTypes = {
+//   handleAvatarChange: PropTypes.func.isRequired,
+//   avatarURL: PropTypes.string.isRequired,
+// }
+
+function AvatarImage({ previewURL, avatarURL }) {
+  // if (avatarURL !== '') {
+  //   return (
+  //     <img src={avatarURL} alt='' className={styles.avatarShape} />
+  //   )
+  // }
+  if (previewURL !== '') {
+    return(
+      <img src={previewURL} alt='' className={styles.avatarShape} />
+    )
+  }
+  return(
+    <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
+  )
+}
+
+// AvatarImage.propTypes = {
+//   previewURL: PropTypes.string.isRequired,
+//   avatarURL: PropTypes.string.isRequired,
+// }
 
 function Name({ handleNameChange, name, heading, placeholder, rec }) {
   return (
@@ -245,9 +316,14 @@ function Birthday({ handleNameChange, heading, placeholder }) {
   )
 }
 
+const mapStateToProps = (state) => ({
+  petInfo: state.petInfo.pet,
+})
+
 const mapDispatchToProps = (dispatch) => ({
   createPet: (uid, name, species, breed, color, birthDate, gender, chip, token) =>
     dispatch(createPet(uid, name, species, breed, color, birthDate, gender, chip, token)),
+  uploadAvatar: (uid, pid, token, image) => dispatch(uploadPetAvatar(uid, pid, token, image))
 })
 
-export default connect(null, mapDispatchToProps)(PetCreator)
+export default connect(mapStateToProps, mapDispatchToProps)(PetCreator)

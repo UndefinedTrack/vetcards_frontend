@@ -90,7 +90,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
             <Avatar
               handleAvatarChange={handleAvatarChange}
               popUpOpen={popUpOpen}
-              avatarURL={profileInfo.avatar}
+              avatar={avatar}
               getAvatar={getAvatar}
             />
             <div className={styles.fieldsColumn}>
@@ -119,7 +119,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
   )
 }
 
-function Avatar({ handleAvatarChange, avatarURL, popUpOpen }) {
+function Avatar({ handleAvatarChange, avatar, popUpOpen }) {
   const [previewURL, setPreviewURL] = useState('')
 
   const imageInput = React.useRef(null)
@@ -142,7 +142,7 @@ function Avatar({ handleAvatarChange, avatarURL, popUpOpen }) {
   return (
     <div>
       <div className={styles.avatarWrapper}>
-        <AvatarImage previewURL={previewURL} avatarURL={avatarURL} />
+        <AvatarImage previewURL={previewURL} avatarURL={avatar} />
         <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
           Изменить фото
         </button>
@@ -163,10 +163,10 @@ function Avatar({ handleAvatarChange, avatarURL, popUpOpen }) {
 Avatar.propTypes = {
   handleAvatarChange: PropTypes.func.isRequired,
   popUpOpen: PropTypes.func.isRequired,
-  avatarURL: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 }
 
-function AvatarImage({ previewURL, avatarURL }) {
+function AvatarImage({ previewURL, avatar }) {
   // if (avatarURL !== '') {
   //   return (
   //     <img src={avatarURL} alt='' className={styles.avatarShape} />
@@ -184,7 +184,7 @@ function AvatarImage({ previewURL, avatarURL }) {
 
 AvatarImage.propTypes = {
   previewURL: PropTypes.string.isRequired,
-  avatarURL: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 }
 
 function LastName({ lastName, changeInputHandler }) {
