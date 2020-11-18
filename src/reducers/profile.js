@@ -22,10 +22,11 @@ const initialState = {
         patronymic: '',
         lastName: '',
         phone: '',
-        email: ''
+        email: '',
+        avatar: '',
     },
     petsList: [],
-    patientsLIst: [],
+    patientsList: [],
     error: null
 }
 

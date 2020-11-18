@@ -1,14 +1,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styles from '../../styles/vet/PatientsCard.module.css'
-import { ReactComponent as Photo } from '../../icons/photo.svg'
+import { getPetAvatar } from '../../actions/avatar'
 
-function PatientCard({ patient }) {
+function PatientCard({ patient, getAvatar }) {
+  const token = localStorage.getItem('token')
+
+  let avatarFullURL = ''
+  if (patient.avatar !== '') {
+    avatarFullURL = getAvatar(patient.avatar, token)
+  }
+
   return (
     <div className={styles.PatientsContainer}>
-      <Photo className={styles.Photo} />
+      <AvatarImage avatarFullURL={avatarFullURL} />
       <div className={styles.PatientInfo}>
         <div className={styles.Column}>
           <Info sectionName="Пациент" value={patient.patient} />
@@ -58,4 +66,19 @@ Info.propTypes = {
   sectionName: PropTypes.string.isRequired,
 }
 
-export default PatientCard
+function AvatarImage({ avatarFullURL }) {
+  console.log(avatarFullURL)
+  if (avatarFullURL !== '') {
+    return (
+      <img src={avatarFullURL} alt='' className={styles.avatarShape} />
+    )
+  }
+  return <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
+}
+
+
+const mapDispatchToProps = (dispatch) => ({
+  getAvatar: (avatarURL, token) => dispatch(getPetAvatar(avatarURL, token)),
+})
+
+export default connect(null, mapDispatchToProps)(PatientCard)

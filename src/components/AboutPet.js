@@ -6,10 +6,15 @@ import LinkButton from './LinkButton'
 import InformationBlock from './InformationBlock'
 import styles from '../styles/AboutPets.module.css'
 // import { ReactComponent as PhotoPet } from '../icons/photo_pet.svg'
-import { uploadPetAvatar } from '../actions/avatar'
+import { uploadPetAvatar, getPetAvatar } from '../actions/avatar'
 
-function AboutPet({ pet, closeSearchString, uploadAvatar }) {
+function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, petInfo }) {
   const token = localStorage.getItem('token')
+  
+  let avatarFullURL = ''
+  if (pet.avatar !== '') {
+    avatarFullURL = getAvatar(pet.avatar, token)
+  }
 
   function handleAvatarChange(image) {
     uploadAvatar(pet.userId, pet.petId, token, image)
@@ -18,7 +23,7 @@ function AboutPet({ pet, closeSearchString, uploadAvatar }) {
   return (
     <section className={styles.Container}>
       <div className={styles.PetName}>{pet.name}</div>
-      <Avatar handleAvatarChange={handleAvatarChange} />
+      <Avatar handleAvatarChange={handleAvatarChange} avatarFullURL={avatarFullURL} />
       <hr className={styles.Line} />
       <InformationBlock pet={pet} />
       <hr className={styles.Line} />
@@ -28,7 +33,7 @@ function AboutPet({ pet, closeSearchString, uploadAvatar }) {
   )
 }
 
-function Avatar({ handleAvatarChange }) {
+function Avatar({ handleAvatarChange, avatarFullURL }) {
   const [previewURL, setPreviewURL] = useState('')
 
   const imageInput = React.useRef(null)
@@ -50,7 +55,7 @@ function Avatar({ handleAvatarChange }) {
   return (
     <div>
       <div className={styles.avatarWrapper}>
-        <AvatarImage previewURL={previewURL} />
+        <AvatarImage previewURL={previewURL} avatarFullURL={avatarFullURL} />
         <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
           Изменить фото
         </button>
@@ -72,12 +77,12 @@ Avatar.propTypes = {
   handleAvatarChange: PropTypes.func.isRequired,
 }
 
-function AvatarImage({ previewURL }) {
-  // if (avatarURL !== '') {
-  //   return (
-  //     <img src={avatarURL} alt='' className={styles.avatarShape} />
-  //   )
-  // }
+function AvatarImage({ previewURL, avatarFullURL }) {
+  if (avatarFullURL !== '') {
+    return (
+      <img src={avatarFullURL} alt='' className={styles.avatarShape} />
+    )
+  }
   if (previewURL !== '') {
     return <img src={previewURL} alt="" className={styles.avatarShape} />
   }
@@ -89,6 +94,7 @@ AvatarImage.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  getAvatar: (avatarURL, token) => dispatch(getPetAvatar(avatarURL, token)),
   uploadAvatar: (uid, pid, token, image) => dispatch(uploadPetAvatar(uid, pid, token, image)),
 })
 
