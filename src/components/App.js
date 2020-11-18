@@ -15,7 +15,7 @@ function App() {
   return (
     <div className={styles.App}>
       <HashRouter>
-        {signInUp && <SignIn setUserReg={setUserReg} />}
+        {signInUp && <SignIn setUserReg={setUserReg} setSignInUp={setSignInUp} />}
         {!userReg && (
           <Route exact path="/">
             <Header header="#/" setSignInUp={setSignInUp} signInUp={signInUp} />
