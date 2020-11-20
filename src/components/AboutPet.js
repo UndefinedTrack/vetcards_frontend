@@ -8,12 +8,11 @@ import styles from '../styles/AboutPets.module.css'
 // import { ReactComponent as PhotoPet } from '../icons/photo_pet.svg'
 import { uploadPetAvatar, getPetAvatar } from '../actions/avatar'
 
-function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, petInfo }) {
+function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullURL }) {
   const token = localStorage.getItem('token')
   
-  let avatarFullURL = ''
   if (pet.avatar !== '') {
-    avatarFullURL = getAvatar(pet.avatar, token)
+    getAvatar(pet.avatar, token)
   }
 
   function handleAvatarChange(image) {
@@ -74,6 +73,7 @@ function Avatar({ handleAvatarChange, avatarFullURL }) {
 }
 
 Avatar.propTypes = {
+  avatarFullURL: PropTypes.string.isRequired,
   handleAvatarChange: PropTypes.func.isRequired,
 }
 
@@ -90,12 +90,17 @@ function AvatarImage({ previewURL, avatarFullURL }) {
 }
 
 AvatarImage.propTypes = {
+  avatarFullURL: PropTypes.string.isRequired,
   previewURL: PropTypes.string.isRequired,
 }
+
+const mapStateToProps = (state) => ({
+  avatarFullURL: state.avatar.avatar,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   getAvatar: (avatarURL, token) => dispatch(getPetAvatar(avatarURL, token)),
   uploadAvatar: (uid, pid, token, image) => dispatch(uploadPetAvatar(uid, pid, token, image)),
 })
 
-export default connect(null, mapDispatchToProps)(AboutPet)
+export default connect(mapStateToProps, mapDispatchToProps)(AboutPet)

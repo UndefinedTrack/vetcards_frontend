@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom'
 import styles from '../../styles/vet/PatientsCard.module.css'
 import { getPetAvatar } from '../../actions/avatar'
 
-function PatientCard({ patient, getAvatar }) {
+function PatientCard({ patient, getAvatar, avatarFullURL }) {
   const token = localStorage.getItem('token')
 
-  let avatarFullURL = ''
   if (patient.avatar !== '') {
-    avatarFullURL = getAvatar(patient.avatar, token)
+    getAvatar(patient.avatar, token)
   }
 
   return (
@@ -67,7 +66,6 @@ Info.propTypes = {
 }
 
 function AvatarImage({ avatarFullURL }) {
-  console.log(avatarFullURL)
   if (avatarFullURL !== '') {
     return (
       <img src={avatarFullURL} alt='' className={styles.avatarShape} />
@@ -76,9 +74,12 @@ function AvatarImage({ avatarFullURL }) {
   return <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
 }
 
+const mapStateToProps = (state) => ({
+  avatarFullURL: state.avatar.avatar,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   getAvatar: (avatarURL, token) => dispatch(getPetAvatar(avatarURL, token)),
 })
 
-export default connect(null, mapDispatchToProps)(PatientCard)
+export default connect(mapStateToProps, mapDispatchToProps)(PatientCard)
