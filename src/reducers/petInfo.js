@@ -19,6 +19,7 @@ const initialState = {
         birthDate: '',
         gender: '',
         chip: '',
+        avatar: '',
     },
     error: null,
 }

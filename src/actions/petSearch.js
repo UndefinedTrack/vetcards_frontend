@@ -56,6 +56,7 @@ export const searchPets = (uid, name, token) => {
             birthDate: pt.birth_date,
             gender: pt.gender,
             chip: pt.chip,
+            avatar: pt.avatar,
           }
 
           patients.push(patient)

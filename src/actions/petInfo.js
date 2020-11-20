@@ -67,6 +67,7 @@ export const getPetInfo = (pid, uid, token) => {
           birthDate: pinfo.birth_date,
           gender: pinfo.gender,
           chip: pinfo.chip,
+          avatar: pinfo.avatar,
         }
 
         dispatch(getPetInfoSuccess(pet))

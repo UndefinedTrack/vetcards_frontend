@@ -25,6 +25,19 @@
   fill: #c4c4c4;
 }
 
+.avatarShape {
+  display: flex;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-left: 22px;
+  margin-right: 27px;
+}
+
+.avatarSample {
+  background-color: var(--grey-green-color);
+}
+
 .InfoContainer {
   width: 430px;
   overflow: hidden;
