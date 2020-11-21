@@ -5,6 +5,7 @@ import styles from '../../styles/mainPage/MainPage.module.css'
 import SignUp from '../SignUp'
 import { ReactComponent as Heart } from '../../icons/emojione-monotone_yellow-heart.svg'
 import { ReactComponent as Monitor } from '../../icons/line-md_computer.svg'
+import { ReactComponent as Clock } from '../../icons/et_clock.svg'
 
 function ClientPage({ setUserReg }) {
   const hashLink = React.useRef(null)
@@ -19,6 +20,7 @@ function ClientPage({ setUserReg }) {
     <main className={styles.Container}>
       <div className={styles.Advert}>
         <div className={styles.Ad}>
+          <div className={styles.SmallText}>Есть домашний любимец?</div>
           <div className={styles.LargeText}>Полезный сервис для здоровья питомца</div>
           <button type="button" className={styles.Button} onClick={handleButtonClick}>
             Зарегистрируйтесь
@@ -32,8 +34,8 @@ function ClientPage({ setUserReg }) {
       </div>
       <div className={styles.Cards}>
         <div className={styles.Card}>
-          <Heart className={styles.icon} />
-          <div className={styles.CardText}>Доступ к истории болезни питомца в личном кабинете</div>
+          <Clock className={styles.icon} />
+          <div className={styles.CardText}>Вы не забудете сделать прививку</div>
         </div>
         <div className={styles.Card}>
           <Monitor className={styles.icon} />
@@ -41,7 +43,7 @@ function ClientPage({ setUserReg }) {
         </div>
         <div className={styles.Card}>
           <Heart className={styles.icon} />
-          <div className={styles.CardText}>Вы не забудете сделать прививку или обработать шерсть любимца от блох</div>
+          <div className={styles.CardText}>Создавайте собственные заметки о здоровье питомца</div>
         </div>
       </div>
       <div id='form' className={styles.ConnectPart}>

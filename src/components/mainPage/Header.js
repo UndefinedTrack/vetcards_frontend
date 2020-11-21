@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { HashLink } from 'react-router-hash-link'
 import HeaderButton from './HeaderButton'
 import styles from '../../styles/mainPage/MainPageHeader.module.css'
 
@@ -20,6 +21,14 @@ function Header({ header, setSignInUp, signInUp }) {
     setSignInUp(!signInUp)
   }
 
+  const hashLink = React.useRef(null)
+
+  function handleButtonClick() {
+    if (hashLink.current) {
+      hashLink.current.click()
+    }
+  }
+
   return (
     <header className={styles.MainPageHeader}>
       <p className={styles.Name}>VetCards</p>
@@ -28,7 +37,8 @@ function Header({ header, setSignInUp, signInUp }) {
         <button type="button" className={styles.SignIn} onClick={signInForm}>
           Вход
         </button>
-        <div className={styles.SignUp}>Регистрация</div>
+        <button type='button' className={styles.SignUp} onClick={handleButtonClick} >Регистрация</button>
+        <HashLink smooth to='/clients/#form' ref={hashLink} />
       </div>
     </header>
   )
