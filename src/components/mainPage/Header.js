@@ -3,17 +3,16 @@ import PropTypes from 'prop-types'
 import HeaderButton from './HeaderButton'
 import styles from '../../styles/mainPage/MainPageHeader.module.css'
 
-// eslint-disable-next-line
 function Header({ header, setSignInUp, signInUp }) {
   let vet = 'disabled'
   let clients = 'disabled'
   let contacts = 'disabled'
 
-  if (header === '#/') {
+  if (header === '/') {
     vet = 'enabled'
-  } else if (header === '#/clients') {
+  } else if (header === '/clients') {
     clients = 'enabled'
-  } else if (header === '#/contacts') {
+  } else if (header === '/contacts') {
     contacts = 'enabled'
   }
 
@@ -37,14 +36,16 @@ function Header({ header, setSignInUp, signInUp }) {
 
 Header.propTypes = {
   header: PropTypes.string.isRequired,
+  setSignInUp: PropTypes.func.isRequired,
+  signInUp: PropTypes.bool.isRequired,
 }
 
 function ButtonContainer({ vet, clients, contacts }) {
   return (
     <div className={styles.ButtonContainer}>
-      <HeaderButton buttonStyles={vet} header="#/" buttonName="Для ветеринаров" />
-      <HeaderButton buttonStyles={clients} header="#/clients" buttonName="Для владельцев" />
-      <HeaderButton buttonStyles={contacts} header="#/contacts" buttonName="Контакты" />
+      <HeaderButton buttonStyles={vet} header="/" buttonName="Для ветеринаров" />
+      <HeaderButton buttonStyles={clients} header="/clients" buttonName="Для владельцев" />
+      <HeaderButton buttonStyles={contacts} header="/contacts" buttonName="Контакты" />
     </div>
   )
 }
