@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import styles from '../styles/App.module.css'
@@ -18,19 +17,19 @@ function App() {
         {signInUp && <SignIn setUserReg={setUserReg} setSignInUp={setSignInUp} />}
         {!userReg && (
           <Route exact path="/">
-            <Header header="#/" setSignInUp={setSignInUp} signInUp={signInUp} />
+            <Header header="/" setSignInUp={setSignInUp} signInUp={signInUp} />
             <VetPage />
           </Route>
         )}
         {!userReg && (
           <Route exact path="/clients">
-            <Header header="#/clients" setSignInUp={setSignInUp} signInUp={signInUp} />
+            <Header header="/clients" setSignInUp={setSignInUp} signInUp={signInUp} />
             <ClientPage setUserReg={setUserReg} />
           </Route>
         )}
         {!userReg && (
           <Route exact path="/contacts">
-            <Header header="#/contacts" setSignInUp={setSignInUp} signInUp={signInUp} />
+            <Header header="/contacts" setSignInUp={setSignInUp} signInUp={signInUp} />
             <ContactsPage />
           </Route>
         )}
