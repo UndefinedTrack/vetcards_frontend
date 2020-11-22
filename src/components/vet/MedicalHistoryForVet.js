@@ -6,8 +6,9 @@ import styles from '../../styles/vet/VisitsHistory.module.css'
 import MedicalCard from '../MedicalCard'
 import { ReactComponent as SearchButton } from '../../icons/search.svg'
 import { getVetProcs } from '../../actions/procsList'
+
 // eslint-disable-next-line
-function MedicalHistoryForVet({ procsList, getVetProcs, uid }) {
+function MedicalHistoryForVet({ procsList, getVetProcs, uid, isVet, setCurrentProc }) {
   const { pid } = useParams()
   const [searchInput, setSearchInput] = useState('')
   const token = localStorage.getItem('token')
@@ -36,7 +37,16 @@ function MedicalHistoryForVet({ procsList, getVetProcs, uid }) {
             const month = Number(procs.procDate.slice(5, 7)) - 1
             const year = procs.procDate.slice(0, 4)
             const date = new Date(year, month, day)
-            return <MedicalCard key={procs.procId} procs={procs} date={date} />
+            return (
+              <MedicalCard
+                key={procs.procId}
+                uid={uid}
+                procs={procs}
+                date={date}
+                isVet={isVet}
+                setCurrentProc={setCurrentProc}
+              />
+            )
           })
           .reverse()
           .sort((a, b) => {

@@ -9,12 +9,22 @@ import { getOwnerProcs } from '../../actions/procsList'
 import { ReactComponent as Search } from '../../icons/search.svg'
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 
-// eslint-disable-next-line
-function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs, uid }) {
+function OwnerProcedures({
+  name,
+  search,
+  plusClick,
+  procsList,
+  // eslint-disable-next-line
+  getOwnerProcs,
+  uid,
+  setCreateProcedureWindow,
+  setProc,
+}) {
   const { pid } = useParams()
   const [searchLine, setSearchLine] = useState(false)
   const [searchInput, setSearchInput] = useState('')
   const token = localStorage.getItem('token')
+  const [deleteProc, setDeleteProc] = useState(false)
 
   useEffect(() => {
     if (!procsList.length) {
@@ -23,7 +33,7 @@ function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs, ui
 
     setTimeout(() => getOwnerProcs(pid, uid, searchInput, token), 100)
     // eslint-disable-next-line
-  }, [searchInput, pid, uid])
+  }, [searchInput, pid, uid, deleteProc])
 
   return (
     <section className={styles.DiaryBlocks}>
@@ -60,7 +70,17 @@ function OwnerProcedures({ name, search, plusClick, procsList, getOwnerProcs, ui
             const month = Number(proc.procDate.slice(5, 7)) - 1
             const year = proc.procDate.slice(0, 4)
             const date = new Date(year, month, day)
-            return <HomeProcedure key={proc.procId} proc={proc} date={date} />
+            return (
+              <HomeProcedure
+                key={proc.procId}
+                uid={uid}
+                proc={proc}
+                date={date}
+                setCreateProcedureWindow={setCreateProcedureWindow}
+                setProc={setProc}
+                setDeleteProc={setDeleteProc}
+              />
+            )
           })
           .reverse()
           .sort((a, b) => {

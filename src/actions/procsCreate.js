@@ -44,11 +44,12 @@ const createOwnerProcFailure = (error) => ({
   },
 })
 
-export const createVetProc = (pid, uid, date, purpose, symptoms, diagnosis, recomms, recipe, token) => {
+export const createVetProc = (pid, uid, name, date, purpose, symptoms, diagnosis, recomms, recipe, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pet', pid)
     data.append('user', uid)
+    data.append('name', name)
     data.append('proc_date', date)
     data.append('purpose', purpose)
     data.append('symptoms', symptoms)

@@ -10,6 +10,7 @@ import avatar from './avatar'
 import petSearch from './petSearch'
 import signIn from './signIn'
 import notification from './notification'
+import procsUpdate from './procsUpdate'
 
 const rootReducer = combineReducers({
   petInfo,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   petSearch,
   signIn,
   notification,
+  procsUpdate,
 })
 
 export default rootReducer
