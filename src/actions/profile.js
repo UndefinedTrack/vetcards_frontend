@@ -177,6 +177,7 @@ export const getPetsList = (uid, token) => {
             birthDate: pt.birth_date,
             gender: pt.gender,
             chip: pt.chip,
+            avatar: pt.avatar,
           }
 
           pets.push(pet)
@@ -213,6 +214,7 @@ export const getPatientsList = (uid, token) => {
             birthDate: pt.birth_date,
             gender: pt.gender,
             chip: pt.chip,
+            avatar: pt.avatar,
           }
 
           patients.push(patient)

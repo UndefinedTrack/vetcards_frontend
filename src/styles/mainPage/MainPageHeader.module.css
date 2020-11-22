@@ -57,6 +57,7 @@
 .Disabled {
   color: var(--dark-green-color) !important;
   text-decoration: none;
+  background-color: var(--grey-yellow-color);
 }
 
 .SignIn {

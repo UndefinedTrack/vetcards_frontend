@@ -86,6 +86,24 @@ export const uploadUserAvatar = (uid, token, image) => {
   }
 }
 
+export const getPetAvatar = (avatarURL, token) => {
+  return (dispatch, getState) => {
+    dispatch(getAvatarStarted())
+
+    fetch(`${API_URL}${avatarURL}`, {
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
+    })
+    .then((resp) => resp.json())
+    .then((data) => {
+      dispatch(getAvatarSuccess(data))
+    })
+    .catch((err) => dispatch(getAvatarFailure(err.message)))
+  }
+}
+
 export const uploadPetAvatar = (uid, pid, token, image) => {
   return (dispatch, getState) => {
     const data = new FormData()

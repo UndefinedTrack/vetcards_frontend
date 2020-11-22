@@ -8,7 +8,7 @@ import { uploadUserAvatar, getUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
 // eslint-disable-next-line
-function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAvatar, getAvatar, avatar }) {
+function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAvatar, getAvatar, avatarFullURL }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
   const token = localStorage.getItem('token')
 
@@ -26,8 +26,9 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
   const [patronymic, setPatronymic] = useState('')
 
   const avatarURL = profileInfo.avatar
-  getAvatar(avatarURL, token)
-  console.log(avatarURL, avatar)
+  if (avatarURL !== '') {
+    getAvatar(avatarURL, token)
+  }
 
   useEffect(() => {
     if (profileInfo.userId === -1) {
@@ -88,7 +89,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
             <Avatar
               handleAvatarChange={handleAvatarChange}
               popUpOpen={popUpOpen}
-              avatar={avatar}
+              avatarFullURL={avatarFullURL}
               getAvatar={getAvatar}
             />
             <div className={styles.fieldsColumn}>
@@ -117,7 +118,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
   )
 }
 
-function Avatar({ handleAvatarChange, avatar, popUpOpen }) {
+function Avatar({ handleAvatarChange, avatarFullURL, popUpOpen }) {
   const [previewURL, setPreviewURL] = useState('')
 
   const imageInput = React.useRef(null)
@@ -140,7 +141,7 @@ function Avatar({ handleAvatarChange, avatar, popUpOpen }) {
   return (
     <div>
       <div className={styles.avatarWrapper}>
-        <AvatarImage previewURL={previewURL} avatarURL={avatar} />
+        <AvatarImage previewURL={previewURL} avatarFullURL={avatarFullURL} />
         <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
           Изменить фото
         </button>
@@ -161,15 +162,15 @@ function Avatar({ handleAvatarChange, avatar, popUpOpen }) {
 Avatar.propTypes = {
   handleAvatarChange: PropTypes.func.isRequired,
   popUpOpen: PropTypes.func.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatarFullURL: PropTypes.string.isRequired,
 }
 
-function AvatarImage({ previewURL, avatar }) {
-  // if (avatarURL !== '') {
-  //   return (
-  //     <img src={avatarURL} alt='' className={styles.avatarShape} />
-  //   )
-  // }
+function AvatarImage({ previewURL, avatarFullURL }) {
+  if (avatarFullURL !== '') {
+    return (
+      <img src={avatarFullURL} alt='' className={styles.avatarShape} />
+    )
+  }
   if (previewURL !== '') {
     return <img src={previewURL} alt="" className={styles.avatarShape} />
   }
@@ -178,7 +179,7 @@ function AvatarImage({ previewURL, avatar }) {
 
 AvatarImage.propTypes = {
   previewURL: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
+  avatarFullURL: PropTypes.string.isRequired,
 }
 
 function LastName({ lastName, changeInputHandler }) {
@@ -317,7 +318,7 @@ Email.propTypes = {
 
 const mapStateToProps = (state) => ({
   profileInfo: state.profile.profile,
-  avatar: state.avatar.avatar,
+  avatarFullURL: state.avatar.avatar,
 })
 
 const mapDispatchToProps = (dispatch) => ({
