@@ -36,8 +36,6 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
     // eslint-disable-next-line
   }, [getProfileInfo])
 
-  console.log(profileInfo)
-
   function changeInputHandler(event) {
     event.persist()
     setState((prev) => ({

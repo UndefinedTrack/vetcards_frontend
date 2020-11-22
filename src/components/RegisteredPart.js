@@ -102,7 +102,7 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
         {isVet && (
           <Route path="/visits-history/:pid">
             <PopUpHeader header="История приемов" link="#/my-acc" isVet={isVet} />
-            <VisitsHistory uid={uid} />
+            <VisitsHistory uid={uid} isVet />
           </Route>
         )}
       </HashRouter>

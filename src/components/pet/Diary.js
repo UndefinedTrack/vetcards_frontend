@@ -10,6 +10,7 @@ import OwnerProcedures from './OwnerProcedures'
 function Diary({ uid }) {
   const [createProcedureWindow, setCreateProcedureWindow] = useState(false)
   const [createReminderWindow, setCreateReminderWindow] = useState(false)
+  const [proc, setProc] = useState(undefined)
 
   return (
     <main className={styles.DiaryContainer}>
@@ -22,7 +23,7 @@ function Diary({ uid }) {
           plusClick={openCreateReminderWindow}
         />
       )}
-      {createReminderWindow && <CreateReminder uid={uid} backClick={openCreateReminderWindow} />}
+      {createReminderWindow && <CreateReminder uid={uid} backClick={openCreateReminderWindow} proc={proc} />}
       {!createProcedureWindow && (
         <OwnerProcedures
           className={styles.DiaryBlocks}
@@ -30,14 +31,17 @@ function Diary({ uid }) {
           uid={uid}
           search
           plusClick={openCreateProcedureWindow}
+          setCreateProcedureWindow={setCreateProcedureWindow}
+          setProc={setProc}
         />
       )}
-      {createProcedureWindow && <CreateProcedure uid={uid} backClick={openCreateProcedureWindow} />}
+      {createProcedureWindow && <CreateProcedure uid={uid} backClick={openCreateProcedureWindow} proc={proc} />}
     </main>
   )
 
   function openCreateProcedureWindow() {
     setCreateProcedureWindow(!createProcedureWindow)
+    setProc(undefined)
   }
 
   function openCreateReminderWindow() {

@@ -65,6 +65,7 @@ export const getVetProcs = (pid, uid, name, token) => {
             procId: proc.id,
             petId: proc.pet_id,
             userId: proc.user_id,
+            name: proc.name,
             purpose: proc.purpose,
             symptoms: proc.symptoms,
             diagnosis: proc.diagnosis,
