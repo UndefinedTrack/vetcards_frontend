@@ -96,9 +96,10 @@ export const getPetAvatar = (avatarURL, token) => {
         Authorization: `Bearer ${token}`, 
       },
     })
-    .then((resp) => resp.json())
+    .then((resp) => resp.blob())
     .then((data) => {
-      dispatch(getAvatarSuccess(data))
+      const avatarFullURL = URL.createObjectURL(data)
+      dispatch(getAvatarSuccess(avatarFullURL))
     })
     .catch((err) => dispatch(getAvatarFailure(err.message)))
   }

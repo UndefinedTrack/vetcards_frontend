@@ -43,11 +43,12 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
     // eslint-disable-next-line
   }, [userInfo, uid])
 
-  if (profileInfo)
+  if (profileInfo) {
     if (userInfo.access !== '' && userInfo.access !== undefined) {
       localStorage.setItem('token', userInfo.access)
     }
-
+  }
+  
   return (
     <div className={styles.App}>
       <HashRouter>

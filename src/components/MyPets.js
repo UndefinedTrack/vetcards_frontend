@@ -32,26 +32,18 @@ function MyPets({ uid, petList, getInfo, procsList, getVetProcs }) {
     // eslint-disable-next-line
   }, [procsList])
 
-  return (
-    <div className={styles.Content}>
-      {Boolean(!petList.length) && (
-        <div className={styles.NotPet}>
-          <div className={styles.NotPetText}>У вас нет ни одного питомца :(</div>
-          <a href="#/create-pet" className={`${styles.Button} ${styles.NotPetButton}`}>
-            Добавить!
-          </a>
-        </div>
-      )}
-      {Boolean(petList.length) && (
+  console.log('mypets')
+
+  if (petList.length) {
+    return (
+      <div className={styles.Content}>
         <div className={styles.ContainerButton}>
           <a href="#/create-pet" className={`${styles.Button} ${styles.NewPetButton}`}>
             <Plus className={styles.Plus} />
             Добавить питомца
           </a>
         </div>
-      )}
-      {Boolean(petList.length) &&
-        petList
+        {petList
           .map((pet) => (
             <div className={styles.Container} key={pet.petId}>
               <AboutPet pet={pet} closeSearchString={closeSearchString} />
@@ -65,6 +57,17 @@ function MyPets({ uid, petList, getInfo, procsList, getVetProcs }) {
             </div>
           ))
           .reverse()}
+    </div>
+    )
+  }
+  return (
+    <div className={styles.Content}>
+      <div className={styles.NotPet}>
+        <div className={styles.NotPetText}>У вас нет ни одного питомца :(</div>
+        <a href="#/create-pet" className={`${styles.Button} ${styles.NotPetButton}`}>
+          Добавить!
+        </a>
+      </div>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import LinkButton from './LinkButton'
@@ -10,10 +10,14 @@ import { uploadPetAvatar, getPetAvatar } from '../actions/avatar'
 
 function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullURL }) {
   const token = localStorage.getItem('token')
+
+  // useEffect(() => {
+  //   if (pet.avatar !== '') {
+  //     console.log(`${pet.petId} getAvatar ${pet.avatar}`)
+  //     getAvatar(pet.avatar, token)
+  //   }
+  // })
   
-  if (pet.avatar !== '') {
-    getAvatar(pet.avatar, token)
-  }
 
   function handleAvatarChange(image) {
     uploadAvatar(pet.userId, pet.petId, token, image)
@@ -78,9 +82,9 @@ Avatar.propTypes = {
 }
 
 function AvatarImage({ previewURL, avatarFullURL }) {
-  if (avatarFullURL !== '') {
+  if (avatarFullURL) {
     return (
-      <img src={avatarFullURL} alt='' className={styles.avatarShape} />
+      <img src={avatarFullURL} alt="" className={styles.avatarShape} />
     )
   }
   if (previewURL !== '') {
