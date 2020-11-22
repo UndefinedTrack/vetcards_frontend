@@ -243,7 +243,7 @@ function DropDownList({ changeInputHandler, options, defaultValue }) {
   function handleArrowClick() {
     setIsVisible(!isVisible)
   }
-
+  console.log(chosenOption)
   return (
     <div className={styles.purposeWrapper}>
       <div
