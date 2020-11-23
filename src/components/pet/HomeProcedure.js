@@ -4,10 +4,23 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { getOwnerProcs } from '../../actions/procsList'
 import { deleteOwnerProc } from '../../actions/procsUpdate'
+import { deleteNotification } from '../../actions/notifications'
 import styles from '../../styles/pet/Diary.module.css'
 import { ReactComponent as More } from '../../icons/mdi_more_vert.svg'
 
-function HomeProcedure({ proc, uid, date, setCreateProcedureWindow, setProc, deleteOwnProc, setDeleteProc }) {
+function HomeProcedure({
+  proc,
+  uid,
+  date,
+  setCreateProcedureWindow,
+  setProc,
+  deleteOwnProc,
+  setDeleteProc,
+  deleteNotif,
+  setCreateReminderWindow,
+  setNotif,
+  setDeleteNotif,
+}) {
   const formatter = new Intl.DateTimeFormat('ru')
   const procDate = formatter.format(date)
   const token = localStorage.getItem('token')
@@ -17,8 +30,13 @@ function HomeProcedure({ proc, uid, date, setCreateProcedureWindow, setProc, del
   }
 
   function EditProc() {
-    setCreateProcedureWindow(true)
-    setProc(proc)
+    if (proc.notifId !== undefined) {
+      setCreateReminderWindow(true)
+      setNotif(proc)
+    } else {
+      setCreateProcedureWindow(true)
+      setProc(proc)
+    }
   }
 
   function OpenMenu() {
@@ -26,8 +44,13 @@ function HomeProcedure({ proc, uid, date, setCreateProcedureWindow, setProc, del
   }
 
   function deleteProc() {
-    deleteOwnProc(uid, proc.procId, token)
-    setDeleteProc(true)
+    if (proc.notifId !== undefined) {
+      deleteNotif(uid, proc.notifId, token)
+      setDeleteNotif(true)
+    } else {
+      deleteOwnProc(uid, proc.procId, token)
+      setDeleteProc(true)
+    }
     setOpenMenu(false)
   }
 
@@ -65,6 +88,7 @@ function HomeProcedure({ proc, uid, date, setCreateProcedureWindow, setProc, del
 const mapDispatchToProps = (dispatch) => ({
   deleteOwnProc: (uid, procId, token) => dispatch(deleteOwnerProc(uid, procId, token)),
   getProc: (pid, uid, name, token) => dispatch(getOwnerProcs(pid, uid, name, token)),
+  deleteNotif: (uid, nid, token) => dispatch(deleteNotification(uid, nid, token)),
 })
 
 export default connect(null, mapDispatchToProps)(HomeProcedure)

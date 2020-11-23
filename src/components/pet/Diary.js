@@ -11,6 +11,7 @@ function Diary({ uid }) {
   const [createProcedureWindow, setCreateProcedureWindow] = useState(false)
   const [createReminderWindow, setCreateReminderWindow] = useState(false)
   const [proc, setProc] = useState(undefined)
+  const [notif, setNotif] = useState(undefined)
 
   return (
     <main className={styles.DiaryContainer}>
@@ -21,9 +22,11 @@ function Diary({ uid }) {
           search={false}
           uid={uid}
           plusClick={openCreateReminderWindow}
+          setCreateReminderWindow={setCreateReminderWindow}
+          setNotif={setNotif}
         />
       )}
-      {createReminderWindow && <CreateReminder uid={uid} backClick={openCreateReminderWindow} proc={proc} />}
+      {createReminderWindow && <CreateReminder uid={uid} backClick={openCreateReminderWindow} notif={notif} />}
       {!createProcedureWindow && (
         <OwnerProcedures
           className={styles.DiaryBlocks}
@@ -46,6 +49,7 @@ function Diary({ uid }) {
 
   function openCreateReminderWindow() {
     setCreateReminderWindow(!createReminderWindow)
+    setNotif(undefined)
   }
 }
 
