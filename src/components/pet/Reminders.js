@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -9,18 +9,25 @@ import HomeProcedure from './HomeProcedure'
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 
 // eslint-disable-next-line
-function Reminders({ uid, name, plusClick, notifList, getNotifications }) {
+function Reminders({ uid, name, plusClick, notifList, getNotifications, setCreateReminderWindow, setNotif }) {
   const { pid } = useParams()
   const token = localStorage.getItem('token')
+  const [deleteNotif, setDeleteNotif] = useState(false)
+
+  if (notifList === undefined) notifList = []
 
   useEffect(() => {
     if (!notifList.length) {
       getNotifications(pid, uid, token)
     }
 
+    if (deleteNotif === true) {
+      setDeleteNotif(false)
+    }
+
     setTimeout(() => getNotifications(pid, uid, token), 100)
     // eslint-disable-next-line
-  }, [pid])
+  }, [pid, deleteNotif])
 
   return (
     <section className={styles.DiaryBlocks}>
@@ -43,7 +50,16 @@ function Reminders({ uid, name, plusClick, notifList, getNotifications }) {
             const month = Number(proc.date.slice(5, 7)) - 1
             const year = proc.date.slice(0, 4)
             const date = new Date(year, month, day)
-            return <HomeProcedure key={proc.notifId} proc={proc} date={date} />
+            return (
+              <HomeProcedure
+                key={proc.notifId}
+                proc={proc}
+                date={date}
+                setCreateReminderWindow={setCreateReminderWindow}
+                setNotif={setNotif}
+                setDeleteNotif={setDeleteNotif}
+              />
+            )
           })
           .reverse()
           .sort((a, b) => {

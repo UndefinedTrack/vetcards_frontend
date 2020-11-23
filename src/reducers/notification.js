@@ -5,6 +5,12 @@ import {
   GET_NOTIFICATIONS_REQUEST,
   GET_NOTIFICATIONS_SUCCESS,
   GET_NOTIFICATIONS_FAILURE,
+  DELETE_NOTIFICATION_REQUEST,
+  DELETE_NOTIFICATION_SUCCESS,
+  DELETE_NOTIFICATION_FAILURE,
+  UPDATE_NOTIFICATION_REQUEST,
+  UPDATE_NOTIFICATION_SUCCESS,
+  UPDATE_NOTIFICATION_FAILURE,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -46,6 +52,40 @@ export default (state = initialState, action) => {
         newNotif: action.payload,
       }
     case CREATE_NOTIFICATION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      }
+    case DELETE_NOTIFICATION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+    case DELETE_NOTIFICATION_SUCCESS:
+      return {
+        loading: false,
+        error: null,
+        newNotif: action.payload,
+      }
+    case DELETE_NOTIFICATION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      }
+    case UPDATE_NOTIFICATION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+    case UPDATE_NOTIFICATION_SUCCESS:
+      return {
+        loading: false,
+        error: null,
+        newNotif: action.payload,
+      }
+    case UPDATE_NOTIFICATION_FAILURE:
       return {
         ...state,
         loading: false,

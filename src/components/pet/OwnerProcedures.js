@@ -31,6 +31,10 @@ function OwnerProcedures({
       getOwnerProcs(pid, uid, searchInput, token)
     }
 
+    if (deleteProc === true) {
+      setDeleteProc(false)
+    }
+
     setTimeout(() => getOwnerProcs(pid, uid, searchInput, token), 100)
     // eslint-disable-next-line
   }, [searchInput, pid, uid, deleteProc])

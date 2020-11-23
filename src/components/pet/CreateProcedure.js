@@ -19,7 +19,6 @@ function CreateProcedure({ backClick, createProc, uid, proc, getProc, updateProc
   let defaultRemark = ''
 
   if (proc !== undefined) {
-    // const procDate = formatter.format(date)
     let day = proc.procDate.slice(8, 10)
     let month = Number(proc.procDate.slice(5, 7))
     const year = proc.procDate.slice(0, 4)

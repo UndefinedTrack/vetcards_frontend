@@ -261,10 +261,10 @@ textarea.input {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
+  position: relative;
   width: 150px;
   height: 60px;
-  margin-top: -65px;
+  margin-top: -62px;
   margin-left: 420px;
   border-radius: 10px;
   background-color: var(--white-color);
