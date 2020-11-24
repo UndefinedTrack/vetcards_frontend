@@ -15,6 +15,7 @@ import Diary from './pet/Diary'
 import Schedule from './vet/Schedule'
 import CreateSchedule from './vet/CreateSchedule'
 import VisitsHistory from './vet/VisitsHistory'
+import EditClientInformation from './vet/EditClientInformation'
 
 // eslint-disable-next-line
 function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT, loginFailed }) {
@@ -38,7 +39,8 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
       setTimeout(() => getProfileInfo(userInfo.userId, token), 100)
       setTimeout(() => {
         refreshJWT(localStorage.getItem('refresh'))
-      }, 6000 * 14)
+        console.log('refresh')
+      }, 60000 * 3)
     }
     // eslint-disable-next-line
   }, [userInfo, uid])
@@ -63,12 +65,6 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
             <MyPets uid={uid} />
           </Route>
         )}
-        {isVet && (
-          <Route path="/my-acc">
-            <Header header="my-acc" isVet={isVet} />
-            <MyPatients uid={uid} />
-          </Route>
-        )}
         {!isVet && (
           <Route path="/create-pet">
             <PopUpHeader header="Добавление питомца" link="#/my-acc" isVet={isVet} />
@@ -79,6 +75,12 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
           <Route path="/diary/:pid">
             <PopUpHeader header="Дневник питомца" link="#/my-acc" isVet={isVet} />
             <Diary uid={uid} />
+          </Route>
+        )}
+        {isVet && (
+          <Route path="/my-acc">
+            <Header header="my-acc" isVet={isVet} />
+            <MyPatients uid={uid} />
           </Route>
         )}
         {isVet && (
@@ -103,6 +105,12 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
           <Route path="/visits-history/:pid">
             <PopUpHeader header="История приемов" link="#/my-acc" isVet={isVet} />
             <VisitsHistory uid={uid} isVet />
+          </Route>
+        )}
+        {isVet && (
+          <Route path="/edit-client-information/:cid">
+            <PopUpHeader header="Информация о клиенте" link="#/my-acc" isVet={isVet} />
+            <EditClientInformation uid={uid} />
           </Route>
         )}
       </HashRouter>

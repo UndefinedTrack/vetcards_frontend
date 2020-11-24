@@ -103,6 +103,9 @@ export const getUserProfileInfo = (uid, token) => {
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
+          address: uinfo.address,
+          passport: uinfo.passport,
+          paidService: uinfo.paid_service,
           avatar: uinfo.avatar,
           vet: uinfo.vet,
         }
@@ -113,7 +116,7 @@ export const getUserProfileInfo = (uid, token) => {
   }
 }
 
-export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, email, token) => {
+export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, email, address, paidService, token) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pk', uid)
@@ -122,6 +125,9 @@ export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, e
     data.append('last_name', lastName)
     data.append('phone', phone)
     data.append('email', email)
+    data.append('address', address)
+    data.append('passport', '')
+    data.append('paid_service', paidService)
     dispatch(updateProfileInfoStarted())
 
     fetch(`${API_URL}/users/update`, {
@@ -143,7 +149,11 @@ export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, e
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
+          address: uinfo.address,
+          passport: uinfo.passport,
+          paidService: uinfo.paid_service,
         }
+
         dispatch(updateProfileInfoSuccess(user))
       })
       .catch((err) => dispatch(updateProfileInfoFailure(err.message)))
@@ -163,7 +173,6 @@ export const getPetsList = (uid, token) => {
       .then((resp) => resp.json())
       .then((data) => {
         const pets = []
-
         const pinfo = data.pets
 
         pinfo.forEach((pt) => {
@@ -202,7 +211,6 @@ export const getPatientsList = (uid, token) => {
       .then((resp) => resp.json())
       .then((data) => {
         const patients = []
-
         const pinfo = data.patients
 
         pinfo.forEach((pt) => {
