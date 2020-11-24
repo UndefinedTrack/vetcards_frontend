@@ -12,6 +12,7 @@ import signIn from './signIn'
 import notification from './notification'
 import procsUpdate from './procsUpdate'
 import clientProfile from './clientProfile'
+import getPets from './getPets'
 
 const rootReducer = combineReducers({
   petInfo,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   notification,
   procsUpdate,
   clientProfile,
+  getPets,
 })
 
 export default rootReducer

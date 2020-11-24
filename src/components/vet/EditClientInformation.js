@@ -303,7 +303,7 @@ function MobilePhone({ mobilePhone, changeInputHandler }) {
         className={styles.input}
         value={mobilePhone}
         maxLength="11"
-        placeholder="+79990000000"
+        placeholder="89990000000"
         pattern="8[0-9]{10}"
         title="Введите номер телефона в формате 8хххххххххх"
       />

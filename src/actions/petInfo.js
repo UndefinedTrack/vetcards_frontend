@@ -98,23 +98,6 @@ export const updatePetInfo = (
   weight,
   token,
 ) => {
-  console.log(
-    pid,
-    uid,
-    name,
-    species,
-    breed,
-    color,
-    birthDate,
-    gender,
-    chip,
-    sterilized,
-    vaccinated,
-    contraindications,
-    remark,
-    weight,
-    token,
-  )
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pk', pid)
@@ -131,7 +114,6 @@ export const updatePetInfo = (
     data.append('contraindications', contraindications)
     data.append('notes', remark)
     data.append('weight', weight)
-    console.log(remark)
 
     dispatch(updatePetInfoStarted())
 

@@ -1,49 +1,50 @@
 import {
-  GET_AVATAR_REQUEST,
-  GET_AVATAR_SUCCESS,
-  GET_AVATAR_FAILURE,
-  UPLOAD_AVATAR_REQUEST,
-  UPLOAD_AVATAR_SUCCESS,
-  UPLOAD_AVATAR_FAILURE,
+  GET_PETS_LIST_REQUEST,
+  GET_PETS_LIST_SUCCESS,
+  GET_PETS_LIST_FAILURE,
+  GET_PATIENTS_LIST_REQUEST,
+  GET_PATIENTS_LIST_SUCCESS,
+  GET_PATIENTS_LIST_FAILURE,
 } from '../constants/ActionTypes'
 
 const initialState = {
   loading: false,
-  avatar: '',
+  petsList: [],
+  patientsList: [],
   error: null,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_AVATAR_REQUEST:
+    case GET_PETS_LIST_REQUEST:
       return {
         ...state,
         loading: true,
       }
-    case GET_AVATAR_SUCCESS:
+    case GET_PETS_LIST_SUCCESS:
       return {
         loading: false,
         error: null,
-        avatar: action.payload,
+        petsList: action.payload,
       }
-    case GET_AVATAR_FAILURE:
+    case GET_PETS_LIST_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload.error,
       }
-    case UPLOAD_AVATAR_REQUEST:
+    case GET_PATIENTS_LIST_REQUEST:
       return {
         ...state,
         loading: true,
       }
-    case UPLOAD_AVATAR_SUCCESS:
+    case GET_PATIENTS_LIST_SUCCESS:
       return {
         loading: false,
         error: null,
-        avatar: action.payload,
+        patientsList: action.payload,
       }
-    case UPLOAD_AVATAR_FAILURE:
+    case GET_PATIENTS_LIST_FAILURE:
       return {
         ...state,
         loading: false,

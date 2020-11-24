@@ -18,9 +18,9 @@ import VisitsHistory from './vet/VisitsHistory'
 import EditClientInformation from './vet/EditClientInformation'
 
 // eslint-disable-next-line
-function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT, loginFailed }) {
+function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT, loginFailed, loading }) {
   const token = localStorage.getItem('token')
-
+  console.log('reg part')
   if (userInfo.userId === undefined) userInfo.userId = -1
   if (profileInfo === undefined) profileInfo = []
   const uid = userInfo.userId
@@ -36,91 +36,103 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
     if (uid === -1) {
       setTimeout(() => getMe(token), 100)
     } else {
-      setTimeout(() => getProfileInfo(userInfo.userId, token), 100)
+      getProfileInfo(userInfo.userId, token)
       setTimeout(() => {
         refreshJWT(localStorage.getItem('refresh'))
-        console.log('refresh')
-      }, 60000 * 3)
+      }, 60000 * 4)
     }
-    // eslint-disable-next-line
-  }, [userInfo, uid])
+  }, [userInfo, uid, getMe, getProfileInfo, refreshJWT, token])
 
   if (profileInfo)
     if (userInfo.access !== '' && userInfo.access !== undefined) {
       localStorage.setItem('token', userInfo.access)
     }
 
-  return (
-    <div className={styles.App}>
-      <HashRouter>
-        {!isVet && (
-          <Route path="/profile">
-            <Header header="profile" isVet={isVet} />
-            <Profile uid={uid} />
-          </Route>
-        )}
-        {!isVet && (
-          <Route path="/my-acc">
-            <Header header="my-acc" isVet={isVet} />
-            <MyPets uid={uid} />
-          </Route>
-        )}
-        {!isVet && (
-          <Route path="/create-pet">
-            <PopUpHeader header="Добавление питомца" link="#/my-acc" isVet={isVet} />
-            <PetCreator uid={uid} />
-          </Route>
-        )}
-        {!isVet && (
-          <Route path="/diary/:pid">
-            <PopUpHeader header="Дневник питомца" link="#/my-acc" isVet={isVet} />
-            <Diary uid={uid} />
-          </Route>
-        )}
-        {isVet && (
-          <Route path="/my-acc">
-            <Header header="my-acc" isVet={isVet} />
-            <MyPatients uid={uid} />
-          </Route>
-        )}
-        {isVet && (
-          <Route path="/vetprofile">
-            <Header header="profile" isVet={isVet} />
-            <Profile uid={uid} />
-          </Route>
-        )}
-        {isVet && (
-          <Route path="/schedule">
-            <Header header="schedule" isVet={isVet} />
-            <Schedule uid={uid} />
-          </Route>
-        )}
-        {isVet && (
-          <Route path="/create-schedule">
-            <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet={isVet} />
-            <CreateSchedule uid={uid} />
-          </Route>
-        )}
-        {isVet && (
-          <Route path="/visits-history/:pid">
-            <PopUpHeader header="История приемов" link="#/my-acc" isVet={isVet} />
-            <VisitsHistory uid={uid} isVet />
-          </Route>
-        )}
-        {isVet && (
-          <Route path="/edit-client-information/:cid">
-            <PopUpHeader header="Информация о клиенте" link="#/my-acc" isVet={isVet} />
-            <EditClientInformation uid={uid} />
-          </Route>
-        )}
-      </HashRouter>
-    </div>
-  )
+  if (!loading && profileInfo.userId !== -1) {
+    if (!isVet) {
+      return (
+        <div className={styles.App}>
+          <HashRouter>
+            {!isVet && (
+              <Route path="/profile">
+                <Header header="profile" isVet={isVet} />
+                <Profile uid={uid} />
+              </Route>
+            )}
+            {!isVet && (
+              <Route path="/my-acc">
+                <Header header="my-acc" isVet={isVet} />
+                <MyPets uid={uid} />
+              </Route>
+            )}
+            {!isVet && (
+              <Route path="/create-pet">
+                <PopUpHeader header="Добавление питомца" link="#/my-acc" isVet={isVet} />
+                <PetCreator uid={uid} />
+              </Route>
+            )}
+            {!isVet && (
+              <Route path="/diary/:pid">
+                <PopUpHeader header="Дневник питомца" link="#/my-acc" isVet={isVet} />
+                <Diary uid={uid} />
+              </Route>
+            )}
+          </HashRouter>
+        </div>
+      )
+    }
+    if (isVet) {
+      return (
+        <div className={styles.App}>
+          <HashRouter>
+            {isVet && (
+              <Route path="/my-acc">
+                <Header header="my-acc" isVet={isVet} />
+                <MyPatients uid={uid} />
+              </Route>
+            )}
+            {isVet && (
+              <Route path="/vetprofile">
+                <Header header="profile" isVet={isVet} />
+                <Profile uid={uid} />
+              </Route>
+            )}
+            {isVet && (
+              <Route path="/schedule">
+                <Header header="schedule" isVet={isVet} />
+                <Schedule uid={uid} />
+              </Route>
+            )}
+            {isVet && (
+              <Route path="/create-schedule">
+                <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet={isVet} />
+                <CreateSchedule uid={uid} />
+              </Route>
+            )}
+            {isVet && (
+              <Route path="/visits-history/:pid">
+                <PopUpHeader header="История приемов" link="#/my-acc" isVet={isVet} />
+                <VisitsHistory uid={uid} isVet />
+              </Route>
+            )}
+            {isVet && (
+              <Route path="/edit-client-information/:cid">
+                <PopUpHeader header="Информация о клиенте" link="#/my-acc" isVet={isVet} />
+                <EditClientInformation uid={uid} />
+              </Route>
+            )}
+          </HashRouter>
+        </div>
+      )
+    }
+  }
+  return <></>
 }
 
 const mapStateToProps = (state) => ({
   userInfo: state.signIn.user,
   loginFailed: state.signIn.error,
+  loading: state.signIn.loading,
   profileInfo: state.profile.profile,
 })
 
