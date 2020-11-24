@@ -204,7 +204,10 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
 
 function ClarificationBlock({ changeInputHandler, options, value}) {
   let isActive = true
-  if (options[0] === '') {
+  if (options === undefined) {
+    isActive = false
+  }
+  else if (options[0] === '') {
     isActive = false
   }
 
@@ -291,6 +294,20 @@ InputBlock.propTypes = {
 
 function DropDownList({ changeInputHandler, options, value, name, isActive }) {
   const [isVisible, setIsVisible] = useState(false)
+  const dropDown = React.useRef(null)
+
+  function handleClickOutside(event) {
+    if ((!dropDown || !dropDown.current.contains(event.target))) {
+      setIsVisible(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, false)
+    return function cleanup() {
+      document.removeEventListener('click', handleClickOutside, false)
+    }
+  })
 
   function handleOptionClick() {
     setIsVisible(false)
@@ -312,7 +329,7 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
   }
 
   return (
-    <div className={styles.purposeWrapper}>
+    <div className={styles.purposeWrapper} ref={dropDown} >
       <div
         className={style}
         role="button"
@@ -376,16 +393,19 @@ Arrow.propTypes = {
 
 function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler, name }) {
   const optionsComponents = []
-  for (let i = 0; i < options.length; i += 1) {
-    optionsComponents.push(
-      <Option
-        name={name}
-        key={i}
-        value={options[i]}
-        handleOptionClick={handleOptionClick}
-        changeInputHandler={changeInputHandler}
-      />,
-    )
+
+  if (options !== undefined) {
+    for (let i = 0; i < options.length; i += 1) {
+      optionsComponents.push(
+        <Option
+          name={name}
+          key={i}
+          value={options[i]}
+          handleOptionClick={handleOptionClick}
+          changeInputHandler={changeInputHandler}
+        />,
+      )
+    }
   }
 
   let optionBoxStyle
