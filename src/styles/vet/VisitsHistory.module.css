@@ -96,12 +96,13 @@
 .DFlexColumn {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 }
 
 .InputBlock {
   margin-top: 9px;
   padding-left: 13px;
-  border: 1px solid var(--dark-green-color);
+  border: 1px solid #c4c4c4;
   box-sizing: border-box;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
@@ -111,6 +112,10 @@
   width: 294px;
   height: 42px;
   outline: none;
+}
+.InputBlock:hover,
+.InputBlock:focus {
+  border: 1px solid var(--dark-green-color);
 }
 
 .Input {
@@ -297,23 +302,49 @@
   outline: none;
   padding: 0;
 }
+.purposeArrowButton:disabled {
+  cursor: default;
+}
 
-.purposeBlock {
+
+.dropDownBlock {
   position: relative;
   margin-top: 9px;
   padding-left: 13px;
   padding-top: 5.5px;
-  border: 1px solid var(--dark-green-color);
+  border-bottom: 1px solid #c4c4c4;
   box-sizing: border-box;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
-  border-radius: 10px;
   width: 294px;
   height: 42px;
   outline: none;
   cursor: pointer;
+}
+.dropDownBlock:hover {
+  border-bottom: 1px solid var(--dark-green-color);
+}
+
+.purposeBlock {
+  width: 294px;
+}
+
+.nameBlock {
+  width: 611px;
+}
+
+.nameBlockDisabled {
+  cursor: default;
+}
+.nameBlockDisabled:hover,
+.nameBlockDisabled:focus {
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.textDisabled {
+  color: #c4c4c4;
 }
 
 .purposeOptionsBox {
@@ -364,6 +395,10 @@
 @media (max-width: 1400px) {
   .purposeBlock {
     width: 215px;
+  }
+
+  .nameBlock {
+    width: 450px;
   }
 
   .purposeOptionsBox {

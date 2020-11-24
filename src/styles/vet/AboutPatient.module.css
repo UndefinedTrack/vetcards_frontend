@@ -58,7 +58,8 @@
   line-height: 26px;
 }
 
-.InputBlock:focus {
+.InputBlock:focus,
+.InputBlock:hover {
   border-bottom: 1px solid var(--dark-green-color);
   color: var(--dark-green-color);
 }
@@ -87,7 +88,9 @@
 }
 
 .Contraindications:focus,
-.RemarkTextArea:focus {
+.Contraindications:hover,
+.RemarkTextArea:focus,
+.RemarkTextArea:hover {
   border: 1px solid var(--dark-green-color);
   color: var(--dark-green-color);
 }
