@@ -11,6 +11,9 @@ import Header from './mainPage/Header'
 function App() {
   const [userReg, setUserReg] = useState(localStorage.getItem('userReg'))
   const [signInUp, setSignInUp] = useState(false)
+  if (!userReg) {
+    window.location.href = '#/'
+  }
   return (
     <div className={styles.App}>
       <HashRouter>
@@ -33,16 +36,6 @@ function App() {
             <ContactsPage />
           </Route>
         )}
-        {/* {!userReg && (
-          <Route exact path="/sign-up">
-            <SignUp setUserReg={setUserReg} />
-          </Route>
-        )} */}
-        {/* {!userReg && (
-          <Route exact path="/sign-in">
-            <SignIn setUserReg={setUserReg} />
-          </Route>
-        )} */}
         {userReg && <RegisteredPart />}
       </HashRouter>
     </div>

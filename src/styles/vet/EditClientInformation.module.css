@@ -1,4 +1,4 @@
-@import url('./stylesConstants.css');
+@import url('../stylesConstants.css');
 
 .profileSpace {
   display: flex;
@@ -225,12 +225,11 @@
 @media (max-width: 1200px) {
   .profileWrapper {
     width: 828px;
-    height: 500px;
+    height: 600px;
   }
 
   .text {
     margin-bottom: 5px;
-    /* background-color: #000; */
   }
 
   .avatarSample {

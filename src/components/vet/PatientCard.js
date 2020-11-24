@@ -22,7 +22,6 @@ function PatientCard({ patient, getAvatar, avatarFullURL }) {
           <Info sectionName="Владелец" value={patient.owner} />
           <Info sectionName="Номер карты" value={patient.card} />
         </div>
-        {/* <Info sectionName="Окрас" value="Окрас" /> */}
         <div className={styles.Column}>
           <Info sectionName="Пол" value={patient.gender} />
           <Info sectionName="Дата рождения" value={patient.birthDate} />
@@ -35,29 +34,28 @@ function PatientCard({ patient, getAvatar, avatarFullURL }) {
 }
 
 function Info({ sectionName, value }) {
-  let sectionData
-  if (sectionName === 'Пациент') {
-    sectionData = value
-  } else if (sectionName === 'Владелец') {
-    sectionData = value
-  } else {
-    sectionData = value
-  }
   return (
     <div className={styles.InfoContainer}>
       {value && <div className={`${styles.InfoName} ${styles.InfoText}`}>{sectionName}</div>}
-      <div className={`${styles.InfoData} ${styles.InfoText}`}>{sectionData}</div>
+      <div className={`${styles.InfoData} ${styles.InfoText}`}>{value}</div>
     </div>
   )
 }
 
 function HistoryButton({ pet }) {
   return (
-    <Link to={`./visits-history/${pet.card}`} className={styles.HistoryLink}>
-      <button type="button" className={styles.HistoryButton}>
-        История приёмов
-      </button>
-    </Link>
+    <div className={styles.Buttons}>
+      <Link to={`./visits-history/${pet.card}`} className={styles.HistoryLink}>
+        <button type="button" className={styles.HistoryButton}>
+          История приёмов
+        </button>
+      </Link>
+      <Link to={`./edit-client-information/${pet.ownerId}`} className={styles.HistoryLink}>
+        <button type="button" className={styles.HistoryButton}>
+          О клиенте
+        </button>
+      </Link>
+    </div>
   )
 }
 
@@ -67,9 +65,7 @@ Info.propTypes = {
 
 function AvatarImage({ avatarFullURL }) {
   if (avatarFullURL !== '') {
-    return (
-      <img src={avatarFullURL} alt='' className={styles.avatarShape} />
-    )
+    return <img src={avatarFullURL} alt="" className={styles.avatarShape} />
   }
   return <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
 }
