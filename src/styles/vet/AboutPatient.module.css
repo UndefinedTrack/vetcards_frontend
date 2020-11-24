@@ -56,6 +56,7 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
+  width: 216px;
 }
 
 .InputBlock:focus,
@@ -156,7 +157,7 @@
   }
 
   .InputBlock {
-    width: 130px;
+    width: 134px;
   }
 
   .RemarkTextArea {
