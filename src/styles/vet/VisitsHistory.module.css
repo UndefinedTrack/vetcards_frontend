@@ -51,31 +51,23 @@
 .VisitInf {
   display: flex;
   flex-direction: column;
-  width: 294px;
 }
 
 .VisitInf:first-child {
   margin-right: 23px;
 }
 
+.date {
+  width: 150px;
+}
+.purpose {
+  width: 280px;
+}
+
 .mybox {
   margin-top: 9px;
   position: relative;
   display: inline-block;
-}
-
-.SelectInput {
-  width: 294px;
-  height: 42px;
-  outline: none;
-  border: 1px solid var(--dark-green-color);
-  border-radius: 10px;
-  padding-left: 10px;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 26px;
-  background-color: #fff;
 }
 
 .mybox .myarrow {
@@ -91,6 +83,9 @@
 
 .DFlex {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 29px; 
 }
 
 .DFlexColumn {
@@ -109,7 +104,7 @@
   font-size: 18px;
   line-height: 26px;
   border-radius: 10px;
-  width: 294px;
+  width: 150px;
   height: 42px;
   outline: none;
 }
@@ -240,20 +235,6 @@
   pointer-events: none;
 }
 
-.SelectInputFilter {
-  width: 125px;
-  height: 45px;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 26px;
-  color: #c4c4c4;
-  background-color: #fff;
-}
-
 .CardsSection {
   height: 580px;
   overflow: auto;
@@ -276,10 +257,8 @@
     width: 287px;
   }
 
-  .VisitInf,
-  .SelectInput,
-  .InputBlock {
-    width: 215px;
+  .date {
+    width: 150px;
   }
 
   .Input {
@@ -328,7 +307,7 @@
 }
 
 .purposeBlock {
-  width: 294px;
+  width: 438px;
 }
 
 .nameBlock {
@@ -347,25 +326,33 @@
   color: #c4c4c4;
 }
 
-.purposeOptionsBox {
+
+.optionsBox {
   position: absolute;
-  top: 49px;
+  top: 50px;
   left: 6px;
   background-color: #fff;
-  width: 280px;
   border: 1px solid var(--dark-green-color);
   border-top: none;
   border-radius: 5px;
+  z-index: 1;
+}
+.purposeOptionsBox {
+  width: 424px;
+}
+.nameOptionsBox {
+  width: 597px;
+  top: 41px;
 }
 
-.purposeOption {
+.option {
   display: flex;
   flex-direction: row;
   align-items: center;
   border-top: 1px solid var(--dark-green-color);
   height: 42px;
 }
-.purposeOption:hover {
+.option:hover {
   background-color: var(--dark-green-color);
   color: #fff;
   font-weight: 500;
@@ -375,7 +362,7 @@
   display: none;
 }
 
-.purposeLabel {
+.label {
   display: flex;
   padding-left: 13px;
   padding-top: 13px;
@@ -384,8 +371,14 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
-  width: 280px;
   height: 42px;
+}
+
+.purposeLabel {
+  width: 280px;
+}
+.nameLabel {
+  width: 597px;
 }
 
 .purposeWrapper {
@@ -394,15 +387,19 @@
 
 @media (max-width: 1400px) {
   .purposeBlock {
-    width: 215px;
+    width: 280px;
   }
 
   .nameBlock {
     width: 450px;
   }
 
+  .nameOptionsBox {
+    width: 436px;
+  }
+
   .purposeOptionsBox {
-    width: 201px;
+    width: 266px;
     left: 5px;
   }
 }

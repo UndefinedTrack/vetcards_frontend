@@ -131,7 +131,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
   return (
     <form onSubmit={submitHandler} className={styles.CreateVFContainer}>
       <div className={styles.DFlex}>
-        <div className={styles.VisitInf}>
+        <div className={`${styles.VisitInf} ${styles.purpose}`}>
           <div>
             Цель визита <span className={styles.noteText}>*</span>
           </div>
@@ -143,7 +143,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
             value={state.purpose}
           />
         </div>
-        <div className={styles.VisitInf}>
+        <div className={`${styles.VisitInf} ${styles.date}`}>
           <div>
             Дата визита <span className={styles.noteText}>*</span>
           </div>
@@ -387,8 +387,18 @@ function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler
       />,
     )
   }
+
+  let optionBoxStyle
+  if (name === 'name') {
+    optionBoxStyle = `${styles.optionsBox} ${styles.nameOptionsBox}`
+  }
+  if (name === 'purpose') {
+    optionBoxStyle = `${styles.optionsBox} ${styles.purposeOptionsBox}`
+  }
+
+
   if (isVisible) {
-    return <div className={styles.purposeOptionsBox}>{optionsComponents}</div>
+    return <div className={optionBoxStyle}>{optionsComponents}</div>
   }
   return null
 }
@@ -402,8 +412,16 @@ OptionsList.propTypes = {
 }
 
 function Option({ value, handleOptionClick, changeInputHandler, name }) {
+  let labelStyle
+  if (name === 'name') {
+    labelStyle = `${styles.label} ${styles.nameLabel}`
+  }
+  if (name === 'purpose') {
+    labelStyle = `${styles.label} ${styles.purposeLabel}`
+  }
+
   return (
-    <div className={styles.purposeOption}>
+    <div className={styles.option}>
       <input
         id={value}
         type="checkbox"
@@ -413,7 +431,7 @@ function Option({ value, handleOptionClick, changeInputHandler, name }) {
         onClick={handleOptionClick}
         onChange={changeInputHandler}
       />
-      <label className={styles.purposeLabel} htmlFor={value}>
+      <label className={labelStyle} htmlFor={value}>
         {value}
       </label>
     </div>
