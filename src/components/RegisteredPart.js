@@ -39,7 +39,7 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
       getProfileInfo(userInfo.userId, token)
       setTimeout(() => {
         refreshJWT(localStorage.getItem('refresh'))
-      }, 60000 * 3)
+      }, 60000 * 4)
     }
   }, [userInfo, uid, getMe, getProfileInfo, refreshJWT, token])
 

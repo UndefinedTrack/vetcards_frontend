@@ -16,8 +16,8 @@ function MedicalHistory({ pet, uid, procsList, ind, searchLine, setSearchLine, g
     if (uid !== -1) {
       setTimeout(() => getVetProcs(pid, uid, input, token), 100)
     }
-  }, [input, getVetProcs, pid, token, uid])
-  console.log(procsList)
+  }, [input, getVetProcs, pid, token, uid, procsList])
+
   return (
     <div className={styles.Container}>
       <div className={styles.NameAndSearch}>

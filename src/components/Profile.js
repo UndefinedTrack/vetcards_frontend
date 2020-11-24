@@ -1,20 +1,19 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
-import { getUserProfileInfo, updateProfileInfo } from '../actions/profile'
+import { updateProfileInfo } from '../actions/profile'
 import { uploadUserAvatar, getUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
 // eslint-disable-next-line
-function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAvatar, getAvatar, avatarFullURL }) {
+function Profile({ uid, profileInfo, updateProfileInfo, uploadAvatar, getAvatar, avatarFullURL }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
   const token = localStorage.getItem('token')
 
   if (profileInfo === undefined) {
     profileInfo = []
-    getProfileInfo(uid, token)
   }
 
   const isVet = profileInfo.vet
@@ -31,13 +30,6 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
   if (avatarURL !== '') {
     getAvatar(avatarURL, token)
   }
-
-  useEffect(() => {
-    if (profileInfo.userId === -1) {
-      getProfileInfo(uid, token)
-    }
-    // eslint-disable-next-line
-  }, [getProfileInfo])
 
   function changeInputHandler(event) {
     event.persist()
@@ -117,8 +109,7 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
               {isVet && <p className={styles.noteText}>* - обязательные для заполнения поля</p>}
               {!isVet && (
                 <div>
-                  <p className={styles.noteText}>Важно: редактировать информацию</p>{' '}
-                  <p className={styles.noteText}>может только ваш ветеринар</p>
+                  <p className={styles.noteText}>Важно: редактировать информацию может только ваш ветеринар</p>
                 </div>
               )}
             </div>
@@ -434,7 +425,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getProfileInfo: (uid, token) => dispatch(getUserProfileInfo(uid, token)),
   updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, address, paidService, token) =>
     dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, address, paidService, token)),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),

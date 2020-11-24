@@ -9,10 +9,10 @@ import { ReactComponent as Plus } from '../icons/plus.svg'
 import { getVetProcs } from '../actions/procsList'
 
 // eslint-disable-next-line
-function MyPets({ uid, petList, getInfo, procsList, loading }) {
+function MyPets({ uid, petList, getInfo, loading }) {
   const [searchLine, setSearchLine] = useState(-1)
   const token = localStorage.getItem('token')
-
+  console.log('mypets')
   if (petList === undefined) {
     petList = []
   }
@@ -23,9 +23,10 @@ function MyPets({ uid, petList, getInfo, procsList, loading }) {
 
   useEffect(() => {
     getInfo(uid, token)
-  }, [procsList, getInfo, token, uid])
-  console.log(!petList.length)
+  }, [getInfo, token, uid])
+
   if (loading === false) {
+    console.log('rerender', petList.length)
     return (
       <div className={styles.Content}>
         {Boolean(!petList.length) && (
