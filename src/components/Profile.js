@@ -16,14 +16,16 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
     profileInfo = []
     getProfileInfo(uid, token)
   }
+
+  const isVet = profileInfo.vet
   const [state, setState] = useState({
     firstName: '',
     patronymic: '',
     lastName: '',
     phone: '',
     email: '',
+    address: '',
   })
-  const [patronymic, setPatronymic] = useState('')
 
   const avatarURL = profileInfo.avatar
   if (avatarURL !== '') {
@@ -54,8 +56,18 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
     if (state.phone === '') state.phone = profileInfo.phone
     if (state.email === '') state.email = profileInfo.email
     if (state.patronymic === '') state.patronymic = profileInfo.patronymic
-    // uid, firstName, patronymic, lastName, phone, email, token
-    updateProfileInfo(uid, state.firstName, state.patronymic, state.lastName, state.phone, state.email, token)
+    // uid, firstName, patronymic, lastName, phone, email, address, paidService, token
+    updateProfileInfo(
+      uid,
+      state.firstName,
+      state.patronymic,
+      state.lastName,
+      state.phone,
+      state.email,
+      state.address,
+      false,
+      token,
+    )
 
     setState({
       firstName: '',
@@ -64,10 +76,6 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
       phone: '',
       email: '',
     })
-  }
-
-  function handlePatronymicChange(event) {
-    setPatronymic(event.target.value)
   }
 
   function handleAvatarChange(image) {
@@ -93,19 +101,26 @@ function Profile({ uid, profileInfo, getProfileInfo, updateProfileInfo, uploadAv
               getAvatar={getAvatar}
             />
             <div className={styles.fieldsColumn}>
-              <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} />
-              <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} />
+              <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} isVet={isVet} />
+              <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} isVet={isVet} />
               <Patronymic
                 name="patronymic"
                 changeInputHandler={changeInputHandler}
-                handlePatronymicChange={handlePatronymicChange}
-                patronymic={patronymic}
+                patronymic={profileInfo.patronymic}
+                isVet={isVet}
               />
             </div>
             <div className={styles.fieldsColumn}>
-              <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} />
-              <Email changeInputHandler={changeInputHandler} email={profileInfo.email} />
-              <p className={styles.noteText}>* - обязательные для заполнения поля</p>
+              <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} isVet={isVet} />
+              <Email changeInputHandler={changeInputHandler} email={profileInfo.email} isVet={isVet} />
+              <Address changeInputHandler={changeInputHandler} address={profileInfo.address} isVet={isVet} />
+              {isVet && <p className={styles.noteText}>* - обязательные для заполнения поля</p>}
+              {!isVet && (
+                <div>
+                  <p className={styles.noteText}>Важно: редактировать информацию</p>{' '}
+                  <p className={styles.noteText}>может только ваш ветеринар</p>
+                </div>
+              )}
             </div>
           </div>
           <button type="submit" className={styles.saveButton}>
@@ -127,7 +142,6 @@ function Avatar({ handleAvatarChange, avatarFullURL, popUpOpen }) {
     if (imageInput.current) {
       imageInput.current.click()
     }
-    // popUpOpen()
   }
 
   function handleImageInput(event) {
@@ -167,9 +181,7 @@ Avatar.propTypes = {
 
 function AvatarImage({ previewURL, avatarFullURL }) {
   if (avatarFullURL !== '') {
-    return (
-      <img src={avatarFullURL} alt='' className={styles.avatarShape} />
-    )
+    return <img src={avatarFullURL} alt="" className={styles.avatarShape} />
   }
   if (previewURL !== '') {
     return <img src={previewURL} alt="" className={styles.avatarShape} />
@@ -182,20 +194,33 @@ AvatarImage.propTypes = {
   avatarFullURL: PropTypes.string.isRequired,
 }
 
-function LastName({ lastName, changeInputHandler }) {
+function LastName({ lastName, changeInputHandler, isVet }) {
   return (
     <div>
       <p className={styles.text}>
         Фамилия <span className={styles.noteText}>*</span>
       </p>
-      <input
-        type="text"
-        name="lastName"
-        onChange={changeInputHandler}
-        className={styles.input}
-        defaultValue={lastName}
-        placeholder="Иванов"
-      />
+      {isVet && (
+        <input
+          type="text"
+          name="lastName"
+          title="Фамилия может содержать только буквы и должна быть длиннее 2 символов"
+          pattern="[A-Za-zА-Яа-яЁё]{2,30}"
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={lastName}
+        />
+      )}
+      {!isVet && (
+        <input
+          type="text"
+          name="lastName"
+          disabled
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={lastName}
+        />
+      )}
     </div>
   )
 }
@@ -209,20 +234,33 @@ LastName.propTypes = {
   lastName: PropTypes.string,
 }
 
-function FirstName({ firstName, changeInputHandler }) {
+function FirstName({ firstName, changeInputHandler, isVet }) {
   return (
     <div>
       <p className={styles.text}>
         Имя <span className={styles.noteText}>*</span>
       </p>
-      <input
-        type="text"
-        name="firstName"
-        onChange={changeInputHandler}
-        className={styles.input}
-        defaultValue={firstName}
-        placeholder="Иван"
-      />
+      {isVet && (
+        <input
+          type="text"
+          name="firstName"
+          title="Имя может содержать только буквы и должно быть длиннее 2 символов"
+          pattern="[A-Za-zА-Яа-яЁё]{2,30}"
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={firstName}
+        />
+      )}
+      {!isVet && (
+        <input
+          type="text"
+          name="firstName"
+          disabled
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={firstName}
+        />
+      )}
     </div>
   )
 }
@@ -236,18 +274,31 @@ FirstName.propTypes = {
   firstName: PropTypes.string,
 }
 
-function Patronymic({ patronymic, changeInputHandler }) {
+function Patronymic({ patronymic, changeInputHandler, isVet }) {
   return (
     <div>
       <p className={styles.text}>Отчество</p>
-      <input
-        type="text"
-        name="patronymic"
-        onChange={changeInputHandler}
-        className={styles.input}
-        defaultValue={patronymic}
-        placeholder="Иванович"
-      />
+      {isVet && (
+        <input
+          type="text"
+          name="patronymic"
+          title="Отчество может содержать только буквы и должно быть длиннее 2 символов"
+          pattern="[A-Za-zА-Яа-яЁё]{2,30}"
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={patronymic}
+        />
+      )}
+      {!isVet && (
+        <input
+          type="text"
+          name="patronymic"
+          disabled
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={patronymic}
+        />
+      )}
     </div>
   )
 }
@@ -261,20 +312,39 @@ Patronymic.propTypes = {
   patronymic: PropTypes.string,
 }
 
-function MobilePhone({ mobilePhone, changeInputHandler }) {
+function MobilePhone({ mobilePhone, changeInputHandler, isVet }) {
   return (
     <div>
       <p className={styles.text}>
         Номер телефона <span className={styles.noteText}>*</span>
       </p>
-      <input
-        type="text"
-        name="phone"
-        onChange={changeInputHandler}
-        className={styles.input}
-        defaultValue={mobilePhone}
-        placeholder="+79990000000"
-      />
+      {isVet && (
+        <input
+          type="text"
+          name="phone"
+          required
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={mobilePhone}
+          placeholder="89990000000"
+          maxLength="11"
+          pattern="8[0-9]{10}"
+          title="Введите номер телефона в формате 8хххххххххх"
+        />
+      )}
+      {!isVet && (
+        <input
+          type="text"
+          name="phone"
+          disabled
+          required
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={mobilePhone}
+          placeholder="89990000000"
+          maxLength="11"
+        />
+      )}
     </div>
   )
 }
@@ -288,21 +358,36 @@ MobilePhone.propTypes = {
   mobilePhone: PropTypes.string,
 }
 
-function Email({ email, changeInputHandler }) {
+function Email({ email, changeInputHandler, isVet }) {
   return (
     <div>
       <p className={styles.text}>
         Электронная почта
         <span className={styles.noteText}>*</span>
       </p>
-      <input
-        type="text"
-        name="email"
-        onChange={changeInputHandler}
-        className={styles.input}
-        defaultValue={email}
-        placeholder="example@gmail.com"
-      />
+      {isVet && (
+        <input
+          type="email"
+          required
+          name="email"
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={email}
+          placeholder="example@gmail.com"
+        />
+      )}
+      {!isVet && (
+        <input
+          type="email"
+          required
+          name="email"
+          disabled
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={email}
+          placeholder="example@gmail.com"
+        />
+      )}
     </div>
   )
 }
@@ -316,6 +401,33 @@ Email.propTypes = {
   email: PropTypes.string,
 }
 
+function Address({ address, changeInputHandler, isVet }) {
+  return (
+    <div>
+      <p className={styles.text}>Адрес</p>
+      {isVet && (
+        <input
+          type="text"
+          name="address"
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={address}
+        />
+      )}
+      {!isVet && (
+        <input
+          type="text"
+          name="address"
+          disabled
+          onChange={changeInputHandler}
+          className={styles.input}
+          defaultValue={address}
+        />
+      )}
+    </div>
+  )
+}
+
 const mapStateToProps = (state) => ({
   profileInfo: state.profile.profile,
   avatarFullURL: state.avatar.avatar,
@@ -323,8 +435,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid, token) => dispatch(getUserProfileInfo(uid, token)),
-  updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, token) =>
-    dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, token)),
+  updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, address, paidService, token) =>
+    dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, address, paidService, token)),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
   getAvatar: (avatarURL, token) => dispatch(getUserAvatar(avatarURL, token)),
 })

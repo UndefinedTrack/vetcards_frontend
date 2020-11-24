@@ -14,6 +14,7 @@ function App() {
   if (!userReg) {
     window.location.href = '#/'
   }
+
   return (
     <div className={styles.App}>
       <HashRouter>
