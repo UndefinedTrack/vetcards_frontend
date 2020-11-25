@@ -37,17 +37,11 @@ Header.propTypes = {
   isVet: PropTypes.bool.isRequired,
 }
 
-function ButtonContainer({
-  isVet,
-  scheduleStyles,
-  myPatientsStyles,
-  profileStyles,
-  myPetStyles,
-}) {
+function ButtonContainer({ isVet, scheduleStyles, myPatientsStyles, profileStyles, myPetStyles }) {
   if (isVet) {
     return (
       <div className={styles.ButtonContainer}>
-        <HeaderButton buttonStyles={scheduleStyles} header="#/schedule" buttonName="График работы" />
+        {/* <HeaderButton buttonStyles={scheduleStyles} header="#/schedule" buttonName="График работы" /> */}
         <HeaderButton buttonStyles={myPatientsStyles} header="#/my-acc" buttonName="Мои пациенты" />
         <HeaderButton buttonStyles={profileStyles} header="#/vetprofile" buttonName="Профиль" />
       </div>

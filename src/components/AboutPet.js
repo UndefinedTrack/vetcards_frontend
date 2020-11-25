@@ -17,7 +17,8 @@ function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullU
     if (pet.avatar) {
       getAvatar(pet.petId, pet.avatar, token)
     }
-  })
+    // eslint-disable-next-line
+  }, [pet.avatar])
 
   function handleAvatarChange(image) {
     uploadAvatar(pet.userId, pet.petId, token, image)
@@ -30,7 +31,7 @@ function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullU
       <hr className={styles.Line} />
       <InformationBlock pet={pet} />
       <hr className={styles.Line} />
-      <LinkButton nameButton="Записаться на приём" href="./my-acc" />
+      {/* <LinkButton nameButton="Записаться на приём" href="./my-acc" /> */}
       <LinkButton closeSearchString={closeSearchString} nameButton="Дневник" href={`#/diary/${pet.petId}`} />
     </section>
   )
@@ -77,12 +78,12 @@ function Avatar({ handleAvatarChange, avatarFullURL, pid }) {
 }
 
 Avatar.propTypes = {
-  avatarFullURL: PropTypes.array.isRequired,
+  // avatarFullURL: PropTypes.array.isRequired,
   handleAvatarChange: PropTypes.func.isRequired,
 }
 
 function AvatarImage({ previewURL, avatarFullURL, pid }) {
-  if (avatarFullURL[pid]) {
+  if (avatarFullURL && avatarFullURL[pid]) {
     return <img src={avatarFullURL[pid]} alt="" className={styles.avatarShape} />
   }
   if (previewURL !== '') {

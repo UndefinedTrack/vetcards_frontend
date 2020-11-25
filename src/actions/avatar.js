@@ -126,7 +126,8 @@ export const uploadPetAvatar = (uid, pid, token, image) => {
     })
       .then((resp) => resp.json())
       .then((dat) => {
-        dispatch(uploadAvatarSuccess(dat))
+        petavatars[pid] = dat.pet_avatar.avatar
+        dispatch(uploadAvatarSuccess(petavatars))
       })
       .catch((err) => dispatch(uploadAvatarFailure(err.message)))
   }

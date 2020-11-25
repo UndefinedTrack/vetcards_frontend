@@ -7,7 +7,6 @@ import { updateProfileInfo } from '../actions/profile'
 import { uploadUserAvatar, getUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
-
 function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatarFullURL }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
   const token = localStorage.getItem('token')
@@ -31,7 +30,7 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
       getAvatar(profileInfo.avatar, token)
     }
   }, [getAvatar, profileInfo.avatar, token])
-  
+
   function changeInputHandler(event) {
     event.persist()
     setState((prev) => ({
@@ -173,7 +172,8 @@ Avatar.propTypes = {
 }
 
 function AvatarImage({ previewURL, avatarFullURL }) {
-  if ((avatarFullURL !== '') && (avatarFullURL !== undefined)) {
+  console.log(typeof avatarFullURL)
+  if (avatarFullURL !== '' && avatarFullURL !== undefined && typeof avatarFullURL === 'string') {
     return <img src={avatarFullURL} alt="" className={styles.avatarShape} />
   }
   if (previewURL !== '') {
