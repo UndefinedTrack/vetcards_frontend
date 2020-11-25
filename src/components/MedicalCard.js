@@ -5,8 +5,9 @@ import PropTypes from 'prop-types'
 import { deleteVetProc } from '../actions/procsUpdate'
 import styles from '../styles/MedicalCard.module.css'
 import { ReactComponent as More } from '../icons/mdi_more_vert.svg'
+import { getVetProcs } from '../actions/procsList'
 
-function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid }) {
+function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid, getProcs }) {
   const [openMenu, setOpenMenu] = useState(false)
   const token = localStorage.getItem('token')
 
@@ -22,6 +23,7 @@ function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid }) {
   function deleteThisProc() {
     deleteProc(uid, procs.procId, token)
     setOpenMenu(false)
+    setTimeout(() => getProcs(procs.petId, uid, '', token), 100)
   }
 
   if (procs !== undefined && procs.procDate !== undefined) {
@@ -43,7 +45,7 @@ function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid }) {
               </div>
             </div>
           </div>
-          {isVet && <More className={styles.MoreButton} onClick={openEditMenu} />}
+          {isVet && procs.userId === uid && <More className={styles.MoreButton} onClick={openEditMenu} />}
           {openMenu && (
             <div className={styles.MoreMenu} id="edit-and-delete">
               <button
@@ -97,6 +99,7 @@ RecordName.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   deleteProc: (uid, procId, token) => dispatch(deleteVetProc(uid, procId, token)),
+  getProcs: (pid, uid, name, token) => dispatch(getVetProcs(pid, uid, name, token)),
 })
 
 export default connect(null, mapDispatchToProps)(MedicalCard)

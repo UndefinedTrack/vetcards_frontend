@@ -121,6 +121,12 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
                 <EditClientInformation uid={uid} />
               </Route>
             )}
+            {isVet && (
+              <Route path="/new-pet/:cid">
+                <PopUpHeader header="Новый питомец" link="#/my-acc" isVet={isVet} />
+                <PetCreator uid={0} />
+              </Route>
+            )}
           </HashRouter>
         </div>
       )

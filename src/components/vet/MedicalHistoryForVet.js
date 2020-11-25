@@ -20,7 +20,7 @@ function MedicalHistoryForVet({ procsList, getVetProcs, uid, isVet, setCurrentPr
   useEffect(() => {
     setTimeout(() => getVetProcs(pid, uid, searchInput, token), 10)
     // eslint-disable-next-line
-  }, [getVetProcs, pid, searchInput])
+  }, [getVetProcs, pid, searchInput, procsList])
 
   return (
     <div className={styles.CreateVFContainer}>

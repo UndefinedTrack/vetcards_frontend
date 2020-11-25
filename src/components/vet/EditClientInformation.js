@@ -132,6 +132,9 @@ function EditClientInformation({
             </div>
           </div>
           <div className={styles.Test}>
+            <a href={`#/new-pet/${cid}`} className={`${styles.saveButton} ${styles.NewPet}`}>
+              <span className={styles.Plus}>+</span> Новый питомец
+            </a>
             <button type="submit" className={styles.saveButton}>
               Сохранить
             </button>

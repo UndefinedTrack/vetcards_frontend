@@ -1,39 +1,32 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { createPet } from '../actions/petOps'
 import styles from '../styles/Profile.module.css'
 
-class PetCreator extends React.Component {
-  constructor(props) {
-    super(props)
+function PetCreator({ uid, createNewPet }) {
+  const token = localStorage.getItem('token')
+  const { cid } = useParams()
+  const [state, setState] = useState({
+    name: '',
+    species: '',
+    breed: '',
+    color: '',
+    gender: '',
+    chip: '',
+    day: '',
+    month: '',
+    year: '',
+  })
 
-    this.state = {
-      name: '',
-      species: '',
-      breed: '',
-      color: '',
-      gender: '',
-      chip: '',
-      day: '',
-      month: '',
-      year: '',
-    }
-
-    this.createPet = props.createPet
-    this.uid = props.uid
-    this.token = localStorage.getItem('token')
-  }
-
-  submitHandler = (event) => {
-    // const { petInfo } = this.props
-
+  function submitHandler(event) {
     event.preventDefault()
     let birthDate = ''
 
-    const { name, species, breed, color, gender, chip, year } = this.state
-    let { day, month } = this.state
+    const { name, species, breed, color, gender, chip, year } = state
+    let { day, month } = state
     if (day.length === 1) {
       day = `0${day}`
     }
@@ -55,8 +48,13 @@ class PetCreator extends React.Component {
     } else {
       birthDate = `${year}`
     }
-    this.createPet(this.uid, name, species, breed, color, birthDate, gender, chip, this.token)
-    this.setState({
+
+    if (uid !== 0) {
+      createNewPet(uid, name, species, breed, color, birthDate, gender, chip, token)
+    } else {
+      createNewPet(cid, name, species, breed, color, birthDate, gender, chip, token)
+    }
+    setState({
       name: '',
       species: '',
       breed: '',
@@ -71,9 +69,9 @@ class PetCreator extends React.Component {
     }, 100)
   }
 
-  changeInputHandler = (event) => {
+  function changeInputHandler(event) {
     event.persist()
-    this.setState((prev) => ({
+    setState((prev) => ({
       ...prev,
       ...{
         [event.target.name]: event.target.value,
@@ -81,49 +79,31 @@ class PetCreator extends React.Component {
     }))
   }
 
-  render() {
-    return (
-      <div className={styles.profileSpace}>
-        <div className={styles.profileWrapper}>
-          <form onSubmit={this.submitHandler}>
-            <div className={styles.formSpace}>
-              <div className={styles.fieldsColumn}>
-                <Name
-                  handleNameChange={this.changeInputHandler}
-                  heading="Кличка"
-                  placeholder="Мурзик"
-                  name="name"
-                  rec
-                />
-                <Name handleNameChange={this.changeInputHandler} heading="Вид" placeholder="Кот" name="species" rec />
-                <Name
-                  handleNameChange={this.changeInputHandler}
-                  heading="Порода"
-                  placeholder="Беспородный"
-                  name="breed"
-                />
-                <Name handleNameChange={this.changeInputHandler} heading="Окрас" placeholder="Чёрный" name="color" />
-              </div>
-              <div className={styles.fieldsColumn}>
-                <Birthday handleNameChange={this.changeInputHandler} heading="Дата рождения" name="birthDate" />
-                <Name handleNameChange={this.changeInputHandler} heading="Пол" placeholder="Самец" name="gender" />
-                <Chip
-                  handleNameChange={this.changeInputHandler}
-                  heading="Чип"
-                  placeholder="000000000000000"
-                  name="chip"
-                />
-                <p className={styles.noteText}>* - обязательные для заполнения поля</p>
-              </div>
+  return (
+    <div className={styles.profileSpace}>
+      <div className={styles.profileWrapper}>
+        <form onSubmit={submitHandler}>
+          <div className={styles.formSpace}>
+            <div className={styles.fieldsColumn}>
+              <Name handleNameChange={changeInputHandler} heading="Кличка" placeholder="Мурзик" name="name" rec />
+              <Name handleNameChange={changeInputHandler} heading="Вид" placeholder="Кот" name="species" rec />
+              <Name handleNameChange={changeInputHandler} heading="Порода" placeholder="Беспородный" name="breed" />
+              <Name handleNameChange={changeInputHandler} heading="Окрас" placeholder="Чёрный" name="color" />
             </div>
-            <button type="submit" className={styles.saveButton}>
-              Сохранить
-            </button>
-          </form>
-        </div>
+            <div className={styles.fieldsColumn}>
+              <Birthday handleNameChange={changeInputHandler} heading="Дата рождения" name="birthDate" />
+              <Name handleNameChange={changeInputHandler} heading="Пол" placeholder="Самец" name="gender" />
+              <Chip handleNameChange={changeInputHandler} heading="Чип" placeholder="000000000000000" name="chip" />
+              <p className={styles.noteText}>* - обязательные для заполнения поля</p>
+            </div>
+          </div>
+          <button type="submit" className={styles.saveButton}>
+            Сохранить
+          </button>
+        </form>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 function Name({ handleNameChange, name, heading, placeholder, rec }) {
@@ -240,7 +220,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createPet: (uid, name, species, breed, color, birthDate, gender, chip, token) =>
+  createNewPet: (uid, name, species, breed, color, birthDate, gender, chip, token) =>
     dispatch(createPet(uid, name, species, breed, color, birthDate, gender, chip, token)),
 })
 
