@@ -34,7 +34,6 @@ const uploadAvatarStarted = () => ({
 
 const uploadAvatarSuccess = (info) => ({
   type: UPLOAD_AVATAR_SUCCESS,
-  payload: info,
 })
 
 const uploadAvatarFailure = (error) => ({
@@ -54,10 +53,7 @@ export const getUserAvatar = (avatarURL, token) => {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resp) => {
-        console.log(resp)
-        resp.json()
-      })
+      .then((resp) => resp.blob())
       .then((data) => {
         const avatarFullURL = URL.createObjectURL(data)
         dispatch(getAvatarSuccess(avatarFullURL))
@@ -82,7 +78,7 @@ export const uploadUserAvatar = (uid, token, image) => {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resp) => resp.blob())
+      .then((resp) => resp.json())
       .then((dat) => {
         dispatch(uploadAvatarSuccess(dat))
       })
