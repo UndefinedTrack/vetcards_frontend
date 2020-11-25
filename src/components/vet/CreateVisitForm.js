@@ -11,24 +11,33 @@ import { updateVetProc } from '../../actions/procsUpdate'
 import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
 import { ReactComponent as ArrowDownDisabled } from '../../icons/arrow_down_disabled.svg'
 import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
+import { getVetProcs } from '../../actions/procsList'
 
-function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateProc }) {
+function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateProc, getProcs }) {
   const { pid } = useParams()
   const today = new Date()
   const formatter = new Intl.DateTimeFormat('ru')
   const date = formatter.format(today)
   const token = localStorage.getItem('token')
 
-  const visitPurposes = ["Первичный приём", "Вторичный приём", "Диагностика", "Процедурный приём", "Узкие специалисты", "Консультация без животного", "Хирургическое лечение"]
+  const visitPurposes = [
+    'Первичный приём',
+    'Вторичный приём',
+    'Диагностика',
+    'Процедурный приём',
+    'Узкие специалисты',
+    'Консультация без животного',
+    'Хирургическое лечение',
+  ]
   const visitPurposesNames = {
-    "Первичный приём": [""],
-    "Вторичный приём": [""],
-    "Диагностика": ["УЗИ", "Рентген"],
-    "Процедурный приём": ["Таблетка", "Инъекция", "Обработка раны", "Уколы", "Перевязки", "Капельницы", "Анализы"],
-    "Узкие специалисты": ["Кардиолог", "Офтальмолог"],
-    "Консультация без животного": [""],
-    "Консультация по телефону": [""],
-    "Хирургическое лечение": [""],
+    'Первичный приём': [''],
+    'Вторичный приём': [''],
+    Диагностика: ['УЗИ', 'Рентген'],
+    'Процедурный приём': ['Таблетка', 'Инъекция', 'Обработка раны', 'Уколы', 'Перевязки', 'Капельницы', 'Анализы'],
+    'Узкие специалисты': ['Кардиолог', 'Офтальмолог'],
+    'Консультация без животного': [''],
+    'Консультация по телефону': [''],
+    'Хирургическое лечение': [''],
   }
 
   let defaultPurpose = visitPurposes[0]
@@ -98,6 +107,8 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
       recomms: '',
       recipe: '',
     })
+
+    setTimeout(() => getProcs(pid, uid, '', token), 100)
   }
 
   function saveEdit() {
@@ -105,6 +116,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
     const procDate = state.date
 
     updateProc(uid, currentProc.procId, purpose, name, symptoms, diagnosis, recomms, recipe, procDate, token)
+    setTimeout(() => getProcs(pid, uid, '', token), 100)
   }
 
   function changeInputHandler(event) {
@@ -114,11 +126,10 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
         ...prev,
         ...{
           [event.target.name]: event.target.value,
-          'name': visitPurposesNames[event.target.value][0],
+          name: visitPurposesNames[event.target.value][0],
         },
       }))
-    }
-    else {
+    } else {
       setState((prev) => ({
         ...prev,
         ...{
@@ -202,12 +213,11 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
   )
 }
 
-function ClarificationBlock({ changeInputHandler, options, value}) {
+function ClarificationBlock({ changeInputHandler, options, value }) {
   let isActive = true
   if (options === undefined) {
     isActive = false
-  }
-  else if (options[0] === '') {
+  } else if (options[0] === '') {
     isActive = false
   }
 
@@ -218,9 +228,7 @@ function ClarificationBlock({ changeInputHandler, options, value}) {
 
   return (
     <div>
-      <div className={divStyle} >
-        Уточните цель визита
-      </div>
+      <div className={divStyle}>Уточните цель визита</div>
       <DropDownList
         isActive={isActive}
         name="name"
@@ -297,7 +305,7 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
   const dropDown = React.useRef(null)
 
   function handleClickOutside(event) {
-    if ((!dropDown || !dropDown.current.contains(event.target))) {
+    if (!dropDown || !dropDown.current.contains(event.target)) {
       setIsVisible(false)
     }
   }
@@ -318,7 +326,7 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
       setIsVisible(!isVisible)
     }
   }
-  
+
   let style = `${styles.dropDownBlock} ${styles.purposeBlock}`
 
   if (name === 'name') {
@@ -329,20 +337,10 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
   }
 
   return (
-    <div className={styles.purposeWrapper} ref={dropDown} >
-      <div
-        className={style}
-        role="button"
-        tabIndex="0"
-        onKeyDown={handleArrowClick}
-        onClick={handleArrowClick}
-      >
+    <div className={styles.purposeWrapper} ref={dropDown}>
+      <div className={style} role="button" tabIndex="0" onKeyDown={handleArrowClick} onClick={handleArrowClick}>
         {value}
-        <Arrow
-          isActive={isActive}
-          isVisible={isVisible}
-          handleArrowClick={handleArrowClick}
-        />
+        <Arrow isActive={isActive} isVisible={isVisible} handleArrowClick={handleArrowClick} />
       </div>
       <OptionsList
         name={name}
@@ -416,7 +414,6 @@ function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler
     optionBoxStyle = `${styles.optionsBox} ${styles.purposeOptionsBox}`
   }
 
-
   if (isVisible) {
     return <div className={optionBoxStyle}>{optionsComponents}</div>
   }
@@ -470,6 +467,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createVetProc(pid, uid, name, date, purpose, symptoms, diagnosis, recomms, recipe, token)),
   updateProc: (uid, procId, purpose, name, symptoms, diagnosis, recomms, recipe, date, token) =>
     dispatch(updateVetProc(uid, procId, purpose, name, symptoms, diagnosis, recomms, recipe, date, token)),
+  getProcs: (pid, uid, name, token) => dispatch(getVetProcs(pid, uid, name, token)),
 })
 
 export default connect(null, mapDispatchToProps)(CreateVisitForm)

@@ -17,9 +17,9 @@ function Reminders({ uid, name, plusClick, notifList, getNotifications, setCreat
   if (notifList === undefined) notifList = []
 
   useEffect(() => {
-    if (!notifList.length) {
-      getNotifications(pid, uid, token)
-    }
+    // if (!notifList.length) {
+    //   getNotifications(pid, uid, token)
+    // }
 
     if (deleteNotif === true) {
       setDeleteNotif(false)

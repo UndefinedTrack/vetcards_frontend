@@ -169,7 +169,6 @@ export const deleteVetProc = (uid, procId, token) => {
     const data = new FormData()
     data.append('uid', uid)
     data.append('pid', procId)
-
     dispatch(deleteVetProcedureStarted())
 
     fetch(`${API_URL}/cards/delete_vet`, {

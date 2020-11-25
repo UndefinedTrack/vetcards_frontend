@@ -27,9 +27,9 @@ function OwnerProcedures({
   const [deleteProc, setDeleteProc] = useState(false)
 
   useEffect(() => {
-    if (!procsList.length) {
-      getOwnerProcs(pid, uid, searchInput, token)
-    }
+    // if (!procsList.length) {
+    //   getOwnerProcs(pid, uid, searchInput, token)
+    // }
 
     if (deleteProc === true) {
       setDeleteProc(false)
