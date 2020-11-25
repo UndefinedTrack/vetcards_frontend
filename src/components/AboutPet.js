@@ -1,19 +1,21 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import LinkButton from './LinkButton'
 import InformationBlock from './InformationBlock'
 import styles from '../styles/AboutPets.module.css'
-// import { ReactComponent as PhotoPet } from '../icons/photo_pet.svg'
+import { ReactComponent as PhotoPet } from '../icons/photo_pet.svg'
 import { uploadPetAvatar, getPetAvatar } from '../actions/avatar'
 
 function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullURL }) {
   const token = localStorage.getItem('token')
-  
-  if (pet.avatar !== '') {
-    getAvatar(pet.avatar, token)
-  }
+
+  useEffect(() => {
+    if (pet.avatar) {
+      getAvatar(pet.petId, pet.avatar, token)
+    }
+  })
 
   function handleAvatarChange(image) {
     uploadAvatar(pet.userId, pet.petId, token, image)
@@ -22,7 +24,7 @@ function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullU
   return (
     <section className={styles.Container}>
       <div className={styles.PetName}>{pet.name}</div>
-      <Avatar handleAvatarChange={handleAvatarChange} avatarFullURL={avatarFullURL} />
+      <Avatar handleAvatarChange={handleAvatarChange} avatarFullURL={avatarFullURL} pid={pet.petId} />
       <hr className={styles.Line} />
       <InformationBlock pet={pet} />
       <hr className={styles.Line} />
@@ -32,7 +34,7 @@ function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullU
   )
 }
 
-function Avatar({ handleAvatarChange, avatarFullURL }) {
+function Avatar({ handleAvatarChange, avatarFullURL, pid }) {
   const [previewURL, setPreviewURL] = useState('')
 
   const imageInput = React.useRef(null)
@@ -54,7 +56,7 @@ function Avatar({ handleAvatarChange, avatarFullURL }) {
   return (
     <div>
       <div className={styles.avatarWrapper}>
-        <AvatarImage previewURL={previewURL} avatarFullURL={avatarFullURL} />
+        <AvatarImage previewURL={previewURL} avatarFullURL={avatarFullURL} pid={pid} />
         <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
           Изменить фото
         </button>
@@ -77,16 +79,14 @@ Avatar.propTypes = {
   handleAvatarChange: PropTypes.func.isRequired,
 }
 
-function AvatarImage({ previewURL, avatarFullURL }) {
-  if (avatarFullURL !== '') {
-    return (
-      <img src={avatarFullURL} alt='' className={styles.avatarShape} />
-    )
+function AvatarImage({ previewURL, avatarFullURL, pid }) {
+  if (avatarFullURL[pid]) {
+    return <img src={avatarFullURL[pid]} alt="" className={styles.avatarShape} />
   }
   if (previewURL !== '') {
     return <img src={previewURL} alt="" className={styles.avatarShape} />
   }
-  return <div className={`${styles.avatarShape} ${styles.avatarSample}`} />
+  return <PhotoPet className={styles.avatarShape} />
 }
 
 AvatarImage.propTypes = {
@@ -99,7 +99,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getAvatar: (avatarURL, token) => dispatch(getPetAvatar(avatarURL, token)),
+  getAvatar: (pid, avatarURL, token) => dispatch(getPetAvatar(pid, avatarURL, token)),
   uploadAvatar: (uid, pid, token, image) => dispatch(uploadPetAvatar(uid, pid, token, image)),
 })
 

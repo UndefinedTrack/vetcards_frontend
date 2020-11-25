@@ -12,7 +12,7 @@ import { getVetProcs } from '../actions/procsList'
 function MyPets({ uid, petList, getInfo, loading }) {
   const [searchLine, setSearchLine] = useState(-1)
   const token = localStorage.getItem('token')
-  console.log('mypets')
+
   if (petList === undefined) {
     petList = []
   }
@@ -26,7 +26,6 @@ function MyPets({ uid, petList, getInfo, loading }) {
   }, [getInfo, token, uid])
 
   if (loading === false) {
-    console.log('rerender', petList.length)
     return (
       <div className={styles.Content}>
         {Boolean(!petList.length) && (

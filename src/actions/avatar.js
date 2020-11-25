@@ -4,7 +4,7 @@ import {
   GET_AVATAR_FAILURE,
   UPLOAD_AVATAR_REQUEST,
   UPLOAD_AVATAR_SUCCESS,
-  UPLOAD_AVATAR_FAILURE
+  UPLOAD_AVATAR_FAILURE,
 } from '../constants/ActionTypes'
 
 import {
@@ -12,7 +12,7 @@ import {
   // TEST_API_URL
 } from '../constants/constants'
 
-const getAvatarStarted= () => ({
+const getAvatarStarted = () => ({
   type: GET_AVATAR_REQUEST,
 })
 
@@ -51,14 +51,18 @@ export const getUserAvatar = (avatarURL, token) => {
     fetch(`${API_URL}${avatarURL}`, {
       credentials: 'include',
       headers: {
-        Authorization: `Bearer ${token}`, 
+        Authorization: `Bearer ${token}`,
       },
     })
-    .then((resp) => resp.json())
-    .then((data) => {
-      dispatch(getAvatarSuccess(data))
-    })
-    .catch((err) => dispatch(getAvatarFailure(err.message)))
+      .then((resp) => {
+        console.log(resp)
+        resp.json()
+      })
+      .then((data) => {
+        const avatarFullURL = URL.createObjectURL(data)
+        dispatch(getAvatarSuccess(avatarFullURL))
+      })
+      .catch((err) => dispatch(getAvatarFailure(err.message)))
   }
 }
 
@@ -78,29 +82,32 @@ export const uploadUserAvatar = (uid, token, image) => {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((resp) => resp.json())
-    .then((dat) => {
-      dispatch(uploadAvatarSuccess(dat))
-    })
-    .catch((err) => dispatch(uploadAvatarFailure(err.message)))
+      .then((resp) => resp.blob())
+      .then((dat) => {
+        dispatch(uploadAvatarSuccess(dat))
+      })
+      .catch((err) => dispatch(uploadAvatarFailure(err.message)))
   }
 }
 
-export const getPetAvatar = (avatarURL, token) => {
+const petavatars = []
+export const getPetAvatar = (pid, avatarURL, token) => {
   return (dispatch, getState) => {
     dispatch(getAvatarStarted())
 
     fetch(`${API_URL}${avatarURL}`, {
       credentials: 'include',
       headers: {
-        Authorization: `Bearer ${token}`, 
+        Authorization: `Bearer ${token}`,
       },
     })
-    .then((resp) => resp.json())
-    .then((data) => {
-      dispatch(getAvatarSuccess(data))
-    })
-    .catch((err) => dispatch(getAvatarFailure(err.message)))
+      .then((resp) => resp.blob())
+      .then((data) => {
+        const avatarFullURL = URL.createObjectURL(data)
+        petavatars[pid] = avatarFullURL
+        dispatch(getAvatarSuccess(petavatars))
+      })
+      .catch((err) => dispatch(getAvatarFailure(err.message)))
   }
 }
 
@@ -118,13 +125,13 @@ export const uploadPetAvatar = (uid, pid, token, image) => {
       body: data,
       credentials: 'include',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((resp) => resp.json())
-    .then((dat) => {
-      dispatch(uploadAvatarSuccess(dat))
-    })
-    .catch((err) => dispatch(uploadAvatarFailure(err.message)))
+      .then((resp) => resp.json())
+      .then((dat) => {
+        dispatch(uploadAvatarSuccess(dat))
+      })
+      .catch((err) => dispatch(uploadAvatarFailure(err.message)))
   }
 }

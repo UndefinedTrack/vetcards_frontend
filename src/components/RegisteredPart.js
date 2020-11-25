@@ -20,7 +20,7 @@ import EditClientInformation from './vet/EditClientInformation'
 // eslint-disable-next-line
 function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT, loginFailed, loading }) {
   const token = localStorage.getItem('token')
-  console.log('reg part')
+
   if (userInfo.userId === undefined) userInfo.userId = -1
   if (profileInfo === undefined) profileInfo = []
   const uid = userInfo.userId
