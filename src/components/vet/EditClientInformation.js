@@ -25,10 +25,12 @@ function EditClientInformation({
     profileInfo = []
   }
 
-  const avatarURL = profileInfo.avatar
-  if (avatarURL !== '') {
-    getAvatar(avatarURL, token)
-  }
+  useEffect(() => {
+    const avatarURL = profileInfo.avatar
+    if (avatarURL !== '') {
+      getAvatar(avatarURL, token)
+    }
+  }, [profileInfo.avatar, token, getAvatar])
 
   useEffect(() => {
     getProfileInfo(cid, token)
@@ -147,12 +149,6 @@ function Avatar({ handleAvatarChange, avatarFullURL }) {
 
   const imageInput = React.useRef(null)
 
-  // function handleButtonClick() {
-  //   if (imageInput.current) {
-  //     imageInput.current.click()
-  //   }
-  // }
-
   function handleImageInput(event) {
     const image = event.target.files[0]
     if (image) {
@@ -165,9 +161,6 @@ function Avatar({ handleAvatarChange, avatarFullURL }) {
     <div>
       <div className={styles.avatarWrapper}>
         <AvatarImage previewURL={previewURL} avatarFullURL={avatarFullURL} />
-        {/* <button type="button" className={styles.changeAvatar} onClick={handleButtonClick}>
-          Изменить фото
-        </button> */}
         <input
           id="image"
           type="file"
@@ -188,7 +181,7 @@ Avatar.propTypes = {
 }
 
 function AvatarImage({ previewURL, avatarFullURL }) {
-  if (avatarFullURL !== '') {
+  if ((avatarFullURL !== '') && (avatarFullURL !== undefined)) {
     return <img src={avatarFullURL} alt="" className={styles.avatarShape} />
   }
   if (previewURL !== '') {

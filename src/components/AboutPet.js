@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
+
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -75,7 +77,7 @@ function Avatar({ handleAvatarChange, avatarFullURL, pid }) {
 }
 
 Avatar.propTypes = {
-  avatarFullURL: PropTypes.string.isRequired,
+  avatarFullURL: PropTypes.array.isRequired,
   handleAvatarChange: PropTypes.func.isRequired,
 }
 
@@ -90,7 +92,7 @@ function AvatarImage({ previewURL, avatarFullURL, pid }) {
 }
 
 AvatarImage.propTypes = {
-  avatarFullURL: PropTypes.string.isRequired,
+  avatarFullURL: PropTypes.array.isRequired,
   previewURL: PropTypes.string.isRequired,
 }
 

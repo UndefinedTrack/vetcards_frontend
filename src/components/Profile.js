@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styles from '../styles/Profile.module.css'
@@ -7,8 +7,8 @@ import { updateProfileInfo } from '../actions/profile'
 import { uploadUserAvatar, getUserAvatar } from '../actions/avatar'
 import PopUpWindow from './PopUpWindow'
 
-// eslint-disable-next-line
-function Profile({ uid, profileInfo, updateProfileInfo, uploadAvatar, getAvatar, avatarFullURL }) {
+
+function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatarFullURL }) {
   const [popUpDispl, setPopUpDispl] = useState(false)
   const token = localStorage.getItem('token')
 
@@ -26,11 +26,12 @@ function Profile({ uid, profileInfo, updateProfileInfo, uploadAvatar, getAvatar,
     address: '',
   })
 
-  const avatarURL = profileInfo.avatar
-  if (avatarURL !== '') {
-    getAvatar(avatarURL, token)
-  }
-
+  useEffect(() => {
+    if (profileInfo.avatar) {
+      getAvatar(profileInfo.avatar, token)
+    }
+  }, [getAvatar, profileInfo.avatar, token])
+  
   function changeInputHandler(event) {
     event.persist()
     setState((prev) => ({
@@ -49,7 +50,7 @@ function Profile({ uid, profileInfo, updateProfileInfo, uploadAvatar, getAvatar,
     if (state.email === '') state.email = profileInfo.email
     if (state.patronymic === '') state.patronymic = profileInfo.patronymic
     // uid, firstName, patronymic, lastName, phone, email, address, paidService, token
-    updateProfileInfo(
+    updateInfo(
       uid,
       state.firstName,
       state.patronymic,
@@ -80,6 +81,7 @@ function Profile({ uid, profileInfo, updateProfileInfo, uploadAvatar, getAvatar,
       setPopUpDispl(false)
     }, 2000)
   }
+  console.log(avatarFullURL)
 
   return (
     <div className={styles.profileSpace}>
@@ -171,7 +173,7 @@ Avatar.propTypes = {
 }
 
 function AvatarImage({ previewURL, avatarFullURL }) {
-  if (avatarFullURL !== '') {
+  if ((avatarFullURL !== '') && (avatarFullURL !== undefined)) {
     return <img src={avatarFullURL} alt="" className={styles.avatarShape} />
   }
   if (previewURL !== '') {
@@ -425,7 +427,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, address, paidService, token) =>
+  updateInfo: (uid, firstName, patronymic, lastName, phone, email, address, paidService, token) =>
     dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, address, paidService, token)),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
   getAvatar: (avatarURL, token) => dispatch(getUserAvatar(avatarURL, token)),
