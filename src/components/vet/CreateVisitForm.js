@@ -9,6 +9,7 @@ import styles from '../../styles/vet/VisitsHistory.module.css'
 import { createVetProc } from '../../actions/procsCreate'
 import { updateVetProc } from '../../actions/procsUpdate'
 import { ReactComponent as ArrowDown } from '../../icons/arrow_down_square.svg'
+import { ReactComponent as ArrowDownDisabled } from '../../icons/arrow_down_disabled.svg'
 import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 
 function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateProc }) {
@@ -17,9 +18,21 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
   const formatter = new Intl.DateTimeFormat('ru')
   const date = formatter.format(today)
   const token = localStorage.getItem('token')
-  let defaultPurpose = 'Осмотр'
-  // eslint-disable-next-line
-  let defaultName = 'первичный прием'
+
+  const visitPurposes = ["Первичный приём", "Вторичный приём", "Диагностика", "Процедурный приём", "Узкие специалисты", "Консультация без животного", "Хирургическое лечение"]
+  const visitPurposesNames = {
+    "Первичный приём": [""],
+    "Вторичный приём": [""],
+    "Диагностика": ["УЗИ", "Рентген"],
+    "Процедурный приём": ["Таблетка", "Инъекция", "Обработка раны", "Уколы", "Перевязки", "Капельницы", "Анализы"],
+    "Узкие специалисты": ["Кардиолог", "Офтальмолог"],
+    "Консультация без животного": [""],
+    "Консультация по телефону": [""],
+    "Хирургическое лечение": [""],
+  }
+
+  let defaultPurpose = visitPurposes[0]
+  let defaultName = visitPurposesNames[defaultPurpose][0]
   let defaultDate = date
   let defaultSymptoms = ''
   let defaultDiagnosis = ''
@@ -34,6 +47,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
     if (String(day).length === 1) day = `0${day}`
     const currentDate = `${day}.${month}.${year}`
     defaultPurpose = currentProc.purpose
+    defaultName = currentProc.name
     defaultDate = currentDate
     defaultSymptoms = currentProc.symptoms
     defaultDiagnosis = currentProc.diagnosis
@@ -50,8 +64,6 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
     recomms: defaultRecomms,
     recipe: defaultRecipe,
   })
-
-  const visitPurposes = ['Осмотр', 'Прививка', 'Стерилизация']
 
   useEffect(() => {
     setState({
@@ -78,9 +90,9 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
 
     createProc(pid, uid, name, procDate, purpose, symptoms, diagnosis, recomms, recipe, token)
     setState({
-      name: 'первичный прием',
+      name: '',
       date,
-      purpose: 'Осмотр',
+      purpose: 'Первичный приём',
       symptoms: '',
       diagnosis: '',
       recomms: '',
@@ -97,24 +109,41 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
 
   function changeInputHandler(event) {
     event.persist()
-    setState((prev) => ({
-      ...prev,
-      ...{
-        [event.target.name]: event.target.value,
-      },
-    }))
+    if (event.target.name === 'purpose') {
+      setState((prev) => ({
+        ...prev,
+        ...{
+          [event.target.name]: event.target.value,
+          'name': visitPurposesNames[event.target.value][0],
+        },
+      }))
+    }
+    else {
+      setState((prev) => ({
+        ...prev,
+        ...{
+          [event.target.name]: event.target.value,
+        },
+      }))
+    }
   }
 
   return (
     <form onSubmit={submitHandler} className={styles.CreateVFContainer}>
       <div className={styles.DFlex}>
-        <div className={styles.VisitInf}>
+        <div className={`${styles.VisitInf} ${styles.purpose}`}>
           <div>
             Цель визита <span className={styles.noteText}>*</span>
           </div>
-          <DropDownList changeInputHandler={changeInputHandler} options={visitPurposes} defaultValue={state.purpose} />
+          <DropDownList
+            isActive
+            name="purpose"
+            changeInputHandler={changeInputHandler}
+            options={visitPurposes}
+            value={state.purpose}
+          />
         </div>
-        <div className={styles.VisitInf}>
+        <div className={`${styles.VisitInf} ${styles.date}`}>
           <div>
             Дата визита <span className={styles.noteText}>*</span>
           </div>
@@ -122,6 +151,11 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
         </div>
       </div>
       <div className={styles.DFlexColumn}>
+        <ClarificationBlock
+          changeInputHandler={changeInputHandler}
+          options={visitPurposesNames[state.purpose]}
+          value={state.name}
+        />
         <div className={styles.FormName}>Симптомы</div>
         <TextAreaBlock
           changeInputHandler={changeInputHandler}
@@ -142,13 +176,6 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
           placeholder="Укажите рекомендации по лечению"
           defaultValue={state.recomms}
           name="recomms"
-        />
-        <div className={styles.FormName}>Рецепт</div>
-        <InputBlock
-          changeInputHandler={changeInputHandler}
-          placeholder="Выпишете рецепт"
-          name="recipe"
-          defaultValue={state.recipe}
         />
       </div>
       <p className={styles.noteText}>* - обязательные для заполнения поля</p>
@@ -173,6 +200,41 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
       </div>
     </form>
   )
+}
+
+function ClarificationBlock({ changeInputHandler, options, value}) {
+  let isActive = true
+  if (options === undefined) {
+    isActive = false
+  }
+  else if (options[0] === '') {
+    isActive = false
+  }
+
+  let divStyle
+  if (!isActive) {
+    divStyle = styles.textDisabled
+  }
+
+  return (
+    <div>
+      <div className={divStyle} >
+        Уточните цель визита
+      </div>
+      <DropDownList
+        isActive={isActive}
+        name="name"
+        changeInputHandler={changeInputHandler}
+        options={options}
+        value={value}
+      />
+    </div>
+  )
+}
+ClarificationBlock.propTypes = {
+  value: PropTypes.string.isRequired,
+  changeInputHandler: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
 }
 
 function DateBlock({ changeInputHandler, defaultValue }) {
@@ -230,33 +292,60 @@ InputBlock.propTypes = {
 
 // Выпадающий список
 
-function DropDownList({ changeInputHandler, options, defaultValue }) {
+function DropDownList({ changeInputHandler, options, value, name, isActive }) {
   const [isVisible, setIsVisible] = useState(false)
+  const dropDown = React.useRef(null)
 
-  const [chosenOption, setChosenOption] = useState(defaultValue)
+  function handleClickOutside(event) {
+    if ((!dropDown || !dropDown.current.contains(event.target))) {
+      setIsVisible(false)
+    }
+  }
 
-  function handleOptionClick(optionName) {
-    setChosenOption(optionName)
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, false)
+    return function cleanup() {
+      document.removeEventListener('click', handleClickOutside, false)
+    }
+  })
+
+  function handleOptionClick() {
     setIsVisible(false)
   }
 
   function handleArrowClick() {
-    setIsVisible(!isVisible)
+    if (isActive) {
+      setIsVisible(!isVisible)
+    }
   }
-  console.log(chosenOption)
+  
+  let style = `${styles.dropDownBlock} ${styles.purposeBlock}`
+
+  if (name === 'name') {
+    style = `${styles.dropDownBlock} ${styles.nameBlock}`
+    if (!isActive) {
+      style = `${styles.dropDownBlock} ${styles.nameBlock} ${styles.nameBlockDisabled}`
+    }
+  }
+
   return (
-    <div className={styles.purposeWrapper}>
+    <div className={styles.purposeWrapper} ref={dropDown} >
       <div
-        className={styles.purposeBlock}
+        className={style}
         role="button"
         tabIndex="0"
         onKeyDown={handleArrowClick}
         onClick={handleArrowClick}
       >
-        {defaultValue}
-        <Arrow isVisible={isVisible} handleArrowClick={handleArrowClick} />
+        {value}
+        <Arrow
+          isActive={isActive}
+          isVisible={isVisible}
+          handleArrowClick={handleArrowClick}
+        />
       </div>
       <OptionsList
+        name={name}
         isVisible={isVisible}
         handleOptionClick={handleOptionClick}
         options={options}
@@ -267,15 +356,25 @@ function DropDownList({ changeInputHandler, options, defaultValue }) {
 }
 
 DropDownList.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   changeInputHandler: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
 }
 
-function Arrow({ isVisible, handleArrowClick }) {
+function Arrow({ isVisible, handleArrowClick, isActive }) {
   if (!isVisible) {
+    if (isActive) {
+      return (
+        <button type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+          <ArrowDown />
+        </button>
+      )
+    }
     return (
-      <button type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
-        <ArrowDown />
+      <button disabled type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+        <ArrowDownDisabled />
       </button>
     )
   }
@@ -287,49 +386,73 @@ function Arrow({ isVisible, handleArrowClick }) {
 }
 
 Arrow.propTypes = {
+  isActive: PropTypes.bool.isRequired,
   isVisible: PropTypes.bool.isRequired,
   handleArrowClick: PropTypes.func.isRequired,
 }
 
-function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler }) {
+function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler, name }) {
   const optionsComponents = []
-  for (let i = 0; i < options.length; i += 1) {
-    optionsComponents.push(
-      <Option
-        key={i}
-        name={options[i]}
-        handleOptionClick={handleOptionClick}
-        changeInputHandler={changeInputHandler}
-      />,
-    )
+
+  if (options !== undefined) {
+    for (let i = 0; i < options.length; i += 1) {
+      optionsComponents.push(
+        <Option
+          name={name}
+          key={i}
+          value={options[i]}
+          handleOptionClick={handleOptionClick}
+          changeInputHandler={changeInputHandler}
+        />,
+      )
+    }
   }
+
+  let optionBoxStyle
+  if (name === 'name') {
+    optionBoxStyle = `${styles.optionsBox} ${styles.nameOptionsBox}`
+  }
+  if (name === 'purpose') {
+    optionBoxStyle = `${styles.optionsBox} ${styles.purposeOptionsBox}`
+  }
+
+
   if (isVisible) {
-    return <div className={styles.purposeOptionsBox}>{optionsComponents}</div>
+    return <div className={optionBoxStyle}>{optionsComponents}</div>
   }
   return null
 }
 
 OptionsList.propTypes = {
+  name: PropTypes.string.isRequired,
   isVisible: PropTypes.bool.isRequired,
   handleOptionClick: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   changeInputHandler: PropTypes.func.isRequired,
 }
 
-function Option({ name, handleOptionClick, changeInputHandler }) {
+function Option({ value, handleOptionClick, changeInputHandler, name }) {
+  let labelStyle
+  if (name === 'name') {
+    labelStyle = `${styles.label} ${styles.nameLabel}`
+  }
+  if (name === 'purpose') {
+    labelStyle = `${styles.label} ${styles.purposeLabel}`
+  }
+
   return (
-    <div className={styles.purposeOption}>
+    <div className={styles.option}>
       <input
-        id={name}
+        id={value}
         type="checkbox"
-        value={name}
-        name="purpose"
+        value={value}
+        name={name}
         className={styles.purposeOptionInput}
-        onClick={() => handleOptionClick(name)}
+        onClick={handleOptionClick}
         onChange={changeInputHandler}
       />
-      <label className={styles.purposeLabel} htmlFor={name}>
-        {name}
+      <label className={labelStyle} htmlFor={value}>
+        {value}
       </label>
     </div>
   )
@@ -337,6 +460,7 @@ function Option({ name, handleOptionClick, changeInputHandler }) {
 
 Option.propTypes = {
   name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   handleOptionClick: PropTypes.func.isRequired,
   changeInputHandler: PropTypes.func.isRequired,
 }

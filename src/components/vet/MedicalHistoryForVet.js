@@ -67,18 +67,6 @@ function SearchLine({ changeInputHandler }) {
     <div className={styles.SearchContainer}>
       <SearchButton className={styles.SearchButton} />
       <input type="text" onChange={changeInputHandler} className={styles.SearchLine} placeholder="Поиск" />
-      <Duration />
-    </div>
-  )
-}
-
-function Duration() {
-  return (
-    <div className={styles.MyBoxFilter}>
-      <span className={styles.MyArrowFilter} />
-      <select className={styles.SelectInputFilter}>
-        <option>Фильтры</option>
-      </select>
     </div>
   )
 }

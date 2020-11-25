@@ -56,9 +56,11 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
+  width: 216px;
 }
 
-.InputBlock:focus {
+.InputBlock:focus,
+.InputBlock:hover {
   border-bottom: 1px solid var(--dark-green-color);
   color: var(--dark-green-color);
 }
@@ -87,7 +89,9 @@
 }
 
 .Contraindications:focus,
-.RemarkTextArea:focus {
+.Contraindications:hover,
+.RemarkTextArea:focus,
+.RemarkTextArea:hover {
   border: 1px solid var(--dark-green-color);
   color: var(--dark-green-color);
 }
@@ -153,7 +157,7 @@
   }
 
   .InputBlock {
-    width: 130px;
+    width: 134px;
   }
 
   .RemarkTextArea {
