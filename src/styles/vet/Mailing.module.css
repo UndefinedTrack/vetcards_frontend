@@ -27,7 +27,7 @@
   justify-content: flex-start;
 }
 
-.adressWrapper {
+.addressWrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -78,7 +78,7 @@
   line-height: 26px;
 }
 
-.inputAdress {
+.inputAddress {
   width: 28%;
 }
 .inputText {
