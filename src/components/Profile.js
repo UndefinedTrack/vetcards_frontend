@@ -80,7 +80,6 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
       setPopUpDispl(false)
     }, 2000)
   }
-  console.log(avatarFullURL)
 
   return (
     <div className={styles.profileSpace}>

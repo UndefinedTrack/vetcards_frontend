@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styles from '../../styles/vet/Mailing.module.css'
+import { sendMailing } from '../../actions/mailing'
 
 
-export default function Mailing () {
+function Mailing ({ sendMail }) {
+  const token = localStorage.getItem('token')
+
   const [state, setState] = useState({
     region: '',
     city: '',
@@ -22,10 +26,29 @@ export default function Mailing () {
     }))
   }
 
+  function submitHandler(event) {
+    event.preventDefault()
+    sendMail(
+      state.region,
+      state.city,
+      state.adress,
+      state.subject,
+      state.message,
+      token,
+    )
+    setState({
+      region: '',
+      city: '',
+      street: '',
+      subject: '',
+      message: '',
+    })
+  }
+
   return (
     <div className={styles.mailingSpace} >
       <div className={styles.mailingWrapper} >
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={submitHandler}>
           <Adress changeInputHandler={changeInputHandler} />
           <MailingText />
           <button type="submit" className={styles.submitButton}>
@@ -35,6 +58,10 @@ export default function Mailing () {
       </div>
     </div>
   )
+}
+
+Mailing.propTypes ={
+  sendMail: PropTypes.func.isRequired,
 }
 
 function Adress({ changeInputHandler }) {
@@ -104,3 +131,9 @@ function MailingText({ changeInputHandler }) {
 MailingText.propTypes ={
   changeInputHandler: PropTypes.func.isRequired,
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  sendMail: (region, city, street, subject, message, token) => dispatch(sendMailing(region, city, street, subject, message, token))
+})
+
+export default connect(null, mapDispatchToProps)(Mailing)
