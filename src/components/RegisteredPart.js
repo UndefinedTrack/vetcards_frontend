@@ -16,6 +16,7 @@ import Schedule from './vet/Schedule'
 import CreateSchedule from './vet/CreateSchedule'
 import VisitsHistory from './vet/VisitsHistory'
 import EditClientInformation from './vet/EditClientInformation'
+import Mailing from './vet/Mailing'
 
 // eslint-disable-next-line
 function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJWT, loginFailed, loading }) {
@@ -53,30 +54,22 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
       return (
         <div className={styles.App}>
           <HashRouter>
-            {!isVet && (
-              <Route path="/profile">
-                <Header header="profile" isVet={isVet} />
-                <Profile uid={uid} />
-              </Route>
-            )}
-            {!isVet && (
-              <Route path="/my-acc">
-                <Header header="my-acc" isVet={isVet} />
-                <MyPets uid={uid} />
-              </Route>
-            )}
-            {!isVet && (
-              <Route path="/create-pet">
-                <PopUpHeader header="Добавление питомца" link="#/my-acc" isVet={isVet} />
-                <PetCreator uid={uid} />
-              </Route>
-            )}
-            {!isVet && (
-              <Route path="/diary/:pid">
-                <PopUpHeader header="Дневник питомца" link="#/my-acc" isVet={isVet} />
-                <Diary uid={uid} />
-              </Route>
-            )}
+            <Route path="/profile">
+              <Header header="profile" isVet={isVet} />
+              <Profile uid={uid} />
+            </Route>
+            <Route path="/my-acc">
+              <Header header="my-acc" isVet={isVet} />
+              <MyPets uid={uid} />
+            </Route>
+            <Route path="/create-pet">
+              <PopUpHeader header="Добавление питомца" link="#/my-acc" isVet={isVet} />
+              <PetCreator uid={uid} />
+            </Route>
+            <Route path="/diary/:pid">
+              <PopUpHeader header="Дневник питомца" link="#/my-acc" isVet={isVet} />
+              <Diary uid={uid} />
+            </Route>
           </HashRouter>
         </div>
       )
@@ -85,54 +78,44 @@ function RegisteredPart({ userInfo, getMe, profileInfo, getProfileInfo, refreshJ
       return (
         <div className={styles.App}>
           <HashRouter>
-            {isVet && (
-              <Route path="/my-acc">
-                <Header header="my-acc" isVet={isVet} />
-                <MyPatients uid={uid} />
-              </Route>
-            )}
-            {isVet && (
-              <Route path="/vetprofile">
-                <Header header="profile" isVet={isVet} />
-                <Profile uid={uid} />
-              </Route>
-            )}
-            {isVet && (
-              <Route path="/schedule">
-                <Header header="schedule" isVet={isVet} />
-                <Schedule uid={uid} />
-              </Route>
-            )}
-            {isVet && (
-              <Route path="/create-schedule">
-                <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet={isVet} />
-                <CreateSchedule uid={uid} />
-              </Route>
-            )}
-            {isVet && (
-              <Route path="/visits-history/:pid">
-                <PopUpHeader header="История приемов" link="#/my-acc" isVet={isVet} />
-                <VisitsHistory uid={uid} isVet />
-              </Route>
-            )}
-            {isVet && (
-              <Route path="/edit-client-information/:cid">
-                <PopUpHeader header="Информация о клиенте" link="#/my-acc" isVet={isVet} />
-                <EditClientInformation uid={uid} />
-              </Route>
-            )}
-            {isVet && (
-              <Route path="/new-pet/:cid">
-                <PopUpHeader header="Новый питомец" link="#/my-acc" isVet={isVet} />
-                <PetCreator uid={0} />
-              </Route>
-            )}
+            <Route path="/my-acc">
+              <Header header="my-acc" isVet={isVet} />
+              <MyPatients uid={uid} />
+            </Route>
+            <Route path="/vetprofile">
+              <Header header="profile" isVet={isVet} />
+              <Profile uid={uid} />
+            </Route>
+            <Route path="/schedule">
+              <Header header="schedule" isVet={isVet} />
+              <Schedule uid={uid} />
+            </Route>
+            <Route path="/create-schedule">
+              <PopUpHeader header="Настройка графика работы" link="#/schedule" isVet={isVet} />
+              <CreateSchedule uid={uid} />
+            </Route>
+            <Route path="/visits-history/:pid">
+              <PopUpHeader header="История приемов" link="#/my-acc" isVet={isVet} />
+              <VisitsHistory uid={uid} isVet />
+            </Route>
+            <Route path="/edit-client-information/:cid">
+              <PopUpHeader header="Информация о клиенте" link="#/my-acc" isVet={isVet} />
+              <EditClientInformation uid={uid} />
+            </Route>
+            <Route path="/new-pet/:cid">
+              <PopUpHeader header="Новый питомец" link="#/my-acc" isVet={isVet} />
+              <PetCreator uid={0} />
+            </Route>
+            <Route path="/mailing">
+              <Header header="mailing" isVet={isVet} />
+              <Mailing uid={uid} />
+            </Route>
           </HashRouter>
         </div>
       )
     }
   }
-  return <></>
+  return null
 }
 
 const mapStateToProps = (state) => ({
