@@ -35,6 +35,12 @@ export const sendMailing = (region, city, street, subject, message, token) => {
     data.append('message', message)
     dispatch(sendMailingStarted())
 
+    console.log(data.get('message'))
+    console.log(data.get('subject'))
+    console.log(data.get('street'))
+    console.log(data.get('city'))
+    console.log(data.get('region'))
+
     fetch(`${API_URL}/notifications/broadcast`, {
       method: 'POST',
       body: data,
