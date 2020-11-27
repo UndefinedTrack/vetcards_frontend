@@ -65,7 +65,10 @@ export const getUserProfileInfo = (uid, token) => {
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
-          address: uinfo.address,
+          region: uinfo.region,
+          city: uinfo.city,
+          street: uinfo.street,
+          addressOther: uinfo.address,
           passport: uinfo.passport,
           paidService: uinfo.paid_service,
           avatar: uinfo.avatar,
@@ -78,7 +81,20 @@ export const getUserProfileInfo = (uid, token) => {
   }
 }
 
-export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, email, address, paidService, token) => {
+export const updateProfileInfo = (
+  uid,
+  firstName,
+  patronymic,
+  lastName,
+  phone,
+  email,
+  region,
+  city,
+  street,
+  addressOther,
+  paidService,
+  token,
+) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pk', uid)
@@ -87,7 +103,10 @@ export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, e
     data.append('last_name', lastName)
     data.append('phone', phone)
     data.append('email', email)
-    data.append('address', address)
+    data.append('region', region)
+    data.append('city', city)
+    data.append('street', street)
+    data.append('address', addressOther)
     data.append('passport', '')
     data.append('paid_service', paidService)
     dispatch(updateProfileInfoStarted())
@@ -111,7 +130,10 @@ export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, e
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
-          address: uinfo.address,
+          region: uinfo.region,
+          city: uinfo.city,
+          street: uinfo.street,
+          addressOther: uinfo.address,
           passport: uinfo.passport,
           paidService: uinfo.paid_service,
           vet: uinfo.vet,

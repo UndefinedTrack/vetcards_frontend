@@ -65,7 +65,10 @@ export const getClientProfileInfo = (uid, token) => {
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
-          address: uinfo.address,
+          region: uinfo.region,
+          city: uinfo.city,
+          street: uinfo.street,
+          addressOther: uinfo.address,
           passport: uinfo.passport,
           paidService: uinfo.paid_service,
           avatar: uinfo.avatar,
@@ -85,7 +88,10 @@ export const updateClientProfileInfo = (
   lastName,
   phone,
   email,
-  address,
+  region,
+  city,
+  street,
+  addressOther,
   paidService,
   token,
 ) => {
@@ -97,7 +103,10 @@ export const updateClientProfileInfo = (
     data.append('last_name', lastName)
     data.append('phone', phone)
     data.append('email', email)
-    data.append('address', address)
+    data.append('region', region)
+    data.append('city', city)
+    data.append('street', street)
+    data.append('address', addressOther)
     data.append('passport', '')
     data.append('paid_service', paidService)
     dispatch(updateClientProfileStarted())
@@ -121,7 +130,10 @@ export const updateClientProfileInfo = (
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
-          address: uinfo.address,
+          region: uinfo.region,
+          city: uinfo.city,
+          street: uinfo.street,
+          addressOther: uinfo.address,
           passport: uinfo.passport,
           paidService: uinfo.paid_service,
         }

@@ -14,10 +14,16 @@
   background-color: var(--white-color);
   flex-direction: column;
   width: 1318px;
-  height: 600px;
+  height: 550px;
   border-radius: 10px;
   border: 1px solid var(--dark-green-color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .formSpace {
@@ -51,8 +57,7 @@
   line-height: 26px;
   width: 182px;
   height: 46px;
-  margin-right: 110px;
-  margin-left: auto;
+  margin: auto 25px 25px auto;
   cursor: pointer;
   outline: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -123,6 +128,11 @@
   line-height: 26px;
   margin-left: 2px;
 }
+
+.requiredText {
+  margin: auto 25px 10px auto;
+}
+
 
 .Success {
   display: flex;
@@ -226,7 +236,7 @@
 @media (max-width: 1200px) {
   .profileWrapper {
     width: 828px;
-    height: 500px;
+    height: 520px;
   }
 
   .text {
@@ -244,11 +254,7 @@
 
 @media (max-height: 700px) {
   .profileWrapper {
-    height: 450px;
-  }
-
-  .saveButton {
-    margin-right: 10px;
+    height: 500px;
   }
 
   .formSpace {

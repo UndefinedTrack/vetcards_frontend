@@ -14,10 +14,16 @@
   background-color: var(--white-color);
   flex-direction: column;
   width: 1318px;
-  height: 600px;
+  height: 550px;
   border-radius: 10px;
   border: 1px solid var(--dark-green-color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .formSpace {
@@ -51,8 +57,7 @@
   line-height: 26px;
   width: 182px;
   height: 46px;
-  margin-right: 100px;
-  margin-left: auto;
+  margin: auto 25px 25px auto;
   cursor: pointer;
   outline: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -141,6 +146,10 @@
   margin-left: 2px;
 }
 
+.requiredText {
+  margin: auto 25px 0px auto;
+}
+
 .Success {
   display: flex;
   justify-content: center;
@@ -184,6 +193,10 @@
   color: var(--dark-green-color);
 }
 
+.CheckName {
+  margin-top: 50px;
+}
+
 .CustomCheckBox {
   position: absolute;
   z-index: -1;
@@ -202,6 +215,7 @@
 
 .Test {
   display: flex;
+  margin-top: auto;
 }
 
 .CustomCheckBox + label::before {
@@ -260,11 +274,7 @@
 
 @media (max-height: 700px) {
   .profileWrapper {
-    height: 450px;
-  }
-
-  .saveButton {
-    margin-right: 10px;
+    height: 520px;
   }
 
   .formSpace {
