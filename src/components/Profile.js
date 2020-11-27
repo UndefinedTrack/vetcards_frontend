@@ -22,7 +22,10 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
     lastName: '',
     phone: '',
     email: '',
-    address: '',
+    region: '',
+    city: '',
+    street: '',
+    addressOther: '',
   })
 
   useEffect(() => {
@@ -48,6 +51,10 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
     if (state.phone === '') state.phone = profileInfo.phone
     if (state.email === '') state.email = profileInfo.email
     if (state.patronymic === '') state.patronymic = profileInfo.patronymic
+    if (state.region === '') state.region = profileInfo.region
+    if (state.city === '') state.city = profileInfo.city
+    if (state.street === '') state.street = profileInfo.street
+    if (state.addressOther === '') state.addressOther = profileInfo.addressOther
     // uid, firstName, patronymic, lastName, phone, email, address, paidService, token
     updateInfo(
       uid,
@@ -56,7 +63,10 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
       state.lastName,
       state.phone,
       state.email,
-      state.address,
+      state.region,
+      state.city,
+      state.street,
+      state.addressOther,
       false,
       token,
     )
@@ -67,6 +77,10 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
       lastName: '',
       phone: '',
       email: '',
+      region: '',
+      city: '',
+      street: '',
+      addressOther: '',
     })
   }
 
@@ -84,7 +98,7 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className={styles.form} >
           <div className={styles.formSpace}>
             <Avatar
               handleAvatarChange={handleAvatarChange}
@@ -105,15 +119,20 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
             <div className={styles.fieldsColumn}>
               <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} isVet={isVet} />
               <Email changeInputHandler={changeInputHandler} email={profileInfo.email} isVet={isVet} />
-              <Address changeInputHandler={changeInputHandler} address={profileInfo.address} isVet={isVet} />
-              {isVet && <p className={styles.noteText}>* - обязательные для заполнения поля</p>}
-              {!isVet && (
-                <div>
-                  <p className={styles.noteText}>Важно: редактировать информацию может только ваш ветеринар</p>
-                </div>
-              )}
             </div>
+            <FullAddress
+              region={profileInfo.region}
+              city={profileInfo.city}
+              street={profileInfo.street}
+              addressOther={profileInfo.addressOther}
+              changeInputHandler={changeInputHandler}
+              isVet={isVet}
+            />
           </div>
+          {isVet && <p className={`${styles.noteText} ${styles.requiredText}`}>* - обязательные для заполнения поля</p>}
+          {!isVet && (
+              <p className={`${styles.noteText} ${styles.requiredText}`}>Важно: редактировать информацию может только ваш ветеринар</p>
+          )}     
           <button type="submit" className={styles.saveButton}>
             Сохранить
           </button>
@@ -171,7 +190,6 @@ Avatar.propTypes = {
 }
 
 function AvatarImage({ previewURL, avatarFullURL }) {
-  console.log(typeof avatarFullURL)
   if (avatarFullURL !== '' && avatarFullURL !== undefined && typeof avatarFullURL === 'string') {
     return <img src={avatarFullURL} alt="" className={styles.avatarShape} />
   }
@@ -393,31 +411,91 @@ Email.propTypes = {
   email: PropTypes.string,
 }
 
-function Address({ address, changeInputHandler, isVet }) {
-  return (
-    <div>
+function FullAddress({ region, city, street, addressOther, changeInputHandler, isVet }) {
+  if (isVet) {
+    return(
+      <div className={styles.fieldsColumn}>
+        <p className={styles.text}>Адрес</p>
+        <input 
+            type="text"
+            name="region"
+            onChange={changeInputHandler}
+            className={`${styles.input} ${styles.inputaddress}`}
+            defaultValue={region}
+            placeholder="Регион"
+          />
+          <input 
+            type="text"
+            name="city"
+            onChange={changeInputHandler}
+            className={`${styles.input} ${styles.inputaddress}`}
+            defaultValue={city}
+            placeholder="Город"
+          />
+          <input
+            type="text"
+            name="street"
+            onChange={changeInputHandler}
+            className={`${styles.input} ${styles.inputaddress}`}
+            defaultValue={street}
+            placeholder="Улица"
+          />
+          <input
+            type="text"
+            name="addressOther"
+            onChange={changeInputHandler}
+            className={`${styles.input} ${styles.inputaddress}`}
+            defaultValue={addressOther}
+            placeholder="Дом, корпус, квартира"
+          />
+      </div>
+    )
+  }
+  return(
+    <div className={styles.fieldsColumn}>
       <p className={styles.text}>Адрес</p>
-      {isVet && (
-        <input
-          type="text"
-          name="address"
-          onChange={changeInputHandler}
-          className={styles.input}
-          defaultValue={address}
-        />
-      )}
-      {!isVet && (
-        <input
-          type="text"
-          name="address"
-          disabled
-          onChange={changeInputHandler}
-          className={styles.input}
-          defaultValue={address}
-        />
-      )}
+      <input
+        disabled
+        type="text"
+        name="region"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={region}
+        placeholder="Регион"
+      />
+      <input 
+        disabled
+        type="text"
+        name="city"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={city}
+        placeholder="Город"
+      />
+      <input
+        disabled
+        type="text"
+        name="street"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={street}
+        placeholder="Улица"
+      />
+      <input
+        disabled
+        type="text"
+        name="addressOther"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={addressOther}
+        placeholder="Дом, корпус, квартира"
+      />
     </div>
   )
+}
+
+FullAddress.propTypes = {
+  changeInputHandler: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -426,8 +504,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updateInfo: (uid, firstName, patronymic, lastName, phone, email, address, paidService, token) =>
-    dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, address, paidService, token)),
+  updateInfo: (uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paidService, token) =>
+    dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paidService, token)),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
   getAvatar: (avatarURL, token) => dispatch(getUserAvatar(avatarURL, token)),
 })

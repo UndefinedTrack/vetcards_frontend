@@ -42,7 +42,10 @@ function EditClientInformation({
     lastName: profileInfo.lastName || '',
     phone: profileInfo.phone || '',
     email: profileInfo.email || '',
-    address: profileInfo.address || '',
+    region: profileInfo.region || '',
+    city: profileInfo.city || '',
+    street: profileInfo.street || '',
+    addressOther: profileInfo.addressOther || '',
     paid: profileInfo.paidService || '',
   })
 
@@ -84,7 +87,10 @@ function EditClientInformation({
       lastName: profileInfo.lastName || '',
       phone: profileInfo.phone || '',
       email: profileInfo.email || '',
-      address: profileInfo.address || '',
+      region: profileInfo.region || '',
+      city: profileInfo.city || '',
+      street: profileInfo.street || '',
+      addressOther: profileInfo.addressOther || '',
       paid: profileInfo.paidService || '',
     })
     setFlag(false)
@@ -99,7 +105,10 @@ function EditClientInformation({
       state.lastName,
       state.phone,
       state.email,
-      state.address,
+      state.region,
+      state.city,
+      state.street,
+      state.addressOther,
       state.paid,
       token,
     )
@@ -112,7 +121,7 @@ function EditClientInformation({
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className={styles.form}>
           <div className={styles.formSpace}>
             <Avatar handleAvatarChange={handleAvatarChange} avatarFullURL={avatarFullURL} getAvatar={getAvatar} />
             <div className={styles.fieldsColumn}>
@@ -128,11 +137,17 @@ function EditClientInformation({
             <div className={styles.fieldsColumn}>
               <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={state.phone} />
               <Email changeInputHandler={changeInputHandler} email={state.email} />
-              <Address changeInputHandler={changeInputHandler} address={state.address} />
-              <p className={styles.noteText}>* - обязательные для заполнения поля</p>
               <PaidServise changeCheckbox={changeCheckbox} />
             </div>
+            <FullAddress
+              region={profileInfo.region}
+              city={profileInfo.city}
+              street={profileInfo.street}
+              addressOther={profileInfo.addressOther}
+              changeInputHandler={changeInputHandler}
+            />
           </div>
+          <p className={`${styles.noteText} ${styles.requiredText}`}>* - обязательные для заполнения поля</p>
           <div className={styles.Test}>
             <a href={`#/new-pet/${cid}`} className={`${styles.saveButton} ${styles.NewPet}`}>
               <span className={styles.Plus}>+</span> Новый питомец
@@ -345,22 +360,6 @@ Email.propTypes = {
   email: PropTypes.string,
 }
 
-function Address({ address, changeInputHandler }) {
-  return (
-    <div>
-      <p className={styles.text}>Адрес</p>
-      <input
-        type="text"
-        name="address"
-        onChange={changeInputHandler}
-        className={styles.input}
-        value={address}
-        placeholder="Введите адрес"
-      />
-    </div>
-  )
-}
-
 function PaidServise({ changeCheckbox }) {
   return (
     <div>
@@ -381,6 +380,50 @@ function PaidServise({ changeCheckbox }) {
   )
 }
 
+function FullAddress({ region, city, street, addressOther, changeInputHandler }) {
+  return(
+    <div className={styles.fieldsColumn}>
+      <p className={styles.text}>Адрес</p>
+      <input
+        type="text"
+        name="region"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={region}
+        placeholder="Регион"
+      />
+      <input
+        type="text"
+        name="city"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={city}
+        placeholder="Город"
+      />
+      <input
+        type="text"
+        name="street"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={street}
+        placeholder="Улица"
+      />
+      <input
+        type="text"
+        name="addressOther"
+        onChange={changeInputHandler}
+        className={`${styles.input} ${styles.inputaddress}`}
+        defaultValue={addressOther}
+        placeholder="Дом, корпус, квартира"
+      />
+    </div>
+  )
+}
+
+FullAddress.propTypes = {
+  changeInputHandler: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = (state) => ({
   profileInfo: state.clientProfile.clientProfile,
   avatarFullURL: state.avatar.avatar,
@@ -388,8 +431,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid, token) => dispatch(getClientProfileInfo(uid, token)),
-  updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, address, paid, token) =>
-    dispatch(updateClientProfileInfo(uid, firstName, patronymic, lastName, phone, email, address, paid, token)),
+  updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paid, token) =>
+    dispatch(updateClientProfileInfo(uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paid, token)),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
   getAvatar: (avatarURL, token) => dispatch(getUserAvatar(avatarURL, token)),
 })

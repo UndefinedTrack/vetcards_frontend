@@ -31,7 +31,7 @@ function Mailing ({ sendMail }) {
     sendMail(
       state.region,
       state.city,
-      state.adress,
+      state.address,
       state.subject,
       state.message,
       token,
@@ -49,8 +49,8 @@ function Mailing ({ sendMail }) {
     <div className={styles.mailingSpace} >
       <div className={styles.mailingWrapper} >
         <form className={styles.form} onSubmit={submitHandler}>
-          <Adress changeInputHandler={changeInputHandler} />
-          <MailingText />
+          <Address changeInputHandler={changeInputHandler} />
+          <MailingText changeInputHandler={changeInputHandler} />
           <button type="submit" className={styles.submitButton}>
             Отправить
           </button>
@@ -64,16 +64,16 @@ Mailing.propTypes ={
   sendMail: PropTypes.func.isRequired,
 }
 
-function Adress({ changeInputHandler }) {
+function Address({ changeInputHandler }) {
   return(
     <div>
       <p className={styles.text}>Электронная рассылка клиентам, проживающим по адресу:</p>
-      <div className={styles.adressWrapper}>
+      <div className={styles.addressWrapper}>
         <input 
           type="text"
           name="region"
           onChange={changeInputHandler}
-          className={`${styles.input} ${styles.inputAdress}`}
+          className={`${styles.input} ${styles.inputAddress}`}
           defaultValue=""
           placeholder="Регион"
         />
@@ -81,7 +81,7 @@ function Adress({ changeInputHandler }) {
           type="text"
           name="city"
           onChange={changeInputHandler}
-          className={`${styles.input} ${styles.inputAdress}`}
+          className={`${styles.input} ${styles.inputAddress}`}
           defaultValue=""
           placeholder="Город"
         />
@@ -89,7 +89,7 @@ function Adress({ changeInputHandler }) {
           type="text"
           name="street"
           onChange={changeInputHandler}
-          className={`${styles.input} ${styles.inputAdress}`}
+          className={`${styles.input} ${styles.inputAddress}`}
           defaultValue=""
           placeholder="Улица"
         />
@@ -98,7 +98,7 @@ function Adress({ changeInputHandler }) {
   )
 }
 
-Adress.propTypes ={
+Address.propTypes ={
   changeInputHandler: PropTypes.func.isRequired,
 }
 
