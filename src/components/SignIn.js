@@ -35,7 +35,7 @@ function SignIn({ userToken, createJWT, setUserReg, setSignInUp }) {
 
   function submitHandler(event) {
     event.preventDefault()
-    createJWT(state.username, state.password)
+    createJWT(state.username.toLowerCase(), state.password)
   }
 
   if (userToken !== null && userToken !== undefined) {
