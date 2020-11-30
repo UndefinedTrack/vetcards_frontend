@@ -1,0 +1,166 @@
+@import url('./../stylesConstants.css');
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 1318px;
+  border-radius: 10px;
+  background-color: var(--white-color);
+  padding-bottom: 16px;
+  border: 1px solid var(--dark-green-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 25px;
+}
+
+.MainInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.Block {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.CheckName,
+.InputName {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+.CheckName {
+  margin-top: 10px;
+}
+
+.CheckName:nth-child(2) {
+  margin-bottom: 10px;
+}
+
+.InputName:first-child {
+  margin-top: 10px;
+}
+
+.InputBlock {
+  border: none;
+  outline: none;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #c4c4c4;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  width: 216px;
+}
+
+.InputBlock:focus,
+.InputBlock:hover {
+  border-bottom: 1px solid var(--dark-green-color);
+  color: var(--dark-green-color);
+}
+
+.Contraindications,
+.RemarkTextArea {
+  resize: none;
+  border: none;
+  outline: none;
+  height: auto;
+  border-radius: 10px;
+  padding: 5px;
+  width: 90%;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #c4c4c4;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.Contraindications {
+  width: 420px;
+  height: 100px;
+}
+
+.Contraindications:focus,
+.Contraindications:hover,
+.RemarkTextArea:focus,
+.RemarkTextArea:hover {
+  border: 1px solid var(--dark-green-color);
+  color: var(--dark-green-color);
+}
+
+.CustomCheckBox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.CustomCheckBox + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.CustomCheckBox + label::before {
+  content: '';
+  display: inline-block;
+  margin-top: 2px;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid var(--dark-green-color);
+  border-radius: 2px;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.CustomCheckBox:checked + label::before {
+  border-color: var(--dark-green-color);
+  background-color: var(--dark-green-color);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--dark-green-color);
+  color: var(--white-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: 20px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1400px) {
+  .Container {
+    width: 1000px;
+  }
+
+  .InputBlock {
+    width: 134px;
+  }
+
+  .RemarkTextArea {
+    width: 94.5%;
+  }
+}

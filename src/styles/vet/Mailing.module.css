@@ -1,0 +1,166 @@
+@import url('../stylesConstants.css');
+
+.mailingSpace {
+  display: flex;
+  background-color: var(--grey-yellow-color);
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.mailingWrapper {
+  display: flex;
+  margin-top: 100px;
+  background-color: var(--white-color);
+  flex-direction: column;
+  width: 1318px;
+  height: 600px;
+  border-radius: 10px;
+  border: 1px solid var(--dark-green-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+.addressWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.submitButton {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--dark-green-color);
+  color: var(--white-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin: auto 25px 25px auto;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.text {
+  display: flex;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+  margin-left: 25px;
+}
+
+.input {
+  display: flex;
+  height: 42px;
+  outline: none;
+  border: none;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-right: 2vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.inputAddress {
+  width: 28%;
+}
+.inputText {
+  width: auto;
+  margin-right: 25px;
+}
+
+.input:first-child {
+  margin-left: 25px;
+}
+
+.input:last-child {
+  margin-right: 25px;
+}
+
+.input:focus,
+.input:hover {
+  color: var(--dark-green-color);
+  border: 1px solid var(--dark-green-color);
+}
+
+.textArea {
+  display: flex;
+  resize: none;
+  border: none;
+  outline: none;
+  height: 250px;
+  border-radius: 10px;
+  padding: 5px 15px 5px 15px;
+  width: auto;
+  margin-left: 25px;
+  margin-top: 15px;
+  margin-right: 25px;
+  margin-bottom: 10px;
+  border: 1px solid #c4c4c4;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.textArea:focus,
+.textArea:hover {
+  border: 1px solid var(--dark-green-color);
+  color: var(--dark-green-color);
+}
+
+.mailingTextWrapper {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.mailingTextInputWrapper {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+@media (max-width: 1400px) {
+  .mailingWrapper {
+    width: 1080px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mailingWrapper {
+    width: 828px;
+    height: 550px;
+  }
+
+  .textArea {
+    height: 200px;
+  }
+}
+
+@media (max-height: 700px) {
+  .mailingWrapper {
+    height: 500px;
+  }
+
+  .textArea {
+    height: 150px;
+  }
+}

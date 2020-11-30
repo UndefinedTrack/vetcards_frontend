@@ -67,6 +67,12 @@ export const getPetInfo = (pid, uid, token) => {
           birthDate: pinfo.birth_date,
           gender: pinfo.gender,
           chip: pinfo.chip,
+          sterilized: pinfo.sterilized,
+          vaccinated: pinfo.vaccinated,
+          contraindications: pinfo.contraindications,
+          remark: pinfo.notes,
+          weight: pinfo.weight,
+          avatar: pinfo.avatar,
         }
 
         dispatch(getPetInfoSuccess(pet))
@@ -75,7 +81,23 @@ export const getPetInfo = (pid, uid, token) => {
   }
 }
 
-export const updatePetInfo = (pid, uid, name, species, breed, color, birthDate, gender, chip, token) => {
+export const updatePetInfo = (
+  pid,
+  uid,
+  name,
+  species,
+  breed,
+  color,
+  birthDate,
+  gender,
+  chip,
+  sterilized,
+  vaccinated,
+  contraindications,
+  remark,
+  weight,
+  token,
+) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pk', pid)
@@ -87,6 +109,11 @@ export const updatePetInfo = (pid, uid, name, species, breed, color, birthDate, 
     data.append('birth_date', birthDate)
     data.append('gender', gender)
     data.append('chip', chip)
+    data.append('sterilized', sterilized)
+    data.append('vaccinated', vaccinated)
+    data.append('contraindications', contraindications)
+    data.append('notes', remark)
+    data.append('weight', weight)
 
     dispatch(updatePetInfoStarted())
 

@@ -4,7 +4,7 @@ import { createJWT } from '../actions/userCreate.js'
 import styles from '../styles/SignUp.module.css'
 
 // eslint-disable-next-line
-function SignIn({ userToken, createJWT, setUserReg }) {
+function SignIn({ userToken, createJWT, setUserReg, setSignInUp }) {
   let wrong = false
   const [state, setState] = useState({
     username: '',
@@ -20,6 +20,7 @@ function SignIn({ userToken, createJWT, setUserReg }) {
     localStorage.setItem('userReg', true)
     setUserReg(true)
     window.location.href = '#/my-acc'
+    setSignInUp(false)
   }
 
   function changeInputHandler(event) {
@@ -64,24 +65,24 @@ function SignIn({ userToken, createJWT, setUserReg }) {
             name="password"
             type="password"
             id="password"
-            title="Пароль не может быть короче 6 символов"
-            pattern=".{6,}"
+            title="Пароль не может быть короче 8 символов"
+            pattern=".{8,}"
             placeholder="Пароль"
             className={`${styles.FormInput} ${styles.FormInputIn}`}
             onChange={changeInputHandler}
           />
         </div>
-        {wrong && <div className={styles.WrongLogOrPassw}>Неверный логин или пароль</div>}
-        <button type="submit" id="submit" className={`${styles.SubmitButton} ${styles.SubmitSignIn}`}>
+        {wrong && <div className={`${styles.WrongMessage} ${styles.SignInWidth}`}>Неверный логин или пароль</div>}
+        <button type="submit" id="sifn-in-submit" className={`${styles.SubmitButton} ${styles.SubmitSignIn}`}>
           ВОЙТИ
         </button>
+        <div className={styles.SignIn}>
+          Нет аккаунта?{' '}
+          <a href="#/" className={styles.SignInButton}>
+            Зарегистрироваться
+          </a>
+        </div>
       </form>
-      <div className={styles.SignIn}>
-        Нет аккаунта?{' '}
-        <a href="#/sign-up" className={styles.SignInButton}>
-          Зарегистрироваться
-        </a>
-      </div>
     </div>
   )
 }

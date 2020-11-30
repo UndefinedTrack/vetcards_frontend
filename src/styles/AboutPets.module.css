@@ -5,10 +5,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   width: 370px;
   margin-right: 28px;
   border-radius: 10px;
+  border: 1px solid var(--dark-green-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .PetName {
@@ -20,14 +22,36 @@
   line-height: 35px;
 }
 
-.PhotoPet {
+/* .PhotoPet {
   width: 200px;
   margin-bottom: 14px;
+} */
+
+.changeAvatar {
+  display: flex;
+  border: none;
+  color: var(--dark-green-color);
+  background-color: var(--white-color);
+  font-size: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.avatarShape {
+  display: flex;
+  border-radius: 50%;
+  object-fit: cover;
+  width: 180px;
+  height: 180px;
+}
+
+.avatarSample {
+  background-color: var(--grey-green-color);
 }
 
 .Line {
-  color: var(--active-button-color);
-  background-color: var(--active-button-color);
+  color: var(--dark-green-color);
+  background-color: var(--dark-green-color);
   width: 331px;
   border: none;
   height: 1px;
@@ -41,6 +65,11 @@
   .Line {
     width: 280px;
   }
+
+  .avatarShape {
+    height: 100px;
+    width: 100px;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -50,6 +79,11 @@
 
   .Line {
     width: 230px;
+  }
+
+  .avatarShape {
+    height: 70px;
+    width: 70px;
   }
 }
 
@@ -65,5 +99,10 @@
 
   .Line {
     width: 180px;
+  }
+
+  .avatarShape {
+    height: 50px;
+    width: 50px;
   }
 }

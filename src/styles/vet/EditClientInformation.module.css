@@ -1,0 +1,283 @@
+@import url('../stylesConstants.css');
+
+.profileSpace {
+  display: flex;
+  background-color: var(--grey-green-color);
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.profileWrapper {
+  display: flex;
+  margin-top: 100px;
+  background-color: var(--white-color);
+  flex-direction: column;
+  width: 1318px;
+  height: 550px;
+  border-radius: 10px;
+  border: 1px solid var(--dark-green-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.formSpace {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-right: 86px;
+}
+
+.fieldsColumn {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  padding: 2vh;
+}
+
+.saveButton {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--dark-green-color);
+  color: var(--white-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin: auto 25px 25px auto;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.NewPet {
+  border: 1px solid var(--dark-green-color);
+  color: var(--dark-green-color);
+  background-color: var(--white-color);
+  margin-left: 50px;
+}
+
+.NewPet:visited {
+  color: var(--dark-green-color);
+}
+
+.Plus {
+  margin-right: 4px;
+  font-size: 32px;
+  line-height: 37px;
+}
+
+.changeAvatar {
+  display: flex;
+  border: none;
+  color: var(--dark-green-color);
+  background-color: var(--white-color);
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+}
+
+.avatarShape {
+  display: flex;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 50px;
+  object-fit: cover;
+}
+
+.avatarSample {
+  background-color: var(--grey-green-color);
+}
+
+.avatarWrapper {
+  display: flex;
+  height: inherit;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.input {
+  display: flex;
+  height: 42px;
+  width: 90%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #c4c4c4;
+  padding-left: 16px;
+  padding-right: 2vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.input:focus {
+  color: var(--dark-green-color);
+  border-bottom: 1px solid var(--dark-green-color);
+}
+
+.text {
+  display: flex;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.noteText {
+  color: var(--dark-green-color);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  margin-left: 2px;
+}
+
+.requiredText {
+  margin: auto 25px 0px auto;
+}
+
+.Success {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  height: 20px;
+  margin-right: 50px;
+  width: 182px;
+  margin-bottom: 50px;
+}
+
+.BirthdayContainer {
+  display: flex;
+}
+
+.BirthdayDay {
+  padding: 0;
+  padding-left: 13px;
+  box-sizing: border-box;
+  width: 46px;
+}
+
+.BirthdayYear {
+  padding: 0;
+  padding-left: 13px;
+  box-sizing: border-box;
+  width: 66px;
+}
+
+.BirthdayInputAndText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 14px;
+}
+
+.BirthdayText {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--dark-green-color);
+}
+
+.CheckName {
+  margin-top: 50px;
+}
+
+.CustomCheckBox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.CustomCheckBox + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  margin-left: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* margin-top: 100px; */
+}
+
+.Test {
+  display: flex;
+  margin-top: auto;
+}
+
+.CustomCheckBox + label::before {
+  content: '';
+  display: inline-block;
+  margin-top: 2px;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid var(--dark-green-color);
+  border-radius: 2px;
+  margin-right: 8px;
+  margin-left: 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.CustomCheckBox:checked + label::before {
+  border-color: var(--dark-green-color);
+  background-color: var(--dark-green-color);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.Paid {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@media (max-width: 1400px) {
+  .profileWrapper {
+    width: 1080px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .profileWrapper {
+    width: 828px;
+    height: 600px;
+  }
+
+  .text {
+    margin-bottom: 5px;
+  }
+
+  .avatarSample {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 30px;
+  }
+}
+
+@media (max-height: 700px) {
+  .profileWrapper {
+    height: 520px;
+  }
+
+  .formSpace {
+    height: 395px;
+  }
+}

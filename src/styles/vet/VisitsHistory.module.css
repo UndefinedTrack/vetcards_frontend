@@ -2,17 +2,25 @@
 
 .VHContainer {
   display: flex;
-  height: 660px;
   justify-content: center;
   margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.VisitsHistoryWindow {
+  display: flex;
+  flex-direction: column;
 }
 
 .VHContent {
   display: flex;
   width: 1318px;
+  height: 660px;
   border-radius: 10px;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   padding-bottom: 16px;
+  border: 1px solid var(--dark-green-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .CreateVFContainer {
@@ -43,31 +51,23 @@
 .VisitInf {
   display: flex;
   flex-direction: column;
-  width: 294px;
 }
 
 .VisitInf:first-child {
   margin-right: 23px;
 }
 
+.date {
+  width: 150px;
+}
+.purpose {
+  width: 280px;
+}
+
 .mybox {
   margin-top: 9px;
   position: relative;
   display: inline-block;
-}
-
-.SelectInput {
-  width: 294px;
-  height: 42px;
-  outline: none;
-  border: 1px solid var(--active-button-color);
-  border-radius: 10px;
-  padding-left: 10px;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 26px;
-  background-color: #fff;
 }
 
 .mybox .myarrow {
@@ -83,26 +83,34 @@
 
 .DFlex {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 29px; 
 }
 
 .DFlexColumn {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 }
 
 .InputBlock {
   margin-top: 9px;
   padding-left: 13px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid #c4c4c4;
   box-sizing: border-box;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
   border-radius: 10px;
-  width: 294px;
+  width: 150px;
   height: 42px;
   outline: none;
+}
+.InputBlock:hover,
+.InputBlock:focus {
+  border: 1px solid var(--dark-green-color);
 }
 
 .Input {
@@ -125,7 +133,7 @@
 
 .noteText {
   margin-top: 30px;
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
@@ -138,22 +146,35 @@
   justify-content: center;
   border: none;
   border-radius: 10px;
-  background-color: var(--active-button-color);
-  color: var(--header-color);
+  background-color: var(--dark-green-color);
+  color: var(--white-color);
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
   width: 182px;
   height: 46px;
-  margin-left: auto;
+  /* margin-left: auto; */
   margin-right: 29px;
   cursor: pointer;
   outline: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.SaveButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Canel {
+  background-color: var(--white-color);
+  border: 1px solid var(--dark-green-color);
+  color: black;
+  margin-right: 25px;
 }
 
 .VLine {
-  border-left: 1px solid var(--active-button-color);
+  border-left: 1px solid var(--dark-green-color);
   margin-top: 14px;
   height: auto;
 }
@@ -163,7 +184,7 @@
   align-items: center;
   width: 625px;
   height: 48px;
-  border: 1px solid var(--active-button-color);
+  border: 1px solid var(--dark-green-color);
   box-sizing: border-box;
   border-radius: 10px;
   margin-bottom: 14px;
@@ -171,7 +192,7 @@
 }
 
 .SearchButton {
-  fill: var(--active-button-color);
+  fill: var(--dark-green-color);
   height: 30px;
   margin-left: 4px;
 }
@@ -185,7 +206,7 @@
   height: 45px;
   font-size: 18px;
   line-height: 26px;
-  background-color: var(--header-color);
+  background-color: var(--white-color);
   border: 0;
 }
 .SearchLine:focus {
@@ -214,20 +235,6 @@
   pointer-events: none;
 }
 
-.SelectInputFilter {
-  width: 125px;
-  height: 45px;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 26px;
-  color: #c4c4c4;
-  background-color: #fff;
-}
-
 .CardsSection {
   height: 580px;
   overflow: auto;
@@ -250,10 +257,8 @@
     width: 287px;
   }
 
-  .VisitInf,
-  .SelectInput,
-  .InputBlock {
-    width: 215px;
+  .date {
+    width: 150px;
   }
 
   .Input {
@@ -276,45 +281,79 @@
   outline: none;
   padding: 0;
 }
+.purposeArrowButton:disabled {
+  cursor: default;
+}
 
-.purposeBlock {
+
+.dropDownBlock {
   position: relative;
   margin-top: 9px;
   padding-left: 13px;
   padding-top: 5.5px;
-  border: 1px solid var(--active-button-color);
+  border-bottom: 1px solid #c4c4c4;
   box-sizing: border-box;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
-  border-radius: 10px;
   width: 294px;
   height: 42px;
   outline: none;
   cursor: pointer;
 }
-
-.purposeOptionsBox {
-  position: absolute;
-  top: 49px;
-  left: 6px;
-  background-color: #fff;
-  width: 280px;
-  border: 1px solid var(--active-button-color);
-  border-top: none;
-  border-radius: 5px;
+.dropDownBlock:hover {
+  border-bottom: 1px solid var(--dark-green-color);
 }
 
-.purposeOption {
+.purposeBlock {
+  width: 438px;
+}
+
+.nameBlock {
+  width: 611px;
+}
+
+.nameBlockDisabled {
+  cursor: default;
+}
+.nameBlockDisabled:hover,
+.nameBlockDisabled:focus {
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.textDisabled {
+  color: #c4c4c4;
+}
+
+
+.optionsBox {
+  position: absolute;
+  top: 50px;
+  left: 6px;
+  background-color: #fff;
+  border: 1px solid var(--dark-green-color);
+  border-top: none;
+  border-radius: 5px;
+  z-index: 1;
+}
+.purposeOptionsBox {
+  width: 424px;
+}
+.nameOptionsBox {
+  width: 597px;
+  top: 41px;
+}
+
+.option {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-top: 1px solid var(--active-button-color);
-  height: 42px;  
+  border-top: 1px solid var(--dark-green-color);
+  height: 42px;
 }
-.purposeOption:hover {
-  background-color: var(--active-button-color);
+.option:hover {
+  background-color: var(--dark-green-color);
   color: #fff;
   font-weight: 500;
 }
@@ -323,7 +362,7 @@
   display: none;
 }
 
-.purposeLabel {
+.label {
   display: flex;
   padding-left: 13px;
   padding-top: 13px;
@@ -332,8 +371,14 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
-  width: 280px;
   height: 42px;
+}
+
+.purposeLabel {
+  width: 280px;
+}
+.nameLabel {
+  width: 597px;
 }
 
 .purposeWrapper {
@@ -342,11 +387,19 @@
 
 @media (max-width: 1400px) {
   .purposeBlock {
-    width: 215px;
+    width: 280px;
+  }
+
+  .nameBlock {
+    width: 450px;
+  }
+
+  .nameOptionsBox {
+    width: 436px;
   }
 
   .purposeOptionsBox {
-    width: 201px;
+    width: 266px;
     left: 5px;
   }
 }

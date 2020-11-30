@@ -1,7 +1,8 @@
 :root {
-  --main-bg-color: #e6eadb;
-  --header-color: #fff;
-  --active-button-color: #7aa338;
-  --link-button: #e1f4a9;
+  --grey-green-color: #e6eadb;
+  --white-color: #fff;
+  --dark-green-color: #7aa338;
+  --light-green-color: #e1f4a9;
   --placeholder-color: #8a8a8a;
+  --grey-yellow-color: #eae9db;
 }

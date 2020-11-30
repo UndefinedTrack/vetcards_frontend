@@ -5,12 +5,6 @@ import {
   UPDATE_PROFILE_INFO_REQUEST,
   UPDATE_PROFILE_INFO_SUCCESS,
   UPDATE_PROFILE_INFO_FAILURE,
-  GET_PETS_LIST_REQUEST,
-  GET_PETS_LIST_SUCCESS,
-  GET_PETS_LIST_FAILURE,
-  GET_PATIENTS_LIST_REQUEST,
-  GET_PATIENTS_LIST_SUCCESS,
-  GET_PATIENTS_LIST_FAILURE,
 } from '../constants/ActionTypes'
 
 import {
@@ -50,38 +44,6 @@ const updateProfileInfoFailure = (error) => ({
   },
 })
 
-const getPetsListStarted = () => ({
-  type: GET_PETS_LIST_REQUEST,
-})
-
-const getPetsListSuccess = (pets) => ({
-  type: GET_PETS_LIST_SUCCESS,
-  payload: pets,
-})
-
-const getPetsListFailure = (error) => ({
-  type: GET_PETS_LIST_FAILURE,
-  payload: {
-    error,
-  },
-})
-
-const getPatientsListStarted = () => ({
-  type: GET_PATIENTS_LIST_REQUEST,
-})
-
-const getPatientsListSuccess = (patients) => ({
-  type: GET_PATIENTS_LIST_SUCCESS,
-  payload: patients,
-})
-
-const getPatientsListFailure = (error) => ({
-  type: GET_PATIENTS_LIST_FAILURE,
-  payload: {
-    error,
-  },
-})
-
 export const getUserProfileInfo = (uid, token) => {
   return (dispatch, getState) => {
     dispatch(getProfileInfoStarted())
@@ -103,6 +65,13 @@ export const getUserProfileInfo = (uid, token) => {
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
+          region: uinfo.region,
+          city: uinfo.city,
+          street: uinfo.street,
+          addressOther: uinfo.address,
+          passport: uinfo.passport,
+          paidService: uinfo.paid_service,
+          avatar: uinfo.avatar,
           vet: uinfo.vet,
         }
 
@@ -112,7 +81,20 @@ export const getUserProfileInfo = (uid, token) => {
   }
 }
 
-export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, email, token) => {
+export const updateProfileInfo = (
+  uid,
+  firstName,
+  patronymic,
+  lastName,
+  phone,
+  email,
+  region,
+  city,
+  street,
+  addressOther,
+  paidService,
+  token,
+) => {
   return (dispatch, getState) => {
     const data = new FormData()
     data.append('pk', uid)
@@ -121,7 +103,12 @@ export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, e
     data.append('last_name', lastName)
     data.append('phone', phone)
     data.append('email', email)
-
+    data.append('region', region)
+    data.append('city', city)
+    data.append('street', street)
+    data.append('address', addressOther)
+    data.append('passport', '')
+    data.append('paid_service', paidService)
     dispatch(updateProfileInfoStarted())
 
     fetch(`${API_URL}/users/update`, {
@@ -143,83 +130,17 @@ export const updateProfileInfo = (uid, firstName, patronymic, lastName, phone, e
           lastName: uinfo.last_name,
           phone: uinfo.phone,
           email: uinfo.email,
+          region: uinfo.region,
+          city: uinfo.city,
+          street: uinfo.street,
+          addressOther: uinfo.address,
+          passport: uinfo.passport,
+          paidService: uinfo.paid_service,
+          vet: uinfo.vet,
         }
+
         dispatch(updateProfileInfoSuccess(user))
       })
       .catch((err) => dispatch(updateProfileInfoFailure(err.message)))
-  }
-}
-
-export const getPetsList = (uid, token) => {
-  return (dispatch, getState) => {
-    dispatch(getPetsListStarted())
-
-    fetch(`${API_URL}/pets/list?uid=${uid}`, {
-      credentials: 'include',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        const pets = []
-
-        const pinfo = data.pets
-
-        pinfo.forEach((pt) => {
-          const pet = {
-            petId: pt.id,
-            userId: pt.user_id,
-            name: pt.name,
-            species: pt.species,
-            breed: pt.breed,
-            color: pt.color,
-            birthDate: pt.birth_date,
-            gender: pt.gender,
-            chip: pt.chip,
-          }
-
-          pets.push(pet)
-        })
-
-        dispatch(getPetsListSuccess(pets))
-      })
-      .catch((err) => dispatch(getPetsListFailure(err.message)))
-  }
-}
-
-export const getPatientsList = (uid, token) => {
-  return (dispatch, getState) => {
-    dispatch(getPatientsListStarted())
-
-    fetch(`${API_URL}/pets/patients?uid=${uid}`, {
-      credentials: 'include',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        const patients = []
-
-        const pinfo = data.patients
-
-        pinfo.forEach((pt) => {
-          const patient = {
-            patient: pt.patient,
-            owner: pt.owner,
-            card: pt.card,
-            color: pt.color,
-            birthDate: pt.birth_date,
-            gender: pt.gender,
-            chip: pt.chip,
-          }
-
-          patients.push(patient)
-        })
-
-        dispatch(getPatientsListSuccess(patients))
-      })
-      .catch((err) => dispatch(getPatientsListFailure(err.message)))
   }
 }

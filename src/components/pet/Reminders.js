@@ -1,26 +1,70 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
+import { connect } from 'react-redux'
 import styles from '../../styles/pet/Diary.module.css'
-// import HomeProcedure from './HomeProcedure'
-import { ReactComponent as Search } from '../../icons/search.svg'
+import { getNotifications } from '../../actions/notifications'
+import HomeProcedure from './HomeProcedure'
 import { ReactComponent as Plus } from '../../icons/plus.svg'
 
-function Reminders({ name, search, plusClick }) {
+// eslint-disable-next-line
+function Reminders({ uid, name, plusClick, notifList, getNotifications, setCreateReminderWindow, setNotif }) {
+  const { pid } = useParams()
+  const token = localStorage.getItem('token')
+  const [deleteNotif, setDeleteNotif] = useState(false)
+
+  if (notifList === undefined) notifList = []
+
+  useEffect(() => {
+    // if (!notifList.length) {
+    //   getNotifications(pid, uid, token)
+    // }
+
+    if (deleteNotif === true) {
+      setDeleteNotif(false)
+    }
+
+    setTimeout(() => getNotifications(pid, uid, token), 100)
+    // eslint-disable-next-line
+  }, [pid, deleteNotif])
+
   return (
     <section className={styles.DiaryBlocks}>
       <div className={styles.NameAndSearch}>
         <div className={styles.Name}>{name}</div>
         <div className={styles.Buttons}>
-          {search && <Search className={styles.Button} />}
           <Plus className={styles.Button} onClick={plusClick} />
         </div>
       </div>
       <hr className={styles.Line} />
       <section className={styles.Procedures}>
-        <div className={styles.EmptyStoryContainer}>
-          <div className={styles.EmptyStory}>Нет ни одного напоминания</div>
-        </div>
-        {/* <HomeProcedure /> */}
+        {!notifList.length && (
+          <div className={styles.EmptyStoryContainer}>
+            <div className={styles.EmptyStory}>Нет ни одного напоминания</div>
+          </div>
+        )}
+        {notifList
+          .map((proc) => {
+            const day = proc.date.slice(8, 10)
+            const month = Number(proc.date.slice(5, 7)) - 1
+            const year = proc.date.slice(0, 4)
+            const date = new Date(year, month, day)
+            return (
+              <HomeProcedure
+                key={proc.notifId}
+                proc={proc}
+                date={date}
+                setCreateReminderWindow={setCreateReminderWindow}
+                setNotif={setNotif}
+                setDeleteNotif={setDeleteNotif}
+              />
+            )
+          })
+          .reverse()
+          .sort((a, b) => {
+            return b.props.date - a.props.date
+          })}
       </section>
     </section>
   )
@@ -31,9 +75,18 @@ Reminders.defaultProps = {
 }
 
 Reminders.propTypes = {
+  uid: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  search: PropTypes.bool.isRequired,
   plusClick: PropTypes.func,
+  getNotifications: PropTypes.func.isRequired,
 }
 
-export default Reminders
+const mapStateToProps = (state) => ({
+  notifList: state.notification.notifications,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getNotifications: (pid, uid, token) => dispatch(getNotifications(pid, uid, token)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reminders)

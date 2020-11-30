@@ -51,11 +51,13 @@ export const searchPets = (uid, name, token) => {
           const patient = {
             patient: pt.patient,
             owner: pt.owner,
+            ownerId: pt.owner_id,
             card: pt.card,
             color: pt.color,
             birthDate: pt.birth_date,
             gender: pt.gender,
             chip: pt.chip,
+            avatar: pt.avatar,
           }
 
           patients.push(patient)

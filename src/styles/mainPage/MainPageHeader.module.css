@@ -1,0 +1,114 @@
+@import url('../stylesConstants.css');
+
+.MainPageHeader {
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 75px;
+  background-color: var(--grey-yellow-color);
+  align-items: center;
+  position: fixed;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.Name {
+  color: var(--dark-green-color);
+  margin-left: 23px;
+  font-size: 48px;
+  line-height: 70px;
+}
+
+.Nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.ButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+  width: 187px;
+  height: 75px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.Enabled {
+  color: black !important;
+  text-decoration: none;
+  background-color: var(--white-color);
+}
+
+.Disabled {
+  color: var(--dark-green-color) !important;
+  text-decoration: none;
+  background-color: var(--grey-yellow-color);
+}
+
+.SignIn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 129px;
+  height: 36px;
+  color: var(--dark-green-color);
+  border: 1px solid var(--dark-green-color);
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 18px;
+  line-height: 26px;
+  cursor: pointer;
+  margin: 0 20px;
+  background-color: var(--grey-yellow-color);
+  outline: none;
+}
+
+.SignUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--dark-green-color);
+  background-color: var(--dark-green-color);
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 241px;
+  height: 36px;
+  color: var(--white-color);
+  font-size: 18px;
+  line-height: 26px;
+  cursor: pointer;
+  margin: 0 20px;
+}
+
+@media (max-width: 1300px) {
+  .Button {
+    width: 140px;
+    padding: 0px 5px;
+    text-align: center;
+  }
+
+  .SignIn {
+    width: 100px;
+    margin-left: 10px;
+  }
+
+  .SignUp {
+    width: 180px;
+    margin: 0px 10px;
+  }
+}

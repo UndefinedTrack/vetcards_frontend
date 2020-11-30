@@ -54,7 +54,7 @@ export const getMe = (token) => {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((resp) => resp.json())
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
       .then((data) => {
         const user = {
           email: data.email,
@@ -64,7 +64,12 @@ export const getMe = (token) => {
 
         dispatch(getMeSuccess(user))
       })
-      .catch((err) => dispatch(getMeFailure(err.message)))
+      .catch((err) => {
+        window.location.href = '#/'
+        localStorage.setItem('userReg', '')
+        window.location.reload()
+        dispatch(getMeFailure(err.statusText))
+      })
   }
 }
 
@@ -78,6 +83,8 @@ export const refreshJWT = (refresh) => {
     fetch(`${API_URL}/auth/jwt/refresh`, { method: 'POST', body: data, credentials: 'include' })
       .then((resp) => resp.json())
       .then((dat) => dispatch(refreshJWTSuccess(dat)))
-      .catch((err) => dispatch(refreshJWTFailure(err.message)))
+      .catch((err) => {
+        dispatch(refreshJWTFailure(err.statusText))
+      })
   }
 }

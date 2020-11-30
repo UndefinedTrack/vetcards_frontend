@@ -1,48 +1,23 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styles from '../styles/MedicalHistory.module.css'
 import MedicalCard from './MedicalCard'
 import { ReactComponent as Search } from '../icons/search.svg'
 import { getVetProcs } from '../actions/procsList'
 
-function MedicalHistory({
-  pet,
-  procsList,
-  // eslint-disable-next-line
-  getVetProcs,
-  procs,
-  input,
-  setInput,
-  searchString,
-  ind,
-  searchLine,
-  setSearchLine,
-}) {
-  const uid = 4
+// eslint-disable-next-line
+function MedicalHistory({ pet, uid, procsList, ind, searchLine, setSearchLine, getVetProcs }) {
   const pid = pet.petId
+  const [input, setInput] = useState('')
   const token = localStorage.getItem('token')
 
-  if (procsList[0] === undefined) {
-    procsList[0] = []
-  }
-
   useEffect(() => {
-    if (searchString[pid] === undefined) {
-      searchString[pid] = ''
+    if (uid !== -1) {
+      setTimeout(() => getVetProcs(pid, uid, input, token), 100)
     }
-    setTimeout(() => {
-      getVetProcs(pid, uid, searchString[pid], token)
-      if (procs[pid] !== procsList) {
-        procs[pid] = procsList
-      }
-    }, 100)
-    // eslint-disable-next-line
-  }, [getVetProcs, searchString[pid]])
+  }, [input, getVetProcs, pid, token, uid, procsList])
 
-  if (pid === procsList[0].petId && procs[pid] !== procsList) {
-    procs[pid] = procsList
-  }
   return (
     <div className={styles.Container}>
       <div className={styles.NameAndSearch}>
@@ -65,25 +40,8 @@ function MedicalHistory({
       </div>
       <hr className={styles.Line} />
       <section className={styles.MedicalCardContainer}>
-        {procs.map((procedures) => {
-          if (pet.petId !== procedures[0].petId) {
-            return <div key={procedures[0].procId} />
-          }
-          return (
-            <div key={procedures[0].procId} className={procedures[0].procId}>
-              <LoadProcedures
-                procedures={procedures}
-                searchString={searchString}
-                pid={pid}
-                uid={uid}
-                getVetProcs={getVetProcs}
-                procsList={procsList}
-                procs={procs}
-              />
-            </div>
-          )
-        })}
-        {(procs[pid] === undefined || procs[pid][0].length === 0) && (
+        {procsList && procsList[pid] && procsList[pid].map((proc) => <MedicalCard key={proc.procId} procs={proc} />)}
+        {procsList[pid] && procsList[pid].length === 0 && (
           <div className={styles.EmptyStoryContainer}>
             <div className={styles.EmptyStory}>Здесь будут появляться записи вашего ветеринара</div>
           </div>
@@ -93,31 +51,17 @@ function MedicalHistory({
   )
 
   function searchLineDisplay() {
-    setInput('')
-    getVetProcs(searchLine, uid, '', token)
     setSearchLine(ind)
-    getVetProcs(pid, uid, '', token)
-    getVetProcs(ind, uid, '', token)
   }
 
   function changeInputHandler(event) {
-    searchString[pid] = event.target.value
-    setInput(searchString[pid])
+    setInput(event.target.value)
   }
-}
-// eslint-disable-next-line
-function LoadProcedures({ procedures }) {
-  return (
-    <div>
-      {procedures.map((proc) => (
-        <MedicalCard key={proc.procId} procs={proc} />
-      ))}
-    </div>
-  )
 }
 
 const mapStateToProps = (state) => ({
   procsList: state.procsList.vetProcs,
+  loading: state.procsList.loading,
 })
 
 const mapDispatchToProps = (dispatch) => ({

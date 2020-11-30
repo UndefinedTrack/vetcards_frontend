@@ -50,7 +50,7 @@
 }
 
 .Button {
-  background-color: var(--active-button-color);
+  background-color: var(--dark-green-color);
   border-radius: 10px;
   padding: 10px;
   font-family: 'Noto Sans JP', sans-serif;

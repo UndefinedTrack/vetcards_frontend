@@ -44,6 +44,7 @@ const getOwnerProcsFailure = (error) => ({
   },
 })
 
+const procedures = []
 export const getVetProcs = (pid, uid, name, token) => {
   return (dispatch, getState) => {
     dispatch(getVetProcsStarted())
@@ -56,7 +57,7 @@ export const getVetProcs = (pid, uid, name, token) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        const procedures = []
+        procedures[pid] = []
         const pinfo = data.procedures
 
         pinfo.forEach((proc) => {
@@ -64,6 +65,7 @@ export const getVetProcs = (pid, uid, name, token) => {
             procId: proc.id,
             petId: proc.pet_id,
             userId: proc.user_id,
+            name: proc.name,
             purpose: proc.purpose,
             symptoms: proc.symptoms,
             diagnosis: proc.diagnosis,
@@ -72,7 +74,7 @@ export const getVetProcs = (pid, uid, name, token) => {
             procDate: proc.proc_date,
           }
 
-          procedures.push(procedure)
+          procedures[pid].push(procedure)
         })
 
         dispatch(getVetProcsSuccess(procedures))
@@ -93,7 +95,7 @@ export const getOwnerProcs = (pid, uid, name, token) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        const procedures = []
+        const ownerProcedures = []
         const pinfo = data.procedures
 
         pinfo.forEach((proc) => {
@@ -106,10 +108,10 @@ export const getOwnerProcs = (pid, uid, name, token) => {
             procDate: proc.proc_date,
           }
 
-          procedures.push(procedure)
+          ownerProcedures.push(procedure)
         })
 
-        dispatch(getOwnerProcsSuccess(procedures))
+        dispatch(getOwnerProcsSuccess(ownerProcedures))
       })
       .catch((err) => dispatch(getOwnerProcsFailure(err.message)))
   }

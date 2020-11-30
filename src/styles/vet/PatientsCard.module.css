@@ -10,6 +10,8 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  border: 1px solid var(--dark-green-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .PatientInfo {
@@ -23,8 +25,21 @@
   fill: #c4c4c4;
 }
 
+.avatarShape {
+  display: flex;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-left: 22px;
+  margin-right: 27px;
+}
+
+.avatarSample {
+  background-color: var(--grey-green-color);
+}
+
 .InfoContainer {
-  width: 430px;
+  width: 355px;
   overflow: hidden;
   display: flex;
 }
@@ -43,7 +58,7 @@
 .InfoName {
   font-weight: 500;
   margin-right: 10px;
-  color: var(--active-button-color);
+  color: var(--dark-green-color);
 }
 a {
   text-decoration: none;
@@ -53,12 +68,17 @@ a:visited {
   color: white;
 }
 
+.Buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 .HistoryButton {
   height: 47px;
-  width: 203px;
-  margin-left: auto;
-  margin-right: 31px;
-  background-color: var(--active-button-color);
+  width: 200px;
+  /* margin-left: auto; */
+  margin-right: 20px;
+  background-color: var(--dark-green-color);
   border-radius: 10px;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
@@ -71,6 +91,7 @@ a:visited {
   border: none;
   cursor: pointer;
   outline: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .HistoryLink {
@@ -83,7 +104,7 @@ a:visited {
   }
 
   .InfoContainer {
-    width: 320px;
+    width: 267px;
   }
 }
 
@@ -97,11 +118,15 @@ a:visited {
   }
 
   .HistoryButton {
-    width: 150px;
-    height: 60px;
+    width: 170px;
+    height: 50px;
   }
 
   .InfoContainer {
-    width: 240px;
+    width: 370px;
+  }
+
+  .Column:nth-child(2) {
+    display: none;
   }
 }
