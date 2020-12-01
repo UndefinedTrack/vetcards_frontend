@@ -28,6 +28,16 @@ function SignUp({ createUser, createJWT, userToken, setUserReg, regFailed }) {
 
   function submitHandler(event) {
     event.preventDefault()
+
+    console.log(
+      state.username.toLowerCase(),
+      state.password,
+      state.first_name,
+      '',
+      state.last_name,
+      state.phone,
+      state.email,
+    )
     createUser(
       state.username.toLowerCase(),
       state.password,

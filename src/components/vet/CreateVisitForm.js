@@ -13,7 +13,7 @@ import { ReactComponent as ArrowDownDisabled } from '../../icons/arrow_down_disa
 import { ReactComponent as ArrowUp } from '../../icons/arrow_up.svg'
 import { getVetProcs } from '../../actions/procsList'
 
-function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateProc, getProcs }) {
+function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateProc, getProcs, procs }) {
   const { pid } = useParams()
   const today = new Date()
   const formatter = new Intl.DateTimeFormat('ru')
@@ -75,6 +75,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
   })
 
   useEffect(() => {
+    console.log('rerender')
     setState({
       name: defaultName,
       date: defaultDate,
@@ -85,7 +86,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
       recipe: defaultRecipe,
     })
     // eslint-disable-next-line
-  }, [currentProc])
+  }, [currentProc, procs])
 
   function closeEditForm() {
     setCurrentProc(undefined)
@@ -107,7 +108,11 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
       recomms: '',
       recipe: '',
     })
-
+    defaultSymptoms = ''
+    defaultDiagnosis = ''
+    defaultRecomms = ''
+    defaultRecipe = ''
+    console.log('create')
     setTimeout(() => getProcs(pid, uid, '', token), 100)
   }
 
@@ -116,6 +121,16 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
     const procDate = state.date
 
     updateProc(uid, currentProc.procId, purpose, name, symptoms, diagnosis, recomms, recipe, procDate, token)
+    setState({
+      name: '',
+      date,
+      purpose: 'Первичный приём',
+      symptoms: '',
+      diagnosis: '',
+      recomms: '',
+      recipe: '',
+    })
+    setCurrentProc(undefined)
     setTimeout(() => getProcs(pid, uid, '', token), 100)
   }
 
@@ -138,7 +153,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
       }))
     }
   }
-
+  console.log(state)
   return (
     <form onSubmit={submitHandler} className={styles.CreateVFContainer}>
       <div className={styles.DFlex}>
@@ -462,6 +477,10 @@ Option.propTypes = {
   changeInputHandler: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = (state) => ({
+  procs: state.procsCreate.proc,
+})
+
 const mapDispatchToProps = (dispatch) => ({
   createProc: (pid, uid, name, date, purpose, symptoms, diagnosis, recomms, recipe, token) =>
     dispatch(createVetProc(pid, uid, name, date, purpose, symptoms, diagnosis, recomms, recipe, token)),
@@ -470,4 +489,4 @@ const mapDispatchToProps = (dispatch) => ({
   getProcs: (pid, uid, name, token) => dispatch(getVetProcs(pid, uid, name, token)),
 })
 
-export default connect(null, mapDispatchToProps)(CreateVisitForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateVisitForm)

@@ -71,6 +71,12 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
       token,
     )
 
+    const elem = document.getElementById('pop-up-edit')
+    elem.style = 'display: flex;'
+    setTimeout(() => {
+      elem.style = 'display: none;'
+    }, 3000)
+
     setState({
       firstName: '',
       patronymic: '',
@@ -98,7 +104,7 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
   return (
     <div className={styles.profileSpace}>
       <div className={styles.profileWrapper}>
-        <form onSubmit={submitHandler} className={styles.form} >
+        <form onSubmit={submitHandler} className={styles.form}>
           <div className={styles.formSpace}>
             <Avatar
               handleAvatarChange={handleAvatarChange}
@@ -131,11 +137,16 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
           </div>
           {isVet && <p className={`${styles.noteText} ${styles.requiredText}`}>* - обязательные для заполнения поля</p>}
           {!isVet && (
-              <p className={`${styles.noteText} ${styles.requiredText}`}>Важно: редактировать информацию может только ваш ветеринар</p>
-          )}     
+            <p className={`${styles.noteText} ${styles.requiredText}`}>
+              Важно: редактировать информацию может только ваш ветеринар
+            </p>
+          )}
           <button type="submit" className={styles.saveButton}>
             Сохранить
           </button>
+          <div className={styles.PopUp} id="pop-up-edit">
+            Сохранено!
+          </div>
         </form>
       </div>
       <PopUpWindow displ={popUpDispl} />
@@ -413,45 +424,45 @@ Email.propTypes = {
 
 function FullAddress({ region, city, street, addressOther, changeInputHandler, isVet }) {
   if (isVet) {
-    return(
+    return (
       <div className={styles.fieldsColumn}>
         <p className={styles.text}>Адрес</p>
-        <input 
-            type="text"
-            name="region"
-            onChange={changeInputHandler}
-            className={`${styles.input} ${styles.inputaddress}`}
-            defaultValue={region}
-            placeholder="Регион"
-          />
-          <input 
-            type="text"
-            name="city"
-            onChange={changeInputHandler}
-            className={`${styles.input} ${styles.inputaddress}`}
-            defaultValue={city}
-            placeholder="Город"
-          />
-          <input
-            type="text"
-            name="street"
-            onChange={changeInputHandler}
-            className={`${styles.input} ${styles.inputaddress}`}
-            defaultValue={street}
-            placeholder="Улица"
-          />
-          <input
-            type="text"
-            name="addressOther"
-            onChange={changeInputHandler}
-            className={`${styles.input} ${styles.inputaddress}`}
-            defaultValue={addressOther}
-            placeholder="Дом, корпус, квартира"
-          />
+        <input
+          type="text"
+          name="region"
+          onChange={changeInputHandler}
+          className={`${styles.input} ${styles.inputaddress}`}
+          defaultValue={region}
+          placeholder="Регион"
+        />
+        <input
+          type="text"
+          name="city"
+          onChange={changeInputHandler}
+          className={`${styles.input} ${styles.inputaddress}`}
+          defaultValue={city}
+          placeholder="Город"
+        />
+        <input
+          type="text"
+          name="street"
+          onChange={changeInputHandler}
+          className={`${styles.input} ${styles.inputaddress}`}
+          defaultValue={street}
+          placeholder="Улица"
+        />
+        <input
+          type="text"
+          name="addressOther"
+          onChange={changeInputHandler}
+          className={`${styles.input} ${styles.inputaddress}`}
+          defaultValue={addressOther}
+          placeholder="Дом, корпус, квартира"
+        />
       </div>
     )
   }
-  return(
+  return (
     <div className={styles.fieldsColumn}>
       <p className={styles.text}>Адрес</p>
       <input
@@ -463,7 +474,7 @@ function FullAddress({ region, city, street, addressOther, changeInputHandler, i
         defaultValue={region}
         placeholder="Регион"
       />
-      <input 
+      <input
         disabled
         type="text"
         name="city"
@@ -504,8 +515,36 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updateInfo: (uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paidService, token) =>
-    dispatch(updateProfileInfo(uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paidService, token)),
+  updateInfo: (
+    uid,
+    firstName,
+    patronymic,
+    lastName,
+    phone,
+    email,
+    region,
+    city,
+    street,
+    addressOther,
+    paidService,
+    token,
+  ) =>
+    dispatch(
+      updateProfileInfo(
+        uid,
+        firstName,
+        patronymic,
+        lastName,
+        phone,
+        email,
+        region,
+        city,
+        street,
+        addressOther,
+        paidService,
+        token,
+      ),
+    ),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
   getAvatar: (avatarURL, token) => dispatch(getUserAvatar(avatarURL, token)),
 })

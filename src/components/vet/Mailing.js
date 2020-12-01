@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import styles from '../../styles/vet/Mailing.module.css'
 import { sendMailing } from '../../actions/mailing'
 
-
-function Mailing ({ sendMail }) {
+function Mailing({ sendMail }) {
   const token = localStorage.getItem('token')
 
   const [state, setState] = useState({
@@ -28,14 +27,12 @@ function Mailing ({ sendMail }) {
 
   function submitHandler(event) {
     event.preventDefault()
-    sendMail(
-      state.region,
-      state.city,
-      state.street,
-      state.subject,
-      state.message,
-      token,
-    )
+    sendMail(state.region, state.city, state.street, state.subject, state.message, token)
+    const elem = document.getElementById('pop-up-send-mail')
+    elem.style = 'display: flex;'
+    setTimeout(() => {
+      elem.style = 'display: none;'
+    }, 3000)
     setState({
       region: '',
       city: '',
@@ -46,8 +43,8 @@ function Mailing ({ sendMail }) {
   }
 
   return (
-    <div className={styles.mailingSpace} >
-      <div className={styles.mailingWrapper} >
+    <div className={styles.mailingSpace}>
+      <div className={styles.mailingWrapper}>
         <form className={styles.form} onSubmit={submitHandler}>
           <Address
             changeInputHandler={changeInputHandler}
@@ -55,26 +52,25 @@ function Mailing ({ sendMail }) {
             city={state.city}
             street={state.street}
           />
-          <MailingText
-            changeInputHandler={changeInputHandler}
-            subject={state.subject}
-            message={state.message}
-          />
+          <MailingText changeInputHandler={changeInputHandler} subject={state.subject} message={state.message} />
           <button type="submit" className={styles.submitButton}>
             Отправить
           </button>
+          <div className={styles.PopUp} id="pop-up-send-mail">
+            Отправлено!
+          </div>
         </form>
       </div>
     </div>
   )
 }
 
-Mailing.propTypes ={
+Mailing.propTypes = {
   sendMail: PropTypes.func.isRequired,
 }
 
 function Address({ changeInputHandler, region, city, street }) {
-  return(
+  return (
     <div>
       <p className={styles.text}>Электронная рассылка клиентам, проживающим по адресу:</p>
       <div className={styles.addressWrapper}>
@@ -109,7 +105,7 @@ function Address({ changeInputHandler, region, city, street }) {
   )
 }
 
-Address.propTypes ={
+Address.propTypes = {
   changeInputHandler: PropTypes.func.isRequired,
   region: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
@@ -144,14 +140,15 @@ function MailingText({ changeInputHandler, subject, message }) {
   )
 }
 
-MailingText.propTypes ={
+MailingText.propTypes = {
   changeInputHandler: PropTypes.func.isRequired,
   subject: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  sendMail: (region, city, street, subject, message, token) => dispatch(sendMailing(region, city, street, subject, message, token))
+  sendMail: (region, city, street, subject, message, token) =>
+    dispatch(sendMailing(region, city, street, subject, message, token)),
 })
 
 export default connect(null, mapDispatchToProps)(Mailing)

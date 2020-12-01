@@ -84,7 +84,7 @@
 }
 
 .Contraindications {
-  width: 420px;
+  width: 148.5%;
   height: 100px;
 }
 
@@ -149,6 +149,58 @@
   cursor: pointer;
   outline: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+.PopUp {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  top: 467px;
+  left: 1353px;
+  position: absolute;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--light-green-color);
+  color: rgb(32, 32, 32);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  width: 182px;
+  height: 46px;
+  margin-left: auto;
+  margin-right: 20px;
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+}
+
+.PopUp {
+  animation-name: slideDown;
+  -webkit-animation-name: slideDown;
+
+  animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+
+  animation-timing-function: ease;
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0%);
+  }
+  30% {
+    transform: translateY(-115%);
+  }
+  100% {
+    transform: translateY(-115%);
+  }
+}
+
+.PopUp:hover {
+  transform: translate3d(0px, -150px, 0px);
 }
 
 @media (max-width: 1400px) {
