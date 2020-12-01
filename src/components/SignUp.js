@@ -6,7 +6,7 @@ import styles from '../styles/SignUp.module.css'
 
 // eslint-disable-next-line
 function SignUp({ createUser, createJWT, userToken, setUserReg, regFailed }) {
-  let wrong
+  const [wrong, setWrong] = useState('')
   const [state, setState] = useState({
     last_name: '',
     first_name: '',
@@ -28,18 +28,39 @@ function SignUp({ createUser, createJWT, userToken, setUserReg, regFailed }) {
 
   function submitHandler(event) {
     event.preventDefault()
-    createUser(state.username, state.password, state.first_name, '', state.last_name, state.phone, state.email)
+
+    console.log(
+      state.username.toLowerCase(),
+      state.password,
+      state.first_name,
+      '',
+      state.last_name,
+      state.phone,
+      state.email,
+    )
+    createUser(
+      state.username.toLowerCase(),
+      state.password,
+      state.first_name,
+      '',
+      state.last_name,
+      state.phone,
+      state.email,
+    )
   }
 
   if (userToken && userToken.id !== undefined) {
-    wrong = ''
-    createJWT(state.username, state.password)
+    createJWT(state.username.toLowerCase(), state.password)
   }
   if (userToken && userToken.username !== undefined && userToken.username !== state.username) {
-    ;[wrong] = userToken.username
+    if (wrong !== userToken.username) {
+      setWrong(userToken.username)
+    }
   }
   if (userToken && userToken.password !== undefined && userToken.password !== state.password) {
-    ;[wrong] = userToken.password
+    if (wrong !== userToken.password) {
+      setWrong(userToken.password)
+    }
   }
 
   if (userToken !== null && userToken !== undefined) {
@@ -142,7 +163,7 @@ function SignUp({ createUser, createJWT, userToken, setUserReg, regFailed }) {
           />
         </div>
         <div className={styles.Warning}>Все поля обязательны для заполнения</div>
-        <div className={styles.WrongMessage}>{wrong}</div>
+        {wrong && <div className={styles.WrongMessage}>{wrong[0].slice(0, wrong[0].length - 1)}</div>}
         <button type="submit" id="submit" className={styles.SubmitButton}>
           ЗАРЕГИСТРИРОВАТЬСЯ
         </button>

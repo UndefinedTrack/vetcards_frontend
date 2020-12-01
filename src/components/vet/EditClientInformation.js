@@ -112,6 +112,11 @@ function EditClientInformation({
       state.paid,
       token,
     )
+    const elem = document.getElementById('pop-up-edit-client')
+    elem.style = 'display: flex;'
+    setTimeout(() => {
+      elem.style = 'display: none;'
+    }, 3000)
   }
 
   function handleAvatarChange(image) {
@@ -155,6 +160,9 @@ function EditClientInformation({
             <button type="submit" className={styles.saveButton}>
               Сохранить
             </button>
+            <div className={styles.PopUp} id="pop-up-edit-client">
+              Сохранено!
+            </div>
           </div>
         </form>
       </div>
@@ -199,7 +207,7 @@ Avatar.propTypes = {
 }
 
 function AvatarImage({ previewURL, avatarFullURL }) {
-  if ((avatarFullURL !== '') && (avatarFullURL !== undefined)) {
+  if (avatarFullURL !== '' && avatarFullURL !== undefined) {
     return <img src={avatarFullURL} alt="" className={styles.avatarShape} />
   }
   if (previewURL !== '') {
@@ -381,7 +389,7 @@ function PaidServise({ changeCheckbox }) {
 }
 
 function FullAddress({ region, city, street, addressOther, changeInputHandler }) {
-  return(
+  return (
     <div className={styles.fieldsColumn}>
       <p className={styles.text}>Адрес</p>
       <input
@@ -431,8 +439,36 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProfileInfo: (uid, token) => dispatch(getClientProfileInfo(uid, token)),
-  updateProfileInfo: (uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paid, token) =>
-    dispatch(updateClientProfileInfo(uid, firstName, patronymic, lastName, phone, email, region, city, street, addressOther, paid, token)),
+  updateProfileInfo: (
+    uid,
+    firstName,
+    patronymic,
+    lastName,
+    phone,
+    email,
+    region,
+    city,
+    street,
+    addressOther,
+    paid,
+    token,
+  ) =>
+    dispatch(
+      updateClientProfileInfo(
+        uid,
+        firstName,
+        patronymic,
+        lastName,
+        phone,
+        email,
+        region,
+        city,
+        street,
+        addressOther,
+        paid,
+        token,
+      ),
+    ),
   uploadAvatar: (uid, token, image) => dispatch(uploadUserAvatar(uid, token, image)),
   getAvatar: (avatarURL, token) => dispatch(getUserAvatar(avatarURL, token)),
 })
