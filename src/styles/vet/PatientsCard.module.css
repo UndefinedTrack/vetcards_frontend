@@ -32,6 +32,7 @@
   height: 60px;
   margin-left: 22px;
   margin-right: 27px;
+  object-fit: cover;
 }
 
 .avatarSample {
