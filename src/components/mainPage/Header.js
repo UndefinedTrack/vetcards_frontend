@@ -31,14 +31,19 @@ function Header({ header, setSignInUp, signInUp }) {
 
   return (
     <header className={styles.MainPageHeader}>
+      <p className={styles.MiniName}>VCards</p>
       <p className={styles.Name}>VetCards</p>
       <div className={styles.Nav}>
         <ButtonContainer vet={vet} clients={clients} contacts={contacts} />
-        <button type="button" className={styles.SignIn} onClick={signInForm}>
-          Вход
-        </button>
-        <button type='button' className={styles.SignUp} onClick={handleButtonClick} >Регистрация</button>
-        <HashLink smooth to='/clients/#form' ref={hashLink} />
+        <div className={styles.SignButtons}>
+          <button type="button" className={styles.SignIn} onClick={signInForm}>
+            Вход
+          </button>
+          <button type="button" className={styles.SignUp} onClick={handleButtonClick}>
+            Регистрация
+          </button>
+        </div>
+        <HashLink smooth to="/clients/#form" ref={hashLink} />
       </div>
     </header>
   )
@@ -55,7 +60,9 @@ function ButtonContainer({ vet, clients, contacts }) {
     <div className={styles.ButtonContainer}>
       <HeaderButton buttonStyles={vet} header="/" buttonName="Для ветеринаров" />
       <HeaderButton buttonStyles={clients} header="/clients" buttonName="Для владельцев" />
-      <HeaderButton buttonStyles={contacts} header="/contacts" buttonName="Контакты" />
+      <div className={styles.ContactButton}>
+        <HeaderButton buttonStyles={contacts} header="/contacts" buttonName="Контакты" />
+      </div>
     </div>
   )
 }

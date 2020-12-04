@@ -25,7 +25,7 @@ function ClientPage({ setUserReg }) {
           <button type="button" className={styles.Button} onClick={handleButtonClick}>
             Зарегистрируйтесь
           </button>
-          <HashLink smooth to='#form' ref={hashLink} />
+          <HashLink smooth to="#form" ref={hashLink} />
           <div className={styles.SmallText}>Это бесплатно!</div>
         </div>
         <div className={styles.BGColor}>
@@ -39,14 +39,16 @@ function ClientPage({ setUserReg }) {
         </div>
         <div className={styles.Card}>
           <Monitor className={styles.icon} />
-          <div className={styles.CardText}>Доступ к истории болезни питомца в личном кабинете</div>
+          <div className={styles.MiniCardText}>Доступ к истории болезни питомца</div>
+          <div className={styles.MaxiCardText}>Доступ к истории болезни питомца в личном кабинете</div>
         </div>
         <div className={styles.Card}>
           <Heart className={styles.icon} />
-          <div className={styles.CardText}>Создавайте собственные заметки о здоровье питомца</div>
+          <div className={styles.MiniCardText}>Заметки о здоровье питомца</div>
+          <div className={styles.MaxiCardText}>Создавайте собственные заметки о здоровье питомца</div>
         </div>
       </div>
-      <div id='form' className={styles.ConnectPart}>
+      <div id="form" className={styles.ConnectPart}>
         <div className={styles.BGClientImage}>
           <SignUp setUserReg={setUserReg} />
         </div>

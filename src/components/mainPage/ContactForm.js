@@ -44,7 +44,7 @@ function ContactForm() {
         </div>
         <div className={styles.Warning}>Все поля обязательны для заполнения</div>
         {/* <div className={styles.WrongMessage}>{wrong}</div> */}
-        <button type="submit" id="submit" className={styles.SubmitButton}>
+        <button type="submit" id="submit" className={`${styles.SubmitButton} ${styles.SubmitContactButton}`}>
           ОТПРАВИТЬ
         </button>
       </form>

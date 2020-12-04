@@ -13,7 +13,7 @@
   z-index: 1;
   font-family: 'Noto Sans JP', sans-serif;
 }
-
+.MiniName,
 .Name {
   color: var(--dark-green-color);
   margin-left: 23px;
@@ -21,11 +21,19 @@
   line-height: 70px;
 }
 
+.MiniName {
+  display: none;
+}
+
 .Nav {
   display: flex;
   align-items: center;
   margin-left: auto;
   justify-content: flex-end;
+}
+
+.SignButtons {
+  display: flex;
 }
 
 .ButtonContainer {
@@ -110,5 +118,157 @@
   .SignUp {
     width: 180px;
     margin: 0px 10px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .Name {
+    font-size: 40px;
+    margin: 0;
+    margin-left: 5px;
+  }
+
+  .Button {
+    width: 120px;
+    padding: 0;
+  }
+
+  .SignIn {
+    width: 70px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  .SignUp {
+    width: 120px;
+    margin: 0px 5px;
+  }
+}
+
+@media (max-width: 750px) {
+  .MainPageHeader {
+    height: 60px;
+  }
+
+  .Name {
+    font-size: 30px;
+    margin: 0;
+    margin-left: 5px;
+    line-height: 35px;
+  }
+
+  .Button {
+    width: 100px;
+    padding: 0;
+    font-size: 15px;
+    line-height: 18px;
+    height: 60px;
+  }
+
+  .SignIn {
+    width: 50px;
+    font-size: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  .SignUp {
+    width: 100px;
+    font-size: 15px;
+    margin: 0px 5px;
+  }
+}
+
+@media (max-width: 640px) {
+  .MainPageHeader {
+    height: 75px;
+  }
+
+  .SignButtons {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .Name {
+    font-size: 24px;
+    margin: 0;
+    margin-left: 5px;
+    line-height: 28px;
+  }
+
+  .Button {
+    width: 82px;
+    font-size: 12px;
+    line-height: 18px;
+    height: 75px;
+  }
+
+  .SignIn {
+    width: 50px;
+    height: 30px;
+    font-size: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+
+  .SignUp {
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    margin: 0px 5px;
+  }
+}
+
+@media (max-width: 490px) {
+  .MainPageHeader {
+    height: 75px;
+  }
+
+  .SignButtons {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .MiniName,
+  .Name {
+    font-size: 20px;
+    margin: 0;
+    margin-left: 5px;
+    line-height: 28px;
+  }
+
+  .MiniName {
+    display: flex;
+  }
+
+  .Name {
+    display: none;
+  }
+
+  .Button {
+    width: 75px;
+    font-size: 12px;
+    line-height: 18px;
+    height: 75px;
+    margin-right: 2px;
+  }
+
+  .SignIn {
+    width: 40px;
+    height: 30px;
+    font-size: 13px;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  .SignUp {
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .ContactButton {
+    display: none;
   }
 }

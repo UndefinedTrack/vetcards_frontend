@@ -117,7 +117,7 @@ function Name({ handleNameChange, name, heading, placeholder, rec }) {
         <input
           type="text"
           pattern="([A-Za-zА-Яа-яЁё]| |-){2,25}"
-          className={styles.input}
+          className={`${styles.input} ${styles.PetCreatorInput}`}
           onChange={handleNameChange}
           name={name}
           title="При заполнении данного поля вы можете использовать буквы, пробелы и дефисы"
@@ -129,7 +129,7 @@ function Name({ handleNameChange, name, heading, placeholder, rec }) {
           type="text"
           required
           pattern="[A-Za-zА-Яа-яЁё]{2,15}"
-          className={styles.input}
+          className={`${styles.input} ${styles.PetCreatorInput}`}
           onChange={handleNameChange}
           name={name}
           placeholder={placeholder}

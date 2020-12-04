@@ -9,7 +9,7 @@
   align-items: flex-end;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 15px;
-  line-height: 26px;
+  line-height: 24px;
 }
 
 .Name {
@@ -21,8 +21,14 @@
 }
 
 @media (max-width: 950px) {
+  .InformationBlock {
+    width: 180px;
+  }
+
   .InformationLine {
-    font-size: 15px;
+    width: 170px;
+    font-size: 13px;
+    line-height: 18px;
   }
 
   .Name {
@@ -31,5 +37,39 @@
 
   .Value {
     margin: 1px;
+  }
+}
+
+@media (max-width: 660px) {
+  .InformationBlock {
+    margin-top: 100px;
+    height: 100%;
+  }
+
+  .InformationLine {
+    width: 200px;
+    font-size: 15px;
+    line-height: 23px;
+  }
+
+  .Name {
+    margin-right: 2px;
+  }
+
+  .Value {
+    margin-left: 2px;
+  }
+}
+
+@media (max-width: 490px) {
+  .InformationBlock {
+    margin-top: 100px;
+    margin-left: 0px;
+    height: 100%;
+  }
+
+  .InformationLine {
+    font-size: 14px;
+    line-height: 18px;
   }
 }

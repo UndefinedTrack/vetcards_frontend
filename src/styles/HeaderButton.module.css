@@ -73,3 +73,32 @@
 .optionText {
   margin: 0px;
 }
+
+@media (max-width: 950px) {
+  .Button {
+    width: 130px;
+    height: 65px;
+  }
+}
+
+@media (max-width: 490px) {
+  .Button {
+    width: 80px;
+    font-size: 13px;
+    height: 50px;
+    text-align: center;
+    line-height: 17px;
+  }
+
+  .optionsBox {
+    top: 60px;
+    right: 3px;
+    width: 100px;
+    height: 60px;
+  }
+
+  .option,
+  .optionText {
+    font-size: 12px;
+  }
+}

@@ -106,34 +106,38 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
       <div className={styles.profileWrapper}>
         <form onSubmit={submitHandler} className={styles.form}>
           <div className={styles.formSpace}>
-            <Avatar
-              handleAvatarChange={handleAvatarChange}
-              popUpOpen={popUpOpen}
-              avatarFullURL={avatarFullURL}
-              getAvatar={getAvatar}
-            />
-            <div className={styles.fieldsColumn}>
-              <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} isVet={isVet} />
-              <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} isVet={isVet} />
-              <Patronymic
-                name="patronymic"
+            <div className={styles.AvAndName}>
+              <Avatar
+                handleAvatarChange={handleAvatarChange}
+                popUpOpen={popUpOpen}
+                avatarFullURL={avatarFullURL}
+                getAvatar={getAvatar}
+              />
+              <div className={styles.fieldsColumn}>
+                <LastName changeInputHandler={changeInputHandler} lastName={profileInfo.lastName} isVet={isVet} />
+                <FirstName changeInputHandler={changeInputHandler} firstName={profileInfo.firstName} isVet={isVet} />
+                <Patronymic
+                  name="patronymic"
+                  changeInputHandler={changeInputHandler}
+                  patronymic={profileInfo.patronymic}
+                  isVet={isVet}
+                />
+              </div>
+            </div>
+            <div className={styles.AvAndName}>
+              <div className={styles.fieldsColumn}>
+                <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} isVet={isVet} />
+                <Email changeInputHandler={changeInputHandler} email={profileInfo.email} isVet={isVet} />
+              </div>
+              <FullAddress
+                region={profileInfo.region}
+                city={profileInfo.city}
+                street={profileInfo.street}
+                addressOther={profileInfo.addressOther}
                 changeInputHandler={changeInputHandler}
-                patronymic={profileInfo.patronymic}
                 isVet={isVet}
               />
             </div>
-            <div className={styles.fieldsColumn}>
-              <MobilePhone changeInputHandler={changeInputHandler} mobilePhone={profileInfo.phone} isVet={isVet} />
-              <Email changeInputHandler={changeInputHandler} email={profileInfo.email} isVet={isVet} />
-            </div>
-            <FullAddress
-              region={profileInfo.region}
-              city={profileInfo.city}
-              street={profileInfo.street}
-              addressOther={profileInfo.addressOther}
-              changeInputHandler={changeInputHandler}
-              isVet={isVet}
-            />
           </div>
           {isVet && <p className={`${styles.noteText} ${styles.requiredText}`}>* - обязательные для заполнения поля</p>}
           {!isVet && (

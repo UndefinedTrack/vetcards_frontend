@@ -81,8 +81,8 @@ function CreateReminder({ backClick, uid, createNotification, notif, updateNotif
       <form className={styles.ProcedureContainer} onSubmit={handleSubmit}>
         <div className={styles.inputAndTextWrapper}>
           <div className={styles.ProcedureEntryBlock}>
-            <div className={styles.ReminderText}>Название напоминания</div>
-            <span className={styles.noteReminderText}>*</span>
+            <div className={styles.ProcedureText}>Название напоминания</div>
+            <span className={styles.noteText}>*</span>
           </div>
           <input
             type="text"
@@ -116,8 +116,8 @@ function CreateReminder({ backClick, uid, createNotification, notif, updateNotif
         </div> */}
         <div className={styles.inputAndTextWrapper}>
           <div className={styles.ProcedureEntryBlock}>
-            <div className={styles.ReminderText}>Частота напоминаний</div>
-            <span className={styles.noteReminderText}>*</span>
+            <div className={styles.ProcedureText}>Частота напоминаний</div>
+            <span className={styles.noteText}>*</span>
           </div>
           <DropDownList
             options={reminderFrequencies}
@@ -128,7 +128,7 @@ function CreateReminder({ backClick, uid, createNotification, notif, updateNotif
         </div>
         <div className={styles.inputAndTextWrapper}>
           <div className={styles.ProcedureEntryBlock}>
-            <div className={styles.ReminderText}>Примечание</div>
+            <div className={styles.ProcedureText}>Примечание</div>
           </div>
           <textarea
             type="text"
@@ -139,7 +139,7 @@ function CreateReminder({ backClick, uid, createNotification, notif, updateNotif
             defaultValue={state.remark}
           />
         </div>
-        <p className={styles.noteReminderText}>* - обязательные для заполнения поля</p>
+        <p className={styles.noteText}>* - обязательные для заполнения поля</p>
         <button type="submit" className={styles.saveButton}>
           {!notif && <spnan>Добавить</spnan>}
           {notif && <spnan>Сохранить</spnan>}

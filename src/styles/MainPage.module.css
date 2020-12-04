@@ -41,7 +41,7 @@
 .Warning {
   text-align: center;
   font-weight: 500;
-  color: red;
+  color: rgb(228, 3, 3);
 }
 
 .ButtonsContainer {

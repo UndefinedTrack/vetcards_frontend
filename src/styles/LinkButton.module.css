@@ -49,3 +49,11 @@
     font-size: 15px;
   }
 }
+
+@media (max-width: 480px) {
+  .Button {
+    width: 100px;
+    height: 20px;
+    font-size: 15px;
+  }
+}

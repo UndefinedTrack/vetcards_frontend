@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 2;
-  padding: 2vh;
+  padding: 20px;
 }
 
 .saveButton {
@@ -150,7 +150,7 @@
   border: none;
   border-bottom: 1px solid #c4c4c4;
   padding-left: 16px;
-  padding-right: 2vh;
+  padding-right: 20px;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   line-height: 26px;
@@ -159,6 +159,10 @@
 .input:focus {
   color: var(--dark-green-color);
   border-bottom: 1px solid var(--dark-green-color);
+}
+
+.AvAndName {
+  display: flex;
 }
 
 .text {
@@ -274,6 +278,16 @@
   line-height: 24px;
 }
 
+@media (max-height: 700px) {
+  .profileWrapper {
+    height: 500px;
+  }
+
+  .formSpace {
+    height: 395px;
+  }
+}
+
 @media (max-width: 1400px) {
   .profileWrapper {
     width: 1080px;
@@ -283,28 +297,269 @@
 @media (max-width: 1200px) {
   .profileWrapper {
     width: 828px;
-    height: 520px;
+    height: 530px;
   }
 
   .text {
     margin-bottom: 5px;
-    /* background-color: #000; */
   }
 
   .avatarSample {
     border-radius: 50%;
     width: 150px;
     height: 150px;
-    margin: 30px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-right: 10px;
   }
-}
 
-@media (max-height: 700px) {
-  .profileWrapper {
-    height: 500px;
+  .avatarShape {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+
+  .input {
+    width: 140px;
+  }
+
+  .inputaddress {
+    margin-right: 20px;
+  }
+
+  .changeAvatar {
+    margin-left: 45px;
   }
 
   .formSpace {
-    height: 395px;
+    margin: 0;
+  }
+
+  .BirthdayYear {
+    width: 60px;
+  }
+  .BirthdayDay {
+    width: 45px;
+  }
+}
+
+@media (max-width: 850px) {
+  .profileWrapper {
+    width: 600px;
+    height: auto;
+  }
+
+  .formSpace {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input {
+    width: 200px;
+  }
+
+  .PetCreatorInput {
+    width: 400px;
+  }
+
+  .BirthdayYear {
+    width: 60px;
+  }
+
+  .BirthdayDay {
+    width: 45px;
+  }
+
+  .inputaddress {
+    margin-right: 0px;
+  }
+
+  .changeAvatar {
+    margin-left: 0px;
+  }
+
+  .avatarSample {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+    margin-bottom: 20px;
+  }
+
+  .avatarShape {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin: 40px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-height: 700px) {
+    .profileWrapper {
+      height: auto;
+    }
+
+    .formSpace {
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 660px) {
+  .profileWrapper {
+    width: 450px;
+    margin-top: 80px;
+  }
+
+  .input {
+    width: 150px;
+    height: 30px;
+  }
+
+  .PetCreatorInput {
+    width: 350px;
+  }
+
+  .BirthdayYear {
+    width: 60px;
+  }
+
+  .BirthdayDay {
+    width: 45px;
+  }
+
+  .fieldsColumn {
+    margin: 0;
+    padding: 5px 10px;
+  }
+
+  .avatarSample {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 60px 28px 20px 28px;
+  }
+
+  .avatarShape {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 60px 28px 20px 28px;
+  }
+
+  .requiredText {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .saveButton {
+    margin-top: 10px;
+  }
+
+  @media (max-height: 700px) {
+    .profileWrapper {
+      height: auto;
+    }
+
+    .formSpace {
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .profileWrapper {
+    width: 300px;
+    margin-bottom: 20px;
+    margin-top: 65px;
+  }
+
+  .input {
+    width: 180px;
+    height: 25px;
+    font-size: 13px;
+    padding-left: 5px;
+  }
+
+  .PetCreatorInput {
+    width: 240px;
+  }
+
+  .BirthdayYear {
+    width: 40px;
+  }
+
+  .BirthdayDay {
+    width: 25px;
+  }
+
+  .text {
+    font-size: 13px;
+    margin: 0;
+    margin-bottom: 2px;
+  }
+
+  .BirthdayText {
+    font-size: 10px;
+  }
+
+  .noteText {
+    font-size: 13px;
+  }
+
+  .requiredText {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .saveButton {
+    margin-top: 0;
+    margin-right: 60px;
+    font-size: 13px;
+    height: 35px;
+  }
+
+  .AvAndName {
+    flex-direction: column;
+  }
+
+  .fieldsColumn {
+    margin: 0;
+    padding: 2px 0px;
+  }
+
+  .avatarSample {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 20px 28px 10px 28px;
+  }
+
+  .avatarShape {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 20px 28px 10px 28px;
+  }
+
+  .changeAvatar {
+    font-size: 13px;
+  }
+
+  .requiredText {
+    margin-top: 10px;
+  }
+
+  @media (max-height: 700px) {
+    .profileWrapper {
+      height: auto;
+    }
+
+    .formSpace {
+      height: auto;
+    }
   }
 }

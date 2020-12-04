@@ -26,12 +26,18 @@ function AboutPet({ pet, closeSearchString, uploadAvatar, getAvatar, avatarFullU
 
   return (
     <section className={styles.Container}>
-      <div className={styles.PetName}>{pet.name}</div>
-      <Avatar handleAvatarChange={handleAvatarChange} avatarFullURL={avatarFullURL} pid={pet.petId} />
+      <div className={styles.Block}>
+        <div className={styles.AvatarAndName}>
+          <div className={styles.PetName}>{pet.name}</div>
+          <Avatar handleAvatarChange={handleAvatarChange} avatarFullURL={avatarFullURL} pid={pet.petId} />
+        </div>
+        <hr className={styles.Line} />
+        <InformationBlock pet={pet} />
+      </div>
       <hr className={styles.Line} />
-      <InformationBlock pet={pet} />
-      <hr className={styles.Line} />
-      <LinkButton closeSearchString={closeSearchString} nameButton="Дневник" href={`#/diary/${pet.petId}`} />
+      <div className={styles.LinkButton}>
+        <LinkButton closeSearchString={closeSearchString} nameButton="Дневник" href={`#/diary/${pet.petId}`} />
+      </div>
     </section>
   )
 }

@@ -13,6 +13,15 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.Block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+
 .PetName {
   margin-top: 21px;
   margin-bottom: 14px;
@@ -82,18 +91,24 @@
   }
 
   .avatarShape {
-    height: 70px;
-    width: 70px;
+    height: 100px;
+    width: 100px;
   }
 }
 
 @media (max-width: 950px) {
   .Container {
     width: 200px;
+    margin-right: 15px;
+  }
+
+  .Line {
+    margin: 0;
   }
 
   .PetName {
-    margin-top: 5px;
+    margin-top: 15px;
+    margin-bottom: 5px;
     font-size: 19px;
   }
 
@@ -102,7 +117,63 @@
   }
 
   .avatarShape {
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
+  }
+
+  .LinkButton {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 660px) {
+  .Container {
+    width: 450px;
+    height: 200px;
+    margin-bottom: 15px;
+  }
+
+  .Block {
+    flex-direction: row;
+  }
+
+  .AvatarAndName {
+    margin-left: 20px;
+  }
+
+  .Line {
+    display: none;
+  }
+
+  .LinkButton {
+    position: relative;
+    top: -30px;
+    left: -5px;
+    width: 100%;
+    margin-left: 50px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 490px) {
+  .Container {
+    width: 300px;
+    height: 190px;
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .AvatarAndName {
+    margin-left: 10px;
+  }
+
+  .LinkButton {
+    position: relative;
+    top: -30px;
+    width: 100%;
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 120px;
   }
 }
