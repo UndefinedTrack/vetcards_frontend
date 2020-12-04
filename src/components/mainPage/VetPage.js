@@ -27,14 +27,15 @@ function MainPage() {
           <button type="button" className={styles.Button} onClick={handleButtonClick}>
             Свяжитесь с нами
           </button>
-          <HashLink smooth to='#form' ref={hashLink} />
+          <HashLink smooth to="#form" ref={hashLink} />
           <div className={styles.SmallText}>Попробуйте бесплатно!</div>
         </div>
       </div>
       <div className={styles.Cards}>
         <div className={styles.Card}>
-          <Book className={styles.icon} />
-          <div className={styles.CardText}>Быстрый доступ к электронной медицинской карте пациента</div>
+          <Book className={`${styles.icon} ${styles.firstIcon}`} />
+          <div className={styles.MiniCardText}>Доступ к электронным картам</div>
+          <div className={styles.MaxiCardText}>Быстрый доступ к электронной медицинской карте пациента</div>
         </div>
         <div className={styles.Card}>
           <Settings className={styles.icon} />
@@ -45,7 +46,7 @@ function MainPage() {
           <div className={styles.CardText}>Современный дизайн</div>
         </div>
       </div>
-      <div id='form' className={styles.ConnectPart}>
+      <div id="form" className={styles.ConnectPart}>
         <div className={styles.BGImage}>
           <ContactForm />
         </div>

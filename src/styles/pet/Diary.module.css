@@ -8,7 +8,6 @@
   margin-top: 100px;
   outline: none;
   border: none;
-  background-color: rgba(0, 0, 0, 0);
 }
 
 .DiaryBlocks {
@@ -177,7 +176,7 @@
   display: flex;
   outline: none;
   height: 42px;
-  width: 565px;
+  width: 560px;
   border: 1px solid var(--dark-green-color);
   border-radius: 10px;
   padding-left: 20px;
@@ -314,7 +313,7 @@ textarea.input {
 
 @media (max-height: 750px) {
   .DiaryBlocks {
-    height: 550px;
+    height: 500px;
   }
 
   .ProcedureText {
@@ -346,13 +345,19 @@ textarea.input {
   .Procedures {
     height: 490px;
   }
-}
 
-/* @media (max-height: 670px) {
-  .DiaryBlocks {
-    height: 450px;
+  .diaryOptionBlock {
+    width: 562px;
   }
-} */
+
+  .diaryOptionsBox {
+    width: 550px;
+  }
+
+  .diaryOptionArrowButton {
+    top: 3px;
+  }
+}
 
 @media (max-width: 1400px) {
   .DiaryBlocks {
@@ -370,23 +375,75 @@ textarea.input {
   .input {
     width: 490px;
   }
+
+  .MoreMenu {
+    margin-top: -62px;
+    margin-left: 350px;
+  }
 }
 
 @media (max-width: 1200px) {
   .DiaryBlocks {
-    width: 480px;
-  }
-
-  .Line {
     width: 450px;
   }
 
-  .SearchLine {
-    width: 300px;
+  .Line {
+    margin-left: 10px;
+    width: 430px;
   }
 
   .input {
-    width: 390px;
+    width: 360px;
+  }
+
+  .SearchLine {
+    width: 340px;
+  }
+
+  .MoreMenu {
+    width: 132px;
+    margin-top: -62px;
+    margin-left: 240px;
+  }
+
+  .OptionLine {
+    width: 132px;
+  }
+}
+
+@media (max-width: 950px) {
+  .DiaryContainer {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .DiaryBlocks {
+    width: 610px;
+    height: 600px;
+    margin-bottom: 20px;
+  }
+
+  .DiaryBlocks:first-child {
+    margin-right: 0;
+  }
+
+  .Line {
+    width: 590px;
+  }
+
+  .input {
+    width: 520px;
+  }
+
+  .SearchLine {
+    width: 490px;
+  }
+
+  .MoreMenu {
+    width: 132px;
+    margin-top: -62px;
+    margin-left: 400px;
   }
 }
 
@@ -419,7 +476,7 @@ textarea.input {
   font-size: 18px;
   line-height: 26px;
   border-radius: 10px;
-  width: 607px;
+  width: 602px;
   height: 46px;
   outline: none;
   cursor: pointer;
@@ -430,7 +487,7 @@ textarea.input {
   top: 58px;
   left: 6px;
   background-color: #fff;
-  width: 594px;
+  width: 590px;
   border: 1px solid var(--dark-green-color);
   border-top: none;
   border-radius: 5px;
@@ -483,30 +540,235 @@ textarea.input {
 
 @media (max-width: 1200px) {
   .diaryOptionBlock {
-    width: 432px;
+    width: 402px;
   }
 
   .diaryOptionsBox {
-    width: 420px;
+    width: 390px;
+    left: 5px;
+  }
+
+  .Procedures {
+    height: 540px;
+  }
+}
+
+@media (max-width: 950px) {
+  .diaryOptionBlock {
+    width: 562px;
+  }
+
+  .diaryOptionsBox {
+    width: 550px;
     left: 5px;
   }
 }
 
-@media (max-height: 750px) {
+@media (max-width: 660px) {
+  .DiaryContainer {
+    margin-top: 80px;
+  }
+
+  .DiaryBlocks {
+    width: 450px;
+  }
+
+  .Line {
+    width: 430px;
+  }
+
+  .input {
+    width: 360px;
+  }
+
+  .SearchLine {
+    width: 330px;
+  }
+
   .diaryOptionBlock {
-    height: 39px;
-    line-height: 22px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+    width: 402px;
   }
 
   .diaryOptionsBox {
-    width: 420px;
-    top: 42px;
-    left: 5px;
+    width: 390px;
+  }
+
+  .Procedures {
+    height: 540px;
+  }
+
+  .MoreMenu {
+    width: 132px;
+    margin-top: -62px;
+    margin-left: 240px;
+  }
+}
+
+@media (max-width: 490px) {
+  .DiaryContainer {
+    margin-top: 65px;
+  }
+
+  .DiaryBlocks {
+    width: 300px;
+    height: 420px;
+  }
+
+  .DiaryBlocks:first-child {
+    height: 420px;
+  }
+
+  .Line {
+    width: 280px;
+  }
+
+  .NameAndSearch {
+    height: 40px;
+  }
+
+  .Name {
+    margin: 0;
+    margin-left: 15px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .NewProcedureName {
+    margin-left: 0px;
+  }
+
+  .SearchButton {
+    height: 25px;
+  }
+
+  .Button {
+    margin: 0;
+    padding: 10px;
+    margin-top: 5px;
+    height: 25px;
+  }
+
+  .Button:last-child {
+    margin-right: 5px;
+  }
+
+  .input {
+    margin: 2px 0px;
+    height: 30px;
+    width: 220px;
+    font-size: 14px;
+    padding-left: 10px;
+  }
+
+  .SearchContainer {
+    margin: 0;
+    height: 30px;
+  }
+
+  .SearchLine {
+    height: 30px;
+    width: 180px;
+  }
+
+  .diaryOptionBlock {
+    margin: 2px 0px;
+    width: 252px;
+    height: 30px;
+    padding: 0;
+    padding-left: 10px;
+    font-size: 14px;
+  }
+
+  .diaryOptionsBox {
+    width: 240px;
+    top: 30px;
   }
 
   .diaryOptionArrowButton {
-    top: 3px;
+    top: -2px;
+    right: 5px;
+  }
+
+  .diaryOption {
+    font-size: 14px;
+    height: 30px;
+  }
+
+  .diaryOptionLabel {
+    padding-left: 5px;
+    padding-top: 10px;
+    font-size: 14px;
+    line-height: 18px;
+    height: 32px;
+  }
+
+  .BackButton {
+    padding-top: 3px;
+    padding-left: 7px;
+    height: 30px;
+  }
+
+  .noteText,
+  .ProcedureText {
+    margin: 2px;
+    font-size: 15px;
+  }
+
+  .saveButton {
+    margin-top: 5px;
+    font-size: 16px;
+    height: 35px;
+    width: 110px;
+  }
+
+  .ProcedureBlock {
+    /* background-color: #000; */
+    margin: 10px;
+  }
+
+  .ProcedurePhoto {
+    height: 40px;
+    width: 40px;
+    background: url(../../icons/tablet.svg) no-repeat 8px var(--dark-green-color);
+    background-size: 25px;
+  }
+
+  .InformationBlock {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .MoreButton {
+    height: 25px;
+  }
+
+  .EmptyStoryContainer {
+    height: 380px;
+    text-align: center;
+  }
+
+  .DiaryBlocks:last-child {
+    margin-bottom: 20px;
+  }
+
+  .Procedures {
+    height: 380px;
+  }
+
+  .MoreMenu {
+    height: 30px;
+    width: 100px;
+    margin-top: -42px;
+    margin-left: 160px;
+  }
+
+  .OptionLine {
+    width: 100px;
+  }
+
+  .Option {
+    padding: 0;
+    font-size: 13px;
+    line-height: 15px;
   }
 }

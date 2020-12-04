@@ -2,6 +2,7 @@
 
 .Content {
   margin-top: 100px;
+  width: 100%;
 }
 
 .Container {
@@ -91,10 +92,41 @@ a:visited {
 @media (max-width: 950px) {
   .Container {
     height: 400px;
-    margin-bottom: 30px;
+    margin-top: 15px;
   }
 
   .NewPetButton {
-    width: 600px;
+    width: 614px;
+    height: 35px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 660px) {
+  .Content {
+    margin-top: 80px;
+  }
+
+  .NewPetButton {
+    width: 451px;
+  }
+
+  .Container {
+    flex-direction: column;
+    height: auto;
+    margin-left: 15px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 490px) {
+  .Content {
+    margin-top: 65px;
+  }
+
+  .NewPetButton {
+    width: 300px;
+    height: 30px;
+    font-size: 15px;
   }
 }

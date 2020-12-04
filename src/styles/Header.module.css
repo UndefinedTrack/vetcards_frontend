@@ -54,3 +54,34 @@
   background-color: #fff;
   cursor: pointer;
 }
+
+@media (max-width: 950px) {
+  .Header {
+    height: 65px;
+  }
+
+  .Name {
+    font-size: 25px;
+    margin-left: 15px;
+  }
+
+  .NotPetButton {
+    height: 65px;
+  }
+}
+
+@media (max-width: 490px) {
+  .Header {
+    height: 50px;
+  }
+
+  .Name {
+    font-size: 18px;
+    margin-left: 10px;
+    line-height: 20px;
+  }
+
+  .NotPetButton {
+    height: 50px;
+  }
+}
