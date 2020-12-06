@@ -38,7 +38,7 @@ function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid, getProcs }
             <div className={styles.NameAndDate}>
               <div className={styles.Name}>
                 {procs.purpose}
-                {procs.name !== null && `,`} {procs.name}
+                {procs.name !== '' && `,`} {procs.name}
               </div>
               <div className={styles.Date}>
                 {day}.{month}.{year}
