@@ -173,7 +173,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
           <div>
             Дата визита <span className={styles.noteText}>*</span>
           </div>
-          <DateBlock changeInputHandler={changeInputHandler} defaultValue={state.date} />
+          <DateBlock changeInputHandler={changeInputHandler} value={state.date} />
         </div>
       </div>
       <div className={styles.DFlexColumn}>
@@ -187,20 +187,20 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
           changeInputHandler={changeInputHandler}
           placeholder="Опишите симптомы"
           name="symptoms"
-          defaultValue={state.symptoms}
+          value={state.symptoms}
         />
         <div className={styles.FormName}>Диагноз</div>
         <InputBlock
           changeInputHandler={changeInputHandler}
           placeholder="Поставьте диагноз"
           name="diagnosis"
-          defaultValue={state.diagnosis}
+          value={state.diagnosis}
         />
         <div className={styles.FormName}>Рекомендации по лечению</div>
         <TextAreaBlock
           changeInputHandler={changeInputHandler}
           placeholder="Укажите рекомендации по лечению"
-          defaultValue={state.recomms}
+          value={state.recomms}
           name="recomms"
         />
       </div>
@@ -260,44 +260,44 @@ ClarificationBlock.propTypes = {
   options: PropTypes.array.isRequired,
 }
 
-function DateBlock({ changeInputHandler, defaultValue }) {
+function DateBlock({ changeInputHandler, value }) {
   return (
     <input
       required
       type="text"
-      value={defaultValue}
+      value={value}
       onChange={changeInputHandler}
       className={styles.InputBlock}
       name="date"
       title="Введите дату в формате дд.мм.гггг"
       pattern="([0][1-9]|[1-2][1-9]|[1-3][1-1]|[1-3][0])\.([0][1-9]|[1][0-2])\.([1][0-9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0])"
-      placeholder={defaultValue}
+      placeholder={value}
       maxLength="10"
     />
   )
 }
 
-function TextAreaBlock({ placeholder, name, changeInputHandler, defaultValue }) {
+function TextAreaBlock({ placeholder, name, changeInputHandler, value }) {
   return (
     <textarea
       type="text"
       name={name}
       onChange={changeInputHandler}
       placeholder={placeholder}
-      defaultValue={defaultValue}
+      value={value}
       className={`${styles.InputBlock} ${styles.Input} ${styles.TextArea}`}
     />
   )
 }
 
-function InputBlock({ placeholder, name, changeInputHandler, defaultValue }) {
+function InputBlock({ placeholder, name, changeInputHandler, value }) {
   return (
     <input
       type="text"
       name={name}
       onChange={changeInputHandler}
       placeholder={placeholder}
-      defaultValue={defaultValue}
+      value={value}
       className={`${styles.InputBlock} ${styles.Input}`}
     />
   )
