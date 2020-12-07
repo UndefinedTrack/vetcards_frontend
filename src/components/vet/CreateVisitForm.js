@@ -321,7 +321,11 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
 
   function handleClickOutside(event) {
     if (!dropDown || !dropDown.current.contains(event.target)) {
-      setIsVisible(false)
+      const arrowID = `#arrow${name}`
+      const openButton = document.querySelector(arrowID)
+      if (!event.path.includes(openButton)) {
+        setIsVisible(false)
+      }
     }
   }
 
@@ -355,7 +359,7 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
     <div className={styles.purposeWrapper} ref={dropDown}>
       <div className={style} role="button" tabIndex="0" onKeyDown={handleArrowClick} onClick={handleArrowClick}>
         {value}
-        <Arrow isActive={isActive} isVisible={isVisible} handleArrowClick={handleArrowClick} />
+        <Arrow name={name} isActive={isActive} isVisible={isVisible} handleArrowClick={handleArrowClick} />
       </div>
       <OptionsList
         name={name}
@@ -376,23 +380,25 @@ DropDownList.propTypes = {
   options: PropTypes.array.isRequired,
 }
 
-function Arrow({ isVisible, handleArrowClick, isActive }) {
+function Arrow({ isVisible, handleArrowClick, isActive, name }) {
+  const arrowID = `arrow${name}`
+  
   if (!isVisible) {
     if (isActive) {
       return (
-        <button type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+        <button id={arrowID} type='button' onClick={handleArrowClick} className={styles.purposeArrowButton}>
           <ArrowDown />
         </button>
       )
     }
     return (
-      <button disabled type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+      <button disabled type='button' className={styles.purposeArrowButton}>
         <ArrowDownDisabled />
       </button>
     )
   }
   return (
-    <button type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+    <button id={arrowID} type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
       <ArrowUp />
     </button>
   )
@@ -402,6 +408,7 @@ Arrow.propTypes = {
   isActive: PropTypes.bool.isRequired,
   isVisible: PropTypes.bool.isRequired,
   handleArrowClick: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 }
 
 function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler, name }) {

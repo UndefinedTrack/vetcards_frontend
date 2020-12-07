@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { deleteVetProc } from '../actions/procsUpdate'
@@ -8,23 +8,7 @@ import { ReactComponent as More } from '../icons/mdi_more_vert.svg'
 import { getVetProcs } from '../actions/procsList'
 
 function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid, getProcs }) {
-  const [openMenu, setOpenMenu] = useState(false)
   const token = localStorage.getItem('token')
-
-  function openEditMenu() {
-    setOpenMenu(!openMenu)
-  }
-
-  function editProc() {
-    setCurrentProc(procs)
-    setOpenMenu(false)
-  }
-
-  function deleteThisProc() {
-    deleteProc(uid, procs.procId, token)
-    setOpenMenu(false)
-    setTimeout(() => getProcs(procs.petId, uid, '', token), 100)
-  }
 
   if (procs !== undefined && procs.procDate !== undefined) {
     const year = procs.procDate.slice(0, 4)
@@ -45,28 +29,15 @@ function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid, getProcs }
               </div>
             </div>
           </div>
-          {isVet && procs.userId === uid && <More className={styles.MoreButton} onClick={openEditMenu} />}
-          {openMenu && (
-            <div className={styles.MoreMenu} id="edit-and-delete">
-              <button
-                type="button"
-                id="edit-menu"
-                className={`${styles.Option} ${styles.EditOption}`}
-                onClick={editProc}
-              >
-                Редактировать
-              </button>
-              <hr className={styles.OptionLine} />
-              <button
-                type="button"
-                id="delete-menu"
-                className={`${styles.Option} ${styles.DeleteOption}`}
-                onClick={deleteThisProc}
-              >
-                Удалить
-              </button>
-            </div>
-          )}
+          <MoreWindow
+            token={token}
+            isVet={isVet}
+            uid={uid}
+            procs={procs}
+            setCurrentProc={setCurrentProc}
+            deleteProc={deleteProc}
+            getProcs={getProcs}
+          />
         </section>
         <RecordName name="Симптомы:" value={procs.symptoms} />
         <RecordName name="Диагноз:" value={procs.diagnosis} />
@@ -77,6 +48,96 @@ function MedicalCard({ procs, isVet, setCurrentProc, deleteProc, uid, getProcs }
     )
   }
   return <></>
+}
+
+function MoreWindow({ isVet, uid, procs, token, setCurrentProc, deleteProc, getProcs }) {
+  const [openMenu, setOpenMenu] = useState(false)
+
+  function openEditMenu() {
+    setOpenMenu(!openMenu)
+  }
+
+  function editProc() {
+    setCurrentProc(procs)
+    setOpenMenu(false)
+  }
+
+  function deleteThisProc() {
+    deleteProc(uid, procs.procId, token)
+    setOpenMenu(false)
+    setTimeout(() => getProcs(procs.petId, uid, '', token), 100)
+  }
+
+  const dropDown = React.useRef(null)
+
+  function handleClickOutside(event) {
+    if (openMenu) {
+      if (!dropDown || !dropDown.current.contains(event.target)) {
+        const openButton = document.querySelector('#moreButton')
+        if (!event.path.includes(openButton)) {
+          setOpenMenu(false)
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, false)
+    return function cleanup() {
+      document.removeEventListener('click', handleClickOutside, false)
+    }
+  })
+
+  if (isVet && procs.userId === uid) {
+    return(
+      <div ref={dropDown} className={styles.MoreMenuWrapper}>
+        <More id='moreButton' className={styles.MoreButton} onClick={openEditMenu} />
+        <MoreMenu openMenu={openMenu} editProc={editProc} deleteThisProc={deleteThisProc} />
+      </div>
+    )
+  }
+  return null
+}
+
+MoreWindow.PropTypes ={
+  isVet: PropTypes.bool.isRequired,
+  uid: PropTypes.number.isRequired,
+  setCurrentProc: PropTypes.func.isRequired,
+  deleteProc: PropTypes.func.isRequired,
+  getProcs: PropTypes.func.isRequired,
+}
+
+function MoreMenu({ openMenu, editProc, deleteThisProc }) {
+  if (openMenu) {
+    return (
+      <div className={styles.MoreMenu} id='edit-and-delete'>
+        <button
+          type="button"
+          id="edit-menu"
+          className={`${styles.Option} ${styles.EditOption}`}
+          onClick={editProc}
+        >
+          Редактировать
+        </button>
+        <hr className={styles.OptionLine} />
+        <button
+          type="button"
+          id="delete-menu"
+          className={`${styles.Option} ${styles.DeleteOption}`}
+          onClick={deleteThisProc}
+        >
+          Удалить
+        </button>
+      </div>
+    )
+  }
+  return null
+}
+
+MoreMenu.propTypes = {
+  openMenu: PropTypes.bool.isRequired,
+  editProc: PropTypes.func.isRequired,
+  deleteThisProc: PropTypes.func.isRequired,
 }
 
 export function RecordName({ name, value }) {
