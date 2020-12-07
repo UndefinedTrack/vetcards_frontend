@@ -342,8 +342,9 @@ textarea.input {
     margin-top: 10px;
   }
 
+  .EmptyStoryContainer,
   .Procedures {
-    height: 490px;
+    height: 430px;
   }
 
   .diaryOptionBlock {
@@ -519,7 +520,7 @@ textarea.input {
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
-  width: 280px;
+  width: 590px;
   height: 42px;
 }
 
