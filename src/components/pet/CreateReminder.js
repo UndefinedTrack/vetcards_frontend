@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -171,8 +171,26 @@ function DropDownList({ changeInputHandler, options, indOption }) {
     setIsVisible(!isVisible)
   }
 
+  const dropDown = React.useRef(null)
+
+  function handleClickOutside(event) {
+    if (!dropDown || !dropDown.current.contains(event.target)) {
+      const openButton = document.querySelector('#arrow')
+      if (!event.path.includes(openButton)) {
+        setIsVisible(false)
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, false)
+    return function cleanup() {
+      document.removeEventListener('click', handleClickOutside, false)
+    }
+  })
+
   return (
-    <div className={styles.diaryOptionWrapper}>
+    <div className={styles.diaryOptionWrapper} ref={dropDown}>
       <div
         className={styles.diaryOptionBlock}
         role="button"
@@ -201,13 +219,13 @@ DropDownList.propTypes = {
 function Arrow({ isVisible, handleArrowClick }) {
   if (!isVisible) {
     return (
-      <button type="button" onClick={handleArrowClick} className={styles.diaryOptionArrowButton}>
+      <button id='arrow' type="button" onClick={handleArrowClick} className={styles.diaryOptionArrowButton}>
         <ArrowDown />
       </button>
     )
   }
   return (
-    <button type="button" onClick={handleArrowClick} className={styles.diaryOptionArrowButton}>
+    <button id='arrow' type="button" onClick={handleArrowClick} className={styles.diaryOptionArrowButton}>
       <ArrowUp />
     </button>
   )

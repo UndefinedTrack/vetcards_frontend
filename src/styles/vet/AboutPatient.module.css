@@ -16,6 +16,7 @@
 .MainInfo {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .Block {
@@ -73,7 +74,7 @@
   height: auto;
   border-radius: 10px;
   padding: 5px;
-  width: 90%;
+  width: calc(100% - 40px);
   margin-left: 20px;
   margin-bottom: 10px;
   border: 1px solid #c4c4c4;
@@ -81,10 +82,11 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 26px;
+  box-sizing: border-box;
 }
 
 .Contraindications {
-  width: 148.5%;
+  width: calc(100% - 20px);
   height: 100px;
 }
 
@@ -210,9 +212,5 @@
 
   .InputBlock {
     width: 134px;
-  }
-
-  .RemarkTextArea {
-    width: 94.5%;
   }
 }

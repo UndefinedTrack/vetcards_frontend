@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createJWT } from '../actions/userCreate.js'
 import styles from '../styles/SignUp.module.css'
@@ -45,8 +45,23 @@ function SignIn({ userToken, createJWT, setUserReg, setSignInUp }) {
     localStorage.setItem('refresh', userToken.refresh)
   }
 
+  const signInRef = React.useRef(null)
+
+  function handleClickOutside(event) {
+    if (!signInRef || !signInRef.current.contains(event.target)) {
+      setSignInUp(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, false)
+    return function cleanup() {
+      document.removeEventListener('click', handleClickOutside, false)
+    }
+  })
+
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} ref={signInRef}>
       <form className={`${styles.SignUpForm} ${styles.SignInContainer}`} onSubmit={submitHandler}>
         <div className={styles.FormName}>Вход</div>
         <input

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styles from '../styles/HeaderButton.module.css'
 
@@ -58,7 +58,7 @@ function ProfileButton({ header, buttonStyles, reload }) {
         >
           <p>Профиль</p>
         </div>
-        <DropDownList isVisible={isVisible} header={header} handleExitClick={handleExitClick} reload={reload} />
+        <DropDownList handleClick={handleClick} isVisible={isVisible} header={header} handleExitClick={handleExitClick} reload={reload} />
       </div>
     )
   }
@@ -73,7 +73,7 @@ function ProfileButton({ header, buttonStyles, reload }) {
       >
         <p>Профиль</p>
       </div>
-      <DropDownList isVisible={isVisible} header={header} handleExitClick={handleExitClick} reload={reload} />
+      <DropDownList handleClick={handleClick} isVisible={isVisible} header={header} handleExitClick={handleExitClick} reload={reload} />
     </div>
   )
 }
@@ -84,10 +84,27 @@ ProfileButton.propTypes = {
   reload: PropTypes.func.isRequired,
 }
 
-function DropDownList({ isVisible, handleExitClick, header, reload }) {
+function DropDownList({ isVisible, handleExitClick, header, reload, handleClick }) {
+  const dropDown = React.useRef(null)
+
+  function handleClickOutside(event) {
+    if (isVisible) {
+      if (!dropDown || !dropDown.current.contains(event.target)) {
+        handleClick(false)
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, false)
+    return function cleanup() {
+      document.removeEventListener('click', handleClickOutside, false)
+    }
+  })
+
   if (isVisible) {
     return (
-      <div className={styles.optionsBox}>
+      <div ref={dropDown} className={styles.optionsBox}>
         <button type="button" onClick={reload} className={styles.option}>
           <p className={styles.optionText}>Редактировать</p>
         </button>
@@ -101,6 +118,7 @@ function DropDownList({ isVisible, handleExitClick, header, reload }) {
 }
 
 DropDownList.propTypes = {
+  handleClick: PropTypes.func.isRequired,
   isVisible: PropTypes.bool.isRequired,
   handleExitClick: PropTypes.func.isRequired,
   header: PropTypes.string.isRequired,

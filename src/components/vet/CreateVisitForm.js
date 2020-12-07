@@ -173,7 +173,7 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
           <div>
             Дата визита <span className={styles.noteText}>*</span>
           </div>
-          <DateBlock changeInputHandler={changeInputHandler} defaultValue={state.date} />
+          <DateBlock changeInputHandler={changeInputHandler} value={state.date} />
         </div>
       </div>
       <div className={styles.DFlexColumn}>
@@ -187,20 +187,20 @@ function CreateVisitForm({ createProc, uid, currentProc, setCurrentProc, updateP
           changeInputHandler={changeInputHandler}
           placeholder="Опишите симптомы"
           name="symptoms"
-          defaultValue={state.symptoms}
+          value={state.symptoms}
         />
         <div className={styles.FormName}>Диагноз</div>
         <InputBlock
           changeInputHandler={changeInputHandler}
           placeholder="Поставьте диагноз"
           name="diagnosis"
-          defaultValue={state.diagnosis}
+          value={state.diagnosis}
         />
         <div className={styles.FormName}>Рекомендации по лечению</div>
         <TextAreaBlock
           changeInputHandler={changeInputHandler}
           placeholder="Укажите рекомендации по лечению"
-          defaultValue={state.recomms}
+          value={state.recomms}
           name="recomms"
         />
       </div>
@@ -260,44 +260,44 @@ ClarificationBlock.propTypes = {
   options: PropTypes.array.isRequired,
 }
 
-function DateBlock({ changeInputHandler, defaultValue }) {
+function DateBlock({ changeInputHandler, value }) {
   return (
     <input
       required
       type="text"
-      value={defaultValue}
+      value={value}
       onChange={changeInputHandler}
       className={styles.InputBlock}
       name="date"
       title="Введите дату в формате дд.мм.гггг"
       pattern="([0][1-9]|[1-2][1-9]|[1-3][1-1]|[1-3][0])\.([0][1-9]|[1][0-2])\.([1][0-9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0])"
-      placeholder={defaultValue}
+      placeholder={value}
       maxLength="10"
     />
   )
 }
 
-function TextAreaBlock({ placeholder, name, changeInputHandler, defaultValue }) {
+function TextAreaBlock({ placeholder, name, changeInputHandler, value }) {
   return (
     <textarea
       type="text"
       name={name}
       onChange={changeInputHandler}
       placeholder={placeholder}
-      defaultValue={defaultValue}
+      value={value}
       className={`${styles.InputBlock} ${styles.Input} ${styles.TextArea}`}
     />
   )
 }
 
-function InputBlock({ placeholder, name, changeInputHandler, defaultValue }) {
+function InputBlock({ placeholder, name, changeInputHandler, value }) {
   return (
     <input
       type="text"
       name={name}
       onChange={changeInputHandler}
       placeholder={placeholder}
-      defaultValue={defaultValue}
+      value={value}
       className={`${styles.InputBlock} ${styles.Input}`}
     />
   )
@@ -321,7 +321,11 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
 
   function handleClickOutside(event) {
     if (!dropDown || !dropDown.current.contains(event.target)) {
-      setIsVisible(false)
+      const arrowID = `#arrow${name}`
+      const openButton = document.querySelector(arrowID)
+      if (!event.path.includes(openButton)) {
+        setIsVisible(false)
+      }
     }
   }
 
@@ -355,7 +359,7 @@ function DropDownList({ changeInputHandler, options, value, name, isActive }) {
     <div className={styles.purposeWrapper} ref={dropDown}>
       <div className={style} role="button" tabIndex="0" onKeyDown={handleArrowClick} onClick={handleArrowClick}>
         {value}
-        <Arrow isActive={isActive} isVisible={isVisible} handleArrowClick={handleArrowClick} />
+        <Arrow name={name} isActive={isActive} isVisible={isVisible} handleArrowClick={handleArrowClick} />
       </div>
       <OptionsList
         name={name}
@@ -376,23 +380,25 @@ DropDownList.propTypes = {
   options: PropTypes.array.isRequired,
 }
 
-function Arrow({ isVisible, handleArrowClick, isActive }) {
+function Arrow({ isVisible, handleArrowClick, isActive, name }) {
+  const arrowID = `arrow${name}`
+  
   if (!isVisible) {
     if (isActive) {
       return (
-        <button type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+        <button id={arrowID} type='button' onClick={handleArrowClick} className={styles.purposeArrowButton}>
           <ArrowDown />
         </button>
       )
     }
     return (
-      <button disabled type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+      <button disabled type='button' className={styles.purposeArrowButton}>
         <ArrowDownDisabled />
       </button>
     )
   }
   return (
-    <button type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
+    <button id={arrowID} type="button" onClick={handleArrowClick} className={styles.purposeArrowButton}>
       <ArrowUp />
     </button>
   )
@@ -402,6 +408,7 @@ Arrow.propTypes = {
   isActive: PropTypes.bool.isRequired,
   isVisible: PropTypes.bool.isRequired,
   handleArrowClick: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 }
 
 function OptionsList({ isVisible, handleOptionClick, options, changeInputHandler, name }) {

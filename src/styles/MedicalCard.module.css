@@ -57,6 +57,11 @@
   fill: var(--dark-green-color);
 }
 
+.MoreMenuWrapper {
+  display: flex;
+  position: relative;
+}
+
 .MoreMenu {
   display: flex;
   flex-direction: column;
