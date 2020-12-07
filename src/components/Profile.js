@@ -71,11 +71,11 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
       token,
     )
 
-    const elem = document.getElementById('pop-up-edit')
-    elem.style = 'display: flex;'
-    setTimeout(() => {
-      elem.style = 'display: none;'
-    }, 3000)
+    // const elem = document.getElementById('pop-up-edit')
+    // elem.style = 'display: flex;'
+    // setTimeout(() => {
+    //   elem.style = 'display: none;'
+    // }, 3000)
 
     setState({
       firstName: '',
@@ -148,9 +148,6 @@ function Profile({ uid, profileInfo, updateInfo, uploadAvatar, getAvatar, avatar
           <button type="submit" className={styles.saveButton}>
             Сохранить
           </button>
-          <div className={styles.PopUp} id="pop-up-edit">
-            Сохранено!
-          </div>
         </form>
       </div>
       <PopUpWindow displ={popUpDispl} />

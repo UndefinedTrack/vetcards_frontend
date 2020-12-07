@@ -28,11 +28,11 @@ function Mailing({ sendMail }) {
   function submitHandler(event) {
     event.preventDefault()
     sendMail(state.region, state.city, state.street, state.subject, state.message, token)
-    const elem = document.getElementById('pop-up-send-mail')
-    elem.style = 'display: flex;'
-    setTimeout(() => {
-      elem.style = 'display: none;'
-    }, 3000)
+    // const elem = document.getElementById('pop-up-send-mail')
+    // elem.style = 'display: flex;'
+    // setTimeout(() => {
+    //   elem.style = 'display: none;'
+    // }, 3000)
     setState({
       region: '',
       city: '',
@@ -56,9 +56,6 @@ function Mailing({ sendMail }) {
           <button type="submit" className={styles.submitButton}>
             Отправить
           </button>
-          <div className={styles.PopUp} id="pop-up-send-mail">
-            Отправлено!
-          </div>
         </form>
       </div>
     </div>
