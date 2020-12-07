@@ -121,11 +121,11 @@ function AboutPatient({ uid, petInfo, getPet, updatePet }) {
     } = state
     const token = localStorage.getItem('token')
 
-    const elem = document.getElementById('pop-up')
-    elem.style = 'display: flex;'
-    setTimeout(() => {
-      elem.style = 'display: none;'
-    }, 3000)
+    // const elem = document.getElementById('pop-up')
+    // elem.style = 'display: flex;'
+    // setTimeout(() => {
+    //   elem.style = 'display: none;'
+    // }, 3000)
     updatePet(
       pid,
       uid,
@@ -206,9 +206,6 @@ function AboutPatient({ uid, petInfo, getPet, updatePet }) {
       <button type="button" className={styles.saveButton} onClick={updPet}>
         Сохранить
       </button>
-      <div className={styles.PopUp} id="pop-up">
-        Сохранено!
-      </div>
     </div>
   )
 }

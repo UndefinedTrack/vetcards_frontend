@@ -112,11 +112,11 @@ function EditClientInformation({
       state.paid,
       token,
     )
-    const elem = document.getElementById('pop-up-edit-client')
-    elem.style = 'display: flex;'
-    setTimeout(() => {
-      elem.style = 'display: none;'
-    }, 3000)
+    // const elem = document.getElementById('pop-up-edit-client')
+    // elem.style = 'display: flex;'
+    // setTimeout(() => {
+    //   elem.style = 'display: none;'
+    // }, 3000)
   }
 
   function handleAvatarChange(image) {
@@ -160,9 +160,6 @@ function EditClientInformation({
             <button type="submit" className={styles.saveButton}>
               Сохранить
             </button>
-            <div className={styles.PopUp} id="pop-up-edit-client">
-              Сохранено!
-            </div>
           </div>
         </form>
       </div>
